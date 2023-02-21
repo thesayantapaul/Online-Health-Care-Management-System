@@ -81,7 +81,8 @@
                         <a href="#" class="nav-item nav-link">Medical History</a>
                         <a href="#" class="nav-item nav-link">Bookings</a>
                         <a href="#" class="nav-item nav-link">About Us</a>
-                        <a href="#" class="nav-item nav-link">Contact</a>
+                        <a href="login.jsp" class="nav-item nav-link">Login/Signup</a>
+                        
                     </div>
                 </div>
             </nav>
