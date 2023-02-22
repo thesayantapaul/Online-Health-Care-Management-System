@@ -168,6 +168,7 @@
                                 <div class="col-12 col-sm-6">
                                     <input type="email" class="form-control bg-light border-0" placeholder="Your Email" style="height: 55px;">
                                 </div>
+                                
                                 <div class="col-12 col-sm-6">
                                     <div class="date" id="date" data-target-input="nearest">
                                         <input type="text"
@@ -181,6 +182,9 @@
                                             class="form-control bg-light border-0 datetimepicker-input"
                                             placeholder="Time" data-target="#time" data-toggle="datetimepicker" style="height: 55px;">
                                     </div>
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control bg-light border-0" placeholder="Symptoms" style="height: 55px;">
                                 </div>
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3" type="submit">Make An Appointment</button>
