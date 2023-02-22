@@ -85,7 +85,9 @@
                             <a href="#" class="nav-item nav-link">Bookings</a>
                             <a href="#" class="nav-item nav-link">About Us</a>
                             <c:if test="${login_check==null}">
-                                <a href="login.jsp" class="nav-item nav-link">Login/Signup</a>
+                                <a href="login.jsp" class="nav-item nav-link">Login</a>
+                                <a href="registration.jsp" class="nav-item nav-link">SignUp</a>
+
                             </c:if>
                             <c:if test="${login_check!=null}">
                                 <a href="Logout" class="nav-item nav-link">Logut</a>

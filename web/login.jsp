@@ -5,6 +5,7 @@
 --%>
 
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
     <head>
@@ -40,6 +41,9 @@
                             <div class="form-block mx-auto">
                                 <div class="text-center mb-5">
                                     <h3 class="text-uppercase">Login to <strong>OHMS</strong></h3>
+                                </div>
+                                <div class="text-center mb-5" >
+                                    <c:out value="${SuccessSignUp}"></c:out>
                                 </div>
                                 <form action="Login" method="POST">
                                     <!--                                    <div class="form-group first">
