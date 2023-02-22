@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import org.apache.log4j.Logger;
 /**
  *
@@ -61,4 +62,38 @@ public class LoginService {
         return result;
     }
 
+    public boolean doSignUp(Users user) {
+        
+        boolean result = false;
+        String sql = "INSERT INTO users(emailAddress,password,name,occupation,address,gender)" + "VALUES(? ,? ,? ,?,?,?)";
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, user.getEmailAddress());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getFirstName()+user.getLastName());
+            preparedStatement.setString(4, user.getOccupation());
+            preparedStatement.setString(5, user.getAddress());
+            preparedStatement.setString(6, user.getGender());
+
+            System.out.println(preparedStatement);
+            int res = preparedStatement.executeUpdate();
+
+            if (res == 1) {
+                result = true;
+            }
+
+        } catch (SQLException ex) {
+            int e = ex.getErrorCode();
+            log.error(LocalDateTime.now()+"Sql Error :"+e+" Duplicate Email Address");
+            System.out.println(LocalDateTime.now()+"error code:"+e+"Duplicate Email Address" );
+        }
+
+        return result;
+
+    }
+
+    
 }
