@@ -80,7 +80,7 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto py-0">
                             <a href="#" class="nav-item nav-link active">Home</a>
-                            <a href="#" class="nav-item nav-link">Book Service</a>
+                            <a href="bookService.jsp" class="nav-item nav-link">Book Service</a>
                             <a href="#" class="nav-item nav-link">Medical History</a>
                             <a href="#" class="nav-item nav-link">Bookings</a>
                             <a href="#" class="nav-item nav-link">About Us</a>
