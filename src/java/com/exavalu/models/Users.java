@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
-package com.exavalu.ohms.models;
+package com.exavalu.models;
 
-import com.exavalu.ohms.services.LoginService;
+import com.exavalu.services.LoginService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
@@ -135,6 +135,16 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
 
         }
         return result;
+    }
+
+    public String doLogout() throws Exception {
+        String result = "FAILURE";
+        sessionMap.clear();
+        if (sessionMap.isEmpty()) {
+            result = "SUCCESS";
+        }
+        return result;
+
     }
 
 }
