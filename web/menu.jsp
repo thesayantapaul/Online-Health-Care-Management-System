@@ -80,10 +80,11 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto py-0">
                             <a href="#" class="nav-item nav-link active">Home</a>
-                            <a href="bookService.jsp" class="nav-item nav-link">Book Service</a>
-                            <a href="#" class="nav-item nav-link">Medical History</a>
-                            <a href="#" class="nav-item nav-link">Bookings</a>
-                            <a href="#" class="nav-item nav-link">About Us</a>
+                            <a href="#Service" class="nav-item nav-link">Services</a>
+                            <a href="#bookAppointment" class="nav-item nav-link">Book Service</a>
+                            <a href="#Explore" class="nav-item nav-link">Explore</a>
+                            <a href="#Testimonial" class="nav-item nav-link">Testimonial</a>
+                            <a href="#about" class="nav-item nav-link">About Us</a>
                             <c:if test="${login_check==null}">
                                 <a href="login.jsp" class="nav-item nav-link">Login</a>
                                 <a href="registration.jsp" class="nav-item nav-link">SignUp</a>
