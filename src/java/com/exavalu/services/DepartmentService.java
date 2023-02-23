@@ -1,0 +1,69 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
+ */
+package com.exavalu.services;
+
+import com.exavalu.models.Departments;
+import static com.exavalu.services.LoginService.log;
+import com.exavalu.utils.JDBCConnectionManager;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import org.apache.log4j.Logger;
+
+/**
+ *
+ * @author anich
+ */
+public class DepartmentService {
+
+    public static DepartmentService departmentService = null;
+    public static Logger log = Logger.getLogger(DepartmentService.class.getName());
+
+    private DepartmentService() {
+    }
+
+    public static DepartmentService getInstance() {
+        if (departmentService == null) {
+            return new DepartmentService();
+        } else {
+            return departmentService;
+        }
+    }
+
+    public ArrayList getAllDepartments() {
+        ArrayList deptLIst = new ArrayList();
+        try {
+
+            Connection con = JDBCConnectionManager.getConnection();
+
+            String sql = "Select * from departments";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Departments dept = new Departments();
+
+                dept.setDepartmentId(rs.getString("departmentId"));
+                dept.setDepartmentName(rs.getString("departmentName"));
+
+                deptLIst.add(dept);
+
+            }
+
+        } catch (SQLException ex) {
+            int e = ex.getErrorCode();
+            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting departments");
+            System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting departments");
+        }
+
+        return deptLIst;
+    }
+
+}

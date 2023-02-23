@@ -16,7 +16,17 @@
         <action name="SignUp" class="com.exavalu.models.Users" method="doSignUp">
             <result name="SUCCESS">login.jsp</result>
             <result name="FAILURE">menu.jsp</result>
+            <result name="Appointment">index.jsp</result>
         </action>  
+        <action name="getDoctor" class="com.exavalu.models.Appointment" method="doGetDoctor">
+            <result name="SUCCESS">doctorList.jsp</result>
+            <result name="FAILURE">menu.jsp</result>
+        </action> 
+        <action name="Appointment" class="com.exavalu.models.Appointment" method="getAppointment">
+            <result name="SUCCESS">index.jsp</result>
+            <result name="SignUp">registration.jsp</result>
+            <result name="FAILURE">menu.jsp</result>
+        </action> 
   
         
            

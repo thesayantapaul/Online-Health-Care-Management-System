@@ -4,6 +4,8 @@
  */
 package com.exavalu.models;
 
+import com.exavalu.services.AppointmentService;
+import com.exavalu.services.DepartmentService;
 import com.exavalu.services.LoginService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -20,7 +22,6 @@ import org.apache.struts2.interceptor.SessionAware;
  */
 public class Users extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
 
-    private String name;
     private String emailAddress;
     private String password;
     private String roleId;
@@ -31,20 +32,6 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     private String gender;
     private String firstName;
     private String lastName;
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
 
     /**
      * @return the emailAddress
@@ -178,6 +165,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
         if (success) {
             result = "SUCCESS";
             sessionMap.put("Loggedin", this);
+            System.out.println(DepartmentService.getInstance().getAllDepartments());
             System.out.println(this.roleId);
 
         }
@@ -199,8 +187,18 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
         boolean success = LoginService.getInstance().doSignUp(this);
 
         if (success) {
-            result = "SUCCESS";
+            Appointment appointment = (Appointment) sessionMap.get("Appointment");
+            if (appointment != null) {
+                boolean insert = AppointmentService.getInstance().getAppointment(appointment);
+                if (insert) {
+                    result = "SUCCESS";
+                }
+            } else {
+                result = "SUCCESS";
+            }
+
             sessionMap.put("SuccessSignUp", "Successfully Registered");
+            sessionMap.put("SignedUp", this);
 
         } else {
             sessionMap.put("FailSignUp", "Email All Ready Exsists");
