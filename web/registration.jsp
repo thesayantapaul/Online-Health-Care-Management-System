@@ -71,12 +71,12 @@
 
                                     <div class="form-group last mb-3">
                                         <label for="occupation">Occupation</label>
-                                        <input name="occupation" type="password" class="form-control" placeholder="Your Occupation" id="occupation">
+                                        <input name="occupation" type="text" class="form-control" placeholder="Your Occupation" id="occupation">
                                     </div>
 
                                     <div class="form-group last mb-3">
                                         <label for="address">Address</label>
-                                        <input name="address" type="password" class="form-control" placeholder="Your Address" id="address">
+                                        <input name="address" type="text" class="form-control" placeholder="Your Address" id="address">
                                     </div>
 
                                     <div class="d-sm-flex mb-5 align-items-center">
