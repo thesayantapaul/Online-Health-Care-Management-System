@@ -51,6 +51,8 @@ public class LoginService {
 
             if (rs.next()) {
                 user.setRoleId(rs.getString("roleId"));
+                user.setDoctorId(rs.getString("doctorId"));
+                user.setPatientId(rs.getString("patientId"));
                 result = true;
             }
 

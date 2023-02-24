@@ -32,6 +32,11 @@
         <action name="ViewAppointment" class="com.exavalu.models.Admin" method="doViewAppointments">
             <result name="SUCCESS">appointments.jsp</result>
             <result name="FAILURE">adminIndex.jsp</result>
+        </action>
+        
+         <action name="DoctorViewAppointment" class="com.exavalu.models.Doctors" method="doViewAppointments">
+            <result name="SUCCESS">doctorviewbooking.jsp</result>
+            <result name="FAILURE">doctorIndex.jsp</result>
         </action> 
         
         <!--fetch particular appointment with id admin-->

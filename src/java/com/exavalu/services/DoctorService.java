@@ -4,6 +4,7 @@
  */
 package com.exavalu.services;
 
+import com.exavalu.models.Appointment;
 import com.exavalu.models.Departments;
 import com.exavalu.models.Doctors;
 import com.exavalu.utils.JDBCConnectionManager;
@@ -69,6 +70,46 @@ public class DoctorService {
         }
 
         return deptLIst;
+    }
+    
+    public ArrayList doViewAppointments(String doctorId) {
+        
+        ArrayList appointmentList = new ArrayList();
+        try {
+
+            Connection con = JDBCConnectionManager.getConnection();
+
+            String sql = "select * from appointments a, patients p,departments dp where a.patientId=p.patientId and a.departmentId=dp.departmentId and doctorId = ?";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, doctorId);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Appointment appointment = new Appointment();
+
+                appointment.setAppointmentId(rs.getString("appointmentId"));
+                appointment.setAppointmentDate(rs.getString("appointmentDate"));
+                
+                appointment.setPatientFirstName(rs.getString("patientFirstName"));
+                appointment.setPatientLastName(rs.getString("patientLastName"));
+                appointment.setGender(rs.getString("gender"));
+                appointment.setAge(rs.getString("age"));
+                appointment.setDepartmentName(rs.getString("departmentName"));
+                //appointment.setSymptoms(rs.getString("symptoms"));
+
+                appointmentList.add(appointment);
+
+            }
+
+        } catch (SQLException ex) {
+            int e = ex.getErrorCode();
+            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+            System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+        }
+
+        return appointmentList;
     }
 
 }
