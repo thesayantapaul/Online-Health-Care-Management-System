@@ -1,7 +1,7 @@
 <%-- 
-    Document   : login
-    Created on : 21-Feb-2023, 4:56:03 pm
-    Author     : SAYANTA PAUL
+    Document   : signup
+    Created on : 23-Feb-2023, 2:19:03 am
+    Author     : Anik Dutta
 --%>
 
 
@@ -27,7 +27,7 @@
 
         <title>OHMS Registration</title>
     </head>
-    <body>
+    <body style="overflow: scroll; height : 90%">
         <div class="d-md-flex half">
             <div class="bg" style="background-image: url('images/login-side.jpg');"></div>
             <div class="contents">

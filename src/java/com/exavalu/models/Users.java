@@ -175,8 +175,18 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     public String doLogin() {
         String result = "FAILURE";
         boolean success = LoginService.getInstance().doLogin(this);
+
         if (success) {
-            result = "SUCCESS";
+            if (this.roleId.equals("1")) {
+                result = "SUCCESS";
+            }
+            if (this.roleId.equals("2")) {
+                result = "SUCCESS";
+            }
+            if (this.roleId.equals("3")) {
+                result = "ADMININDEX";
+            }
+            
             sessionMap.put("Loggedin", this);
             System.out.println(this.roleId);
 

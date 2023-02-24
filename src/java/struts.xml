@@ -7,6 +7,7 @@
     <package name="default" namespace="/" extends="struts-default">
         <action name="Login" class="com.exavalu.models.Users" method="doLogin">
             <result name="SUCCESS">index.jsp</result>
+            <result name="ADMININDEX">adminIndex.jsp</result>
             <result name="FAILURE">menu.jsp</result>
         </action> 
         <action name="Logout" class="com.exavalu.models.Users" method="doLogout">
@@ -16,7 +17,29 @@
         <action name="SignUp" class="com.exavalu.models.Users" method="doSignUp">
             <result name="SUCCESS">login.jsp</result>
             <result name="FAILURE">menu.jsp</result>
-        </action>  
+        </action> 
+        <action name="ViewAppointment" class="com.exavalu.models.Admin" method="doViewAppointments">
+            <result name="SUCCESS">appointments.jsp</result>
+            <result name="FAILURE">adminIndex.jsp</result>
+        </action> 
+        
+        <!--fetch particular appointment with id admin-->
+        <action name="FetchParticularAppointment" class="com.exavalu.models.Admin" method="doViewParticularAppointment">
+            <!--<result name="EDITAPPOINTMENT">admineditappointment.jsp</result>-->
+            <result name="SUCCESS">editAppointments.jsp</result>
+            <result name="FAILURE">adminIndex.jsp</result>
+        </action>
+        <!--CancelAppointment-->
+        <action name="CancelAppointment" class="com.exavalu.models.Admin" method="doCancelAppointment">
+            <result name="APPOINTMENTTABLE">adminappointmentviewtable.jsp</result>
+        </action>
+        <!--UpdateAppointment-->
+        <action name="UpdateAppointment" class="com.exavalu.models.Appointment" method="doUpdateAppointment">
+            <!--<result name="APPOINTMENTTABLE">adminappointmentviewtable.jsp</result>-->
+            <result name="SUCCESS">appointments.jsp</result>
+            <result name="FAILURE">adminIndex.jsp</result>
+        </action>
+        
   
         
            
