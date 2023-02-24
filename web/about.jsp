@@ -146,22 +146,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-center position-relative" style="margin-top: -200px; z-index: 1;">
+                 <div class="row justify-content-center position-relative" style="margin-top: -200px; z-index: 1;">
                     <div class="col-lg-8">
                         <div class="bg-white rounded p-5 m-5 mb-0">
-                            <form>
+                            <form action="https://formspree.io/f/moqzdban" method="POST">
                                 <div class="row g-3">
                                     <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control bg-light border-0" placeholder="Your Name" style="height: 55px;">
+                                        <input name="name" type="text" class="form-control bg-light border-0" placeholder="Your Name" style="height: 55px;" required>
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <input type="email" class="form-control bg-light border-0" placeholder="Your Email" style="height: 55px;">
+                                        <input name="email" type="email" class="form-control bg-light border-0" placeholder="Your Email" style="height: 55px;" required>
                                     </div>
                                     <div class="col-12">
-                                        <input type="text" class="form-control bg-light border-0" placeholder="Subject" style="height: 55px;">
+                                        <input name="subject" type="text" class="form-control bg-light border-0" placeholder="Subject" style="height: 55px;" required>
                                     </div>
                                     <div class="col-12">
-                                        <textarea class="form-control bg-light border-0" rows="5" placeholder="Message"></textarea>
+                                        <textarea name="message" class="form-control bg-light border-0" rows="5" placeholder="Message" required></textarea>
                                     </div>
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
@@ -172,6 +172,7 @@
                     </div>
                 </div>
             </div>
+      
         </div>
 
     </body>

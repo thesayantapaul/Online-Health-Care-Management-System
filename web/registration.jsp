@@ -27,7 +27,7 @@
 
         <title>OHMS Registration</title>
     </head>
-    <body>
+    <body class="">
         <div class="d-md-flex half">
             <div class="bg" style="background-image: url('images/login-side.jpg');"></div>
             <div class="contents">

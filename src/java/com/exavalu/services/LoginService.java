@@ -59,7 +59,6 @@ public class LoginService {
             System.out.println(ex.getErrorCode());
             ex.printStackTrace();
         }
-
         return result;
     }
 
