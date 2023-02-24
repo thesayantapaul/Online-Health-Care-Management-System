@@ -16,7 +16,7 @@
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">  
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
         <!-- Icon Font Stylesheet -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
@@ -71,7 +71,7 @@
         <div class="container-fluid sticky-top bg-white shadow-sm">
             <div class="container">
                 <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
-                    <a href="index.html" class="navbar-brand">
+                    <a href="index.jsp" class="navbar-brand">
                         <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-clinic-medical me-2"></i>OHMS</h1>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -79,21 +79,43 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto py-0">
-                            <a href="#" class="nav-item nav-link active">Home</a>
-                            <a href="#Service" class="nav-item nav-link">Services</a>
-                            <a href="#bookAppointment" class="nav-item nav-link">Book Service</a>
-                            <a href="#Explore" class="nav-item nav-link">Explore</a>
-                            <a href="#Testimonial" class="nav-item nav-link">Testimonial</a>
-                            <a href="#about" class="nav-item nav-link">About Us</a>
                             <c:if test="${login_check==null}">
+                                <a href="#" class="nav-item nav-link active">Home</a>
+                                <a href="#Service" class="nav-item nav-link">Services</a>
+                                <a href="#bookAppointment" class="nav-item nav-link">Book Service</a>
+                                <a href="#Explore" class="nav-item nav-link">Explore</a>
+                                <a href="#Testimonial" class="nav-item nav-link">Testimonial</a>
+                                <a href="#about" class="nav-item nav-link">About Us</a>
+
                                 <a href="login.jsp" class="nav-item nav-link">Login</a>
-                                <a href="registration.jsp" class="nav-item nav-link">SignUp</a>
+                                <a href="registration.jsp" class="nav-item nav-link">Sign Up</a>
 
                             </c:if>
+                            <c:if test="${login_check.roleId == '1'}">
+                                <a href="index.jsp" class="nav-item nav-link">Home</a>
+                                <a href="bookService.jsp" class="nav-item nav-link">Book Service</a>
+                                <a href="medicalHistory.jsp" class="nav-item nav-link">Medical History</a>
+                                <a href="#" class="nav-item nav-link">Bookings</a>
+                                <a href="#" class="nav-item nav-link">About Us</a>
+                            </c:if>
+                            <c:if test="${login_check.roleId == '2'}">
+                                <a href="index.jsp" class="nav-item nav-link active">Home</a>
+                                <a href="#" class="nav-item nav-link">View Bookings</a>
+                                <a href="#" class="nav-item nav-link">Generate Report</a>
+                                <a href="#" class="nav-item nav-link">View Report</a>
+                            </c:if>
+                            <c:if test="${login_check.roleId == '3'}">
+                                <a href="adminIndex.jsp" class="nav-item nav-link active">Home</a>
+                                <a href="search.jsp" class="nav-item nav-link">Search Data</a>
+                                <a href="#" class="nav-item nav-link">Update Data</a>
+                                <a href="ViewAppointment" class="nav-item nav-link">View Appointments</a>
+                                <a href="#" class="nav-item nav-link">Add Data</a>
+                            </c:if>
+
+
                             <c:if test="${login_check!=null}">
-                                <a href="Logout" class="nav-item nav-link">Logut</a>
+                                <a href="Logout" class="nav-item nav-link">Logout</a>
                             </c:if>
-
                         </div>
                     </div>
                 </nav>

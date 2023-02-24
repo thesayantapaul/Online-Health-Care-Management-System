@@ -1,13 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
- */
 package com.exavalu.models;
 
-import com.exavalu.services.AppointmentService;
-import com.exavalu.services.DoctorService;
-import com.exavalu.services.LoginService;
-import com.exavalu.services.PatientService;
+import com.exavalu.services.AdminService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
@@ -24,100 +17,23 @@ import org.apache.struts2.interceptor.SessionAware;
  */
 public class Appointment extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
 
-    private String appointmentId;
-
-    private String appointmentDate;
-
-    private String doctorId;
-
-    private String patientId;
-
-    private String departmentId;
-
-    private String emailAddress;
-
-    public String getEmailAddress() {
-        return emailAddress;
+    public SessionMap<String, Object> getSessionMap() {
+        return sessionMap;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setSessionMap(SessionMap<String, Object> sessionMap) {
+        this.sessionMap = sessionMap;
     }
 
-    public String getDepartmentId() {
-        return departmentId;
+    public ApplicationMap getMap() {
+        return map;
     }
 
-    public void setDepartmentId(String departmentId) {
-        this.departmentId = departmentId;
-    }
-
-    private String statusId;
-
-    private String messagetopatient;
-
-    private String symptoms;
-
-    private String time;
-
-    /**
-     * @return the appointmentId
-     */
-    public String getAppointmentId() {
-        return appointmentId;
-    }
-
-    /**
-     * @param appointmentId the appointmentId to set
-     */
-    public void setAppointmentId(String appointmentId) {
-        this.appointmentId = appointmentId;
-    }
-
-    /**
-     * @return the appointmentDate
-     */
-    public String getAppointmentDate() {
-        return appointmentDate;
-    }
-
-    /**
-     * @param appointmentDate the appointmentDate to set
-     */
-    public void setAppointmentDate(String appointmentDate) {
-        this.appointmentDate = appointmentDate;
-    }
-
-    /**
-     * @return the doctorId
-     */
-    public String getDoctorId() {
-        return doctorId;
-    }
-
-    /**
-     * @param doctorId the doctorId to set
-     */
-    public void setDoctorId(String doctorId) {
-        this.doctorId = doctorId;
-    }
-
-    /**
-     * @return the patientId
-     */
-    public String getPatientId() {
-        return patientId;
-    }
-
-    /**
-     * @param patientId the patientId to set
-     */
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
+    public void setMap(ApplicationMap map) {
+        this.map = map;
     }
 
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
-
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
 
     @Override
@@ -128,105 +44,149 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
     @Override
     public void setSession(Map<String, Object> session) {
         sessionMap = (SessionMap) session;
+
     }
 
-    /**
-     * @return the statusId
-     */
+    public String doUpdateAppointment() {
+        String result = "FAILURE";
+        boolean success = AdminService.doUpdateAppointment(this);
+
+        if (success) {
+            ArrayList appointmentList = AdminService.doViewAppointments();
+
+            if (appointmentList.size() > 0) {
+                sessionMap.put("AppointmentList", appointmentList);
+                
+            }
+
+            result = "SUCCESS";
+
+        }
+        return result;
+    }
+
+    private String patientId;
+    private String patientFirstName, patientLastName, doctorFirstName, doctorLastName;
+    private String appointmentId;
+    private String appointmentDate;
+    private String status;
+    private String report;
+    private String departmentName;
+    private String statusOfAppointments;
+    private String statusId;
+    private String departmentId;
+    private String doctorId;
+
+    public String getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
+    }
+
     public String getStatusId() {
         return statusId;
     }
 
-    /**
-     * @param statusId the statusId to set
-     */
     public void setStatusId(String statusId) {
         this.statusId = statusId;
     }
 
-    /**
-     * @return the messagetopatient
-     */
-    public String getMessagetopatient() {
-        return messagetopatient;
+    public String getStatusOfAppointments() {
+        return statusOfAppointments;
     }
 
-    /**
-     * @param messagetopatient the messagetopatient to set
-     */
-    public void setMessagetopatient(String messagetopatient) {
-        this.messagetopatient = messagetopatient;
+    public void setStatusOfAppointments(String statusOfAppointments) {
+        this.statusOfAppointments = statusOfAppointments;
     }
 
-    /**
-     * @return the symptoms
-     */
-    public String getSymptoms() {
-        return symptoms;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    /**
-     * @param symptoms the symptoms to set
-     */
-    public void setSymptoms(String symptoms) {
-        this.symptoms = symptoms;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
-    /**
-     * @return the time
-     */
-    public String getTime() {
-        return time;
+    public String getPatientId() {
+        return patientId;
     }
 
-    /**
-     * @param time the time to set
-     */
-    public void setTime(String time) {
-        this.time = time;
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
     }
 
-    public String doGetDoctor() throws Exception {
-        System.out.println(this.departmentId);
-        String result = "FAILURE";
-        ArrayList doctorList = DoctorService.getInstance().getAllDoctors(this.departmentId);
-
-        if (!doctorList.isEmpty()) {
-            result = "SUCCESS";
-            sessionMap.put("DoctorList", doctorList);
-
-        } else {
-            sessionMap.put("FailSignUp", "Email All Ready Exsists");
-        }
-        System.out.println(sessionMap);
-        return result;
-
+    public String getPatientFirstName() {
+        return patientFirstName;
     }
 
-    public String getAppointment() throws Exception {
-        String result = "FAILURE";
-        sessionMap.put("Appointment", this);
-
-        sessionMap.put("symptoms", this.symptoms);
-        System.out.println(this.emailAddress);
-        boolean success = LoginService.getInstance().doExsists(this.emailAddress, sessionMap);
-        if (!success) {
-            result = "SignUp";
-        } else {
-            Users user = (Users) sessionMap.get("Patient");
-            boolean res = LoginService.getInstance().doLogin(user);
-            if (res) {
-                sessionMap.put("Loggedin", user);
-                boolean insert = AppointmentService.getInstance().getAppointment(this);
-                if (insert) {
-                    result = "SUCCESS";
-                }
-            }
-
-        }
-
-        System.out.println(sessionMap);
-        return result;
-
+    public void setPatientFirstName(String patientFirstName) {
+        this.patientFirstName = patientFirstName;
     }
+
+    public String getPatientLastName() {
+        return patientLastName;
+    }
+
+    public void setPatientLastName(String patientLastName) {
+        this.patientLastName = patientLastName;
+    }
+
+    public String getDoctorFirstName() {
+        return doctorFirstName;
+    }
+
+    public void setDoctorFirstName(String doctorFirstName) {
+        this.doctorFirstName = doctorFirstName;
+    }
+
+    public String getDoctorLastName() {
+        return doctorLastName;
+    }
+
+    public void setDoctorLastName(String doctorLastName) {
+        this.doctorLastName = doctorLastName;
+    }
+
+    public String getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(String appointmentId) {
+        this.appointmentId = appointmentId;
+    }
+
+    public String getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public void setAppointmentDate(String appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getReport() {
+        return report;
+    }
+
+    public void setReport(String report) {
+        this.report = report;
+    }
+
 }

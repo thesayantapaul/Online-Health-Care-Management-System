@@ -101,6 +101,11 @@
     background-size: cover;
 }
 
+.admin-header {
+    background: url(../img/adminblack.jpg) top right no-repeat;
+    background-size: cover;
+}
+
 .service-item {
     position: relative;
     height: 350px;
