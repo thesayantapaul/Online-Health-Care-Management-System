@@ -100,7 +100,7 @@
                             </c:if>
                             <c:if test="${login_check.roleId == '2'}">
                                 <a href="index.jsp" class="nav-item nav-link active">Home</a>
-                                <a href="#" class="nav-item nav-link">View Bookings</a>
+                                <a href="DoctorViewAppointment?doctorId=${login_check.doctorId}" class="nav-item nav-link">View Bookings</a>
                                 <a href="#" class="nav-item nav-link">Generate Report</a>
                                 <a href="#" class="nav-item nav-link">View Report</a>
                             </c:if>

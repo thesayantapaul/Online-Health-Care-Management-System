@@ -81,6 +81,24 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
     private String doctorId;
     private String emailAddress;
     private String symptoms;
+    private String gender;
+    private String age;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
 
     public String getDoctorId() {
         return doctorId;
