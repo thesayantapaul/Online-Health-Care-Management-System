@@ -39,7 +39,7 @@
                                 <div class="text-center mb-5">
                                     <h3 class="text-uppercase">Please Register With <strong> OHMS </strong></h3>
                                 </div>
-                                <form action="Login" method="POST">                        
+                                <form action="SignUp" method="POST">                        
                                     <div class="form-group first">
                                         <label for="firstName">First Name</label>
                                         <input name="firstName" type="text" class="form-control" placeholder="First Name" id="firstName">
