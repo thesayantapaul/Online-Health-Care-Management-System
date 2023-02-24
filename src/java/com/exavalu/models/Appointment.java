@@ -1,6 +1,9 @@
 package com.exavalu.models;
 
 import com.exavalu.services.AdminService;
+import com.exavalu.services.AppointmentService;
+import com.exavalu.services.DoctorService;
+import com.exavalu.services.LoginService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
@@ -56,7 +59,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
 
             if (appointmentList.size() > 0) {
                 sessionMap.put("AppointmentList", appointmentList);
-                
+
             }
 
             result = "SUCCESS";
@@ -76,6 +79,8 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
     private String statusId;
     private String departmentId;
     private String doctorId;
+    private String emailAddress;
+    private String symptoms;
 
     public String getDoctorId() {
         return doctorId;
@@ -187,6 +192,78 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
 
     public void setReport(String report) {
         this.report = report;
+    }
+
+    public String doGetDoctor() throws Exception {
+        System.out.println(this.departmentId);
+        String result = "FAILURE";
+        ArrayList doctorList = DoctorService.getInstance().getAllDoctors(this.departmentId);
+
+        if (!doctorList.isEmpty()) {
+            result = "SUCCESS";
+            sessionMap.put("DoctorList", doctorList);
+
+        } else {
+            sessionMap.put("FailSignUp", "Email All Ready Exsists");
+        }
+        System.out.println(sessionMap);
+        return result;
+
+    }
+
+    public String getAppointment() throws Exception {
+        String result = "FAILURE";
+        sessionMap.put("Appointment", this);
+
+        sessionMap.put("symptoms", this.getSymptoms());
+        System.out.println(this.getEmailAddress());
+        boolean success = LoginService.getInstance().doExsists(this.getEmailAddress(), sessionMap);
+        if (!success) {
+            result = "SignUp";
+        } else {
+            Users user = (Users) sessionMap.get("Patient");
+            boolean res = LoginService.getInstance().doLogin(user);
+            if (res) {
+                sessionMap.put("Loggedin", user);
+                boolean insert = AppointmentService.getInstance().getAppointment(this);
+                if (insert) {
+                    result = "SUCCESS";
+                }
+            }
+
+        }
+
+        System.out.println(sessionMap);
+        return result;
+
+    }
+
+    /**
+     * @return the emailAddress
+     */
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    /**
+     * @param emailAddress the emailAddress to set
+     */
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    /**
+     * @return the symptoms
+     */
+    public String getSymptoms() {
+        return symptoms;
+    }
+
+    /**
+     * @param symptoms the symptoms to set
+     */
+    public void setSymptoms(String symptoms) {
+        this.symptoms = symptoms;
     }
 
 }
