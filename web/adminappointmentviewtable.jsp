@@ -82,7 +82,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="triggerId1">
 
-                                <a class="dropdown-item"  href="FetchParticularAppointment?appointmentId=${appointment.appointmentId}"><i class="fa fa-pencil mr-1"></i> Edit</a>
+                                <a class="dropdown-item"  onclick="editAppointmentData(${appointment.appointmentId})" href="#"><i class="fa fa-pencil mr-1"></i> Edit</a>
                             <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#ex${appointment.appointmentId}"> <i class ="fa fa-trash mr-1"></i> Cancel</a>
                         </div>
                     </div>

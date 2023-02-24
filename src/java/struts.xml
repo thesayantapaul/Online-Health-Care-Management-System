@@ -37,7 +37,7 @@
         <!--fetch particular appointment with id admin-->
         <action name="FetchParticularAppointment" class="com.exavalu.models.Admin" method="doViewParticularAppointment">
             <!--<result name="EDITAPPOINTMENT">admineditappointment.jsp</result>-->
-            <result name="SUCCESS">editAppointments.jsp</result>
+            <result name="EDITAPPOINTENTJSP">editAppointments.jsp</result>
             <result name="FAILURE">adminIndex.jsp</result>
         </action>
         <!--CancelAppointment-->
