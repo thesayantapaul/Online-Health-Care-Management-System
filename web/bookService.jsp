@@ -58,6 +58,7 @@
     </script>
 
     <body>
+        <jsp:include page="menu.jsp"></jsp:include>
         <c:set var="deptList" value="${DepartmentService.getInstance().getAllDepartments()}" />
 
 
@@ -81,7 +82,7 @@
                             <form action="Appointment" method="Post">
                                     <div class="row g-3">
                                         <div  class="col-12 col-sm-6">
-                                            <select name="departmentId" id="departmentId"  class="form-select bg-light border-0" style="height: 55px;" onchange="fetchContent($('#departmentId').find(':selected').val())" required>
+                                            <select name="departmentId" id="departmentId"  required class="form-select bg-light border-0" style="height: 55px;" onchange="fetchContent($('#departmentId').find(':selected').val())" required>
                                                 <option selected>Choose Department</option>
                                             <c:forEach items="${deptList}" var="dept">
                                                 <option value="${dept.getDepartmentId()}"<c:if test="${dept.getDepartmentId().equalsIgnoreCase(user.getDepartmentId())}" > selected </c:if>  > ${dept.getDepartmentName()} </option>
@@ -89,35 +90,35 @@
                                         </select>
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <select name="doctorId" id="doctorId" class="form-select bg-light border-0" style="height: 55px;">
+                                        <select name="doctorId" id="doctorId" required class="form-select bg-light border-0" style="height: 55px;">
                                             <option value="">Select Doctor</option>
 
 
                                         </select>
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <input name="name" type="text" class="form-control bg-light border-0" placeholder="Your Name" style="height: 55px;"  value="${user.getName()}">
+                                        <input name="name" type="text" class="form-control bg-light border-0" required placeholder="Your Name" style="height: 55px;"  value="${user.getName()}">
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <input name="emailAddress" type="email" class="form-control bg-light border-0" placeholder="Your Email" style="height: 55px;"  value="${user.getEmailAddess()}">
+                                        <input name="emailAddress" type="email" class="form-control bg-light border-0" placeholder="Your Email" required style="height: 55px;"  value="${user.getEmailAddess()}">
                                     </div>
 
                                     <div class="col-12 col-sm-6">
                                         <div class="date" id="date" data-target-input="nearest">
                                             <input name="appointmentDate" type="text"
                                                    class="form-control bg-light border-0 datetimepicker-input"
-                                                   placeholder="Date" data-target="#date" data-toggle="datetimepicker" style="height: 55px;"  value="${user.getAppointmentDate()}">
+                                                   placeholder="Date" data-target="#date" data-toggle="datetimepicker" style="height: 55px;" required  value="${user.getAppointmentDate()}">
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div  class="time" id="time" data-target-input="nearest">
                                             <input name="time" type="text"
                                                    class="form-control bg-light border-0 datetimepicker-input"
-                                                   placeholder="Time" data-target="#time" data-toggle="datetimepicker" style="height: 55px;"  value="${emp.getTime()}">
+                                                   placeholder="Time" data-target="#time" data-toggle="datetimepicker" style="height: 55px;" required  value="${emp.getTime()}">
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <input name="symptoms" type="text" class="form-control bg-light border-0" placeholder="Symptoms" style="height: 55px;" value="${emp.getSymptoms()}">
+                                        <input name="symptoms" type="text" class="form-control bg-light border-0" placeholder="Symptoms" style="height: 55px;" required value="${emp.getSymptoms()}">
                                     </div>
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100 py-3" type="submit">Make An Appointment</button>
@@ -130,7 +131,7 @@
             </div>
         </div>
         <!-- Appointment End -->
-
+<jsp:include page="footer.jsp"></jsp:include>
 
     </body>
 </html>
