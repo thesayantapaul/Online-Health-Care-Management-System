@@ -80,7 +80,7 @@
                                         </div>
                                         <div class="form-group last mb-3">
                                             <label for="appointmentDate">Appointment Date</label>
-                                            <input name="appointmentDate" type="text" class="form-control" placeholder="Appointment Date" id="appointmentDate" value="${appointment.appointmentDate}">
+                                            <input name="appointmentDate" type="text" class="form-control datetimepicker-input" data-target="#date" data-toggle="datetimepicker"  placeholder="Appointment Date" id="appointmentDate" value="${appointment.appointmentDate}">
                                         </div>
                                         <div class="form-group last mb-3">
 

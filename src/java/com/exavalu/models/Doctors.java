@@ -32,9 +32,11 @@ public class Doctors extends ActionSupport implements ApplicationAware, SessionA
     public void setSession(Map<String, Object> session) {
         setSessionmap((SessionMap<String, Object>) (SessionMap) session);
     }
-    
-    private String doctorName;
-    private String doctroId;
+
+    private String doctorFirstName;
+    private String doctorLastName;
+
+    private String doctorId;
     private String departmentId;
 
     /**
@@ -65,32 +67,20 @@ public class Doctors extends ActionSupport implements ApplicationAware, SessionA
         this.map = map;
     }
 
-    /**
-     * @return the doctorName
-     */
-    public String getDoctorName() {
-        return doctorName;
-    }
 
-    /**
-     * @param doctorName the doctorName to set
-     */
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
-    }
 
     /**
      * @return the doctroId
      */
-    public String getDoctroId() {
-        return doctroId;
+    public String getDoctorId() {
+        return doctorId;
     }
 
     /**
      * @param doctroId the doctroId to set
      */
-    public void setDoctroId(String doctroId) {
-        this.doctroId = doctroId;
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
     }
 
     /**
@@ -106,6 +96,33 @@ public class Doctors extends ActionSupport implements ApplicationAware, SessionA
     public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId;
     }
-    
+
+    /**
+     * @return the doctorFirstName
+     */
+    public String getDoctorFirstName() {
+        return doctorFirstName;
+    }
+
+    /**
+     * @param doctorFirstName the doctorFirstName to set
+     */
+    public void setDoctorFirstName(String doctorFirstName) {
+        this.doctorFirstName = doctorFirstName;
+    }
+
+    /**
+     * @return the doctorLastName
+     */
+    public String getDoctorLastName() {
+        return doctorLastName;
+    }
+
+    /**
+     * @param doctorLastName the doctorLastName to set
+     */
+    public void setDoctorLastName(String doctorLastName) {
+        this.doctorLastName = doctorLastName;
+    }
 
 }

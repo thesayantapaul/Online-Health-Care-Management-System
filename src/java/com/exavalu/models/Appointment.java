@@ -11,6 +11,10 @@ import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+/**
+ *
+ * @author anich
+ */
 public class Appointment extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
 
     public SessionMap<String, Object> getSessionMap() {
@@ -71,6 +75,15 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
     private String statusOfAppointments;
     private String statusId;
     private String departmentId;
+    private String doctorId;
+
+    public String getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
+    }
 
     public String getDepartmentId() {
         return departmentId;
