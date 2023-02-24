@@ -147,6 +147,7 @@ public class AdminService {
                 appointment.setDepartmentName(rs.getString("departmentName"));
                 appointment.setStatusOfAppointments(rs.getString("statusName"));
                 appointment.setStatusId(rs.getString("statusId"));
+                appointment.setDepartmentId(rs.getString("departmentId"));
 
             }
 

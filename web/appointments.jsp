@@ -24,7 +24,7 @@ admin appointment jsp
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function ()
                 {
-                    document.getElementById("appointmentEditDiv").innerHTML = xmlhttp.responseText;
+                    document.getElementById("viewAppointmenttableDivId").innerHTML = xmlhttp.responseText;
                 };
                 xmlhttp.open("POST", "FetchParticularAppointment?appointmentId=" + appointmentId, true);
                 xmlhttp.send();
@@ -41,19 +41,19 @@ admin appointment jsp
                 xmlhttp.open("POST", "CancelAppointment?appointmentId=" + appointmentId, true);
                 xmlhttp.send();
             }
-            function functionToUpdateAppointment(appointmentId)
-            {
-                //event.preventDefault();
-                //alert(appointmentId);
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function ()
-                {
-                    document.getElementById("viewAppointmenttableDivId").innerHTML = xmlhttp.responseText;
-                    document.getElementById("appointmentEditDiv").innerHTML = "";
-                };
-                //xmlhttp.open("POST", "UpdateAppointment?appointmentId=" + appointmentId + "&appointmentDate=" + , true);
-                xmlhttp.send();
-            }
+//            function functionToUpdateAppointment(appointmentId)
+//            {
+//                //event.preventDefault();
+//                //alert(appointmentId);
+//                var xmlhttp = new XMLHttpRequest();
+//                xmlhttp.onreadystatechange = function ()
+//                {
+//                    document.getElementById("viewAppointmenttableDivId").innerHTML = xmlhttp.responseText;
+//                    document.getElementById("appointmentEditDiv").innerHTML = "";
+//                };
+//                //xmlhttp.open("POST", "UpdateAppointment?appointmentId=" + appointmentId + "&appointmentDate=" + , true);
+//                xmlhttp.send();
+//            }
             //functionToUpdateAppointment
 
         </script>
@@ -147,7 +147,7 @@ admin appointment jsp
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="triggerId1">
 
-                                                <a class="dropdown-item" href="FetchParticularAppointment?appointmentId=${appointment.appointmentId}"><i class="fa fa-pencil mr-1"></i> Edit</a>
+                                                <a class="dropdown-item" onclick="editAppointmentData(${appointment.appointmentId})" ><i class="fa fa-pencil mr-1"></i> Edit</a>
                                             <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#ex${appointment.appointmentId}"> <i class ="fa fa-trash mr-1"></i> Cancel</a>
                                         </div>
                                     </div>
@@ -183,14 +183,6 @@ admin appointment jsp
                 </table>
             </div>
         </section>
-
-
-        <!--to edit appointment-->
-        <div class="container" id="appointmentEditDiv">
-
-
-        </div>
-
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

@@ -1,6 +1,8 @@
 package com.exavalu.models;
 
 import com.exavalu.services.AdminService;
+import com.exavalu.services.DepartmentService;
+import com.exavalu.services.StatusService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
@@ -66,7 +68,11 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         appointment = AdminService.doViewParticularAppointment(this.appointmentId);
 
         if (appointment != null) {
-            result = "SUCCESS";
+            result = "EDITAPPOINTENTJSP";
+            ArrayList deptList = DepartmentService.getInstance().getAllDepartments();
+            ArrayList statusList = StatusService.getAllStatus();
+            sessionMap.put("DeptList", deptList);
+            sessionMap.put("StatusList", statusList);
             sessionMap.put("appointment", appointment);
             System.out.println("appointmentdate= "+appointment.getAppointmentDate());
         }
