@@ -14,6 +14,11 @@
             <result name="SUCCESS">index.jsp</result>
             <result name="FAILURE">menu.jsp</result>
         </action>
+        <!--VIEW ADMIN DASHBOARD-->
+        <action name="DashBoard" class="com.exavalu.models.Admin" method="doViewDashboard">
+            <result name="SUCCESS">admindashboard.jsp</result>
+        </action>
+        
         <action name="SignUp" class="com.exavalu.models.Users" method="doSignUp">
             <result name="SUCCESS">login.jsp</result>
             <result name="FAILURE">menu.jsp</result>
