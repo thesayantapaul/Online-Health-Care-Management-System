@@ -60,5 +60,13 @@
             <result name="SUCCESS">appointments.jsp</result>
             <result name="FAILURE">adminIndex.jsp</result>
         </action>
+        
+        <!--patients-->
+         <action name="ViewMedicalHistory" class="com.exavalu.models.Patients" method="doViewParticularMedicalHistory">
+            <!--<result name="APPOINTMENTTABLE">adminappointmentviewtable.jsp</result>-->
+            <result name="SUCCESS">patientMedicalHistory.jsp</result>
+            <result name="FAILURE">login.jsp</result>
+        </action>
+        
     </package>
 </struts>
