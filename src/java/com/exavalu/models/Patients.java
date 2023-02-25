@@ -4,9 +4,12 @@
  */
 package com.exavalu.models;
 
+import com.exavalu.services.DepartmentService;
+import com.exavalu.services.PatientService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Map;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -17,12 +20,25 @@ import org.apache.struts2.interceptor.SessionAware;
  *
  * @author SAYANTA PAUL
  */
-public class Patients extends ActionSupport implements ApplicationAware, SessionAware, Serializable{
-    
-    private String patientId,patientFirstName,patientLastName,age,gender,appointmentId;
+public class Patients extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
 
-    private SessionMap<String, Object> sessionmap = (SessionMap<String, Object>) ActionContext.getContext().getSession();
+    public SessionMap<String, Object> getSessionMap() {
+        return sessionMap;
+    }
 
+    public void setSessionMap(SessionMap<String, Object> sessionMap) {
+        this.sessionMap = sessionMap;
+    }
+
+    public ApplicationMap getMap() {
+        return map;
+    }
+
+    public void setMap(ApplicationMap map) {
+        this.map = map;
+    }
+
+    private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
 
     @Override
@@ -32,8 +48,27 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
 
     @Override
     public void setSession(Map<String, Object> session) {
-        setSessionmap((SessionMap<String, Object>) (SessionMap) session);
+        setSessionMap((SessionMap<String, Object>) (SessionMap) session);
+
     }
+
+    public String doViewParticularMedicalHistory() {
+        String result = "FAILURE";
+        Appointment appointment = new Appointment();
+        appointment = PatientService.doViewParticularMedicalHistory(this.patientId);
+
+        if (appointment != null) {
+//            result = "EDITAPPOINTENTJSP";
+            ArrayList deptList = DepartmentService.getInstance().getAllDepartments();
+//            ArrayList statusList = StatusService.getAllStatus();
+            sessionMap.put("PatientMedicalHistory", appointment);
+            result = "SUCCESS";
+        }
+        return result;
+    }
+
+    private String patientId, patientFirstName, patientLastName, age, gender, appointmentId;
+
     /**
      * @return the patientId
      */
@@ -116,13 +151,5 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
      */
     public void setAppointmentId(String appointmentId) {
         this.appointmentId = appointmentId;
-    }
-
-      private void setMap(ApplicationMap applicationMap) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void setSessionmap(SessionMap<String, Object> sessionMap) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
