@@ -149,15 +149,15 @@
                                     </div>
 
                                     <div class="card-body">
-                                        <h5 class="card-title"> Users <span>| Total Registered </span></h5>
+                                        <h5 class="card-title"> Users Registered<span>| Today </span></h5>
 
                                         <div class="d-flex align-items-center">
                                             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                                 <i class="bi bi-people"></i>
                                             </div>
                                             <div class="ps-3">
-                                                    <h6>${TotalRegisteredUsers}</h6>
-                                            <span class="text-success small pt-1 fw-bold"><i class="bi bi-arrow-up-circle"></i></span><span class="text-muted small pt-2 ps-1">Registered users till date</span>
+                                                    <h6>${TodayUsers}</h6>
+                                            <span class="text-success small pt-1 fw-bold"><i class="bi bi-arrow-up-circle"></i></span><span class="text-muted small pt-2 ps-1">User registered today</span>
 
                                         </div>
                                     </div>
@@ -201,7 +201,7 @@
                                                         data: [${Day6Revenue}, ${Day5Revenue}, ${Day4Revenue}, ${Day3Revenue}, ${Day2Revenue}, ${Day1Revenue},${TodayRevenue}]
                                                     }, {
                                                         name: 'Users',
-                                                        data: [${TotalRegisteredUsers}, ${TotalRegisteredUsers}, ${TotalRegisteredUsers}, ${TotalRegisteredUsers}, ${TotalRegisteredUsers}, ${TotalRegisteredUsers}, ${TotalRegisteredUsers}]
+                                                        data: [${Day6User},${Day5User},${Day4User},${Day3User},${Day2User},${Day1User},${TodayUsers}]
                                                     }],
                                                 chart: {
                                                     height: 350,

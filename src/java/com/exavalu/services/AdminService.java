@@ -292,6 +292,7 @@ public class AdminService {
             Connection con = JDBCConnectionManager.getConnection();
             String sql = "SELECT appointmentDate, SUM(amount) as totalRevenue FROM appointments where appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY) GROUP BY appointmentDate;";
             PreparedStatement ps = con.prepareStatement(sql);
+            
             ps.setString(1, interval);
 
             System.out.println("ps:" + ps);
@@ -300,6 +301,8 @@ public class AdminService {
             
             if (rs.next()) {
                appointmentDate = rs.getString("appointmentDate");
+            }else{
+                appointmentDate = "today";
             }
 
         } catch (SQLException ex) {
@@ -312,21 +315,24 @@ public class AdminService {
    //-------------------------------------------------------------------------------------------------------
     
     
-    public static String totalRegisteredUsers() {
+    public static String totalRegisteredUsers(String interval) {
         String totalUsers = null;
 
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "SELECT count(emailAddress) as totalUsers from users";
+            String sql = "SELECT COUNT(emailAddress) as totalRegisteredUsersToday FROM users where dateofregisteration = DATE_ADD(CURDATE(), INTERVAL ? DAY);";
 
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, interval);
 
             System.out.println("ps:" + ps);
             
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                totalUsers = rs.getString("totalUsers");
+                totalUsers = rs.getString("totalRegisteredUsersToday");
+            }else{
+                totalUsers = "0";
             }
 
         } catch (SQLException ex) {
