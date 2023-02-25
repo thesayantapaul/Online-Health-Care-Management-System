@@ -227,6 +227,25 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
             sessionMap.put("Day1Revenue", "0");
             sessionMap.put("HigherOrLowerTextRevenue", "Higher than yesterday");
         }
+        
+        //elements for xaxis in dashboard graph -----------------------------------
+        
+        String todayDateElement = AdminService.elementsForXaxis("0");
+        sessionMap.put("CurrentDay",todayDateElement);
+        String day1 = AdminService.elementsForXaxis("-1");
+        sessionMap.put("Day1",day1);
+        String day2 = AdminService.elementsForXaxis("-2");
+        sessionMap.put("Day2",day2);
+        String day3 = AdminService.elementsForXaxis("-3");
+        sessionMap.put("Day3",day3);
+        String day4 = AdminService.elementsForXaxis("-4");
+        sessionMap.put("Day4",day4);
+        String day5 = AdminService.elementsForXaxis("-5");
+        sessionMap.put("Day5",day5);
+        String day6 = AdminService.elementsForXaxis("-6");
+        sessionMap.put("Day6",day6);
+        
+        //-----------------------------------------------------------------------
 
         ArrayList appointmentList = AdminService.doViewAppointments("0");
 

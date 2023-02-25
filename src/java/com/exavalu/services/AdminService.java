@@ -284,7 +284,32 @@ public class AdminService {
         }
         return totalRevenue;
     }
-    //yesterday revenue
+    //chart data x axis dashboard admin--------------------------------------------------------------------------------
+    public static String elementsForXaxis(String interval) {
+        String appointmentDate = null;
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT appointmentDate, SUM(amount) as totalRevenue FROM appointments where appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY) GROUP BY appointmentDate;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, interval);
+
+            System.out.println("ps:" + ps);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+               appointmentDate = rs.getString("appointmentDate");
+            }
+
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
+        }
+        return appointmentDate;
+    }
+   //-------------------------------------------------------------------------------------------------------
     
     
     public static String totalRegisteredUsers() {
