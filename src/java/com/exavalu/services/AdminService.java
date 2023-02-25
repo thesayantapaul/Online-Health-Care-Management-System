@@ -51,6 +51,7 @@ public class AdminService {
                 appointment.setDepartmentName(rs.getString("departmentName"));
                 appointment.setStatusOfAppointments(rs.getString("statusName"));
                 appointment.setStatusId(rs.getString("statusId"));
+                appointment.setDepartmentId(rs.getString("departmentId"));
                 System.out.println("status id = " + appointment.getStatusId());
                 appointmentList.add(appointment);
             }
