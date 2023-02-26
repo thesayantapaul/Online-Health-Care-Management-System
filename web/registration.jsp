@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : signup
     Created on : 23-Feb-2023, 2:19:03 am
     Author     : Anik Dutta
@@ -10,7 +10,7 @@
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
-         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
@@ -18,7 +18,7 @@
         <!--<link rel="stylesheet" href="css/login-icon-style.css">-->
 
         <!--done-->
-        <link rel="stylesheet" href="css/owl.carousel.min.css"> 
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.login.css">
@@ -40,7 +40,7 @@
                                 <div class="text-center mb-5">
                                     <h3 class="text-uppercase">Please Register With <strong> OHMS </strong></h3>
                                 </div>
-                                <form action="SignUp" method="POST">                        
+                                <form action="SignUp" method="POST">
                                     <div class="form-group first">
                                         <label for="firstName">First Name</label>
                                         <input name="firstName" type="text" class="form-control" placeholder="First Name" id="firstName" required>
@@ -48,7 +48,7 @@
                                     <div class="form-group first">
                                         <label for="lastName">Last Name</label>
                                         <input name="lastName" type="text" class="form-control" placeholder="Last Name" id="lastName" required>
-                                    </div>                               
+                                    </div>
                                     <div class="form-group first">
                                         <label for="emailAddress">Email Address</label>
                                         <input name="emailAddress" type="text" class="form-control" placeholder="your-email@gmail.com" id="emailAddress" required>
@@ -64,9 +64,9 @@
                                         <label class="gender" for="inlineFormCustomSelectPref" id="gender">Choose Gender</label>
                                         <select  name="gender" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" required>
                                             <option selected>Select Gender</option>
-                                            <option value="1">Male</option>
-                                            <option value="2">Female</option>
-                                            <option value="3">Others</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="others">Others</option>
                                         </select>
                                     </div>
 
@@ -85,7 +85,7 @@
                                             <input type="checkbox" checked="checked" required/>
                                             <div class="control__indicator"></div>
                                         </label>
-                                        <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
+                                        <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
                                     </div>
                                     <div class="g-recaptcha" data-sitekey="6LcQjK0kAAAAALMogTAZqQcjHJftku7jwQSL4jIV"></div><br>
                                     <button type="submit" value="Sign Up" class="btn btn-block py-2 btn-primary">Sign Up</button>

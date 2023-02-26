@@ -4,12 +4,13 @@
  */
 package com.exavalu.models;
 
+import com.exavalu.services.AdminService;
 import com.exavalu.services.AppointmentService;
-import com.exavalu.services.DepartmentService;
 import com.exavalu.services.LoginService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Map;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -189,11 +190,214 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 result = "SUCCESS";
             }
             if (this.roleId.equals("3")) {
+
+                String todayBooking = AdminService.doViewBookings("0");
+                String day1Booking = AdminService.doViewBookings("-1");
+
+                //graph data population booking or appointments------------------
+                String day2Booking = AdminService.doViewBookings("-2");
+                String day3Booking = AdminService.doViewBookings("-3");
+                String day4Booking = AdminService.doViewBookings("-4");
+                String day5Booking = AdminService.doViewBookings("-5");
+                String day6Booking = AdminService.doViewBookings("-6");
+
+                if (day2Booking != null) {
+                    sessionMap.put("Day2Booking", day2Booking);
+                } else {
+                    sessionMap.put("Day2Booking", "0");
+                }
+                if (day3Booking != null) {
+                    sessionMap.put("Day3Booking", day3Booking);
+                } else {
+                    sessionMap.put("Day3Booking", "0");
+                }
+                if (day4Booking != null) {
+                    sessionMap.put("Day4Booking", day4Booking);
+                } else {
+                    sessionMap.put("Day4Booking", "0");
+                }
+                if (day5Booking != null) {
+                    sessionMap.put("Day5Booking", day5Booking);
+                } else {
+                    sessionMap.put("Day5Booking", "0");
+                }
+                if (day6Booking != null) {
+                    sessionMap.put("Day6Booking", day6Booking);
+                } else {
+                    sessionMap.put("Day6Booking", "0");
+                }
+
+                //compare booking to show in dashboard
+                if (todayBooking != null && day1Booking != null) {
+
+                    if (Integer.parseInt(todayBooking) >= Integer.parseInt(day1Booking)) {
+
+                        sessionMap.put("HigherOrLowerText", "Higher than yesterday");
+                        sessionMap.put("TodayBooking", todayBooking);
+                        sessionMap.put("IncreaseBooking", "increase");
+                        sessionMap.put("DecreaseBooking", null);
+
+                    } else {
+                        sessionMap.put("HigherOrLowerText", "Lower than yesterday");
+                        sessionMap.put("TodayBooking", todayBooking);
+                        sessionMap.put("DecreaseBooking", "decrease");
+                        sessionMap.put("IncreaseBooking", null);
+                    }
+                    sessionMap.put("Day1Booking", day1Booking);
+                } else {
+                    sessionMap.put("HigherOrLowerText", "Higher than yesterday");
+                    sessionMap.put("TodayBooking", "0");
+                    sessionMap.put("Day1Booking", day1Booking);
+                }
+
+                String totalTodayRevenue = AdminService.doViewTotalRevenue("0");
+                String day1Revenue = AdminService.doViewTotalRevenue("-1");
+
+                //graph data population revenue--------------------------------------
+                String day2Revenue = AdminService.doViewTotalRevenue("-2");
+                String day3Revenue = AdminService.doViewTotalRevenue("-3");
+                String day4Revenue = AdminService.doViewTotalRevenue("-4");
+                String day5Revenue = AdminService.doViewTotalRevenue("-5");
+                String day6Revenue = AdminService.doViewTotalRevenue("-6");
+                
+                if(totalTodayRevenue!=null){
+                    sessionMap.put("TodayRevenue", totalTodayRevenue);
+                }else{
+                    sessionMap.put("TodayRevenue", "0");
+                }
+                
+                if(day1Revenue != null){
+                    sessionMap.put("Day1Revenue", day1Revenue);
+                }else{
+                    sessionMap.put("Day1Revenue", "0");
+                }
+                if (day2Revenue != null) {
+                    sessionMap.put("Day2Revenue", day2Revenue);
+                } else {
+                    sessionMap.put("Day2Revenue", "0");
+                }
+                if (day3Revenue != null) {
+                    sessionMap.put("Day3Revenue", day3Revenue);
+                } else {
+                    sessionMap.put("Day3Revenue", "0");
+                }
+                if (day4Revenue != null) {
+                    sessionMap.put("Day4Revenue", day4Revenue);
+                } else {
+                    sessionMap.put("Day4Revenue", "0");
+                }
+                if (day5Revenue != null) {
+                    sessionMap.put("Day5Revenue", day5Revenue);
+                } else {
+                    sessionMap.put("Day5Revenue", "0");
+                }
+                if (day6Revenue != null) {
+                    sessionMap.put("Day6Revenue", day6Revenue);
+                } else {
+                    sessionMap.put("Day6Revenue", "0");
+                }
+
+                //compare revenue
+                if (totalTodayRevenue != null && day1Revenue != null) {
+                    if (Integer.parseInt(totalTodayRevenue) >= Integer.parseInt(day1Revenue)) {
+                        sessionMap.put("HigherOrLowerTextRevenue", "Higher than yesterday");
+                        sessionMap.put("IncreaseRevenue", "increase");
+                        sessionMap.put("DecreaseRevenue", null);
+
+                    } else {
+                        sessionMap.put("TotalRevenue", totalTodayRevenue);
+                        sessionMap.put("HigherOrLowerTextRevenue", "Lower than yesterday");
+                        sessionMap.put("DecreaseRevenue", "decrease");
+                        sessionMap.put("IncreaseRevenue", null);
+                    }
+                    
+                } else {
+                    
+                    sessionMap.put("HigherOrLowerTextRevenue", "Higher than yesterday");
+                    
+                }
+                //elements for xaxis in dashboard graph -----------------------------------
+
+                String todayDateElement = AdminService.elementsForXaxis("0");
+                sessionMap.put("CurrentDay", todayDateElement);
+                String day1 = AdminService.elementsForXaxis("-1");
+                sessionMap.put("Day1", day1);
+                String day2 = AdminService.elementsForXaxis("-2");
+                sessionMap.put("Day2", day2);
+                String day3 = AdminService.elementsForXaxis("-3");
+                sessionMap.put("Day3", day3);
+                String day4 = AdminService.elementsForXaxis("-4");
+                sessionMap.put("Day4", day4);
+                String day5 = AdminService.elementsForXaxis("-5");
+                sessionMap.put("Day5", day5);
+                String day6 = AdminService.elementsForXaxis("-6");
+                sessionMap.put("Day6", day6);
+
+ //----------------------------------------------------------------------------------------------------------
+                
+                ArrayList appointmentList = AdminService.doViewAppointments("0");
+
+                sessionMap.put("AppointmentListDashBoard", appointmentList);
+                
+                
+//-------------------no. of user registeration to show on admin dashboard---------------------------------------------
+                String todayRegisteration = AdminService.totalRegisteredUsers("0");
+                if(todayRegisteration!=null){
+                    sessionMap.put("TodayUsers", todayRegisteration);
+                }else{
+                    sessionMap.put("TodayUsers", "0");
+                }
+                
+                String day1User = AdminService.totalRegisteredUsers("-1");
+                if(day1User!=null){
+                    sessionMap.put("Day1User", day1User);
+                }else{
+                    sessionMap.put("Day1User", null);
+                }
+                
+                String day2User = AdminService.totalRegisteredUsers("-2");
+                if(day2User!=null){
+                    sessionMap.put("Day2User", day2User);
+                }else{
+                    sessionMap.put("Day2User", null);
+                }
+                
+                
+                String day3User = AdminService.totalRegisteredUsers("-3");
+                if(day3User!=null){
+                     sessionMap.put("Day3User", day3User);
+                }else{
+                     sessionMap.put("Day3User", "0");
+                }
+               
+                
+                String day4User = AdminService.totalRegisteredUsers("-4");
+                if(day4User!=null){
+                    sessionMap.put("Day4User", day4User);
+                }else{
+                     sessionMap.put("Day4User", "0");
+                }
+                
+                String day5User = AdminService.totalRegisteredUsers("-5");
+                if(day5User!=null){
+                    sessionMap.put("Day5User", day5User);
+                }else{
+                    sessionMap.put("Day5User", "0");
+                }
+                
+                String day6User = AdminService.totalRegisteredUsers("-6");
+                if(day6User!=null){
+                    sessionMap.put("Day6User", day6User);
+                }
+                else{
+                    sessionMap.put("Day6User", "0");
+                }
+//---------------------------------------------------------------------------------------------
                 result = "ADMININDEX";
             }
-            
+
             sessionMap.put("Loggedin", this);
-            System.out.println(DepartmentService.getInstance().getAllDepartments());
+            //System.out.println(DepartmentService.getInstance().getAllDepartments());
             System.out.println(this.roleId);
 
         }

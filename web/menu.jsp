@@ -105,7 +105,7 @@
                                 <a href="#" class="nav-item nav-link">View Report</a>
                             </c:if>
                             <c:if test="${login_check.roleId == '3'}">
-                                <a href="adminIndex.jsp" class="nav-item nav-link active">Home</a>
+                                <a href="DashBoard" class="nav-item nav-link active">Dashboard</a>
                                 <a href="search.jsp" class="nav-item nav-link">Search Data</a>
                                 <a href="#" class="nav-item nav-link">Update Data</a>
                                 <a href="ViewAppointment" class="nav-item nav-link">View Appointments</a>

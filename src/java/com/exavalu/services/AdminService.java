@@ -51,6 +51,54 @@ public class AdminService {
                 appointment.setDepartmentName(rs.getString("departmentName"));
                 appointment.setStatusOfAppointments(rs.getString("statusName"));
                 appointment.setStatusId(rs.getString("statusId"));
+                appointment.setDepartmentId(rs.getString("departmentId"));
+                System.out.println("status id = " + appointment.getStatusId());
+                appointmentList.add(appointment);
+            }
+            System.out.println("rs size = " + appointmentList.size());
+
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
+        }
+
+        return appointmentList;
+    }
+    public static ArrayList doViewAppointments(String interval) {
+        ArrayList appointmentList = new ArrayList();
+        String sql = "SELECT * FROM appointments a,doctors d,patients p,departments dp,statusofappointments s where a.doctorId=d.doctorId and a.patientId=p.patientId and a.departmentId=dp.departmentId and a.statusId = s.statusId and appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY)";
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, interval);
+
+            ResultSet rs = ps.executeQuery();
+
+//            if(rs.next()){
+//                System.out.println("rs has next");
+//            }else{
+//                System.out.println("ther is no row in rs");
+//            }
+            while (rs.next()) {
+
+                Appointment appointment = new Appointment();
+                appointment.setPatientId(rs.getString("patientId"));
+
+                System.out.println("patient id= " + appointment.getPatientId());
+
+                appointment.setPatientFirstName(rs.getString("patientFirstName"));
+                System.out.println("patient id= " + appointment.getPatientFirstName());
+                appointment.setPatientLastName(rs.getString("patientLastName"));
+                appointment.setDoctorFirstName(rs.getString("doctorFirstName"));
+                appointment.setDoctorLastName(rs.getString("doctorLastName"));
+                appointment.setAppointmentDate(rs.getString("appointmentDate"));
+                appointment.setAppointmentId(rs.getString("appointmentId"));
+                appointment.setStatus(rs.getString("statusName"));
+                appointment.setDepartmentName(rs.getString("departmentName"));
+                appointment.setStatusOfAppointments(rs.getString("statusName"));
+                appointment.setStatusId(rs.getString("statusId"));
+                appointment.setDepartmentId(rs.getString("departmentId"));
                 System.out.println("status id = " + appointment.getStatusId());
                 appointmentList.add(appointment);
             }
@@ -161,20 +209,19 @@ public class AdminService {
     }
 
     public static boolean doUpdateAppointment(Appointment appointment) {
-        
+
         boolean result = false;
         try {
             Connection con = JDBCConnectionManager.getConnection();
             String sql = "UPDATE appointments SET departmentId=?,appointmentDate=?,statusId=? WHERE appointmentId=?;";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
-            
 
             preparedStatement.setString(1, appointment.getDepartmentId());
             preparedStatement.setString(2, appointment.getAppointmentDate());
             preparedStatement.setString(3, appointment.getStatusId());
             preparedStatement.setString(4, appointment.getAppointmentId());
-            System.out.println("ps:"+preparedStatement);
+            System.out.println("ps:" + preparedStatement);
             int row = preparedStatement.executeUpdate();
 
             if (row == 1) {
@@ -185,6 +232,115 @@ public class AdminService {
             ex.printStackTrace();
         }
         return result;
+    }
+
+    public static String doViewBookings(String interval) {
+        String totalBookings = null;
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT COUNT(appointmentId) as bookings FROM appointments WHERE appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY)";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, interval);
+
+            System.out.println("ps:" + ps);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalBookings = rs.getString("bookings");
+            }
+
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
+        }
+        return totalBookings;
+    }
+    
+
+    public static String doViewTotalRevenue(String interval) {
+        String totalRevenue = null;
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT SUM(amount) as totalRevenue FROM appointments where appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY);";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, interval);
+
+            System.out.println("ps:" + ps);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                totalRevenue = rs.getString("totalRevenue");
+            }
+
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
+        }
+        return totalRevenue;
+    }
+    //chart data x axis dashboard admin--------------------------------------------------------------------------------
+    public static String elementsForXaxis(String interval) {
+        String appointmentDate = null;
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT appointmentDate, SUM(amount) as totalRevenue FROM appointments where appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY) GROUP BY appointmentDate;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setString(1, interval);
+
+            System.out.println("ps:" + ps);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+               appointmentDate = rs.getString("appointmentDate");
+            }else{
+                appointmentDate = "today";
+            }
+
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
+        }
+        return appointmentDate;
+    }
+   //-------------------------------------------------------------------------------------------------------
+    
+    
+    public static String totalRegisteredUsers(String interval) {
+        String totalUsers = null;
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT COUNT(emailAddress) as totalRegisteredUsersToday FROM users where dateofregisteration = DATE_ADD(CURDATE(), INTERVAL ? DAY);";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, interval);
+
+            System.out.println("ps:" + ps);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                totalUsers = rs.getString("totalRegisteredUsersToday");
+            }else{
+                totalUsers = "0";
+            }
+
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
+        }
+        return totalUsers;
     }
 
 }
