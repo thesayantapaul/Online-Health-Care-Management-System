@@ -40,7 +40,7 @@
                 <div class="row">
                     <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                         <div class="d-inline-flex align-items-center">
-                            <a class="text-decoration-none text-body pe-3" href=""><i class="bi bi-telephone me-2"></i>+012 345 6789</a>
+                            <a class="text-decoration-none text-body pe-3"href="tel:+0123456789"><i class="bi bi-telephone me-2"></i>+012 345 6789</a>
                             <span class="text-body">|</span>
                             <a  class="text-decoration-none text-body px-3" href = "mailto:admin@ohms.com"><i class="bi bi-envelope me-2"></i>info@ohms.com</a>
                         </div>
@@ -92,16 +92,15 @@
 
                             </c:if>
                             <c:if test="${login_check.roleId == '1'}">
-                                <a href="index.jsp" class="nav-item nav-link">Home</a>
-                                <a href="bookService.jsp" class="nav-item nav-link">Book Service</a>
-                                <a href="medicalHistory.jsp" class="nav-item nav-link">Medical History</a>
-                                <a href="#" class="nav-item nav-link">Bookings</a>
-                                <a href="#" class="nav-item nav-link">About Us</a>
+                                <a href="patientIndex.jsp" class="nav-item nav-link">Home</a>
+                                <a href="bookService.jsp" class="nav-item nav-link">Book an Appointment</a>
+                                <a href="ViewMedicalHistory" class="nav-item nav-link">Medical History</a>
+                                <a href="patientUpcomingBooking" class="nav-item nav-link">Upcoming Appointments</a>
                             </c:if>
                             <c:if test="${login_check.roleId == '2'}">
                                 <a href="index.jsp" class="nav-item nav-link active">Home</a>
                                 <a href="DoctorViewAppointment?doctorId=${login_check.doctorId}" class="nav-item nav-link">View Bookings</a>
-                                <a href="#" class="nav-item nav-link">Generate Report</a>
+                                <a href="prescription.jsp" class="nav-item nav-link">Generate Report</a>
                                 <a href="#" class="nav-item nav-link">View Report</a>
                             </c:if>
                             <c:if test="${login_check.roleId == '3'}">

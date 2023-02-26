@@ -88,7 +88,7 @@
             <div class="container">
                 <div class="row g-5">
                     <div class="col-md-6 text-center text-md-start">
-                        <p class="mb-md-0">&copy; <a class="text-primary" href="#">Subhadip</a>. All Rights Reserved.</p>
+                        <p class="mb-md-0">&copy; <a class="text-primary" href="#">OHMS</a>. All Rights Reserved.</p>
                     </div>
                 </div>
             </div>

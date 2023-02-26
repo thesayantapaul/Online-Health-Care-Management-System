@@ -34,7 +34,6 @@
                 </div>
                 <div class="col-auto d-none d-lg-block">
                     <img src="images/images.png" width="200" height="250"></img>
-
                 </div>
             </div>
         </div>

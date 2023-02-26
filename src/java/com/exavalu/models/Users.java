@@ -184,10 +184,10 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
 
         if (success) {
             if (this.roleId.equals("1")) {
-                result = "SUCCESS";
+                result = "PATIENTINDEX";
             }
             if (this.roleId.equals("2")) {
-                result = "SUCCESS";
+                result = "DOCTORINDEX";
             }
             if (this.roleId.equals("3")) {
 

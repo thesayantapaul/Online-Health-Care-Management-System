@@ -4,7 +4,6 @@
  */
 package com.exavalu.models;
 
-import com.exavalu.services.DepartmentService;
 import com.exavalu.services.PatientService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -54,14 +53,27 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
 
     public String doViewParticularMedicalHistory() {
         String result = "FAILURE";
-        Appointment appointment = new Appointment();
-        appointment = PatientService.doViewParticularMedicalHistory(this.patientId);
+        ArrayList appointment = new ArrayList();
+        Users patient = (Users) sessionMap.get("Loggedin");
+        System.out.println("this is patiend id :" + patient.getPatientId());
 
+        appointment = PatientService.doViewParticularMedicalHistory(patient.getPatientId());
         if (appointment != null) {
-//            result = "EDITAPPOINTENTJSP";
-            ArrayList deptList = DepartmentService.getInstance().getAllDepartments();
-//            ArrayList statusList = StatusService.getAllStatus();
             sessionMap.put("PatientMedicalHistory", appointment);
+            result = "SUCCESS";
+        }
+        return result;
+    }
+
+    public String doViewParticularUpcomingAppointments() {
+        String result = "FAILURE";
+        ArrayList appointment = new ArrayList();
+        Users patient = (Users) sessionMap.get("Loggedin");
+        System.out.println("this is patiend id :" + patient.getPatientId());
+
+        appointment = PatientService.doViewParticularUpcomingAppointments(patient.getPatientId());
+        if (appointment != null) {
+            sessionMap.put("PatientUpcomingBooking", appointment);
             result = "SUCCESS";
         }
         return result;

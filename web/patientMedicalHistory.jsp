@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -12,20 +14,19 @@
 
         <section class="main-content">
             <div class="container">
-                <h3>OHMS Patient Medical History</h3>
+                <h3>OHMS - Patient's Medical History</h3>
                 <br>
                 <br>
 
                 <table class="table table-hover">
                     <thead>
-                        <tr>
-                            <!--<th>Patient ID</th>-->
-                            <th>Patient Name</th>
-                            <th>Doctor Name</th>
+                        <tr>                           
+                            <th>Patient's Name</th>
+                            <th>Doctor's Name</th>
                             <th>Department Name</th>
                             <th>Appointment Date</th> 
                             <th>Doctor Feedback</th>
-                            <th>Report</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,14 +35,21 @@
                             <td>
                                 <div class="user-info">
                                     <div class="user-info__basic">
-                                        <a class="mb-0">${appointment.patientName}</a>
+                                        <a class="mb-0">${appointment.patientFirstName} ${appointment.patientLastName}</a>
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="user-info">
                                     <div class="user-info__basic">
-                                        <a class="mb-0">${appointment.doctorFirstName}</a>
+                                        <a class="mb-0">${appointment.doctorFirstName} ${appointment.doctorLastName}</a>
+                                    </div>
+                                </div>
+                            </td>
+                             <td>
+                                <div class="user-info">
+                                    <div class="user-info__basic">
+                                        <a class="mb-0">${appointment.departmentName}</a>
                                     </div>
                                 </div>
                             </td>
@@ -52,9 +60,22 @@
                                     </div>
                                 </div>
                             </td>
-                          
-                          
+                             <td>
+                                <div class="user-info">
+                                    <div class="user-info__basic">
+                                        <a class="mb-0">${appointment.feedback}</a>
+                                    </div>
+                                </div>
+                            </td>
+                             <td>
+                                <div class="user-info">
+                                    <div class="user-info__basic">
+                                        <a class="mb-0">${appointment.statusOfAppointments}</a>
+                                    </div>
+                                </div>
+                            </td>                         
                         </tr>
+                          </c:forEach>
                     </tbody>
                 </table>
             </div>
