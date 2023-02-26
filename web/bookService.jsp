@@ -7,7 +7,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>OHMS - Online HealthCare Management System</title>
+        <title>OHMS - Book Service</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
@@ -46,7 +46,7 @@
             xmlhttp.onreadystatechange = function ()
             {
                 document.getElementById("doctorId").innerHTML = xmlhttp.responseText;
-                
+
             };
 
 
@@ -63,7 +63,7 @@
 
 
         <!-- Appointment Start -->
-        <div id="bookAppointment"class="container-fluid bg-primary my-5 py-5">
+        <div id="bookAppointment"class="container-fluid bg-primary my-5 py-5" >
             <div class="container py-5">
                 <div class="row gx-5">
                     <div class="col-lg-6 mb-5 mb-lg-0">
@@ -79,7 +79,7 @@
                         <div class="bg-white text-center rounded p-5">
                             <h1 class="mb-4">Book An Appointment</h1>
                             <c:set var="emp" value="${User}"></c:set>
-                            <form action="Appointment" method="Post">
+                                <form action="Appointment" method="Post">
                                     <div class="row g-3">
                                         <div  class="col-12 col-sm-6">
                                             <select name="departmentId" id="departmentId"  required class="form-select bg-light border-0" style="height: 55px;" onchange="fetchContent($('#departmentId').find(':selected').val())" required>
@@ -105,16 +105,23 @@
 
                                     <div class="col-12 col-sm-6">
                                         <div class="date" id="date" data-target-input="nearest">
-                                            <input name="appointmentDate" type="text"
+                                            <input name="appointmentDate" type="date"
                                                    class="form-control bg-light border-0 datetimepicker-input"
-                                                   placeholder="Date" data-target="#date" data-toggle="datetimepicker" style="height: 55px;" required  value="${user.getAppointmentDate()}">
+                                                   placeholder="Date" style="height: 55px;" required  value="${user.getAppointmentDate()}">
+                                        </div>
+                                    </div>
+                                         <div class="col-12 col-sm-6">
+                                        <div  class="age" id="age" data-target-input="nearest">
+                                            <input name="age" type="number"
+                                                   class="form-control bg-light border-0"
+                                                   placeholder="Your Age"  style="height: 55px;"  min="0" max="150" maxlength="3" required  value="${emp.getAge()}">
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div  class="time" id="time" data-target-input="nearest">
-                                            <input name="time" type="text"
+                                            <input name="time" type="time"
                                                    class="form-control bg-light border-0 datetimepicker-input"
-                                                   placeholder="Time" data-target="#time" data-toggle="datetimepicker" style="height: 55px;" required  value="${emp.getTime()}">
+                                                   placeholder="Time"  style="height: 55px;"  min="10:00" max="16:00" required  value="${emp.getTime()}">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -131,7 +138,7 @@
             </div>
         </div>
         <!-- Appointment End -->
-<jsp:include page="footer.jsp"></jsp:include>
+        <%--<jsp:include page="footer.jsp"></jsp:include>--%>
 
     </body>
 </html>
