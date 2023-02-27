@@ -36,6 +36,15 @@ public class Departments extends ActionSupport implements ApplicationAware, Sess
     private String departmentName;
     
     private String departmentId;
+    private String numberOfPatients;
+
+    public String getNumberOfPatients() {
+        return numberOfPatients;
+    }
+
+    public void setNumberOfPatients(String numberOfPatients) {
+        this.numberOfPatients = numberOfPatients;
+    }
 
     /**
      * @return the sessionMap

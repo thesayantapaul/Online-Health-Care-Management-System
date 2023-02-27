@@ -329,19 +329,18 @@
                                                 <th scope="col">Department Id</th>
 
                                                 <th scope="col">Department Name</th>
-                                                <th scope="col">Doctor Name</th>
+
+                                                <th scope="col">Occupancy(no of patients)</th>
 
 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach items="${AppointmentListDashBoard}" var="appointment">
+                                            <c:forEach items="${OccupancyInDepartments}" var="department">
                                                 <tr>
-                                                    <th scope="row"><a href="#">${appointment.departmentId}</a></th>
-                                                    <td>${appointment.departmentName}</td>
-
-                                                    <td>${appointment.doctorFirstName} ${appointment.doctorLastName}</td>
-
+                                                    <th scope="row"><a href="#">${department.departmentId}</a></th>
+                                                    <td>${department.departmentName}</td>
+                                                    <td>${department.numberOfPatients}</td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>

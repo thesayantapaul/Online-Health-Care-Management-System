@@ -2,6 +2,7 @@ package com.exavalu.services;
 
 import com.exavalu.models.Admin;
 import com.exavalu.models.Appointment;
+import com.exavalu.models.Departments;
 import com.exavalu.utils.JDBCConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -65,6 +66,7 @@ public class AdminService {
 
         return appointmentList;
     }
+
     public static ArrayList doViewAppointments(String interval) {
         ArrayList appointmentList = new ArrayList();
         String sql = "SELECT * FROM appointments a,doctors d,patients p,departments dp,statusofappointments s where a.doctorId=d.doctorId and a.patientId=p.patientId and a.departmentId=dp.departmentId and a.statusId = s.statusId and appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY)";
@@ -257,7 +259,6 @@ public class AdminService {
         }
         return totalBookings;
     }
-    
 
     public static String doViewTotalRevenue(String interval) {
         String totalRevenue = null;
@@ -270,9 +271,9 @@ public class AdminService {
             ps.setString(1, interval);
 
             System.out.println("ps:" + ps);
-            
+
             ResultSet rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 totalRevenue = rs.getString("totalRevenue");
             }
@@ -284,6 +285,7 @@ public class AdminService {
         }
         return totalRevenue;
     }
+
     //chart data x axis dashboard admin--------------------------------------------------------------------------------
     public static String elementsForXaxis(String interval) {
         String appointmentDate = null;
@@ -292,17 +294,17 @@ public class AdminService {
             Connection con = JDBCConnectionManager.getConnection();
             String sql = "SELECT appointmentDate, SUM(amount) as totalRevenue FROM appointments where appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY) GROUP BY appointmentDate;";
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             ps.setString(1, interval);
 
             System.out.println("ps:" + ps);
-            
+
             ResultSet rs = ps.executeQuery();
-            
+
             if (rs.next()) {
-               appointmentDate = rs.getString("appointmentDate");
-            }else{
-                appointmentDate = "today";
+                appointmentDate = rs.getString("appointmentDate");
+            } else {
+                appointmentDate = "next day";
             }
 
         } catch (SQLException ex) {
@@ -312,9 +314,8 @@ public class AdminService {
         }
         return appointmentDate;
     }
-   //-------------------------------------------------------------------------------------------------------
-    
-    
+    //-------------------------------------------------------------------------------------------------------
+
     public static String totalRegisteredUsers(String interval) {
         String totalUsers = null;
 
@@ -326,12 +327,12 @@ public class AdminService {
             ps.setString(1, interval);
 
             System.out.println("ps:" + ps);
-            
+
             ResultSet rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 totalUsers = rs.getString("totalRegisteredUsersToday");
-            }else{
+            } else {
                 totalUsers = "0";
             }
 
@@ -341,6 +342,37 @@ public class AdminService {
 
         }
         return totalUsers;
+    }
+
+    //doGetOccupancyForEachDepartments
+    public static ArrayList doGetOccupancyForEachDepartments(String interval) {
+        ArrayList departmentList = new ArrayList();
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT a.departmentId,departmentName, COUNT(appointmentId) as numberOfPatients FROM appointments a,departments d where a.departmentId = d.departmentId and appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY) group by departmentId";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, interval);
+
+            System.out.println("ps:" + ps);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Departments department = new Departments();
+                department.setDepartmentId(rs.getString("departmentId"));
+                department.setDepartmentName(rs.getString("departmentName"));
+                department.setNumberOfPatients(rs.getString("numberOfPatients"));
+                departmentList.add(department);
+                System.out.println("numberOfpatients = " + department.getNumberOfPatients());
+            }
+
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
+        }
+        return departmentList;
     }
 
 }

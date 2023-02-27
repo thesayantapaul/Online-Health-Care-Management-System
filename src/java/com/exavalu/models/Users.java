@@ -340,6 +340,13 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 sessionMap.put("AppointmentListDashBoard", appointmentList);
                 
                 
+//---------------------departmentList with occupancy start---------------------------------------------------------------   
+                
+                ArrayList departmentOccupncyList = AdminService.doGetOccupancyForEachDepartments("0");
+                System.out.println("departmentOccupncyList = "+departmentOccupncyList.size());
+                sessionMap.put("OccupancyInDepartments", departmentOccupncyList);
+                
+                
 //-------------------no. of user registeration to show on admin dashboard---------------------------------------------
                 String todayRegisteration = AdminService.totalRegisteredUsers("0");
                 if(todayRegisteration!=null){

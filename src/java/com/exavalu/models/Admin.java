@@ -176,13 +176,13 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         String day4Revenue = AdminService.doViewTotalRevenue("-4");
         String day5Revenue = AdminService.doViewTotalRevenue("-5");
         String day6Revenue = AdminService.doViewTotalRevenue("-6");
-        
-        if(totalTodayRevenue!=null){
+
+        if (totalTodayRevenue != null) {
             sessionMap.put("TodayRevenue", totalTodayRevenue);
-        }else{
+        } else {
             sessionMap.put("TodayRevenue", "0");
         }
-        
+
         if (day1Revenue != null) {
             sessionMap.put("Day1Revenue", day1Revenue);
         } else {
@@ -219,7 +219,6 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         if (totalTodayRevenue != null && day1Revenue != null) {
             if (Integer.parseInt(totalTodayRevenue) >= Integer.parseInt(day1Revenue)) {
 
-                
                 sessionMap.put("HigherOrLowerTextRevenue", "Higher than yesterday");
                 sessionMap.put("IncreaseRevenue", "increase");
                 sessionMap.put("DecreaseRevenue", null);
@@ -227,13 +226,13 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
             } else {
                 sessionMap.put("IncreaseRevenue", null);
                 sessionMap.put("DecreaseRevenue", "decrease");
-                
+
                 sessionMap.put("HigherOrLowerTextRevenue", "Lower than yesterday");
             }
-            
+
         } else {
             sessionMap.put("TotalRevenue", "0");
-            
+
             sessionMap.put("HigherOrLowerTextRevenue", "Higher than yesterday");
         }
 
@@ -257,6 +256,12 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         ArrayList appointmentList = AdminService.doViewAppointments("0");
 
         sessionMap.put("AppointmentListDashBoard", appointmentList);
+        //---------------------departmentList with occupancy start---------------------------------------------------------------   
+
+        ArrayList departmentOccupncyList = AdminService.doGetOccupancyForEachDepartments("0");
+        
+        sessionMap.put("OccupancyInDepartments", departmentOccupncyList);
+        //--------------------------------------------------------------------------------------------------------
 
         String todayRegisteration = AdminService.totalRegisteredUsers("0");
         sessionMap.put("TodayUsers", todayRegisteration);
