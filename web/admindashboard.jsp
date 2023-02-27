@@ -86,7 +86,7 @@
                                             </div>
                                             <div class="ps-3">
                                                 <h6>${TodayBooking}</h6>
-                                            <span class="text-success small pt-1 fw-bold"><c:if test="${IncreaseRevenue!=null}"><i class="bi bi-arrow-up-circle"></i></c:if><c:if test="${DecreaseRevenue!=null}"><i class="bi bi-arrow-down-circle"></i></c:if><span class="text-muted small pt-2 ps-1">${HigherOrLowerText}</span>
+                                            <span class="text-success small pt-1 fw-bold"><c:if test="${IncreaseBooking!=null}"><i class="bi bi-arrow-up-circle"></i></c:if><c:if test="${DecreaseBooking!=null}"><i class="bi bi-arrow-down-circle"></i></c:if><span class="text-muted small pt-2 ps-1">${HigherOrLowerText}</span>
 
                                             </div>
                                         </div>

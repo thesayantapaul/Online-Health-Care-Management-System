@@ -87,10 +87,10 @@ public class AdminService {
                 Appointment appointment = new Appointment();
                 appointment.setPatientId(rs.getString("patientId"));
 
-                System.out.println("patient id= " + appointment.getPatientId());
+                //System.out.println("patient id= " + appointment.getPatientId());
 
                 appointment.setPatientFirstName(rs.getString("patientFirstName"));
-                System.out.println("patient id= " + appointment.getPatientFirstName());
+                //System.out.println("patient id= " + appointment.getPatientFirstName());
                 appointment.setPatientLastName(rs.getString("patientLastName"));
                 appointment.setDoctorFirstName(rs.getString("doctorFirstName"));
                 appointment.setDoctorLastName(rs.getString("doctorLastName"));
@@ -250,6 +250,8 @@ public class AdminService {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 totalBookings = rs.getString("bookings");
+            }else{
+                totalBookings = "0";
             }
 
         } catch (SQLException ex) {
@@ -288,11 +290,11 @@ public class AdminService {
 
     //chart data x axis dashboard admin--------------------------------------------------------------------------------
     public static String elementsForXaxis(String interval) {
-        String appointmentDate = null;
+        String date = null;
 
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "SELECT appointmentDate, SUM(amount) as totalRevenue FROM appointments where appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY) GROUP BY appointmentDate;";
+            String sql = "select DATE_ADD(CURDATE(), INTERVAL ? DAY) as Date";
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setString(1, interval);
@@ -302,9 +304,7 @@ public class AdminService {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                appointmentDate = rs.getString("appointmentDate");
-            } else {
-                appointmentDate = "next day";
+                date = rs.getString("Date");
             }
 
         } catch (SQLException ex) {
@@ -312,7 +312,7 @@ public class AdminService {
             log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
 
         }
-        return appointmentDate;
+        return date;
     }
     //-------------------------------------------------------------------------------------------------------
 
@@ -364,7 +364,7 @@ public class AdminService {
                 department.setDepartmentName(rs.getString("departmentName"));
                 department.setNumberOfPatients(rs.getString("numberOfPatients"));
                 departmentList.add(department);
-                System.out.println("numberOfpatients = " + department.getNumberOfPatients());
+                //System.out.println("numberOfpatients = " + department.getNumberOfPatients());
             }
 
         } catch (SQLException ex) {
