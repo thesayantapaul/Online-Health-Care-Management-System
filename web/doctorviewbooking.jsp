@@ -15,7 +15,6 @@
         <link rel="stylesheet" type="text/css" href="css_medicalAppointmentHistory//style.css">
     </head>
     <body>
-        <jsp:include page="menu.jsp"></jsp:include>
             <section class="main-content">
                 <div class="container">
                     <h3>Upcoming Appointments</h3>

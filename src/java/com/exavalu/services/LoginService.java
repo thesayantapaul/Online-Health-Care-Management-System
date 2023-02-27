@@ -130,4 +130,35 @@ public class LoginService {
         return result;
     }
 
+    public boolean doSocialSignUp(Users user) {
+        
+         boolean result = false;
+        String sql = "INSERT INTO users(emailAddress,password,firstName,lastName,dateOfRegisteration)" + "VALUES(? ,? ,? ,? ,CURDATE())";
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(2, user.getSub());
+            preparedStatement.setString(3, user.getGiven_name());
+            preparedStatement.setString(4, user.getFamily_name());
+
+            System.out.println(preparedStatement);
+            int res = preparedStatement.executeUpdate();
+
+            if (res == 1) {
+                result = true;
+            }
+
+        } catch (SQLException ex) {
+            int e = ex.getErrorCode();
+            log.error(LocalDateTime.now() + "Sql Error :" + e + " Duplicate Email Address");
+            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+        }
+
+        return result;
+
+    }
+
 }

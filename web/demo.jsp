@@ -7,12 +7,12 @@
 <html>    
     <head>
                 <title>Google Auth Demo</title>         
-        <meta name="google-signin-client_id" content="223541131739-eerfpk0khhegn7c1vc8f74203pvmk34f.apps.googleusercontent.com">
+        <meta name="google-signin-client_id" content="954298706213-l0sc288rp22fj9vpjt2n6o9t7vqvfuqc.apps.googleusercontent.com">
                 <script src="https://accounts.google.com/gsi/client" async defer></script>
             </head>
         <body>
                 <div id="g_id_onload"
-                                       data-client_id="223541131739-eerfpk0khhegn7c1vc8f74203pvmk34f.apps.googleusercontent.com"
+                                       data-client_id="954298706213-l0sc288rp22fj9vpjt2n6o9t7vqvfuqc.apps.googleusercontent.com"
                                        data-context="signin"
                                        data-ux_mode="popup"
                                        data-callback="handleCredentialResponse"
@@ -24,10 +24,10 @@
                                         data-theme="outline"
                                         data-text="signin_with"
                                         data-size="large"
-                                        data-logo_alignment="middle">
+                                        >
                          </div>
                 <script>
-                                        function handleCredentialResponse(response) {
+                      function handleCredentialResponse(response) {
                                                     const responsePayLoad = decodeJwtResponse(response.credential);
                                                     console.log(responsePayLoad);
                                                     console.log("ID: " + responsePayLoad.sub);
@@ -36,6 +36,16 @@
                                                     console.log("family Name: " + responsePayLoad.family_name);
                                                     console.log("Image URL: " + responsePayLoad.picture);
                                                     console.log("Email: " + responsePayLoad.email);
+                $.ajax({
+                    type: "POST",
+                    url: "SocialSign",
+                    data: responsePayLoad,
+                    success: function (responseText) {
+                        alert(responseText);
+                        $("#" + "social").html(responseText);
+
+                    }
+                });
                                         }                            
                             </script>
                             <script>

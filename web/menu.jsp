@@ -96,12 +96,16 @@
                                 <a href="bookService.jsp" class="nav-item nav-link">Book an Appointment</a>
                                 <a href="ViewMedicalHistory" class="nav-item nav-link">Medical History</a>
                                 <a href="patientUpcomingBooking" class="nav-item nav-link">Upcoming Appointments</a>
+                                <a href="Logout" class="nav-item nav-link">Logout</a>
+
                             </c:if>
                             <c:if test="${login_check.roleId == '2'}">
                                 <a href="index.jsp" class="nav-item nav-link active">Home</a>
                                 <a href="DoctorViewAppointment?doctorId=${login_check.doctorId}" class="nav-item nav-link">View Bookings</a>
                                 <a href="prescription.jsp" class="nav-item nav-link">Generate Report</a>
                                 <a href="#" class="nav-item nav-link">View Report</a>
+                                <a href="Logout" class="nav-item nav-link">Logout</a>
+
                             </c:if>
                             <c:if test="${login_check.roleId == '3'}">
                                 <a href="DashBoard" class="nav-item nav-link active">Dashboard</a>
@@ -109,12 +113,12 @@
                                 <a href="#" class="nav-item nav-link">Update Data</a>
                                 <a href="ViewAppointment" class="nav-item nav-link">View Appointments</a>
                                 <a href="#" class="nav-item nav-link">Add Data</a>
-                            </c:if>
-
-
-                            <c:if test="${login_check!=null}">
                                 <a href="Logout" class="nav-item nav-link">Logout</a>
+
                             </c:if>
+
+
+                         
                         </div>
                     </div>
                 </nav>
