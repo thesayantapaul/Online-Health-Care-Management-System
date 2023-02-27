@@ -4,6 +4,7 @@ import com.exavalu.services.AdminService;
 import com.exavalu.services.AppointmentService;
 import com.exavalu.services.DoctorService;
 import com.exavalu.services.LoginService;
+import com.exavalu.services.PatientService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
@@ -41,12 +42,12 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
 
     @Override
     public void setApplication(Map<String, Object> application) {
-        map = (ApplicationMap) application;
+        setMap((ApplicationMap) application);
     }
 
     @Override
     public void setSession(Map<String, Object> session) {
-        sessionMap = (SessionMap) session;
+        setSessionMap((SessionMap<String, Object>) (SessionMap) session);
 
     }
 
@@ -58,7 +59,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
             ArrayList appointmentList = AdminService.doViewAppointments();
 
             if (appointmentList.size() > 0) {
-                sessionMap.put("AppointmentList", appointmentList);
+                getSessionMap().put("AppointmentList", appointmentList);
 
             }
 
@@ -83,6 +84,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
     private String symptoms;
     private String gender;
     private String age;
+    private String feedback;
 
     public String getGender() {
         return gender;
@@ -213,45 +215,50 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
     }
 
     public String doGetDoctor() throws Exception {
-        System.out.println(this.departmentId);
+        System.out.println(this.getDepartmentId());
         String result = "FAILURE";
-        ArrayList doctorList = DoctorService.getInstance().getAllDoctors(this.departmentId);
+        ArrayList doctorList = DoctorService.getInstance().getAllDoctors(this.getDepartmentId());
 
         if (!doctorList.isEmpty()) {
             result = "SUCCESS";
-            sessionMap.put("DoctorList", doctorList);
+            getSessionMap().put("DoctorList", doctorList);
 
         } else {
-            sessionMap.put("FailSignUp", "Email All Ready Exsists");
+            getSessionMap().put("FailSignUp", "Email All Ready Exsists");
         }
-        System.out.println(sessionMap);
+        System.out.println(getSessionMap());
         return result;
 
     }
 
     public String getAppointment() throws Exception {
         String result = "FAILURE";
-        sessionMap.put("Appointment", this);
+        getSessionMap().put("Appointment", this);
 
-        sessionMap.put("symptoms", this.getSymptoms());
+        getSessionMap().put("symptoms", this.getSymptoms());
         System.out.println(this.getEmailAddress());
-        boolean success = LoginService.getInstance().doExsists(this.getEmailAddress(), sessionMap);
+        boolean success = LoginService.getInstance().doExsists(this.getEmailAddress(), getSessionMap());
         if (!success) {
             result = "SignUp";
         } else {
-            Users user = (Users) sessionMap.get("Patient");
+            Users user = (Users) getSessionMap().get("Patient");
             boolean res = LoginService.getInstance().doLogin(user);
             if (res) {
-                sessionMap.put("Loggedin", user);
-                boolean insert = AppointmentService.getInstance().getAppointment(this);
-                if (insert) {
+                getSessionMap().put("Loggedin", user);
+                boolean r1 = PatientService.getInstance().insertPatient(this);
+                Appointment appointment = PatientService.getInstance().getPatient(this);
+                boolean insert = AppointmentService.getInstance().getAppointment(appointment);
+                appointment= AppointmentService.getInstance().getAppointmentId(appointment);
+                boolean r2 = PatientService.getInstance().insertPatientAppointment(appointment);
+
+                if (insert && r1 && r2) {
                     result = "SUCCESS";
                 }
             }
 
         }
 
-        System.out.println(sessionMap);
+        System.out.println(getSessionMap());
         return result;
 
     }
@@ -282,6 +289,20 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
      */
     public void setSymptoms(String symptoms) {
         this.symptoms = symptoms;
+    }
+
+    /**
+     * @return the feedback
+     */
+    public String getFeedback() {
+        return feedback;
+    }
+
+    /**
+     * @param feedback the feedback to set
+     */
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
     }
 
 }

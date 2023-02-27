@@ -7,6 +7,8 @@
     <package name="default" namespace="/" extends="struts-default">
         <action name="Login" class="com.exavalu.models.Users" method="doLogin">
             <result name="SUCCESS">index.jsp</result>
+             <result name="PATIENTINDEX">patientIndex.jsp</result>
+              <result name="DOCTORINDEX">doctorIndex.jsp</result>
             <result name="ADMININDEX">admindashboard.jsp</result>
             <result name="FAILURE">menu.jsp</result>
         </action> 
@@ -61,12 +63,22 @@
             <result name="FAILURE">adminIndex.jsp</result>
         </action>
         
-        <!--patients-->
-         <action name="ViewMedicalHistory" class="com.exavalu.models.Patients" method="doViewParticularMedicalHistory">
-            <!--<result name="APPOINTMENTTABLE">adminappointmentviewtable.jsp</result>-->
+          <!--patients-->
+        <action name="ViewMedicalHistory" class="com.exavalu.models.Patients" method="doViewParticularMedicalHistory">
             <result name="SUCCESS">patientMedicalHistory.jsp</result>
             <result name="FAILURE">login.jsp</result>
         </action>
+        
+        <action name="patientUpcomingBooking" class="com.exavalu.models.Patients" method="doViewParticularUpcomingAppointments">
+            <result name="SUCCESS">patientUpcomingBooking.jsp</result>
+            <result name="FAILURE">login.jsp</result>
+        </action>
+        <action name="SocialSign" class="com.exavalu.models.Users" method="doSocial">
+            <result name="SUCCESS">patientIndex.jsp</result>
+            <result name="FAILURE">login.jsp</result>
+        </action>
+        
+        
         
     </package>
 </struts>

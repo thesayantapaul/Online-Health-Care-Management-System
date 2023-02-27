@@ -28,7 +28,10 @@
 
         <title>OHMS Registration</title>
     </head>
-    <body style="overflow: scroll; height : 90%">
+     <script src="https://code.jquery.com/jquery-3.6.3.js" 
+                        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
+                crossorigin="anonymous"></script>
+    <body style="overflow: scroll; height : 90%" id="social">
         <div class="d-md-flex half">
             <div class="bg" style="background-image: url('images/login-side.jpg');"></div>
             <div class="contents">
@@ -97,7 +100,7 @@
                                     <!--                                    <a href="#" class="btn btn-block py-2 btn-facebook">
                                                                             <span class="icon-facebook mr-3"></span> Login with facebook
                                                                         </a>-->
-                                    <a href="#" class="btn btn-block py-2 btn-google"><span class="icon-google mr-3"></span> Signup with Google</a>
+                                    <jsp:include page="demo.jsp"></jsp:include>
                                 </div>
 
                             </div>
