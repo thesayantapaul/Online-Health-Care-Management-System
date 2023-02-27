@@ -28,7 +28,7 @@ public class PatientService {
     public static Logger log = Logger.getLogger(PatientService.class.getName());
 
     public static ArrayList doViewParticularMedicalHistory(String patientId) {
-        String sql = "select * from appointments a, doctors d, departments dp, patients p, statusofappointments s where a.departmentId=dp.departmentId and a.appointmentId=p.appointmentId and a.patientId=p.patientId and a.statusId=s.statusId and a.patientId=?";
+        String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.patientId=?";
         ArrayList appointmentList = new ArrayList();
         try {
             Connection con = JDBCConnectionManager.getConnection();
@@ -59,7 +59,7 @@ public class PatientService {
     }
 
     public static ArrayList doViewParticularUpcomingAppointments(String patientId) {
-        String sql = "select * from appointments a, doctors d, departments dp, patients p, statusofappointments s where a.departmentId=dp.departmentId and a.appointmentId=p.appointmentId and a.patientId=p.patientId and a.statusId=s.statusId and a.patientId=?";
+        String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.patientId=?";
 
         ArrayList appointmentList = new ArrayList();
         try {

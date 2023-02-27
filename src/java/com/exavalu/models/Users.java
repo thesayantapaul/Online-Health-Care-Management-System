@@ -6,6 +6,7 @@ package com.exavalu.models;
 
 import com.exavalu.services.AdminService;
 import com.exavalu.services.AppointmentService;
+import com.exavalu.services.DoctorService;
 import com.exavalu.services.LoginService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -35,6 +36,51 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     private String lastName;
     private String doctorId;
     private String patientId;
+     private String sub;
+    private String email;
+    private String family_name;
+    private String given_name;
+    private String picture;
+
+    public String getSub() {
+        return sub;
+    }
+
+    public void setSub(String sub) {
+        this.sub = sub;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFamily_name() {
+        return family_name;
+    }
+
+    public void setFamily_name(String family_name) {
+        this.family_name = family_name;
+    }
+
+    public String getGiven_name() {
+        return given_name;
+    }
+
+    public void setGiven_name(String given_name) {
+        this.given_name = given_name;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 
     public String getDoctorId() {
         return doctorId;
@@ -187,6 +233,9 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 result = "PATIENTINDEX";
             }
             if (this.roleId.equals("2")) {
+                System.out.println(this.doctorId);
+                ArrayList appointmentList=DoctorService.getInstance().doViewAppointments(this.doctorId);
+                sessionMap.put("AppointmentListDoctor",appointmentList);
                 result = "DOCTORINDEX";
             }
             if (this.roleId.equals("3")) {
@@ -429,6 +478,33 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 result = "SUCCESS";
             }
 
+            sessionMap.put("SuccessSignUp", "Successfully Registered");
+            sessionMap.put("SignedUp", this);
+
+        } else {
+            sessionMap.put("FailSignUp", "Email All Ready Exsists");
+        }
+        System.out.println(sessionMap);
+        return result;
+
+    }
+    
+      public String doSocial() throws Exception {
+        String result = "FAILURE";
+        boolean success = LoginService.getInstance().doSocialSignUp(this);
+        this.roleId="1";
+
+        if (success) {
+            Appointment appointment = (Appointment) sessionMap.get("Appointment");
+            if (appointment != null) {
+                boolean insert = AppointmentService.getInstance().getAppointment(appointment);
+                if (insert) {
+                    result = "SUCCESS";
+                }
+            } else {
+                result = "SUCCESS";
+            }
+             sessionMap.put("Loggedin", this);
             sessionMap.put("SuccessSignUp", "Successfully Registered");
             sessionMap.put("SignedUp", this);
 

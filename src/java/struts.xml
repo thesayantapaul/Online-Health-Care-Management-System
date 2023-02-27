@@ -73,6 +73,11 @@
             <result name="SUCCESS">patientUpcomingBooking.jsp</result>
             <result name="FAILURE">login.jsp</result>
         </action>
+        <action name="SocialSign" class="com.exavalu.models.Users" method="doSocial">
+            <result name="SUCCESS">patientIndex.jsp</result>
+            <result name="FAILURE">login.jsp</result>
+        </action>
+        
         
         
     </package>

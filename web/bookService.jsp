@@ -58,7 +58,6 @@
     </script>
 
     <body>
-        <jsp:include page="menu.jsp"></jsp:include>
         <c:set var="deptList" value="${DepartmentService.getInstance().getAllDepartments()}" />
 
 
