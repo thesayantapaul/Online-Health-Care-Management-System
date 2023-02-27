@@ -4,6 +4,7 @@ import com.exavalu.services.AdminService;
 import com.exavalu.services.AppointmentService;
 import com.exavalu.services.DoctorService;
 import com.exavalu.services.LoginService;
+import com.exavalu.services.PatientService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
@@ -244,8 +245,13 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
             boolean res = LoginService.getInstance().doLogin(user);
             if (res) {
                 getSessionMap().put("Loggedin", user);
-                boolean insert = AppointmentService.getInstance().getAppointment(this);
-                if (insert) {
+                boolean r1 = PatientService.getInstance().insertPatient(this);
+                Appointment appointment = PatientService.getInstance().getPatient(this);
+                boolean insert = AppointmentService.getInstance().getAppointment(appointment);
+                appointment= AppointmentService.getInstance().getAppointmentId(appointment);
+                boolean r2 = PatientService.getInstance().insertPatientAppointment(appointment);
+
+                if (insert && r1 && r2) {
                     result = "SUCCESS";
                 }
             }
