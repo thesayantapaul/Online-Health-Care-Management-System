@@ -97,12 +97,22 @@
                                         </select>
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <input name="name" type="text" class="form-control bg-light border-0" required placeholder="Your Name" style="height: 55px;"  value="${user.getName()}">
+                                        <input name="patientFirstName" type="text" class="form-control bg-light border-0" required placeholder="Your Name" style="height: 55px;"  value="${user.getName()}">
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input name="patientLastName" type="text" class="form-control bg-light border-0" required placeholder="Your Name" style="height: 55px;"  value="${user.getName()}">
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <input name="emailAddress" type="email" class="form-control bg-light border-0" placeholder="Your Email" required style="height: 55px;"  value="${user.getEmailAddess()}">
                                     </div>
-
+                                    <div class="col-12 col-sm-6">
+                                        <select name="gender"  id="gender" required>
+                                            <option value="">Select Gender</option>
+                                            <option value="Male">Male</option>  
+                                            <option value="Female">Female</option> 
+                                            <option value="Other">Other</option> 
+                                        </select>
+                                    </div>
                                     <div class="col-12 col-sm-6">
                                         <div class="date" id="date" data-target-input="nearest">
                                             <input name="appointmentDate" type="date"
@@ -110,7 +120,7 @@
                                                    placeholder="Date" style="height: 55px;" required  value="${user.getAppointmentDate()}">
                                         </div>
                                     </div>
-                                         <div class="col-12 col-sm-6">
+                                    <div class="col-12 col-sm-6">
                                         <div  class="age" id="age" data-target-input="nearest">
                                             <input name="age" type="number"
                                                    class="form-control bg-light border-0"

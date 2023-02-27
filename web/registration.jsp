@@ -97,7 +97,7 @@
                                     <!--                                    <a href="#" class="btn btn-block py-2 btn-facebook">
                                                                             <span class="icon-facebook mr-3"></span> Login with facebook
                                                                         </a>-->
-                                    <a href="#" class="btn btn-block py-2 btn-google"><span class="icon-google mr-3"></span> Signup with Google</a>
+                                    <jsp:include page="demo.jsp"></jsp:include>
                                 </div>
 
                             </div>
