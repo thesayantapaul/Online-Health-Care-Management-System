@@ -5,7 +5,6 @@
 package com.exavalu.services;
 
 import com.exavalu.models.Appointment;
-import static com.exavalu.services.PatientService.log;
 import com.exavalu.utils.JDBCConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,13 +38,14 @@ public class AppointmentService {
 
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "INSERT INTO appointments (appointmentDate, doctorId, departmentId, statusId,patientId) VALUES (?, ?, ?, ?,?);";
+            String sql = "INSERT INTO appointments (appointmentDate, doctorId, departmentId, statusId,patientId,userID) VALUES (?, ?, ?, ?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, appointment.getAppointmentDate());
             ps.setString(2, appointment.getDoctorId());
             ps.setString(3, appointment.getDepartmentId());
             ps.setString(4, "2");
             ps.setString(5, appointment.getPatientId());
+            ps.setString(6, appointment.getUserId());
 
             System.out.println("LoginService :: " + ps);
 
@@ -68,12 +68,14 @@ public class AppointmentService {
 
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "select * from appointments where appointmentDate=? and doctorId=? and departmentId=? and patientId=?";
+            String sql = "select * from appointments where appointmentDate=? and doctorId=? and departmentId=? and patientId=? and userId=?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, appointment.getAppointmentDate());
             ps.setString(2, appointment.getDoctorId());
             ps.setString(3, appointment.getDepartmentId());
             ps.setString(4, appointment.getPatientId());
+            ps.setString(5, appointment.getUserId());
+
             System.out.println(ps);
             ResultSet res = ps.executeQuery();
             System.out.println(res);

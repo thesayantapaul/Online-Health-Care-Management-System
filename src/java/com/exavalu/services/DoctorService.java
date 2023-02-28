@@ -13,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
@@ -71,9 +73,9 @@ public class DoctorService {
 
         return deptLIst;
     }
-    
+
     public ArrayList doViewAppointments(String doctorId) {
-        
+
         ArrayList appointmentList = new ArrayList();
         try {
 
@@ -91,7 +93,7 @@ public class DoctorService {
 
                 appointment.setAppointmentId(rs.getString("appointmentId"));
                 appointment.setAppointmentDate(rs.getString("appointmentDate"));
-                
+
                 appointment.setPatientFirstName(rs.getString("patientFirstName"));
                 appointment.setPatientLastName(rs.getString("patientLastName"));
                 appointment.setGender(rs.getString("gender"));
@@ -110,6 +112,60 @@ public class DoctorService {
         }
 
         return appointmentList;
+    }
+
+    public String doViewBookings(String interval, String doctorId) {
+        String totalBookings = null;
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT COUNT(appointmentId) as bookings FROM appointments WHERE appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY) and doctorId=?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, interval);
+            ps.setString(2, doctorId);
+
+            System.out.println("ps:" + ps);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalBookings = rs.getString("bookings");
+            }
+
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
+        }
+        return totalBookings;
+
+    }
+
+    public String doViewTotalRevenue(String interval, String doctorId) {
+
+        String totalRevenue = null;
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT SUM(amount) as totalRevenue FROM appointments where appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY) and doctorId=?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, interval);
+            ps.setString(2, doctorId);
+
+            System.out.println("ps:" + ps);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                totalRevenue = rs.getString("totalRevenue");
+            }
+
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
+        }
+        return totalRevenue;
     }
 
 }
