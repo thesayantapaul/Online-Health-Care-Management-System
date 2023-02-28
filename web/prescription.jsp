@@ -95,13 +95,20 @@
 
                                             </div>
                                         </td>
+                                        
+
+                                    </tr>
+                                    <tr> <td width="40%">                            
+                                        </td>
+                                        <td>
+                                            <button type="submit">Submit</button>
+                                        </td>
                                     </tr>
 
                                 </tbody>
                             </table>
                             <br>
                             <br>
-                            <button type="submit">Submit</button>
 
                             </form>
                         </div>

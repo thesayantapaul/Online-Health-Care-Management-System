@@ -32,6 +32,25 @@
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
     </head>
+      <script src="https://code.jquery.com/jquery-3.6.3.js" 
+                        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
+                crossorigin="anonymous"></script>
+    <script>
+
+                            function fetchData(selectedId, targetId) {
+                                alert(selectedId);
+                                $.ajax({
+                                    url: selectedId,
+
+                                    success: function (responseText) {
+                                        $("#" + targetId).html(responseText);
+                                    }
+                                });
+                            }
+
+
+
+    </script>
 
     <body>
         <!-- Topbar Start -->
@@ -92,10 +111,10 @@
 
                             </c:if>
                             <c:if test="${login_check.roleId == '1'}">
-                                <a href="patientIndex.jsp" class="nav-item nav-link">Home</a>
-                                <a href="bookService.jsp" class="nav-item nav-link">Book an Appointment</a>
-                                <a href="ViewMedicalHistory" class="nav-item nav-link">Medical History</a>
-                                <a href="patientUpcomingBooking" class="nav-item nav-link">Upcoming Appointments</a>
+                                <a onclick="fetchData('index.jsp', 'targetId')" class="nav-item nav-link">Home</a>
+                                <a onclick="fetchData('bookService.jsp', 'targetId')" class="nav-item nav-link">Book an Appointment</a>
+                                <a onclick="fetchData('ViewMedicalHistory', 'targetId')" class="nav-item nav-link">Medical History</a>
+                                <a onclick="fetchData('patientUpcomingBooking', 'targetId')" class="nav-item nav-link">Upcoming Appointments</a>
                                 <a href="Logout" class="nav-item nav-link">Logout</a>
 
                             </c:if>

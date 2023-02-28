@@ -4,7 +4,9 @@
  */
 package com.exavalu.services;
 
+import com.exavalu.models.Appointment;
 import com.exavalu.models.Users;
+import static com.exavalu.services.PatientService.log;
 import com.exavalu.utils.JDBCConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,6 +55,8 @@ public class LoginService {
                 user.setRoleId(rs.getString("roleId"));
                 user.setDoctorId(rs.getString("doctorId"));
                 user.setPatientId(rs.getString("patientId"));
+                user.setUserId(rs.getString("userId"));
+
                 result = true;
             }
 
@@ -67,7 +71,7 @@ public class LoginService {
     public boolean doSignUp(Users user) {
 
         boolean result = false;
-        String sql = "INSERT INTO users(emailAddress,password,firstName,lastName,occupation,address,gender,patientId,dateOfRegisteration)" + "VALUES(? ,? ,? ,? ,?,?,?,?,CURDATE())";
+        String sql = "INSERT INTO users(emailAddress,password,firstName,lastName,occupation,address,gender,dateOfRegisteration)" + "VALUES(? ,? ,? ,? ,?,?,?,CURDATE())";
 
         try {
             Connection con = JDBCConnectionManager.getConnection();
@@ -80,7 +84,6 @@ public class LoginService {
             preparedStatement.setString(5, user.getOccupation());
             preparedStatement.setString(6, user.getAddress());
             preparedStatement.setString(7, user.getGender());
-            preparedStatement.setString(8, user.getPatientId());
 
             System.out.println(preparedStatement);
             int res = preparedStatement.executeUpdate();
@@ -117,6 +120,7 @@ public class LoginService {
             if (rs.next()) {
                 users.setEmailAddress(emailAddress);
                 users.setPassword(rs.getString("password"));
+                users.setUserId(rs.getString("userId"));
                 sessionMap.put("Patient", users);
 
                 result = true;
@@ -132,8 +136,8 @@ public class LoginService {
     }
 
     public boolean doSocialSignUp(Users user) {
-        
-         boolean result = false;
+
+        boolean result = false;
         String sql = "INSERT INTO users(emailAddress,password,firstName,lastName,dateOfRegisteration)" + "VALUES(? ,? ,? ,? ,CURDATE())";
 
         try {
@@ -159,6 +163,33 @@ public class LoginService {
         }
 
         return result;
+
+    }
+
+    public void updateUser(Appointment appointment) {
+
+        boolean result = false;
+        try {
+            String sql = "update users set patientId=? where emailAddress=? and userId=?";
+            Connection con = JDBCConnectionManager.getConnection();
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(2, appointment.getEmailAddress());
+            preparedStatement.setString(1, appointment.getPatientId());
+            preparedStatement.setString(3, appointment.getUserId());
+
+            System.out.println(preparedStatement);
+            int res = preparedStatement.executeUpdate();
+
+            if (res == 1) {
+                result = true;
+            }
+
+        } catch (SQLException ex) {
+            int e = ex.getErrorCode();
+            log.error(LocalDateTime.now() + "Sql Error :" + e + " Duplicate Email Address");
+            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+        }
 
     }
 

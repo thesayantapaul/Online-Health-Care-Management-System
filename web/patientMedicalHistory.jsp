@@ -8,9 +8,34 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="css_medicalAppointmentHistory//style.css">
+                <!-- Libraries Stylesheet -->
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
     </head>
+     <script>
+
+                            function fetchData(selectedId, targetId) {
+                                alert(selectedId);
+                                $.ajax({
+                                    url: selectedId,
+
+                                    success: function (responseText) {
+                                        $("#" + targetId).html(responseText);
+                                    }
+                                });
+                            }
+
+
+
+    </script>
     <body>
-        <jsp:include page="menu.jsp"></jsp:include>
+    <jsp:include page="menu.jsp"></jsp:include>
 
         <section class="main-content">
             <div class="container">
@@ -84,6 +109,9 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.3.js" 
+                        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
+                crossorigin="anonymous"></script>
     </body>
 </html>
 

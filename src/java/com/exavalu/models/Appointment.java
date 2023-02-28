@@ -68,6 +68,15 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
         }
         return result;
     }
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     private String patientId;
     private String patientFirstName, patientLastName, doctorFirstName, doctorLastName;
@@ -245,8 +254,8 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
             boolean res = LoginService.getInstance().doLogin(user);
             if (res) {
                 getSessionMap().put("Loggedin", user);
-                boolean r1 = PatientService.getInstance().insertPatient(this);
-                Appointment appointment = PatientService.getInstance().getPatient(this);
+                boolean r1 = PatientService.getInstance().insertPatient(this,user.getUserId());
+                Appointment appointment = PatientService.getInstance().getPatient(this,user.getUserId());
                 boolean insert = AppointmentService.getInstance().getAppointment(appointment);
                 appointment= AppointmentService.getInstance().getAppointmentId(appointment);
                 boolean r2 = PatientService.getInstance().insertPatientAppointment(appointment);
