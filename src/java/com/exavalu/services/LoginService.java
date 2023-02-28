@@ -67,7 +67,7 @@ public class LoginService {
     public boolean doSignUp(Users user) {
 
         boolean result = false;
-        String sql = "INSERT INTO users(emailAddress,password,firstName,lastName,occupation,address,gender,dateOfRegisteration)" + "VALUES(? ,? ,? ,? ,?,?,?,CURDATE())";
+        String sql = "INSERT INTO users(emailAddress,password,firstName,lastName,occupation,address,gender,patientId,dateOfRegisteration)" + "VALUES(? ,? ,? ,? ,?,?,?,?,CURDATE())";
 
         try {
             Connection con = JDBCConnectionManager.getConnection();
@@ -80,6 +80,7 @@ public class LoginService {
             preparedStatement.setString(5, user.getOccupation());
             preparedStatement.setString(6, user.getAddress());
             preparedStatement.setString(7, user.getGender());
+            preparedStatement.setString(8, user.getPatientId());
 
             System.out.println(preparedStatement);
             int res = preparedStatement.executeUpdate();
@@ -98,7 +99,7 @@ public class LoginService {
 
     }
 
-    public boolean doExsists(String emailAddress,SessionMap sessionMap) {
+    public boolean doExsists(String emailAddress, SessionMap sessionMap) {
 
         boolean result = false;
         Users users = new Users();
@@ -116,7 +117,7 @@ public class LoginService {
             if (rs.next()) {
                 users.setEmailAddress(emailAddress);
                 users.setPassword(rs.getString("password"));
-                sessionMap.put("Patient",users);
+                sessionMap.put("Patient", users);
 
                 result = true;
             }

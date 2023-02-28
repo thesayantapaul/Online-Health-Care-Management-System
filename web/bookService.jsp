@@ -17,7 +17,7 @@
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">  
 
         <!-- Icon Font Stylesheet -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
@@ -39,7 +39,7 @@
     <script>
         function fetchContent(departmentId)
         {
-            //alert(departmentId);
+            alert(departmentId);
             event.preventDefault();
             //alert(fnolId);
             var xmlhttp = new XMLHttpRequest();
@@ -107,9 +107,9 @@
                                     <div class="col-12 col-sm-6">
                                         <select name="gender"  id="gender" required>
                                             <option value="">Select Gender</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                            <option value="Other">Other</option>
+                                            <option value="Male">Male</option>  
+                                            <option value="Female">Female</option> 
+                                            <option value="Other">Other</option> 
                                         </select>
                                     </div>
                                     <div class="col-12 col-sm-6">
