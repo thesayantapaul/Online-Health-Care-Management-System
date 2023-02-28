@@ -86,7 +86,7 @@
                                             </div>
                                             <div class="ps-3">
                                                 <h6>${TodayBooking}</h6>
-                                            <span class="text-success small pt-1 fw-bold"><c:if test="${IncreaseRevenue!=null}"><i class="bi bi-arrow-up-circle"></i></c:if><c:if test="${DecreaseRevenue!=null}"><i class="bi bi-arrow-down-circle"></i></c:if><span class="text-muted small pt-2 ps-1">${HigherOrLowerText}</span>
+                                            <span class="text-success small pt-1 fw-bold"><c:if test="${IncreaseBooking!=null}"><i class="bi bi-arrow-up-circle"></i></c:if><c:if test="${DecreaseBooking!=null}"><i class="bi bi-arrow-down-circle"></i></c:if><span class="text-muted small pt-2 ps-1">${HigherOrLowerText}</span>
 
                                             </div>
                                         </div>
@@ -329,19 +329,18 @@
                                                 <th scope="col">Department Id</th>
 
                                                 <th scope="col">Department Name</th>
-                                                <th scope="col">Doctor Name</th>
+
+                                                <th scope="col">Occupancy(no of patients)</th>
 
 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach items="${AppointmentListDashBoard}" var="appointment">
+                                            <c:forEach items="${OccupancyInDepartments}" var="department">
                                                 <tr>
-                                                    <th scope="row"><a href="#">${appointment.departmentId}</a></th>
-                                                    <td>${appointment.departmentName}</td>
-
-                                                    <td>${appointment.doctorFirstName} ${appointment.doctorLastName}</td>
-
+                                                    <th scope="row"><a href="#">${department.departmentId}</a></th>
+                                                    <td>${department.departmentName}</td>
+                                                    <td>${department.numberOfPatients}</td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
