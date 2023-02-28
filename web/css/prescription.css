@@ -10,20 +10,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 body {
   transition: all 0.3s ease;
 }
-.wrapper {
+/*.wrapper {
   height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
-  background: red;
+  background: white;
   margin: 50px;
-}
-.prescription_form {
+}*/
+/*.prescription_form {
   width: 100%;
   height: 100vh;
 
   background: white;
-}
+}*/
 .prescription {
   width: 720px;
   height: 960px;

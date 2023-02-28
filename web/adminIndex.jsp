@@ -34,7 +34,7 @@
     </head>
     <body>
 
-        <jsp:include page="menu.jsp"></jsp:include>
+        <jsp:include page="sideMenu.jsp"></jsp:include>
 
         <!-- Hero Start -->
 

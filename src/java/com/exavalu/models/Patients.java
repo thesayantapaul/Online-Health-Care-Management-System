@@ -55,9 +55,9 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
         String result = "FAILURE";
         ArrayList appointment = new ArrayList();
         Users patient = (Users) sessionMap.get("Loggedin");
-        System.out.println("this is patiend id :" + patient.getPatientId());
+        System.out.println("this is patiend id :" + patient.getUserId());
 
-        appointment = PatientService.doViewParticularMedicalHistory(patient.getPatientId());
+        appointment = PatientService.doViewParticularMedicalHistory(patient.getUserId());
         if (appointment != null) {
             sessionMap.put("PatientMedicalHistory", appointment);
             result = "SUCCESS";
@@ -69,9 +69,9 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
         String result = "FAILURE";
         ArrayList appointment = new ArrayList();
         Users patient = (Users) sessionMap.get("Loggedin");
-        System.out.println("this is patiend id :" + patient.getPatientId());
+        System.out.println("this is patiend id :" + patient.getUserId());
 
-        appointment = PatientService.doViewParticularUpcomingAppointments(patient.getPatientId());
+        appointment = PatientService.doViewParticularUpcomingAppointments(patient.getUserId());
         if (appointment != null) {
             sessionMap.put("PatientUpcomingBooking", appointment);
             result = "SUCCESS";
