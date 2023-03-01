@@ -310,14 +310,14 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                     sessionMap.put("Day1Booking", day1Booking);
                 }
                 String totalTodayRevenue = DoctorService.getInstance().doViewTotalRevenue("0", this.doctorId);
-                String day1Revenue = DoctorService.getInstance().doViewTotalRevenue("0", this.doctorId);
+                String day1Revenue = DoctorService.getInstance().doViewTotalRevenue("-1", this.doctorId);
 
                 //graph data population revenue--------------------------------------
-                String day2Revenue = DoctorService.getInstance().doViewTotalRevenue("0", this.doctorId);
-                String day3Revenue = DoctorService.getInstance().doViewTotalRevenue("0", this.doctorId);
-                String day4Revenue = DoctorService.getInstance().doViewTotalRevenue("0", this.doctorId);
-                String day5Revenue = DoctorService.getInstance().doViewTotalRevenue("0", this.doctorId);
-                String day6Revenue = DoctorService.getInstance().doViewTotalRevenue("0", this.doctorId);
+                String day2Revenue = DoctorService.getInstance().doViewTotalRevenue("-2", this.doctorId);
+                String day3Revenue = DoctorService.getInstance().doViewTotalRevenue("-3", this.doctorId);
+                String day4Revenue = DoctorService.getInstance().doViewTotalRevenue("-4", this.doctorId);
+                String day5Revenue = DoctorService.getInstance().doViewTotalRevenue("-5", this.doctorId);
+                String day6Revenue = DoctorService.getInstance().doViewTotalRevenue("-6", this.doctorId);
 
                 if (totalTodayRevenue != null) {
                     sessionMap.put("TodayRevenue", totalTodayRevenue);
@@ -375,7 +375,10 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                     sessionMap.put("HigherOrLowerTextRevenue", "Higher than yesterday");
 
                 }
-
+                ArrayList doctortodayAppointmentList=DoctorService.getInstance().doViewtodayAppointments("0",this.doctorId);
+                sessionMap.put("DoctorAppointmentListDashBoard",doctortodayAppointmentList);
+                sessionMap.put("doctorId",this.doctorId);
+                System.out.println(sessionMap);
                 result = "DOCTORINDEX";
             }
             if (this.roleId.equals("3")) {

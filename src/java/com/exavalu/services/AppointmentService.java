@@ -38,7 +38,7 @@ public class AppointmentService {
 
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "INSERT INTO appointments (appointmentDate, doctorId, departmentId, statusId,patientId,bookingDate) VALUES (?, ?, ?, ?,?,curdate());";
+            String sql = "INSERT INTO appointments (appointmentDate, doctorId, departmentId, statusId,patientId,userId) VALUES (?, ?, ?, ?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, appointment.getAppointmentDate());
             ps.setString(2, appointment.getDoctorId());

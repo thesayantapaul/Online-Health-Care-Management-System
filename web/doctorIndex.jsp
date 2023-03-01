@@ -3,12 +3,13 @@
     Created on : Feb 27, 2023, 1:32:46 PM
     Author     : anich
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-                <meta charset="utf-8">
+        <meta charset="utf-8">
         <title>OHMS - Online HealthCare Management System</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
@@ -55,7 +56,6 @@
     <script>
 
         function fetchContent(selectedId, targetId) {
-            alert(selectedId);
             $.ajax({
                 url: selectedId,
 
@@ -71,98 +71,62 @@
     <jsp:include page="sidemenu.jsp" ></jsp:include>
 
         <body >
-             <!-- Topbar Start -->
-        <div class="container-fluid py-2 border-bottom d-none d-lg-block">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
-                        <div class="d-inline-flex align-items-center">
-                            <a class="text-decoration-none text-body pe-3"href="tel:+0123456789"><i class="bi bi-telephone me-2"></i>+012 345 6789</a>
-                            <span class="text-body">|</span>
-                            <a  class="text-decoration-none text-body px-3" href = "mailto:admin@ohms.com"><i class="bi bi-envelope me-2"></i>info@ohms.com</a>
+<!--             Topbar Start 
+            <div class="container-fluid py-2 border-bottom d-none d-lg-block">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+                            <div class="d-inline-flex align-items-center">
+                                <a class="text-decoration-none text-body pe-3"href="tel:+0123456789"><i class="bi bi-telephone me-2"></i>+012 345 6789</a>
+                                <span class="text-body">|</span>
+                                <a  class="text-decoration-none text-body px-3" href = "mailto:admin@ohms.com"><i class="bi bi-envelope me-2"></i>info@ohms.com</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 text-center text-lg-end">
-                        <div class="d-inline-flex align-items-center">
-                            <a class="text-body px-2" href="https://www.facebook.com/login/">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a class="text-body px-2" href="https://www.twitter.com/login/">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a class="text-body px-2" href="https://www.linkedin.com/login/">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a class="text-body px-2" href="https://www.instagram.com/login/">
-                                <i class="fab fa-instagram"></i>
-                            </a>
+                        <div class="col-md-6 text-center text-lg-end">
+                            <div class="d-inline-flex align-items-center">
+                                <a class="text-body px-2" href="https://www.facebook.com/login/">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a class="text-body px-2" href="https://www.twitter.com/login/">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a class="text-body px-2" href="https://www.linkedin.com/login/">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a class="text-body px-2" href="https://www.instagram.com/login/">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Topbar End -->
-        
-        
+             Topbar End -->
+
+
             <div id="main">
                 <div id="target">
-                    <main  class="main">
 
-                        <div class="pagetitle">
-                            <h1>Dashboard</h1>
-                            <nav>
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
-                                    <li class="breadcrumb-item active">Dashboard</li>
-                                </ol>
-                            </nav>
-                        </div><!-- End Page Title -->
+                    <div class="pagetitle">
+                        <h1>Dashboard</h1>
+                        <nav>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
+                                <li class="breadcrumb-item active">Dashboard</li>
+                            </ol>
+                        </nav>
+                    </div><!-- End Page Title -->
 
-                        <section class="section dashboard">
+                    <section class="section dashboard">
 
 
-                            <!-- Left side columns -->
-                            <div class="col-lg-10">
-                                <div class="row">
+                        <!-- Left side columns -->
+                        <div class="col-lg-12">
+                            <div class="row">
 
-                                    <!-- Sales Card -->
-                                    <div class="col-xxl-4 col-md-6">
-                                        <div class="card info-card sales-card">
-
-                                            <div class="filter">
-                                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                    <li class="dropdown-header text-start">
-                                                        <h6>Filter</h6>
-                                                    </li>
-
-                                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="card-body">
-                                                <h5 class="card-title">Appointments <span>| Today</span></h5>
-
-                                                <div class="d-flex align-items-center">
-                                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                                        <i class="bi bi-person-check-fill"></i>
-                                                    </div>
-                                                    <div class="ps-3">
-                                                        <h6>${TodayBooking}</h6>
-                                                    <span class="text-success small pt-1 fw-bold"><c:if test="${IncreaseRevenue!=null}"><i class="bi bi-arrow-up-circle"></i></c:if><c:if test="${DecreaseRevenue!=null}"><i class="bi bi-arrow-down-circle"></i></c:if><span class="text-muted small pt-2 ps-1">${HigherOrLowerText}</span>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div><!-- End Sales Card -->
-
-                                <!-- Revenue Card -->
+                                <!-- Sales Card -->
                                 <div class="col-xxl-4 col-md-6">
-                                    <div class="card info-card revenue-card">
+                                    <div class="card info-card sales-card">
 
                                         <div class="filter">
                                             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -178,253 +142,287 @@
                                         </div>
 
                                         <div class="card-body">
-                                            <h5 class="card-title">Total Revenue <span>| Today</span></h5>
+                                            <h5 class="card-title">Appointments <span>| Today</span></h5>
 
                                             <div class="d-flex align-items-center">
                                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                                    <i class="bi bi-currency-dollar"></i>
+                                                    <i class="bi bi-person-check-fill"></i>
                                                 </div>
                                                 <div class="ps-3">
-                                                    <h6>INR ${TodayRevenue}</h6>
-                                                    <span class="text-success small pt-1 fw-bold"><c:if test="${IncreaseRevenue!=null}"><i class="bi bi-arrow-up-circle"></i></c:if><c:if test="${DecreaseRevenue!=null}"><i class="bi bi-arrow-down-circle"></i></c:if></span> <span class="text-muted small pt-2 ps-1">${HigherOrLowerTextRevenue}</span>
+                                                    <h6>${TodayBooking}</h6>
+                                                <span class="text-success small pt-1 fw-bold"><c:if test="${IncreaseRevenue!=null}"><i class="bi bi-arrow-up-circle"></i></c:if><c:if test="${DecreaseRevenue!=null}"><i class="bi bi-arrow-down-circle"></i></c:if><span class="text-muted small pt-2 ps-1">${HigherOrLowerText}</span>
 
-                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div><!-- End Sales Card -->
+
+                            <!-- Revenue Card -->
+                            <div class="col-xxl-4 col-md-6">
+                                <div class="card info-card revenue-card">
+
+                                    <div class="filter">
+                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                            <li class="dropdown-header text-start">
+                                                <h6>Filter</h6>
+                                            </li>
+
+                                            <li><a class="dropdown-item" href="#">Today</a></li>
+                                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <h5 class="card-title">Total Revenue <span>| Today</span></h5>
+
+                                        <div class="d-flex align-items-center">
+                                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                <i class="bi bi-currency-dollar"></i>
+                                            </div>
+                                            <div class="ps-3">
+                                                <h6>INR ${TodayRevenue}</h6>
+                                                <span class="text-success small pt-1 fw-bold"><c:if test="${IncreaseRevenue!=null}"><i class="bi bi-arrow-up-circle"></i></c:if><c:if test="${DecreaseRevenue!=null}"><i class="bi bi-arrow-down-circle"></i></c:if></span> <span class="text-muted small pt-2 ps-1">${HigherOrLowerTextRevenue}</span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div><!-- End Revenue Card -->
+
+                            <!-- Customers Card -->
+                            <div class="col-xxl-4 col-xl-12">
+
+                                <div class="card info-card customers-card">
+
+                                    <div class="filter">
+                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                            <li class="dropdown-header text-start">
+                                                <h6>Filter</h6>
+                                            </li>
+
+                                            <li><a class="dropdown-item" href="#">Today</a></li>
+                                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <h5 class="card-title"> Users Registered<span>| Today </span></h5>
+
+                                        <div class="d-flex align-items-center">
+                                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                <i class="bi bi-people"></i>
+                                            </div>
+                                            <div class="ps-3">
+                                                <h6>${TodayUsers}</h6>
+                                                <span class="text-success small pt-1 fw-bold"><i class="bi bi-arrow-up-circle"></i></span><span class="text-muted small pt-2 ps-1">User registered today</span>
+
                                             </div>
                                         </div>
 
                                     </div>
-                                </div><!-- End Revenue Card -->
+                                </div>
 
-                                <!-- Customers Card -->
-                                <div class="col-xxl-4 col-xl-12">
+                            </div><!-- End Customers Card -->
 
-                                    <div class="card info-card customers-card">
+                            <!-- Reports -->
+                            <div class="col-12">
+                                <div class="card">
 
-                                        <div class="filter">
-                                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                <li class="dropdown-header text-start">
-                                                    <h6>Filter</h6>
-                                                </li>
+                                    <div class="filter">
+                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                            <li class="dropdown-header text-start">
+                                                <h6>Filter</h6>
+                                            </li>
 
-                                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="card-body">
-                                            <h5 class="card-title"> Users Registered<span>| Today </span></h5>
-
-                                            <div class="d-flex align-items-center">
-                                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                                    <i class="bi bi-people"></i>
-                                                </div>
-                                                <div class="ps-3">
-                                                    <h6>${TodayUsers}</h6>
-                                                    <span class="text-success small pt-1 fw-bold"><i class="bi bi-arrow-up-circle"></i></span><span class="text-muted small pt-2 ps-1">User registered today</span>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
+                                            <li><a class="dropdown-item" href="#">Today</a></li>
+                                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                        </ul>
                                     </div>
 
-                                </div><!-- End Customers Card -->
+                                    <div class="card-body">
+                                        <h5 class="card-title">Reports <span>/Appointments-Revenue-Users</span></h5>
 
-                                <!-- Reports -->
-                                <div class="col-12">
-                                    <div class="card">
+                                        <!-- Line Chart -->
+                                        <div id="reportsChart"></div>
 
-                                        <div class="filter">
-                                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                <li class="dropdown-header text-start">
-                                                    <h6>Filter</h6>
-                                                </li>
-
-                                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="card-body">
-                                            <h5 class="card-title">Reports <span>/Appointments-Revenue-Users</span></h5>
-
-                                            <!-- Line Chart -->
-                                            <div id="reportsChart"></div>
-
-                                            <script>
-                                                document.addEventListener("DOMContentLoaded", () => {
-                                                    new ApexCharts(document.querySelector("#reportsChart"), {
-                                                        series: [{
-                                                                name: 'Appointments',
-                                                                data: [${Day6Booking}, ${Day5Booking}, ${Day4Booking}, ${Day3Booking}, ${Day2Booking}, ${Day1Booking},${TodayBooking}]
-                                                            }, {
-                                                                name: 'Revenue',
-                                                                data: [${Day6Revenue}, ${Day5Revenue}, ${Day4Revenue}, ${Day3Revenue}, ${Day2Revenue}, ${Day1Revenue},${TodayRevenue}]
-                                                            }, {
-                                                                name: 'Users',
-                                                                data: [${Day6User},${Day5User},${Day4User},${Day3User},${Day2User},${Day1User},${TodayUsers}]
-                                                            }],
-                                                        chart: {
-                                                            height: 350,
-                                                            type: 'area',
-                                                            toolbar: {
-                                                                show: false
-                                                            }
-                                                        },
-                                                        markers: {
-                                                            size: 4
-                                                        },
-                                                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                                                        fill: {
-                                                            type: "gradient",
-                                                            gradient: {
-                                                                shadeIntensity: 1,
-                                                                opacityFrom: 0.3,
-                                                                opacityTo: 0.4,
-                                                                stops: [0, 90, 100]
-                                                            }
-                                                        },
-                                                        dataLabels: {
-                                                            enabled: false
-                                                        },
-                                                        stroke: {
-                                                            curve: 'smooth',
-                                                            width: 2
-                                                        },
-                                                        xaxis: {
-
-                                                            categories: ["${Day6}", "${Day5}", "${Day4}", "${Day3}", "${Day2}", "${Day1}", "${CurrentDay}"]
-                                                        },
-                                                        tooltip: {
-                                                            x: {
-                                                                format: 'dd/MM/yy HH:mm'
-                                                            }
+                                        <script>
+                                            document.addEventListener("DOMContentLoaded", () => {
+                                                new ApexCharts(document.querySelector("#reportsChart"), {
+                                                    series: [{
+                                                            name: 'Appointments',
+                                                            data: [${Day6Booking}, ${Day5Booking}, ${Day4Booking}, ${Day3Booking}, ${Day2Booking}, ${Day1Booking},${TodayBooking}]
+                                                        }, {
+                                                            name: 'Revenue',
+                                                            data: [${Day6Revenue}, ${Day5Revenue}, ${Day4Revenue}, ${Day3Revenue}, ${Day2Revenue}, ${Day1Revenue},${TodayRevenue}]
+                                                        }, {
+                                                            name: 'Users',
+                                                            data: [${Day6User},${Day5User},${Day4User},${Day3User},${Day2User},${Day1User},${TodayUsers}]
+                                                        }],
+                                                    chart: {
+                                                        height: 350,
+                                                        type: 'area',
+                                                        toolbar: {
+                                                            show: false
                                                         }
-                                                    }).render();
-                                                });
-                                            </script>
-                                            <!-- End Line Chart -->
-
-                                        </div>
-
-                                    </div>
-                                </div><!-- End Reports -->
-
-                                <!-- Recent Sales -->
-                                <div class="col-12">
-                                    <div class="card recent-sales overflow-auto">
-
-                                        <div class="filter">
-                                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                <li class="dropdown-header text-start">
-                                                    <h6>Filter</h6>
-                                                </li>
-
-                                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="card-body">
-                                            <h5 class="card-title">Recent Bookings <span>| Today</span></h5>
-
-                                            <table class="table table-borderless datatable">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Appointment Id</th>
-                                                        <th scope="col">patient</th>
-                                                        <th scope="col">Department</th>
-                                                        <th scope="col">Doctor</th>
-                                                        <th scope="col">Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                <c:forEach items="${AppointmentListDashBoard}" var="appointment">
-                                                    <tr>
-                                                        <th scope="row"><a href="#">${appointment.appointmentId}</a></th>
-                                                        <td>${appointment.patientFirstName} ${appointment.patientLastName}</td>
-                                                        <td><a href="#" class="text-primary">${appointment.departmentName}</a></td>
-                                                        <td>${appointment.doctorFirstName} ${appointment.doctorLastName}</td>
-                                                        <td>
-                                                    <c:if test="${appointment.statusId.equals('1')}"><span class="badge bg-warning">${appointment.statusOfAppointments}</span></c:if>
-                                                    <c:if test="${appointment.statusId.equals('2')}"><span class="badge bg-info">${appointment.statusOfAppointments}</span></c:if>
-                                                    <c:if test="${appointment.statusId.equals('3')}"><span class="badge bg-success">${appointment.statusOfAppointments}</span></c:if>
-                                                    <c:if test="${appointment.statusId.equals('4')}"><span class="badge bg-danger">${appointment.statusOfAppointments}</span></c:if>
-                                                    </td>
-                                                    </tr>
-
-                                                </c:forEach>
-                                                </tbody>
-                                            </table>
-
-                                        </div>
+                                                    },
+                                                    markers: {
+                                                        size: 4
+                                                    },
+                                                    colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                                                    fill: {
+                                                        type: "gradient",
+                                                        gradient: {
+                                                            shadeIntensity: 1,
+                                                            opacityFrom: 0.3,
+                                                            opacityTo: 0.4,
+                                                            stops: [0, 90, 100]
+                                                        }
+                                                    },
+                                                    dataLabels: {
+                                                        enabled: false
+                                                    },
+                                                    stroke: {
+                                                        curve: 'smooth',
+                                                        width: 2
+                                                    },
+                                                    xaxis: {
+                                                        categories: ["${Day6}", "${Day5}", "${Day4}", "${Day3}", "${Day2}", "${Day1}", "${CurrentDay}"]
+                                                    },
+                                                    tooltip: {
+                                                        x: {
+                                                            format: 'dd/MM/yy HH:mm'
+                                                        }
+                                                    }
+                                                }).render();
+                                            });
+                                        </script>
+                                        <!-- End Line Chart -->
 
                                     </div>
-                                </div><!-- End Recent Sales -->
 
-                                <!-- Top Selling -->
-                                <div class="col-12">
-                                    <div class="card top-selling overflow-auto">
+                                </div>
+                            </div><!-- End Reports -->
 
-                                        <div class="filter">
-                                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                <li class="dropdown-header text-start">
-                                                    <h6>Filter</h6>
-                                                </li>
+                            <!-- Recent Sales -->
+                            <div class="col-12">
+                                <div class="card recent-sales overflow-auto">
 
-                                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                                            </ul>
-                                        </div>
+                                    <div class="filter">
+                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                            <li class="dropdown-header text-start">
+                                                <h6>Filter</h6>
+                                            </li>
 
-                                        <div class="card-body pb-0">
-                                            <h5 class="card-title">Top Department in terms of booking <span>| Today</span></h5>
+                                            <li><a class="dropdown-item" href="#">Today</a></li>
+                                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                        </ul>
+                                    </div>
 
-                                            <table class="table table-borderless datatable">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Department Id</th>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Recent Bookings <span>| Today</span></h5>
 
-                                                        <th scope="col">Department Name</th>
-                                                        <th scope="col">Doctor Name</th>
+                                        <table class="table table-borderless datatable">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Appointment Id</th>
+                                                    <th scope="col">patient</th>
+                                                    <th scope="col">Department</th>
+                                                    <th scope="col">Doctor</th>
+                                                    <th scope="col">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${DoctorAppointmentListDashBoard}" var="appointment">
+                                                <tr>
+                                                    <th scope="row"><a href="#">${appointment.appointmentId}</a></th>
+                                                    <td>${appointment.patientFirstName} ${appointment.patientLastName}</td>
+                                                    <td><a href="#" class="text-primary">${appointment.departmentName}</a></td>
+                                                    <td>${appointment.doctorFirstName} ${appointment.doctorLastName}</td>
+                                                    <td>
+                                                <c:if test="${appointment.statusId.equals('1')}"><span class="badge bg-warning">${appointment.status}</span></c:if>
+                                                <c:if test="${appointment.statusId.equals('2')}"><span class="badge bg-info">${appointment.status}</span></c:if>
+                                                <c:if test="${appointment.statusId.equals('3')}"><span class="badge bg-success">${appointment.status}</span></c:if>
+                                                <c:if test="${appointment.statusId.equals('4')}"><span class="badge bg-danger">${appointment.status}</span></c:if>
+                                                </td>
+                                                </tr>
 
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                <c:forEach items="${AppointmentListDashBoard}" var="appointment">
-                                                    <tr>
-                                                        <th scope="row"><a href="#">${appointment.departmentId}</a></th>
-                                                        <td>${appointment.departmentName}</td>
-
-                                                        <td>${appointment.doctorFirstName} ${appointment.doctorLastName}</td>
-
-                                                    </tr>
-                                                </c:forEach>
-                                                </tbody>
-                                            </table>
-
-                                        </div>
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
 
                                     </div>
-                                </div><!-- End Top Selling -->
 
-                            </div>
+                                </div>
+                            </div><!-- End Recent Sales -->
+
+                            <!-- Top Selling -->
+                            <div class="col-12">
+                                <div class="card top-selling overflow-auto">
+
+                                    <div class="filter">
+                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                            <li class="dropdown-header text-start">
+                                                <h6>Filter</h6>
+                                            </li>
+
+                                            <li><a class="dropdown-item" href="#">Today</a></li>
+                                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="card-body pb-0">
+                                        <h5 class="card-title">Top Department in terms of booking <span>| Today</span></h5>
+
+                                        <table class="table table-borderless datatable">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Department Id</th>
+
+                                                    <th scope="col">Department Name</th>
+                                                    <th scope="col">Doctor Name</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${AppointmentListDashBoard}" var="appointment">
+                                                <tr>
+                                                    <th scope="row"><a href="#">${appointment.departmentId}</a></th>
+                                                    <td>${appointment.departmentName}</td>
+
+                                                    <td>${appointment.doctorFirstName} ${appointment.doctorLastName}</td>
+
+                                                </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div><!-- End Top Selling -->
+
                         </div>
-                        </div><!-- End Left side columns -->
+                    </div><!-- End Left side columns -->
 
-                    </section>
+                </section>
 
                 </main><!-- End #main -->
             </div>
+        </div>
     </body>
 
     <!-- Vendor JS Files -->

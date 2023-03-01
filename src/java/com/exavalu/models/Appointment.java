@@ -259,7 +259,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
                 boolean insert = AppointmentService.getInstance().getAppointment(appointment);
                 appointment= AppointmentService.getInstance().getAppointmentId(appointment);
                 boolean r2 = PatientService.getInstance().insertPatientAppointment(appointment);
-
+                LoginService.getInstance().updateUser(appointment);
                 if (insert && r1 && r2) {
                     result = "SUCCESS";
                 }
