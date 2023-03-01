@@ -107,7 +107,7 @@
                                         <input name="emailAddress" type="email" class="form-control bg-light border-0" placeholder="Your Email" required style="height: 55px;"  value="${user.getEmailAddess()}">
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <select name="gender"  id="gender" required>
+                                        <select name="gender"  id="gender" required class="form-select bg-light border-0" style="height: 55px;">
                                             <option value="">Select Gender</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
