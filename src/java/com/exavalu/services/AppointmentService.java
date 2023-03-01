@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
- */
+
 package com.exavalu.services;
 
 import com.exavalu.models.Appointment;
@@ -38,7 +35,7 @@ public class AppointmentService {
 
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "INSERT INTO appointments (appointmentDate, doctorId, departmentId, statusId,patientId,userId) VALUES (?, ?, ?, ?,?,?);";
+            String sql = "INSERT INTO appointments (appointmentDate, doctorId, departmentId, statusId,patientId,userId,bookingDate) VALUES (?, ?, ?, ?,?,?,curdate());";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, appointment.getAppointmentDate());
             ps.setString(2, appointment.getDoctorId());

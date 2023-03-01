@@ -58,17 +58,16 @@
     </script>
 
     <body>
-            <jsp:include page="menu.jsp"></jsp:include>
 
         <c:set var="deptList" value="${DepartmentService.getInstance().getAllDepartments()}" />
 
 
         <!-- Appointment Start -->
-        <div id="bookAppointment"class="container-fluid bg-primary my-5 py-5" >
-            <div class="container py-5">
+        <div class="container-fluid bg-primary my-5 py-5" >
+            <div class="container py-5"id="bookAppointment">
                 <div class="row gx-5">
-                    <div class="col-lg-6 mb-5 mb-lg-0">
-                        <div class="mb-4">
+                    <div class="col-lg-6 mb-5 mb-lg-0" >
+                        <div class="mb-4" >
                             <h5 class="d-inline-block text-white text-uppercase border-bottom border-5">Appointment</h5>
                             <h1 class="display-4">Make An Appointment For You And Your Family</h1>
                         </div>
