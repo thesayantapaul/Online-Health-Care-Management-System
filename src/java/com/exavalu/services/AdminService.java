@@ -147,7 +147,7 @@ public class AdminService {
         try {
             Connection con = JDBCConnectionManager.getConnection();
             //String sql = "select * from doctors d, departments dp where d.departmentId=dp.departmentId and having doctorFirstName like ? and doctorLastName like ? and doctorGender like ? and departmentName like ? and having doctorId like ?";
-            String sql = "select * from doctors d, departments dp where d.departmentId=dp.departmentId and doctorFirstName like ? and doctorLastName like ? and doctorGender like ? and d.departmentId like ? and doctorId like ?";
+            String sql = "select d.doctorId,doctorFirstName,doctorLastName, departmentName,gender,age from doctors d, departments dp,users u where d.doctorId=u.doctorId and d.departmentId=dp.departmentId and doctorFirstName like ? and doctorLastName like ? and gender like ? and d.departmentId like ? and d.doctorId like ?";
             PreparedStatement preparedStatement = con.prepareStatement(sql);
 
             preparedStatement.setString(1, adminDoctor.getFirstName() + "%");
@@ -167,8 +167,8 @@ public class AdminService {
                 doctor.setDoctorFirstName(rs.getString("doctorFirstName"));
                 doctor.setDoctorLastName(rs.getString("doctorLastName"));
                 doctor.setDepartmentName(rs.getString("departmentName"));
-                doctor.setDoctorAge(rs.getString("doctorAge"));
-                doctor.setDoctorGender(rs.getString("doctorGender"));
+                doctor.setDoctorAge(rs.getString("age"));
+                doctor.setDoctorGender(rs.getString("gender"));
                 //code to set doctor parameters
 
                 doctorList.add(doctor);
