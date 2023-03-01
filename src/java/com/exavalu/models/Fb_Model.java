@@ -4,7 +4,6 @@
  */
 package com.exavalu.models;
 
-import com.exavalu.models.FbProfile;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
