@@ -168,4 +168,51 @@ public class DoctorService {
         return totalRevenue;
     }
 
+    public ArrayList doViewtodayAppointments(String interval, String doctorId) {
+        
+        ArrayList appointmentList = new ArrayList();
+        try {
+
+            Connection con = JDBCConnectionManager.getConnection();
+
+            String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.doctorId=? and  appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY)";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, doctorId);
+            preparedStatement.setString(2, interval);
+            System.out.println(preparedStatement);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Appointment appointment = new Appointment();
+
+                appointment.setAppointmentId(rs.getString("appointmentId"));
+                appointment.setAppointmentDate(rs.getString("appointmentDate"));
+
+                appointment.setPatientFirstName(rs.getString("patientFirstName"));
+                appointment.setPatientLastName(rs.getString("patientLastName"));
+                appointment.setGender(rs.getString("gender"));
+                appointment.setAge(rs.getString("age"));
+                appointment.setDepartmentName(rs.getString("departmentName"));
+                appointment.setDoctorFirstName(rs.getString("doctorFirstName"));
+                appointment.setDoctorLastName(rs.getString("doctorLastName"));
+                appointment.setStatusId(rs.getString("statusId"));
+                appointment.setStatus(rs.getString("statusName"));
+             
+                //appointment.setSymptoms(rs.getString("symptoms"));
+
+                appointmentList.add(appointment);
+
+            }
+
+        } catch (SQLException ex) {
+            int e = ex.getErrorCode();
+            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+            System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+        }
+
+        return appointmentList;
+    }
+
 }

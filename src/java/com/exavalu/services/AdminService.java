@@ -318,7 +318,7 @@ public class AdminService {
 
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "SELECT SUM(amount) as totalRevenue FROM appointments where bookingDate = DATE_ADD(CURDATE(), INTERVAL ? DAY);";
+            String sql = "SELECT SUM(amount) as totalRevenue FROM appointments where appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY);";
 
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, interval);
