@@ -95,5 +95,32 @@ public class Doctors extends ActionSupport implements ApplicationAware, SessionA
 
     private String doctorId;
     private String departmentId;
+    private String departmentName;
+    private String doctorAge;
+    private String doctorGender;
+
+    public String getDoctorAge() {
+        return doctorAge;
+    }
+
+    public void setDoctorAge(String doctorAge) {
+        this.doctorAge = doctorAge;
+    }
+
+    public String getDoctorGender() {
+        return doctorGender;
+    }
+
+    public void setDoctorGender(String doctorGender) {
+        this.doctorGender = doctorGender;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
 
 }

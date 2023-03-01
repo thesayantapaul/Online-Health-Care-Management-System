@@ -176,8 +176,6 @@ admin appointment jsp
 
                                 </td>
                             </tr>
-
-
                         </c:forEach>
                     </tbody>
                 </table>

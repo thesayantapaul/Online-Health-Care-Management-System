@@ -32,21 +32,21 @@
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
     </head>
-      <script src="https://code.jquery.com/jquery-3.6.3.js" 
+    <script src="https://code.jquery.com/jquery-3.6.3.js" 
                         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
                 crossorigin="anonymous"></script>
     <script>
 
-                            function fetchData(selectedId, targetId) {
-                                alert(selectedId);
-                                $.ajax({
-                                    url: selectedId,
+        function fetchData(selectedId, targetId) {
+            alert(selectedId);
+            $.ajax({
+                url: selectedId,
 
-                                    success: function (responseText) {
-                                        $("#" + targetId).html(responseText);
-                                    }
-                                });
-                            }
+                success: function (responseText) {
+                    $("#" + targetId).html(responseText);
+                }
+            });
+        }
 
 
 
@@ -127,17 +127,17 @@
 
                             </c:if>
                             <c:if test="${login_check.roleId == '3'}">
-                                <a href="DashBoard" class="nav-item nav-link active">Dashboard</a>
-                                <a href="search.jsp" class="nav-item nav-link">Search Data</a>
-                                <a href="#" class="nav-item nav-link">Update Data</a>
+                                <a href="DashBoard" class="nav-item nav-link">Dashboard</a>
+                                <a href="adminSearch.jsp" class="nav-item nav-link">Search</a>
+
                                 <a href="ViewAppointment" class="nav-item nav-link">View Appointments</a>
-                                <a href="#" class="nav-item nav-link">Add Data</a>
+                                <a href="adminAddDoctor.jsp" class="nav-item nav-link">Add Doctor</a>
                                 <a href="Logout" class="nav-item nav-link">Logout</a>
 
                             </c:if>
 
 
-                         
+
                         </div>
                     </div>
                 </nav>

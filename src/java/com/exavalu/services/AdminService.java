@@ -3,6 +3,8 @@ package com.exavalu.services;
 import com.exavalu.models.Admin;
 import com.exavalu.models.Appointment;
 import com.exavalu.models.Departments;
+import com.exavalu.models.Doctors;
+import com.exavalu.models.Patients;
 import com.exavalu.utils.JDBCConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -139,28 +141,34 @@ public class AdminService {
         return result;
     }
 
-    public static ArrayList doSearchDoctor(Admin doctor) {
+    public static ArrayList doSearchDoctor(Admin adminDoctor) {
 
         ArrayList doctorList = new ArrayList();
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "select * from doctors d, departments dp where d.departmentId=dp.departmentId and having firstName like ? and lastName like ? and gender like ? and departmentName like ? and having doctorId like ?;";
-
+            //String sql = "select * from doctors d, departments dp where d.departmentId=dp.departmentId and having doctorFirstName like ? and doctorLastName like ? and doctorGender like ? and departmentName like ? and having doctorId like ?";
+            String sql = "select * from doctors d, departments dp where d.departmentId=dp.departmentId and doctorFirstName like ? and doctorLastName like ? and doctorGender like ? and d.departmentId like ? and doctorId like ?";
             PreparedStatement preparedStatement = con.prepareStatement(sql);
 
-            preparedStatement.setString(1, doctor.getFirstName() + "%");
-            preparedStatement.setString(2, doctor.getLastName() + "%");
-            preparedStatement.setString(3, doctor.getGender() + "%");
-            preparedStatement.setString(4, doctor.getDepartmentName() + "%");
-            preparedStatement.setString(5, doctor.getDoctorId() + "%");
+            preparedStatement.setString(1, adminDoctor.getFirstName() + "%");
+            preparedStatement.setString(2, adminDoctor.getLastName() + "%");
+            preparedStatement.setString(3, adminDoctor.getGender() + "%");
+            preparedStatement.setString(4, adminDoctor.getDepartmentId() + "%");
+            preparedStatement.setString(5, adminDoctor.getDoctorId() + "%");
+            System.out.println("sql search doctor = "+preparedStatement);
 
 //            System.out.println("sql"+preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
 //            System.out.println("size of rs="+ rs.getFetchSize());
 
             while (rs.next()) {
-                //Doctor doctor = new Doctor();
-                //doctor.setDoctorId(rs.getString("dcotorId"));
+                Doctors doctor = new Doctors();
+                doctor.setDoctorId(rs.getString("doctorId"));
+                doctor.setDoctorFirstName(rs.getString("doctorFirstName"));
+                doctor.setDoctorLastName(rs.getString("doctorLastName"));
+                doctor.setDepartmentName(rs.getString("departmentName"));
+                doctor.setDoctorAge(rs.getString("doctorAge"));
+                doctor.setDoctorGender(rs.getString("doctorGender"));
                 //code to set doctor parameters
 
                 doctorList.add(doctor);
@@ -171,6 +179,49 @@ public class AdminService {
             ex.printStackTrace();
         }
         return doctorList;
+    }
+    //search patient
+    public static ArrayList doSearchPatient(Admin adminPatient) {
+
+        ArrayList patientList = new ArrayList();
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            //String sql = "select * from doctors d, departments dp where d.departmentId=dp.departmentId and having doctorFirstName like ? and doctorLastName like ? and doctorGender like ? and departmentName like ? and having doctorId like ?";
+            String sql = "select * from patients p, users u where p.userId = u.userId and patientFirstName like ? and patientLastName like ? and p.gender like ? and appointmentId like ? and p.patientId like ?";
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+            preparedStatement.setString(1, adminPatient.getFirstName() + "%");
+            preparedStatement.setString(2, adminPatient.getLastName() + "%");
+            preparedStatement.setString(3, adminPatient.getGender() + "%");
+            preparedStatement.setString(4, adminPatient.getAppointmentId()+ "%");
+            preparedStatement.setString(5, adminPatient.getPatientId() + "%");
+            System.out.println("sql search doctor = "+preparedStatement);
+
+//            System.out.println("sql"+preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+//            System.out.println("size of rs="+ rs.getFetchSize());
+
+            while (rs.next()) {
+                Patients patient = new Patients();
+                patient.setPatientId(rs.getString("patientId"));
+                patient.setAppointmentId(rs.getString("appointmentId"));
+                patient.setPatientFirstName(rs.getString("patientFirstName"));
+                patient.setPatientLastName(rs.getString("patientLastName"));
+                patient.setAge(rs.getString("age"));
+                patient.setGender(rs.getString("gender"));
+                patient.setAddress(rs.getString("address"));
+                patient.setDateOfRegisteration(rs.getString("dateOfRegisteration"));
+                
+                //code to set doctor parameters
+
+                patientList.add(patient);
+            }
+
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+        }
+        return patientList;
     }
 
     public static Appointment doViewParticularAppointment(String appointmentId) {
@@ -374,5 +425,27 @@ public class AdminService {
         }
         return departmentList;
     }
+// check email
+    public static boolean doCheckEmail(String emailAddress) {
 
+        boolean result = false;
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT * FROM users where emailAddress = ?;";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                if(rs.wasNull()){
+                    result = true;
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
 }

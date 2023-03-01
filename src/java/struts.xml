@@ -16,6 +16,25 @@
             <result name="SUCCESS">index.jsp</result>
             <result name="FAILURE">menu.jsp</result>
         </action>
+        <!--admin search and add-->
+        <!--SearchDoctor-->
+        <action name="SearchDoctor" class="com.exavalu.models.Admin" method="doSearchDoctor">
+            <result name="SUCCESS">adminsearchresulttable.jsp</result>
+            <result name="FAILURE">error.jsp</result>
+        </action>
+        <!--doctor search end-->
+        
+        <!--SearchPatient-->
+        <action name="SearchPatient" class="com.exavalu.models.Admin" method="doSearchPatient">
+            <result name="SUCCESS">adminpatientsearch.jsp</result>
+            <result name="FAILURE">error.jsp</result>
+        </action>
+        <!--patient search end-->
+        <!--email check during doctor registeration in admin-->
+<!--        <action name="CheckEmail" class="com.exavalu.models.Admin" method="doCheckEmail">
+            
+        </action>-->
+        
         <!--VIEW ADMIN DASHBOARD-->
         <action name="DashBoard" class="com.exavalu.models.Admin" method="doViewDashboard">
             <result name="SUCCESS">admindashboard.jsp</result>

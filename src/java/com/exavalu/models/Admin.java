@@ -69,9 +69,9 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
 
         if (appointment != null) {
             result = "EDITAPPOINTENTJSP";
-            ArrayList deptList = DepartmentService.getInstance().getAllDepartments();
+
             ArrayList statusList = StatusService.getAllStatus();
-            sessionMap.put("DeptList", deptList);
+
             sessionMap.put("StatusList", statusList);
             sessionMap.put("appointment", appointment);
             System.out.println("appointmentdate= " + appointment.getAppointmentDate());
@@ -98,10 +98,22 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         ArrayList doctorList = AdminService.doSearchDoctor(this);
 
         if (doctorList.size() >= 0) {
-            sessionMap.put("Appointments", doctorList);
+            sessionMap.put("SearchedDoctorList", doctorList);
             result = "SUCCESS";
 
         }
+        return result;
+    }
+
+    public String doSearchPatient() {
+        String result = "FAILURE";
+        ArrayList patientList = AdminService.doSearchPatient(this);
+
+        if (patientList.size() >= 0) {
+            sessionMap.put("SearchResult", patientList);
+            result = "SUCCESS";
+        }
+
         return result;
     }
 
@@ -200,23 +212,20 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
                 sessionMap.put("DecreaseRevenue", "decrease");
                 sessionMap.put("HigherOrLowerTextRevenue", "Lower than yesterday");
 
-                
             }
 
         } else {
-            if(totalTodayRevenue != null){
+            if (totalTodayRevenue != null) {
                 sessionMap.put("IncreaseRevenue", "increase");
                 sessionMap.put("DecreaseRevenue", null);
                 sessionMap.put("HigherOrLowerTextRevenue", "Higher than yesterday");
-            }
-           else{
+            } else {
                 sessionMap.put("IncreaseRevenue", null);
                 sessionMap.put("DecreaseRevenue", "decrease");
                 sessionMap.put("HigherOrLowerTextRevenue", "Lower than yesterday");
             }
             sessionMap.put("TotalRevenue", "0");
 
-            
         }
 
 //elements for x-axis in dashboard graph --------------------------------------------------------------
@@ -267,6 +276,21 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         return result;
     }
 
+    public String doCheckEmail() {
+        String result = "EMAILDONTEXIST";
+
+        boolean success = AdminService.doCheckEmail(this.emailAddress);
+        if(success){
+            result = "EMAILEXIST";
+            sessionMap.put("emailExist",true);
+             
+            return result;
+        }
+         sessionMap.put("emailExist",false);
+       
+
+        return result;
+    }
     private String messageToPatient;
     private String appointmentId;
     private String firstName;
@@ -274,6 +298,33 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
     private String gender;
     private String departmentName;
     private String doctorId;
+    private String departmentId;
+    private String patientId;
+    private String emailAddress;
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public String getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
+    }
     private String appointmentDate;
 
     public String getAppointmentDate() {

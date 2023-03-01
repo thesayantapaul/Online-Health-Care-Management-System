@@ -80,6 +80,24 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
     }
 
     private String patientId, patientFirstName, patientLastName, age, gender, appointmentId;
+    private String address;
+    private String dateOfRegisteration;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getDateOfRegisteration() {
+        return dateOfRegisteration;
+    }
+
+    public void setDateOfRegisteration(String dateOfRegisteration) {
+        this.dateOfRegisteration = dateOfRegisteration;
+    }
 
     /**
      * @return the patientId

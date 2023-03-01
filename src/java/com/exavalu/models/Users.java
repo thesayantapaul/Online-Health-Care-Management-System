@@ -6,6 +6,7 @@ package com.exavalu.models;
 
 import com.exavalu.services.AdminService;
 import com.exavalu.services.AppointmentService;
+import com.exavalu.services.DepartmentService;
 import com.exavalu.services.DoctorService;
 import com.exavalu.services.LoginService;
 import com.exavalu.services.PatientService;
@@ -379,7 +380,8 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 result = "DOCTORINDEX";
             }
             if (this.roleId.equals("3")) {
-
+                ArrayList deptList = DepartmentService.getInstance().getAllDepartments();
+                sessionMap.put("DeptList", deptList);
                 String todayBooking = AdminService.doViewBookings("0");
                 String day1Booking = AdminService.doViewBookings("-1");
 
@@ -524,6 +526,9 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
 
                 //----------------------------------------------------------------------------------------------------------
                 ArrayList appointmentList = AdminService.doViewAppointments("0");
+                ArrayList departmentOccupncyList = AdminService.doGetOccupancyForEachDepartments("0");
+
+                sessionMap.put("OccupancyInDepartments", departmentOccupncyList);
 
                 sessionMap.put("AppointmentListDashBoard", appointmentList);
 
