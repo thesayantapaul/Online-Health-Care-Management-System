@@ -29,24 +29,24 @@
         <div class="col50 colleft">
           <div class="wd50">
             <label for="name">Patient Id:</label>
-            <input type="text" id="name" required />
+            <input placeholder="Patient ID" type="text" id="name" required  autofocus/>
           </div>
 
           <div class="wd50">
             <label for="name">Patient Name:</label>
-            <input type="text" id="name" required />
+            <input  placeholder="Patient Name"  type="text" id="name" required />
           </div>
         </div>
 
         <div class="col50 colright">
           <div class="wd50">
             <label for="name">Doctor Id:</label>
-            <input type="text" id="name" required />
+            <input  placeholder="Doctor ID" type="text" id="name" required />
           </div>
 
           <div class="wd50">
             <label for="name">Doctor Name:</label>
-            <input type="text" id="name" required />
+            <input placeholder="Doctor Name" type="text" id="name" required />
           </div>
         </div>
       </div>
@@ -57,12 +57,12 @@
 
           <div class="wd50">
             <label for="name">Appointment Id:</label>
-            <input type="text" id="name" required />
+            <input placeholder="Appointment ID" type="text" id="name" required />
           </div>
 
           <div class="wd50">
             <label for="name">Appointment Date:</label>
-            <input type="text" id="name" required />
+            <input placeholder="Appointment Date" type="text" id="name" required />
           </div>
 
         </div>
@@ -76,9 +76,9 @@
 
       <div class="col50 colleft">
         <div class="wd100">
-          <label for="email"> Patient's Symptoms:</label>
+          <label name=""> Patient's Symptoms:</label>
           <!-- <input type="email" id="email" required /> -->
-          <textarea id="address" required></textarea>
+          <textarea  placeholder="Add Sympoms here ..." id="" required></textarea>
 
         </div>
       </div>
@@ -86,17 +86,17 @@
 
       <div class="col50 colright">
         <div class="form-group">
-          <label for="email"> Required's Tests:</label>
+          <label name=""> Required's Tests:</label>
           <!-- <input type="email" id="email" required /> -->
-          <textarea id="address" required></textarea>
+          <textarea placeholder="Add Tests here .."  id="" required></textarea>
 
         </div>
       </div>
 
       <div class="col50 colleft">
         <div class="wd100">
-          <label for="address">Doctor Advice:</label>
-          <textarea id="address" required></textarea>
+          <label name="">Doctor's Advice:</label>
+          <textarea  placeholder="Doctor's Feedback to patient..." id="" required></textarea>
         </div>
       </div>
 
