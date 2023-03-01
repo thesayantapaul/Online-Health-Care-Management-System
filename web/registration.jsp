@@ -28,7 +28,7 @@
 
         <title>OHMS Registration</title>
     </head>
-     <script src="https://code.jquery.com/jquery-3.6.3.js" 
+    <script src="https://code.jquery.com/jquery-3.6.3.js" 
                         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
                 crossorigin="anonymous"></script>
     <body style="overflow: scroll; height : 90%" id="social">
@@ -65,7 +65,7 @@
                                     <div class="form-group last mb-3">
 
                                         <label class="gender" for="inlineFormCustomSelectPref" id="gender">Choose Gender</label>
-                                        <select  name="gender" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" required>
+                                        <select  name="gender" class="form-control" id="inlineFormCustomSelectPref" required>
                                             <option selected>Select Gender</option>
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
@@ -94,15 +94,12 @@
                                     <button type="submit" value="Sign Up" class="btn btn-block py-2 btn-primary">Sign Up</button>
                                 </form>
                                 <span class="text-center my-3 d-block">or</span>
+                                <center> <jsp:include page="fblogin.jsp"></jsp:include></center>
+
+                                    <center><jsp:include page="demo.jsp"></jsp:include></center>
 
 
-                                <div class="">
-                                    <!--                                    <a href="#" class="btn btn-block py-2 btn-facebook">
-                                                                            <span class="icon-facebook mr-3"></span> Login with facebook
-                                                                        </a>-->
-                                    <jsp:include page="demo.jsp"></jsp:include>
-                                </div>
-                            <jsp:include page="fblogin.jsp"></jsp:include>
+
                             </div>
                         </div>
                     </div>
@@ -110,13 +107,10 @@
             </div>
 
 
-        </div>
 
-
-
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
+            <script src="js/jquery-3.3.1.min.js"></script>
+            <script src="js/popper.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/main.js"></script>
     </body>
 </html>
