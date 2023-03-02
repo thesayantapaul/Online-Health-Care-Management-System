@@ -202,7 +202,6 @@
 
                         </form>
                     </div>
-                    <p class="mb-md-0">&copy; <a class="text-primary" href="#">OHMS</a>. All Rights Reserved. by @nik</p>
                 </div>
             </div>
         </div>
