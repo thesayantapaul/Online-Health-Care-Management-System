@@ -1,9 +1,3 @@
-<%--
-    Document   : adminAddDoctor
-    Created on : 26-Feb-2023, 12:07:47 pm
-    Author     : Anik Dutta
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -28,6 +22,15 @@
         <link rel="stylesheet" href="css/loginstyle.css">
 
         <title>OHMS Registration</title>
+        <style>
+            #table {
+                display: block;
+                height: 250px;
+                width: 100%;
+                overflow: auto;
+
+            }
+        </style>
 
         <script>
             function sendSearchFormInfo()
@@ -83,7 +86,7 @@
         <jsp:include page="menu.jsp"></jsp:include>
 
             <div class="d-md-flex half">
-                <div class="bg" style="background-image: url('images/login-side.jpg'); opacity: 50%;"></div>
+                <div class="bg" style="background-image: url('images/login-side.jpg'); opacity:100%;"></div>
                 <div class="contents" >
                     <br>
                     <main class="container">
@@ -91,7 +94,7 @@
                             <div class="col-md-6">
                                 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                     <div class="col p-4 d-flex flex-column position-static" >
-                                        <h3><strong class="d-inline-block mb-2 text-primary">Search Doctor</strong></h3>
+                                        <h3><strong class="d-inline-block mb-2 text-danger">Search Doctor</strong></h3>
                                         <form name="searchDoctor" class="form">
                                             <table class="table table-borderless">
                                                 <tr>
@@ -120,7 +123,7 @@
                                                         <div class="form-group last mb-3">
 
                                                             <label for="inlineFormCustomSelectPref" id="patientGender">Gender</label>
-                                                            <select  name="doctorGender" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                                            <select  name="doctorGender" class="form-control" id="inlineFormCustomSelectPref">
                                                                 <option value="">--select gender--</option>
                                                                 <option value="male">Male</option>
                                                                 <option value="female">Female</option>
@@ -132,7 +135,7 @@
                                                         <div class="form-group last mb-3">
 
                                                             <label class="departmentName" for="inlineFormCustomSelectPref" id="departmentName">Department Name</label>
-                                                            <select  name="departmentId" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                                            <select  name="departmentId" class="form-control" id="inlineFormCustomSelectPref">
                                                                 <option value="">--select department--</option>
                                                             <c:forEach items="${DeptList}" var="department">
                                                                 <option value="${department.departmentId}">${department.departmentName}</option>
@@ -143,7 +146,7 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                        <button type="button" onclick="sendSearchFormInfo()" class="btn btn-block py-2 btn-primary">Search</button>
+                                        <button type="button" onclick="sendSearchFormInfo()" class="btn btn-block py-2 btn-danger">Search</button>
                                     </form>
                                 </div>
                             </div>
@@ -187,23 +190,26 @@
                                                     <div class="form-group last mb-3">
 
                                                         <label for="inlineFormCustomSelectPref" id="patientGender">Gender</label>
-                                                        <select  name="patientGender" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                                        <select  name="patientGender" class="form-control" id="inlineFormCustomSelectPref">
                                                             <option value="">--select gender--</option>
                                                             <option value="male">Male</option>
                                                             <option value="female">Female</option>
                                                         </select>
-
                                                     </div>
                                                 </td>
                                             </tr>
                                         </table>
-                                        <button type="button" onclick="sendSearchFormInfoPatient()" class="btn btn-block py-2 btn-primary">Search</button>
+                                        <button type="button" onclick="sendSearchFormInfoPatient()" class="btn btn-block py-2 btn-success">Search</button>
                                     </form>
                                 </div>
                             </div>
+
+                        </div>
+                        <div  id="viewSearchResult">
+
                         </div>
                     </div>
-                    <div id="viewSearchResult">
+                    <div>
 
                     </div>
                 </main>
@@ -211,6 +217,7 @@
             </div>
 
         </div>
+        <p class="mb-md-0">&copy; <a class="text-primary" href="#">OHMS</a>. All Rights Reserved. by @nik</p>
 
 
     </body>

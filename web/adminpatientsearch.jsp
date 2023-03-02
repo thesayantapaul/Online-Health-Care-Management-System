@@ -1,7 +1,9 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h3>OHMS Patient</h3>
-<table class="table">
+
+<table id="table" data-height="100" data-virtual-scroll="true" class="table table-bordered table-hover" style="margin-top: -9.5px;">
+
     <thead>
         <tr>
             <th>Patient ID</th>

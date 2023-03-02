@@ -90,7 +90,6 @@ public class AdminService {
                 appointment.setPatientId(rs.getString("patientId"));
 
                 //System.out.println("patient id= " + appointment.getPatientId());
-
                 appointment.setPatientFirstName(rs.getString("patientFirstName"));
                 //System.out.println("patient id= " + appointment.getPatientFirstName());
                 appointment.setPatientLastName(rs.getString("patientLastName"));
@@ -155,7 +154,7 @@ public class AdminService {
             preparedStatement.setString(3, adminDoctor.getGender() + "%");
             preparedStatement.setString(4, adminDoctor.getDepartmentId() + "%");
             preparedStatement.setString(5, adminDoctor.getDoctorId() + "%");
-            System.out.println("sql search doctor = "+preparedStatement);
+            System.out.println("sql search doctor = " + preparedStatement);
 
 //            System.out.println("sql"+preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
@@ -180,6 +179,7 @@ public class AdminService {
         }
         return doctorList;
     }
+
     //search patient
     public static ArrayList doSearchPatient(Admin adminPatient) {
 
@@ -193,9 +193,9 @@ public class AdminService {
             preparedStatement.setString(1, adminPatient.getFirstName() + "%");
             preparedStatement.setString(2, adminPatient.getLastName() + "%");
             preparedStatement.setString(3, adminPatient.getGender() + "%");
-            preparedStatement.setString(4, adminPatient.getAppointmentId()+ "%");
+            preparedStatement.setString(4, adminPatient.getAppointmentId() + "%");
             preparedStatement.setString(5, adminPatient.getPatientId() + "%");
-            System.out.println("sql search doctor = "+preparedStatement);
+            System.out.println("sql search doctor = " + preparedStatement);
 
 //            System.out.println("sql"+preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
@@ -211,9 +211,8 @@ public class AdminService {
                 patient.setGender(rs.getString("gender"));
                 patient.setAddress(rs.getString("address"));
                 patient.setDateOfRegisteration(rs.getString("dateOfRegisteration"));
-                
-                //code to set doctor parameters
 
+                //code to set doctor parameters
                 patientList.add(patient);
             }
 
@@ -301,7 +300,7 @@ public class AdminService {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 totalBookings = rs.getString("bookings");
-            }else{
+            } else {
                 totalBookings = "0";
             }
 
@@ -426,26 +425,109 @@ public class AdminService {
         return departmentList;
     }
 // check email
+
     public static boolean doCheckEmail(String emailAddress) {
 
-        boolean result = false;
+        boolean result = true;
         try {
             Connection con = JDBCConnectionManager.getConnection();
             String sql = "SELECT * FROM users where emailAddress = ?;";
 
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, emailAddress);
 
-            
             ResultSet rs = ps.executeQuery();
             
-            if(rs.next()){
-                if(rs.wasNull()){
-                    result = true;
-                }
+            if (!rs.next()) {
+                    result = false;
+                    System.out.println("result of query = "+result);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return result;
+    }
+
+    public static boolean doAddDoctorInDoctors(Admin doctor) {
+
+        boolean result = false;
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "INSERT INTO doctors (doctorFirstName,doctorLastName,departmentId,emailAddress) VALUES (?, ?, ?,?);";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, doctor.getFirstName());
+            ps.setString(2, doctor.getLastName());
+            ps.setString(3, doctor.getDepartmentId());
+            ps.setString(4, doctor.getEmailAddress());
+
+            int res = ps.executeUpdate();
+
+            if (res == 1) {
+                result = true;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+    public static boolean doAddDoctorInUsers(Admin doctor) {
+
+        boolean result = false;
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "INSERT INTO users (emailAddress,firstName,lastName,password,dateOfRegisteration,gender,roleId,occupation,address,doctorId,age) VALUES (?,?,?,?,curdate(),?,?,?,?,?,?);";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, doctor.getEmailAddress());
+            ps.setString(2, doctor.getFirstName());
+            ps.setString(3, doctor.getLastName());
+            ps.setString(4, doctor.getPassword());
+           // ps.setString(5, "");
+            ps.setString(5, doctor.getGender());
+            ps.setString(6, doctor.getRoleId());
+            ps.setString(7, doctor.getOccupation());
+            ps.setString(8, doctor.getAddress());
+            ps.setString(9, doctor.getDoctorId());
+            ps.setString(10, doctor.getAge());
+           
+
+            int res = ps.executeUpdate();
+
+            if (res == 1) {
+                result = true;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+     public static String doSearchDoctorUsingEmail(String emailAddress) {
+
+        String doctorId = "";
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "select * from doctors where emailAddress = ?";
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+            preparedStatement.setString(1, emailAddress);
+          
+            System.out.println("sql search doctor = " + preparedStatement);
+
+//            System.out.println("sql"+preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+//            System.out.println("size of rs="+ rs.getFetchSize());
+
+            while (rs.next()) {
+                
+                doctorId = rs.getString("doctorId");
+                
+            }
+
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+        }
+        return doctorId;
     }
 }
