@@ -130,7 +130,7 @@
                                 <a href="adminSearch.jsp" class="nav-item nav-link">Search</a>
 
                                 <a href="ViewAppointment" class="nav-item nav-link">View Appointments</a>
-                                <a href="adminAddDoctor.jsp" class="nav-item nav-link">Add Doctor/Admin</a>
+                                <a href="DoctorRegisteration" class="nav-item nav-link">Add Doctor/Admin</a>
                                 <a href="Logout" class="nav-item nav-link">Logout</a>
 
                             </c:if>

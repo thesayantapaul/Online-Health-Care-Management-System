@@ -46,16 +46,16 @@
                 //event.preventDefault();
                 //alert(url);
                 var xmlhttp = new XMLHttpRequest();
+                xmlhttp.responseType = 'text';
                 xmlhttp.onload = function ()
                 {
                     //document.getElementById("viewSearchResult").innerHTML = xmlhttp.responseText;
                     if (xmlhttp.status === 200) {
-                        alert("successfully added");
+                        var data = xmlhttp.response;
+                        alert(data);
                         document.getElementById("registerformId").reset();
                     } else {
-                        // error
-                        alert("Bhai kar kya rha hai tu ! Email already exist hai bola tha na");
-                        document.getElementById("registerformId").reset();
+
                         console.error('Request failed.  Returned status of ' + xmlhttp.status);
                     }
 
@@ -87,10 +87,8 @@
 
                         alert(data);
 
-                        // display the data in a div element
-                        //document.getElementById('data').innerHTML = data;
                     } else {
-                        // error
+
                         console.error('Request failed.  Returned status of ' + xhr.status);
                     }
                 };
@@ -172,8 +170,8 @@
                                         </div>
                                         <div class="form-group last mb-3">
 
-                                            <label class="gender" for="inlineFormCustomSelectPref" id="gender">Choose Gender</label>
-                                            <select  name="gender" class="form-control" id="inlineFormCustomSelectPref" required>
+                                            <label class="gender" for="gender" id="gender">Choose Gender</label>
+                                            <select  name="gender" class="form-control" id="gender" required>
                                                 <option selected>Select Gender</option>
                                                 <option value="male">Male</option>
                                                 <option value="female">Female</option>
@@ -182,7 +180,7 @@
                                         </div>
                                         <div class="form-group last mb-3">
                                             <label class="departmentName" for="inlineFormCustomSelectPref" id="departmentName">Department Name</label>
-                                            <select  name="departmentId" class="form-control" id="inlineFormCustomSelectPref">
+                                            <select  name="departmentId" class="form-control" id="departmentName">
 
                                                 <c:forEach items="${DeptList}" var="department">
                                                     <option value="${department.departmentId}" <c:if test="${appointment.departmentId==department.departmentId}">selected</c:if>>${department.departmentName}</option>
@@ -206,11 +204,6 @@
                 </div>
             </div>
         </div>
-
-
-
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
     </body>

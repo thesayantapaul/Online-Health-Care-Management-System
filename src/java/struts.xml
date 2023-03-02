@@ -35,10 +35,15 @@
            <result name="SUCCESS">checkEmail.jsp</result>
         </action>
         
+        <action name="DoctorRegisteration" class="com.exavalu.models.Admin" method="showAdminAddDoctor">
+            <result name="SUCCESS">adminAddDoctor.jsp</result>
+            
+        </action>
         <!--add doctor-->
         <action name="RegisterDoctor" class="com.exavalu.models.Admin" method="doAddDoctor">
            
             <result name="SUCCESS">adminSearch.jsp</result>
+             <result name="ALERT">checkEmail.jsp</result>
             <!--<result name="FAILURE">adminAddDoctor.jsp</result>-->
         </action>
     

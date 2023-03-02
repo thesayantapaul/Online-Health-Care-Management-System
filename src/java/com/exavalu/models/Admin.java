@@ -275,10 +275,13 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
 
         return result;
     }
-   
+   public String showAdminAddDoctor(){
+       String result = "SUCCESS";
+       return result;
+   }
 
     public String doAddDoctor() {
-        String result = "FAILURE";
+        String result = "ALERT";
 
         boolean success1 = AdminService.doAddDoctorInDoctors(this);
 
@@ -288,8 +291,12 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
             
             boolean success2 = AdminService.doAddDoctorInUsers(this);
             if (success2) {
-                result = "SUCCESS";
+                sessionMap.put("CheckEmail","Successfully Registered!");
+                result = "ALERT";
             }
+        }else{
+            sessionMap.put("CheckEmail","Bhai kar kya rha hai tu ! Email already exist hai bola tha na");
+            result = "ALERT";
         }
         return result;
     }
