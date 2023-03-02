@@ -40,7 +40,7 @@ public class AppointmentService {
             ps.setString(1, appointment.getAppointmentDate());
             ps.setString(2, appointment.getDoctorId());
             ps.setString(3, appointment.getDepartmentId());
-            ps.setString(4, "2");
+            ps.setString(4, "1");
             ps.setString(5, appointment.getPatientId());
             ps.setString(6, appointment.getUserId());
 

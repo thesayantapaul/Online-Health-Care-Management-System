@@ -376,74 +376,49 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                     sessionMap.put("HigherOrLowerTextRevenue", "Higher than yesterday");
 
                 }
-                ArrayList doctortodayAppointmentList=DoctorService.getInstance().doViewtodayAppointments("0",this.doctorId);
-                sessionMap.put("DoctorAppointmentListDashBoard",doctortodayAppointmentList);
-                sessionMap.put("doctorId",this.doctorId);
+                ArrayList doctortodayAppointmentList = DoctorService.getInstance().doViewtodayAppointments("0", this.doctorId);
+                sessionMap.put("DoctorAppointmentListDashBoard", doctortodayAppointmentList);
+                sessionMap.put("doctorId", this.doctorId);
                 System.out.println(sessionMap);
                 result = "DOCTORINDEX";
             }
             if (this.roleId.equals("3")) {
                 ArrayList deptList = DepartmentService.getInstance().getAllDepartments();
                 sessionMap.put("DeptList", deptList);
+                
+//                booking 
                 String todayBooking = AdminService.doViewBookings("0");
+                sessionMap.put("TodayBooking", todayBooking);
                 String day1Booking = AdminService.doViewBookings("-1");
+                sessionMap.put("Day1Booking", day1Booking);
 
                 //graph data population booking or appointments------------------
                 String day2Booking = AdminService.doViewBookings("-2");
+                sessionMap.put("Day2Booking", day2Booking);
                 String day3Booking = AdminService.doViewBookings("-3");
+                sessionMap.put("Day3Booking", day3Booking);
                 String day4Booking = AdminService.doViewBookings("-4");
+                sessionMap.put("Day4Booking", day4Booking);
                 String day5Booking = AdminService.doViewBookings("-5");
+                sessionMap.put("Day5Booking", day5Booking);
                 String day6Booking = AdminService.doViewBookings("-6");
-
-                if (day2Booking != null) {
-                    sessionMap.put("Day2Booking", day2Booking);
-                } else {
-                    sessionMap.put("Day2Booking", "0");
-                }
-                if (day3Booking != null) {
-                    sessionMap.put("Day3Booking", day3Booking);
-                } else {
-                    sessionMap.put("Day3Booking", "0");
-                }
-                if (day4Booking != null) {
-                    sessionMap.put("Day4Booking", day4Booking);
-                } else {
-                    sessionMap.put("Day4Booking", "0");
-                }
-                if (day5Booking != null) {
-                    sessionMap.put("Day5Booking", day5Booking);
-                } else {
-                    sessionMap.put("Day5Booking", "0");
-                }
-                if (day6Booking != null) {
-                    sessionMap.put("Day6Booking", day6Booking);
-                } else {
-                    sessionMap.put("Day6Booking", "0");
-                }
+                sessionMap.put("Day6Booking", day6Booking);
 
                 //compare booking to show in dashboard
-                if (todayBooking != null && day1Booking != null) {
+                if (Integer.parseInt(todayBooking) >= Integer.parseInt(day1Booking)) {
 
-                    if (Integer.parseInt(todayBooking) >= Integer.parseInt(day1Booking)) {
-
-                        sessionMap.put("HigherOrLowerText", "Higher than yesterday");
-                        sessionMap.put("TodayBooking", todayBooking);
-                        sessionMap.put("IncreaseBooking", "increase");
-                        sessionMap.put("DecreaseBooking", null);
-
-                    } else {
-                        sessionMap.put("HigherOrLowerText", "Lower than yesterday");
-                        sessionMap.put("TodayBooking", todayBooking);
-                        sessionMap.put("DecreaseBooking", "decrease");
-                        sessionMap.put("IncreaseBooking", null);
-                    }
-                    sessionMap.put("Day1Booking", day1Booking);
-                } else {
                     sessionMap.put("HigherOrLowerText", "Higher than yesterday");
-                    sessionMap.put("TodayBooking", "0");
-                    sessionMap.put("Day1Booking", day1Booking);
-                }
 
+                    sessionMap.put("IncreaseBooking", "increase");
+                    sessionMap.put("DecreaseBooking", null);
+
+                } else {
+                    sessionMap.put("HigherOrLowerText", "Lower than yesterday");
+
+                    sessionMap.put("DecreaseBooking", "decrease");
+                    sessionMap.put("IncreaseBooking", null);
+                }
+// revenue---------------------------------------------------------------
                 String totalTodayRevenue = AdminService.doViewTotalRevenue("0");
                 String day1Revenue = AdminService.doViewTotalRevenue("-1");
 
@@ -494,24 +469,33 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 //compare revenue
                 if (totalTodayRevenue != null && day1Revenue != null) {
                     if (Integer.parseInt(totalTodayRevenue) >= Integer.parseInt(day1Revenue)) {
+
                         sessionMap.put("HigherOrLowerTextRevenue", "Higher than yesterday");
                         sessionMap.put("IncreaseRevenue", "increase");
                         sessionMap.put("DecreaseRevenue", null);
 
                     } else {
-                        sessionMap.put("TotalRevenue", totalTodayRevenue);
-                        sessionMap.put("HigherOrLowerTextRevenue", "Lower than yesterday");
-                        sessionMap.put("DecreaseRevenue", "decrease");
                         sessionMap.put("IncreaseRevenue", null);
+                        sessionMap.put("DecreaseRevenue", "decrease");
+                        sessionMap.put("HigherOrLowerTextRevenue", "Lower than yesterday");
+
                     }
 
                 } else {
-
-                    sessionMap.put("HigherOrLowerTextRevenue", "Higher than yesterday");
+                    if (totalTodayRevenue != null) {
+                        sessionMap.put("IncreaseRevenue", "increase");
+                        sessionMap.put("DecreaseRevenue", null);
+                        sessionMap.put("HigherOrLowerTextRevenue", "Higher than yesterday");
+                    } else {
+                        sessionMap.put("IncreaseRevenue", null);
+                        sessionMap.put("DecreaseRevenue", "decrease");
+                        sessionMap.put("HigherOrLowerTextRevenue", "Lower than yesterday");
+                    }
+                    sessionMap.put("TotalRevenue", "0");
 
                 }
-                //elements for xaxis in dashboard graph -----------------------------------
 
+                //elements for xaxis in dashboard graph -----------------------------------
                 String todayDateElement = AdminService.elementsForXaxis("0");
                 sessionMap.put("CurrentDay", todayDateElement);
                 String day1 = AdminService.elementsForXaxis("-1");

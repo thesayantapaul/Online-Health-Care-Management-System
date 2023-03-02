@@ -49,7 +49,6 @@
         }
 
 
-
     </script>
 
     <body>
@@ -99,8 +98,8 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto py-0">
                             <c:if test="${login_check==null}">
-                                <a href="#" class="nav-item nav-link active">Home</a>
-                                <a href="#Service" class="nav-item nav-link">Services</a>
+                                <a href="#" class="nav-item nav-link" id="menuHome">Home</a>
+                                <a href="#Service"  class="nav-item nav-link" id="serviceId">Services</a>
                                 <a href="#bookAppointment" class="nav-item nav-link">Book Service</a>
                                 <a href="#Explore" class="nav-item nav-link">Explore</a>
                                 <a href="#Testimonial" class="nav-item nav-link">Testimonial</a>
@@ -131,7 +130,7 @@
                                 <a href="adminSearch.jsp" class="nav-item nav-link">Search</a>
 
                                 <a href="ViewAppointment" class="nav-item nav-link">View Appointments</a>
-                                <a href="adminAddDoctor.jsp" class="nav-item nav-link">Add Doctor</a>
+                                <a href="adminAddDoctor.jsp" class="nav-item nav-link">Add Doctor/Admin</a>
                                 <a href="Logout" class="nav-item nav-link">Logout</a>
 
                             </c:if>

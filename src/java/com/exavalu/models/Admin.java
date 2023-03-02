@@ -275,32 +275,100 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
 
         return result;
     }
+   
+
+    public String doAddDoctor() {
+        String result = "FAILURE";
+
+        boolean success1 = AdminService.doAddDoctorInDoctors(this);
+
+        if (success1) {
+
+            this.doctorId = AdminService.doSearchDoctorUsingEmail(this.emailAddress);
+            
+            boolean success2 = AdminService.doAddDoctorInUsers(this);
+            if (success2) {
+                result = "SUCCESS";
+            }
+        }
+        return result;
+    }
 
     public String doCheckEmail() {
-        String result = "EMAILDONTEXIST";
+        String result = "FAILURE";
+        System.out.println("email to verify = " + this.emailAddress);
 
         boolean success = AdminService.doCheckEmail(this.emailAddress);
-        if(success){
-            result = "EMAILEXIST";
-            sessionMap.put("emailExist",true);
-             
-            return result;
+        if (success) {
+            String myString = "email already exist!";
+            System.out.println(myString);
+             sessionMap.put("CheckEmail",myString);
+            result = "SUCCESS";
+            //sessionMap.put("emailExist",true);
+
+        }else{
+            sessionMap.put("CheckEmail","Entered enail is available continue!");
+            result = "SUCCESS";
         }
-         sessionMap.put("emailExist",false);
-       
+        //sessionMap.put("emailExist",false);
 
         return result;
     }
+    
     private String messageToPatient;
     private String appointmentId;
     private String firstName;
     private String lastName;
-    private String gender;
+    private String gender, age;
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
     private String departmentName;
     private String doctorId;
     private String departmentId;
     private String patientId;
     private String emailAddress;
+    private String password;
+    private String roleId;
+    private String occupation;
+    private String address;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getEmailAddress() {
         return emailAddress;
