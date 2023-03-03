@@ -103,7 +103,7 @@ public class PatientService {
         }
     }
 
-    public boolean insertPatient(Appointment appointment,String userId) {
+    public boolean insertPatient(Appointment appointment, String userId) {
         boolean result = false;
 
         String sql = "INSERT INTO patients (patientFirstName,patientLastName, age, gender,userId) VALUES (?, ?, ?, ?,?);";
@@ -116,7 +116,6 @@ public class PatientService {
             preparedStatement.setString(3, appointment.getAge());
             preparedStatement.setString(4, appointment.getGender());
             preparedStatement.setString(5, userId);
-
 
             System.out.println(preparedStatement);
             int res = preparedStatement.executeUpdate();
@@ -135,7 +134,7 @@ public class PatientService {
 
     }
 
-    public Appointment getPatient(Appointment appointment,String userId) {
+    public Appointment getPatient(Appointment appointment, String userId) {
         String sql = "select * from patients where patientFirstName=? and patientLastName=? and gender=? and age=? and userId=?";
         try {
             Connection con = JDBCConnectionManager.getConnection();
@@ -192,6 +191,43 @@ public class PatientService {
 
         return result;
 
+    }
+
+    public Appointment getPatientDetail(String appointmentId) {
+        Appointment users = new Appointment();
+        String sql = "select * from appointments right join patients on patients.patientId=appointments.patientId left join users on users.userId=patients.userId where appointments.appointmentId=?";
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, appointmentId);
+
+            System.out.println(preparedStatement);
+            ResultSet res = preparedStatement.executeQuery();
+            System.out.println(res);
+
+            if (res.next()) {
+                users.setPatientId(res.getString("patientId"));
+                users.setUserId(res.getString("userId"));
+                users.setPatientFirstName(res.getString("patientFirstName"));
+                users.setPatientLastName(res.getString("patientLastName"));
+                users.setAge(res.getString("age"));
+                users.setGender(res.getString("gender"));
+                users.setSymptoms(res.getString("symptoms"));
+                users.setDoctorId(res.getString("doctorId"));
+                users.setAppointmentId(res.getString("appointmentId"));
+                users.setAppointmentDate(res.getString("appointmentDate"));
+                users.setEmailAddress(res.getString("emailAddress"));
+
+                System.out.println(users.getPatientId());
+            }
+
+        } catch (SQLException ex) {
+            int e = ex.getErrorCode();
+            log.error(LocalDateTime.now() + "Sql Error :" + e + " Duplicate Email Address");
+            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+        }
+        return users;
     }
 
 }

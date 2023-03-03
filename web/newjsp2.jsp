@@ -41,7 +41,7 @@
         </script>
         <script type="text/javascript">
             (function () {
-                emailjs.init("f_3r8uuVACaKw_woR");
+                emailjs.init("dt5YiV1DExm6r8vBY");
             })();
         </script>
 
@@ -79,7 +79,7 @@
                                         </td>
                                         <td >
                                             <input name="appointmentId" value="${PatientDetail.appointmentId}" hidden>
-                                            <input name="emailAddress" id="emailAddress" value="${PatientDetail.emailAddress}" hidden >
+                                            <input name="emailAddress" id="emailAddress" value="${PatientDetail.emailAddress}" >
                                             <input name="patientId"  value="${PatientDetail.patientId}" hidden>
                                             <input name="doctorId" value="${PatientDetail.doctorId}" hidden>
                                             <input name="date" value="${PatientDetail.appointmentDate}" hidden>
@@ -126,7 +126,7 @@
                                                 <div>
 
                                                     <label>Medicines:</label>
-                                                    <select name="medicine" id="medicine" class="inner-item" style="width:160px" required>
+                                                    <select name="medicine" id="medicine" class="inner-item" required>
                                                         <option value="" disabled selected>Select a medicine</option>
                                                         <option value="Paracetamol">Paracetamol </option>
                                                         <option value="Antacids ">Antacids</option>
@@ -136,7 +136,7 @@
                                                         </c:forEach>
 
                                                     </select>
-                                                    <br>
+
                                                     <label for="timing" >Timings:</label>
                                                     <!-- <input type="text" id="timing" min="1" required /> -->
                                                     <select name="dosage" type="text" id="timing" min="1" class="inner-item" required>
@@ -148,7 +148,7 @@
                                                         <option value="0+0+1">1+1+1</option>
                                                         <option value="1+1+1+1">1+1+1+1</option>
                                                     </select>
-                                                    <br>
+
 
 
                                                     <label  for="timetotake">Time to Take:</label>
@@ -199,7 +199,7 @@
             div.setAttribute("id", "medicine_" + counter);
             textbox = '<div class="wd100">' +
                     ' <label>Medicines: </label>' +
-                    '<select name="medicine" id="medicine" class="inner-item" style="width:160px" required>' +
+                    '<select name="medicine" id="medicine" class="inner-item" required>' +
                     ' <option value="" disabled selected>Select a medicine</option>' +
                     '<option value="Paracetamol">Paracetamol </option>' +
                     '<option value="Antacids ">Antacids</option>' +
@@ -207,7 +207,7 @@
                     '<c:forEach items="${MedList}" var="med" >' +
                     '   <option value="${med}">${med}</option>' +
                     '</c:forEach>' +
-                    '</select>' +'<br>'+
+                    '</select>' +
                     '   <label for="timing">Timings: </label>' +
                     '  <select name="dosage" type="text" id="timing" class="inner-item" min="1" required>' +
                     '     <option value="" disabled selected>Select timings</option>' +
@@ -217,7 +217,7 @@
                     ' <option value="1+0+0">1+1+1</option>' +
                     '<option value="0+0+1">1+1+1</option>' +
                     '<option value="1+1+1+1">1+1+1+1</option>' +
-                    '</select>' +'<br>'+
+                    '</select>' +
                     '   <label  for="timetotake">Time to Take: </label>' +
                     '  <select name="time" type="text" id="timetotake" class="inner-item" required>' +
                     '     <option value="" disabled selected>Select time to take</option>' +
@@ -249,7 +249,7 @@
                     var a = input1[i];
                     med = med + ',' + a.value;
                 }
-//                alert(med);
+                alert(med);
                 for (var i = 0; i < input2.length; i++) {
                     var a = input2[i];
                     dos = dos + ',' + a.value;
@@ -258,13 +258,13 @@
                     var a = input3[i];
                     time = time + ',' + a.value;
                 }
-//                alert(document.getElementById('patientFirstName').value);
-//                alert(document.getElementById('symptoms').value);
-//                alert(document.getElementById('advice').value);
-//                alert(document.getElementById('emailAddress').value);
-//                alert(med);
-//                alert(dos);
-//                alert(time);
+                alert(document.getElementById('patientFirstName').value);
+                alert(document.getElementById('symptoms').value);
+                alert(document.getElementById('advice').value);
+                alert(document.getElementById('emailAddress').value);
+                alert(med);
+                alert(dos);
+                alert(time);
                 var params = {
 
                     to_name: document.getElementById('patientFirstName').value,
@@ -277,15 +277,15 @@
                     dosage: dos,
                     time: time
                 }
-//                alert(params);
-                emailjs.send("service_dnuk9zz", "template_yjzgojn", params);
+                alert(params);
+                emailjs.send("service_k94mghk", "template_ynvcamq", params);
 
 
                 $.each(x, function (i, field) {
                     if (field.name === "medicine")
                     {
-//                        alert("hi");
-//                        alert(field.value);
+                        alert("hi");
+                        alert(field.value);
                         field.value = med;
                     } else if (field.name === "dosage")
                     {

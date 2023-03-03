@@ -1,4 +1,3 @@
-
 package com.exavalu.services;
 
 import com.exavalu.models.Appointment;
@@ -35,7 +34,7 @@ public class AppointmentService {
 
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "INSERT INTO appointments (appointmentDate, doctorId, departmentId, statusId,patientId,userId,bookingDate) VALUES (?, ?, ?, ?,?,?,curdate());";
+            String sql = "INSERT INTO appointments (appointmentDate, doctorId, departmentId, statusId,patientId,userId,symptoms) VALUES (?, ?, ?, ?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, appointment.getAppointmentDate());
             ps.setString(2, appointment.getDoctorId());
@@ -43,6 +42,7 @@ public class AppointmentService {
             ps.setString(4, "1");
             ps.setString(5, appointment.getPatientId());
             ps.setString(6, appointment.getUserId());
+            ps.setString(7, appointment.getSymptoms());
 
             System.out.println("LoginService :: " + ps);
 
@@ -85,7 +85,7 @@ public class AppointmentService {
         } catch (SQLException ex) {
             int e = ex.getErrorCode();
             log.error(LocalDateTime.now() + "Sql Error :" + e);
-            System.out.println(LocalDateTime.now() + "error code:" + e );
+            System.out.println(LocalDateTime.now() + "error code:" + e);
         }
 
         return appointment;

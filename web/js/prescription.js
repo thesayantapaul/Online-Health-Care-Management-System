@@ -59,24 +59,80 @@ addMedicineBtn.addEventListener("click", () => {
   medicineCount++;
 });
 
+  $(document).ready(function () {
+            $("button").click(function () {
+                var x = $("form").serializeArray();
+                var input1 = document.getElementsByName('medicine');
+                var input2 = document.getElementsByName('dosage');
+                var input3 = document.getElementsByName('time');
+                var element = document.getElementById('container');
+//                var opt =
+//                        {
+//                            margin: 1,
+//                            filename: 'pageContent_' + js.AutoCode() + '.pdf',
+//                            image: {type: 'jpeg', quality: 0.98},
+//                            html2canvas: {scale: 2},
+//                            jsPDF: {unit: 'in', format: 'letter', orientation: 'portrait'}
+//                        };
+                // New Promise-based usage:
+//                html2pdf().set(opt).from(element).save();
+                var med = "";
+                var dos = "";
+                var time = "";
+                for (var i = 0; i < input1.length; i++) {
+                    var a = input1[i];
+                    med = med + ',' + a.value;
+                }
+                alert(med);
+                for (var i = 0; i < input2.length; i++) {
+                    var a = input2[i];
+                    dos = dos + ',' + a.value;
+                }
+                for (var i = 0; i < input3.length; i++) {
+                    var a = input3[i];
+                    time = time + ',' + a.value;
+                }
+                alert(x);
+//                        x[2]=hobs;
+//                        alert(x[2].value);
+                
+                $.each(x, function (i, field) {
+                    if (field.name === "medicine")
+                    {
+                        alert("hi");
+                        alert(field.value);
+                        field.value = med;
+                    } else if (field.name === "dosage")
+                    {
+                        field.value = dos;
+                    } else if (field.name === "time")
+                    {
+                        field.value = time;
+                    }
+                    $("#d").append(field.name + ":"
+                            + field.value + " ");
+                });
+            });
+        });
+
 // Handle form submit
-prescriptionForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  // Get medicines
-  const medicines = [];
-  const medicineEls = document.querySelectorAll(".medicine");
-  medicineEls.forEach((medicineEl) => {
-    const medicineName = medicineEl.querySelector(".medicine-name").innerText;
-    const timing = medicineEl
-    const timetotake = medicineEl
-      .querySelector("div:nth-child(2)")
-      .innerText.replace("Timings: ", "TimeToTake", "");
-    medicines.push({ name: medicineName, timing: timing, timetotake: timetotake });
-  });
-
-  // Reset form
-  prescriptionForm.reset();
-  medicinesContainer.innerHTML = "";
-  medicineCount = 0;
-});
+//prescriptionForm.addEventListener("submit", (e) => {
+//  e.preventDefault();
+//
+//  // Get medicines
+//  const medicines = [];
+//  const medicineEls = document.querySelectorAll(".medicine");
+//  medicineEls.forEach((medicineEl) => {
+//    const medicineName = medicineEl.querySelector(".medicine-name").innerText;
+//    const timing = medicineEl
+//    const timetotake = medicineEl
+//      .querySelector("div:nth-child(2)")
+//      .innerText.replace("Timings: ", "TimeToTake", "");
+//    medicines.push({ name: medicineName, timing: timing, timetotake: timetotake });
+//  });
+//
+//  // Reset form
+//  prescriptionForm.reset();
+//  medicinesContainer.innerHTML = "";
+//  medicineCount = 0;
+//});

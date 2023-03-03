@@ -112,6 +112,14 @@
             <result name="SUCCESS">patientIndex.jsp</result>
             <result name="FAILURE">login.jsp</result>
         </action>
+        <action name="Prescribe" class="com.exavalu.models.Appointment" method="doPrescribe">
+            <result name="SUCCESS">prescribe.jsp</result>
+            <result name="FAILURE">login.jsp</result>
+        </action>
+        <action name="GeneratePrescription" class="com.exavalu.models.Prescription" method="doPrescribe">
+            <result name="SUCCESS">doctorIndex.jsp</result>
+            <result name="FAILURE">login.jsp</result>
+        </action>
         
         
         
