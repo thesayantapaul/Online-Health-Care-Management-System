@@ -10,6 +10,7 @@ import com.exavalu.services.DepartmentService;
 import com.exavalu.services.DoctorService;
 import com.exavalu.services.LoginService;
 import com.exavalu.services.PatientService;
+import com.exavalu.services.PrescriptionService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
@@ -53,6 +54,15 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     private String family_name;
     private String given_name;
     private String picture;
+    private String age;
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
 
     public String getSub() {
         return sub;
@@ -379,13 +389,16 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 ArrayList doctortodayAppointmentList = DoctorService.getInstance().doViewtodayAppointments("0", this.doctorId);
                 sessionMap.put("DoctorAppointmentListDashBoard", doctortodayAppointmentList);
                 sessionMap.put("doctorId", this.doctorId);
+                ArrayList prescribedList = PrescriptionService.getInstance().getPrescription(this.doctorId);
+                sessionMap.put("PreviousPrescription", prescribedList);
+
                 System.out.println(sessionMap);
                 result = "DOCTORINDEX";
             }
             if (this.roleId.equals("3")) {
                 ArrayList deptList = DepartmentService.getInstance().getAllDepartments();
                 sessionMap.put("DeptList", deptList);
-                
+
 //                booking 
                 String todayBooking = AdminService.doViewBookings("0");
                 sessionMap.put("TodayBooking", todayBooking);

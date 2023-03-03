@@ -169,7 +169,7 @@ public class DoctorService {
     }
 
     public ArrayList doViewtodayAppointments(String interval, String doctorId) {
-        
+
         ArrayList appointmentList = new ArrayList();
         try {
 
@@ -189,7 +189,7 @@ public class DoctorService {
 
                 appointment.setAppointmentId(rs.getString("appointmentId"));
                 appointment.setAppointmentDate(rs.getString("appointmentDate"));
-
+                appointment.setPatientId(rs.getString("patientId"));
                 appointment.setPatientFirstName(rs.getString("patientFirstName"));
                 appointment.setPatientLastName(rs.getString("patientLastName"));
                 appointment.setGender(rs.getString("gender"));
@@ -199,9 +199,9 @@ public class DoctorService {
                 appointment.setDoctorLastName(rs.getString("doctorLastName"));
                 appointment.setStatusId(rs.getString("statusId"));
                 appointment.setStatus(rs.getString("statusName"));
-             
-                //appointment.setSymptoms(rs.getString("symptoms"));
+                appointment.setSymptoms(rs.getString("symptoms"));
 
+                //appointment.setSymptoms(rs.getString("symptoms"));
                 appointmentList.add(appointment);
 
             }
@@ -213,6 +213,36 @@ public class DoctorService {
         }
 
         return appointmentList;
+    }
+
+    public Doctors getDoctor(String doctorId) {
+
+        Doctors doctor = new Doctors();
+        try {
+
+            Connection con = JDBCConnectionManager.getConnection();
+
+            String sql = "SELECT * FROM doctors right join departments on departments.departmentId=doctors.departmentId where doctorId=?";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, doctorId);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                doctor.setDoctorFirstName(rs.getString("doctorFirstName"));
+                doctor.setDoctorLastName(rs.getString("doctorLastName"));
+                doctor.setDepartmentName(rs.getString("departmentName"));
+
+            }
+
+        } catch (SQLException ex) {
+            int e = ex.getErrorCode();
+            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+            System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+        }
+
+        return doctor;
     }
 
 }

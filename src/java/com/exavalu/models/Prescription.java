@@ -4,9 +4,11 @@
  */
 package com.exavalu.models;
 
+import com.exavalu.services.PrescriptionService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Map;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -19,7 +21,7 @@ import org.apache.struts2.interceptor.SessionAware;
  */
 public class Prescription extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
 
-     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
+    private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
 
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
 
@@ -38,6 +40,87 @@ public class Prescription extends ActionSupport implements ApplicationAware, Ses
     private String time;
     private String tests;
     private String advice;
+    private String date;
+    private String appointmentId;
+    private String patientId;
+    private String doctorId;
+    private String status;
+    private String symptoms;
+    private String patientFirstName;
+    private String patientLastName;
+    private String emailAddress;
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public String getPatientFirstName() {
+        return patientFirstName;
+    }
+
+    public void setPatientFirstName(String patientFirstName) {
+        this.patientFirstName = patientFirstName;
+    }
+
+    public String getPatientLastName() {
+        return patientLastName;
+    }
+
+    public void setPatientLastName(String patientLastName) {
+        this.patientLastName = patientLastName;
+    }
+
+    public String getSymptoms() {
+        return symptoms;
+    }
+
+    public void setSymptoms(String symptoms) {
+        this.symptoms = symptoms;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(String appointmentId) {
+        this.appointmentId = appointmentId;
+    }
+
+    public String getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    public String getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getMedicine() {
         return medicine;
@@ -78,20 +161,30 @@ public class Prescription extends ActionSupport implements ApplicationAware, Ses
     public void setAdvice(String advice) {
         this.advice = advice;
     }
-    
-    public String doPrescribe()
-    {
-        String result = "SUCCESS";
-        System.out.println(this.advice);
+
+    public String doPrescribe() {
+        String result = "FALIURE";
+        System.out.println("advice" + this.advice);
         System.out.println(this.tests);
 
         System.out.println(this.time);
         System.out.println(this.dosage);
 
         System.out.println(this.medicine);
-        
+        System.out.println(this.doctorId);
+        System.out.println(this.appointmentId);
+        System.out.println(this.patientId);
+        System.out.println(this.date);
+
+        boolean success = PrescriptionService.getInstance().addPrescription(this);
+        ArrayList prescribedList = PrescriptionService.getInstance().getPrescription(this.doctorId);
+        if (success) {
+
+            result = "SUCCESS";
+            sessionMap.put("PreviousPrescription", prescribedList);
+        }
+
         return result;
     }
 
-    
 }

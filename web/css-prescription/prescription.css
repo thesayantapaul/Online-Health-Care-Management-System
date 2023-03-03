@@ -4,7 +4,7 @@ body {
 
 .wrapper {
     height: 100vh;
-    width: 100vw;
+    width: 90vw;
     display: flex;
     flex-direction: column;
     background: red;
@@ -20,13 +20,13 @@ body {
 
 .prescription {
     width: 720px;
-    height: 960px;
+/*    height: 960px;*/
     margin: 0 auto;
     border: 1px solid lightgrey;
 }
 
 .prescription tr>td {
-    padding: 15px;
+    padding: 10px;
 }
 
 .header {
