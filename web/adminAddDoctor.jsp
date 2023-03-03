@@ -27,10 +27,23 @@
         <script src="//geodata.solutions/includes/countrystatecity.js"></script>
 
         <title>OHMS Registration</title>
+        <!--send email to doctor who registered by admin with login credentials-->
+        <script src="js/adminAddDoctor.js"></script>
 
+        <script type="text/javascript"
+                src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+        </script>
+        <script type="text/javascript">
+            (function () {
+                emailjs.init("1Sah0vRJNKAddwquU");
+            })();
+        </script>
+
+        <!----------------------------------------------------------------------------------------------->
         <script>
             function sendRegisterFormInfo()
             {
+
                 var email = document.register.emailAddress.value;
                 var firstName = document.register.firstName.value;
                 var occupation = document.register.occupation.value;
@@ -41,8 +54,9 @@
                 var gender = document.register.gender.value;
                 var departmentId = document.register.departmentId.value;
                 var address = document.register.address.value;
+                var contactEmail = document.register.contactEmail.value;
 
-                var url = "RegisterDoctor?emailAddress=" + email + "&firstName=" + firstName + "&lastName=" + lastName + "&departmentId=" + departmentId + "&gender=" + gender + "&address=" + address + "&age=" + age + "&roleId=" + roleId + "&password=" + password + "&occupation=" + occupation;
+                var url = "RegisterDoctor?emailAddress=" + email + "&firstName=" + firstName + "&lastName=" + lastName + "&departmentId=" + departmentId + "&gender=" + gender + "&address=" + address + "&age=" + age + "&roleId=" + roleId + "&password=" + password + "&occupation=" + occupation + "&contactEmail=" + contactEmail;
                 //event.preventDefault();
                 //alert(url);
                 var xmlhttp = new XMLHttpRequest();
@@ -52,7 +66,9 @@
                     //document.getElementById("viewSearchResult").innerHTML = xmlhttp.responseText;
                     if (xmlhttp.status === 200) {
                         var data = xmlhttp.response;
+                        sendMail();
                         alert(data);
+
                         document.getElementById("registerformId").reset();
                     } else {
 
@@ -120,13 +136,15 @@
                                     <td>
                                         <div class="form-group first">
                                             <label for="emailAddress">Email Address</label>
-                                            <input onchange="checkEmail(this.value)" name="emailAddress" type="text" class="form-control" placeholder="your-email@gmail.com" id="emailAddress" required>
+                                            <input onchange="checkEmail(this.value)" name="emailAddress" type="email" class="form-control" placeholder="your-email@gmail.com" id="emailAddress" required>
                                         </div>
+
 
                                         <div class="form-group first">
                                             <label for="firstName">First Name</label>
                                             <input name="firstName" type="text" class="form-control" placeholder="First Name" id="firstName" required>
                                         </div>
+
                                         <div class="form-group last mb-3">
                                             <label for="occupation">Occupation</label>
                                             <input name="occupation" type="text" class="form-control" placeholder="Your Occupation" id="occupation" value="OHMS Doctor" readonly>
@@ -192,6 +210,14 @@
                                             <select name="address" class="cities form-control" id="cityId">
                                                 <option value="">Select City</option>
                                             </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group first">
+                                            <label for="contactEmail"> Doctor contact mail</label>
+                                            <input name="contactEmail" type="email" class="form-control" placeholder="doctor-personalmail@gmail.com" id="contactEmail" >
                                         </div>
                                     </td>
                                 </tr>
