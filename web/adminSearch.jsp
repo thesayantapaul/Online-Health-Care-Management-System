@@ -154,7 +154,7 @@
                         <div class="col-md-6">
                             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                 <div class="col p-4 d-flex flex-column position-static">
-                                    <h3><strong class="d-inline-block mb-2 text-success">Search Patient</strong></h3>
+                                    <h3><strong class="d-inline-block mb-2 text-primary">Search Patient</strong></h3>
                                     <form name="searchPatient" class="form">
                                         <table class="table table-borderless">
                                             <tr>
