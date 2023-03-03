@@ -1,6 +1,7 @@
 package com.exavalu.models;
 
 import com.exavalu.services.AdminService;
+import com.exavalu.services.ApiService;
 import com.exavalu.services.AppointmentService;
 import com.exavalu.services.DoctorService;
 import com.exavalu.services.LoginService;
@@ -231,6 +232,29 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
         if (!doctorList.isEmpty()) {
             result = "SUCCESS";
             getSessionMap().put("DoctorList", doctorList);
+            getSessionMap().put("User", this);
+
+        } else {
+            getSessionMap().put("FailSignUp", "Email All Ready Exsists");
+        }
+        System.out.println(getSessionMap());
+        return result;
+
+    }
+
+    public String doPrescribe() throws Exception {
+        System.out.println(this.getAppointmentId());
+        String result = "FAILURE";
+
+        Appointment user = PatientService.getInstance().getPatientDetail(this.getAppointmentId());
+        String doctorId = (String) getSessionMap().get("doctorId");
+        Doctors doctor = DoctorService.getInstance().getDoctor(doctorId);
+        ArrayList med = ApiService.getInstance().getAllData();
+        if (user != null) {
+            result = "SUCCESS";
+            getSessionMap().put("PatientDetail", user);
+            getSessionMap().put("DoctorDetail", doctor);
+            getSessionMap().put("MedList", med);
 
         } else {
             getSessionMap().put("FailSignUp", "Email All Ready Exsists");
@@ -254,10 +278,10 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
             boolean res = LoginService.getInstance().doLogin(user);
             if (res) {
                 getSessionMap().put("Loggedin", user);
-                boolean r1 = PatientService.getInstance().insertPatient(this,user.getUserId());
-                Appointment appointment = PatientService.getInstance().getPatient(this,user.getUserId());
+                boolean r1 = PatientService.getInstance().insertPatient(this, user.getUserId());
+                Appointment appointment = PatientService.getInstance().getPatient(this, user.getUserId());
                 boolean insert = AppointmentService.getInstance().getAppointment(appointment);
-                appointment= AppointmentService.getInstance().getAppointmentId(appointment);
+                appointment = AppointmentService.getInstance().getAppointmentId(appointment);
                 boolean r2 = PatientService.getInstance().insertPatientAppointment(appointment);
                 LoginService.getInstance().updateUser(appointment);
                 if (insert && r1 && r2) {

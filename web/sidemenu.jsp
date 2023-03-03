@@ -26,7 +26,7 @@
         <link href="css/quill.bubble.css" rel="stylesheet">
         <link href="css/remixicon.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
-         <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -49,14 +49,16 @@
                         <a href="home" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a>
                         <a onclick="fetchContent('doctorviewbooking.jsp', 'target')" class="nav_link"> <i class='bx bx-book'></i> <span class="nav_name">View Bookings</span></a> 
                         <a onclick="fetchContent('prescription.jsp', 'target')" class="nav_link"> <i class='bx bx-detail'></i> <span class="nav_name">Generate Prescription</span> </a> 
-                        
-                </div> 
-                <a href="Logout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Sign Out</span> </a>
+                        <a onclick="fetchContent('doctortodayAppointment.jsp', 'target')" class="nav_link"> <i class='bx bx-detail'></i> <span class="nav_name">Generate Prescription</span> </a> 
+                        <a onclick="fetchContent('doctorPrescribed.jsp', 'target')" class="nav_link"> <i class='bx bx-detail'></i> <span class="nav_name">Generate Prescription</span> </a> 
+
+                    </div> 
+                    <a href="Logout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Sign Out</span> </a>
             </nav>
         </div>
-<!--        Container Main start
-        <div class="height-100 bg-light">
-            <h4>Main Components</h4>
-        </div>-->
-      <script src="js/SideMenu.js"></script>
+        <!--        Container Main start
+                <div class="height-100 bg-light">
+                    <h4>Main Components</h4>
+                </div>-->
+        <script src="js/SideMenu.js"></script>
 </html>
