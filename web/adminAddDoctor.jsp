@@ -65,10 +65,16 @@
                 {
                     //document.getElementById("viewSearchResult").innerHTML = xmlhttp.responseText;
                     if (xmlhttp.status === 200) {
-                        var data = xmlhttp.response;
-                        sendMail();
-                        alert(data);
-
+                        var data = xmlhttp.responseText;
+                        console.log({data});
+                        if (data === 'Successfully Registered!') {
+                            sendMail();
+                            alert(data);
+                        }
+                        if (data === 'invalidEmail') {
+                            //sendMail();
+                            alert(data);
+                        }
                         document.getElementById("registerformId").reset();
                     } else {
 
@@ -100,8 +106,11 @@
                     if (xhr.status === 200) {
                         // success
                         var data = xhr.response;
-
-                        alert(data);
+                        if (data === 'email already exist!') {
+                            alert(data);
+                            document.getElementById("emailAddress").value = "";
+                            //document.getElementById("emailAddress").focus();
+                        }
 
                     } else {
 
@@ -190,7 +199,7 @@
 
                                             <label class="gender" for="gender" id="gender">Choose Gender</label>
                                             <select  name="gender" class="form-control" id="gender" required>
-                                                <option selected>Select Gender</option>
+                                                <option value="0" disabled>Select Gender</option>
                                                 <option value="male">Male</option>
                                                 <option value="female">Female</option>
                                                 <option value="others">Others</option>

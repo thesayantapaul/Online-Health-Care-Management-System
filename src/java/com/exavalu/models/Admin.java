@@ -298,7 +298,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
                 result = "ALERT";
             }
         }else{
-            sessionMap.put("CheckEmail","Bhai kar kya rha hai tu ! Email already exist hai bola tha na");
+            sessionMap.put("CheckEmail","invalidEmail");
             result = "ALERT";
         }
         return result;
