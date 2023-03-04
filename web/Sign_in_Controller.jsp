@@ -9,24 +9,23 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Insert title here</title>
     </head>
-    <body>
+    <body onload="formAutoSubmit()">
         <%
             String access_token = (String) request.getParameter("access_token");
             Fb_Model obj_Profile_Modal = new Fb_Model();
             FbProfile obj_Profile_Bean = obj_Profile_Modal.call_me(access_token);
         %>
-        <img src="<%=obj_Profile_Bean.getProfile_picture()%>"></img>    
-        <input type="text" name="name" value="<%=obj_Profile_Bean.getUser_name()%>">
-        <input type="text" name="email" value="<%=obj_Profile_Bean.getEmail()%>">
-        <input type="text" name="id" value="<%=obj_Profile_Bean.getId()%>">
+             <form action="FaceBookLogin" id="submitfb" method="post">
+            <input  type="hidden" name="user_name" id="user_name" value="<%=obj_Profile_Bean.getUser_name()%>">
+            <input type="hidden" name="email" id="email" value="<%=obj_Profile_Bean.getEmail()%>">
+            <input type="hidden" name="id" id="password" value="<%=obj_Profile_Bean.getId()%>">
+            <!--<button type="submit" class="nextBtn btnText">Post</button>-->
+        </form>
         <script>
-        var name="<%=obj_Profile_Bean.getUser_name()%>";
-        var names=name.split(' ');
-        console.log("FirstName = "+ names[0]);
-        console.log("LastName = "+ names[1]);
+            function formAutoSubmit()
+            {
+                document.getElementById("submitfb").submit();
+            }
         </script>
-        var name="<%=obj_Profile_Bean.getUser_name()%>";
-         var names=name.split(' ');
-         var a=names[0];
     </body>
 </html>
