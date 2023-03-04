@@ -27,10 +27,23 @@
         <script src="//geodata.solutions/includes/countrystatecity.js"></script>
 
         <title>OHMS Registration</title>
+        <!--send email to doctor who registered by admin with login credentials-->
+        <script src="js/adminAddDoctor.js"></script>
 
+        <script type="text/javascript"
+                src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+        </script>
+        <script type="text/javascript">
+            (function () {
+                emailjs.init("1Sah0vRJNKAddwquU");
+            })();
+        </script>
+
+        <!----------------------------------------------------------------------------------------------->
         <script>
             function sendRegisterFormInfo()
             {
+
                 var email = document.register.emailAddress.value;
                 var firstName = document.register.firstName.value;
                 var occupation = document.register.occupation.value;
@@ -41,21 +54,30 @@
                 var gender = document.register.gender.value;
                 var departmentId = document.register.departmentId.value;
                 var address = document.register.address.value;
+                var contactEmail = document.register.contactEmail.value;
 
-                var url = "RegisterDoctor?emailAddress=" + email + "&firstName=" + firstName + "&lastName=" + lastName + "&departmentId=" + departmentId + "&gender=" + gender + "&address=" + address + "&age=" + age + "&roleId=" + roleId + "&password=" + password + "&occupation=" + occupation;
+                var url = "RegisterDoctor?emailAddress=" + email + "&firstName=" + firstName + "&lastName=" + lastName + "&departmentId=" + departmentId + "&gender=" + gender + "&address=" + address + "&age=" + age + "&roleId=" + roleId + "&password=" + password + "&occupation=" + occupation + "&contactEmail=" + contactEmail;
                 //event.preventDefault();
                 //alert(url);
                 var xmlhttp = new XMLHttpRequest();
+                xmlhttp.responseType = 'text';
                 xmlhttp.onload = function ()
                 {
                     //document.getElementById("viewSearchResult").innerHTML = xmlhttp.responseText;
                     if (xmlhttp.status === 200) {
-                        alert("successfully added");
+                        var data = xmlhttp.responseText;
+                        console.log({data});
+                        if (data === 'Successfully Registered!') {
+                            sendMail();
+                            alert(data);
+                        }
+                        if (data === 'invalidEmail') {
+                            //sendMail();
+                            alert(data);
+                        }
                         document.getElementById("registerformId").reset();
                     } else {
-                        // error
-                        alert("Bhai kar kya rha hai tu ! Email already exist hai bola tha na");
-                        document.getElementById("registerformId").reset();
+
                         console.error('Request failed.  Returned status of ' + xmlhttp.status);
                     }
 
@@ -84,13 +106,14 @@
                     if (xhr.status === 200) {
                         // success
                         var data = xhr.response;
+                        if (data === 'email already exist!') {
+                            alert(data);
+                            document.getElementById("emailAddress").value = "";
+                            //document.getElementById("emailAddress").focus();
+                        }
 
-                        alert(data);
-
-                        // display the data in a div element
-                        //document.getElementById('data').innerHTML = data;
                     } else {
-                        // error
+
                         console.error('Request failed.  Returned status of ' + xhr.status);
                     }
                 };
@@ -122,13 +145,15 @@
                                     <td>
                                         <div class="form-group first">
                                             <label for="emailAddress">Email Address</label>
-                                            <input onchange="checkEmail(this.value)" name="emailAddress" type="text" class="form-control" placeholder="your-email@gmail.com" id="emailAddress" required>
+                                            <input onchange="checkEmail(this.value)" name="emailAddress" type="email" class="form-control" placeholder="your-email@gmail.com" id="emailAddress" required>
                                         </div>
+
 
                                         <div class="form-group first">
                                             <label for="firstName">First Name</label>
                                             <input name="firstName" type="text" class="form-control" placeholder="First Name" id="firstName" required>
                                         </div>
+
                                         <div class="form-group last mb-3">
                                             <label for="occupation">Occupation</label>
                                             <input name="occupation" type="text" class="form-control" placeholder="Your Occupation" id="occupation" value="OHMS Doctor" readonly>
@@ -172,9 +197,9 @@
                                         </div>
                                         <div class="form-group last mb-3">
 
-                                            <label class="gender" for="inlineFormCustomSelectPref" id="gender">Choose Gender</label>
-                                            <select  name="gender" class="form-control" id="inlineFormCustomSelectPref" required>
-                                                <option selected>Select Gender</option>
+                                            <label class="gender" for="gender" id="gender">Choose Gender</label>
+                                            <select  name="gender" class="form-control" id="gender" required>
+                                                <option value="0" disabled>Select Gender</option>
                                                 <option value="male">Male</option>
                                                 <option value="female">Female</option>
                                                 <option value="others">Others</option>
@@ -182,7 +207,7 @@
                                         </div>
                                         <div class="form-group last mb-3">
                                             <label class="departmentName" for="inlineFormCustomSelectPref" id="departmentName">Department Name</label>
-                                            <select  name="departmentId" class="form-control" id="inlineFormCustomSelectPref">
+                                            <select  name="departmentId" class="form-control" id="departmentName">
 
                                                 <c:forEach items="${DeptList}" var="department">
                                                     <option value="${department.departmentId}" <c:if test="${appointment.departmentId==department.departmentId}">selected</c:if>>${department.departmentName}</option>
@@ -197,6 +222,14 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group first">
+                                            <label for="contactEmail"> Doctor contact mail</label>
+                                            <input name="contactEmail" type="email" class="form-control" placeholder="doctor-personalmail@gmail.com" id="contactEmail" >
+                                        </div>
+                                    </td>
+                                </tr>
                             </table>
                             <button type="button" onclick="sendRegisterFormInfo()" class="btn btn-block py-2 btn-warning">Add</button>
 
@@ -205,11 +238,6 @@
                 </div>
             </div>
         </div>
-
-
-
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
     </body>

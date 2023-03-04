@@ -317,7 +317,7 @@ public class AdminService {
 
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "SELECT SUM(amount) as totalRevenue FROM appointments where appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY);";
+            String sql = "SELECT SUM(amount) as totalRevenue FROM appointments where bookingDate = DATE_ADD(CURDATE(), INTERVAL ? DAY);";
 
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, interval);
@@ -453,12 +453,13 @@ public class AdminService {
         boolean result = false;
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "INSERT INTO doctors (doctorFirstName,doctorLastName,departmentId,emailAddress) VALUES (?, ?, ?,?);";
+            String sql = "INSERT INTO doctors (doctorFirstName,doctorLastName,departmentId,emailAddress,contactEmail) VALUES (?, ?, ?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, doctor.getFirstName());
             ps.setString(2, doctor.getLastName());
             ps.setString(3, doctor.getDepartmentId());
             ps.setString(4, doctor.getEmailAddress());
+            ps.setString(5,doctor.getContactEmail());
 
             int res = ps.executeUpdate();
 

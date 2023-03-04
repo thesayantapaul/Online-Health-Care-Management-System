@@ -38,6 +38,18 @@
         * License: https://bootstrapmade.com/license/
         ======================================================== -->
     </head>
+    <script>
+        function adminAddDoctorJSP()
+        {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function ()
+            {
+                document.getElementById("main").innerHTML = xmlhttp.responseText;
+            };
+            xmlhttp.open("GET", "ViewDoctorRegisteration", true);
+            xmlhttp.send();
+        }
+    </script>
 
     <body>
 

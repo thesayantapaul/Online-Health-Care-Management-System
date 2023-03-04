@@ -275,21 +275,31 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
 
         return result;
     }
-   
+   public String showAdminAddDoctor(){
+       String result = "SUCCESS";
+       return result;
+   }
 
     public String doAddDoctor() {
-        String result = "FAILURE";
-
-        boolean success1 = AdminService.doAddDoctorInDoctors(this);
-
+        String result = "ALERT";
+        
+        boolean emailcheck = AdminService.doCheckEmail(this.emailAddress);
+        boolean success1 = false;
+        if(!emailcheck){
+            success1 = AdminService.doAddDoctorInDoctors(this);
+        }
         if (success1) {
 
             this.doctorId = AdminService.doSearchDoctorUsingEmail(this.emailAddress);
             
             boolean success2 = AdminService.doAddDoctorInUsers(this);
             if (success2) {
-                result = "SUCCESS";
+                sessionMap.put("CheckEmail","Successfully Registered!");
+                result = "ALERT";
             }
+        }else{
+            sessionMap.put("CheckEmail","invalidEmail");
+            result = "ALERT";
         }
         return result;
     }
@@ -307,7 +317,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
             //sessionMap.put("emailExist",true);
 
         }else{
-            sessionMap.put("CheckEmail","Entered enail is available continue!");
+            sessionMap.put("CheckEmail","this Email can be used !");
             result = "SUCCESS";
         }
         //sessionMap.put("emailExist",false);
@@ -337,6 +347,15 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
     private String roleId;
     private String occupation;
     private String address;
+    private String contactEmail;
+
+    public String getContactEmail() {
+        return contactEmail;
+    }
+
+    public void setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
+    }
 
     public String getPassword() {
         return password;
