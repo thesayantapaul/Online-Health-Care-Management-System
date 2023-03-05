@@ -33,7 +33,7 @@
                 crossorigin="anonymous"></script>
     <body style="overflow: scroll; height : 90%" id="social">
         <div class="d-md-flex half">
-            <div class="bg" style="background-image: url('images/login-side.jpg');"></div>
+            <div class="bg" style="background-image: url('images/login-side.jpg');height: 1309px"></div>
             <div class="contents">
 
                 <div class="container">

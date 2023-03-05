@@ -5,6 +5,7 @@
 package com.exavalu.services;
 
 import com.exavalu.models.Appointment;
+import com.exavalu.models.FbProfile;
 import com.exavalu.models.Users;
 import static com.exavalu.services.PatientService.log;
 import com.exavalu.utils.JDBCConnectionManager;
@@ -148,6 +149,44 @@ public class LoginService {
             preparedStatement.setString(2, user.getSub());
             preparedStatement.setString(3, user.getGiven_name());
             preparedStatement.setString(4, user.getFamily_name());
+
+            System.out.println(preparedStatement);
+            int res = preparedStatement.executeUpdate();
+
+            if (res == 1) {
+                result = true;
+            }
+
+        } catch (SQLException ex) {
+            int e = ex.getErrorCode();
+            log.error(LocalDateTime.now() + "Sql Error :" + e + " Duplicate Email Address");
+            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+        }
+
+        return result;
+
+    }
+    
+    public static boolean doFacebook(FbProfile profile) {
+
+        boolean result = false;
+        String fullname=profile.getUser_name();
+        System.out.println("Hi"+fullname);
+        String output[]=fullname.split(" ");
+        String firstname= output[0];
+        String lastname=output[1];
+        System.out.println("Hi F1= "+firstname+"L1="+lastname );
+        
+        String sql = "INSERT INTO users (emailAddress,firstName,lastName,password,dateOfRegisteration)" + "VALUES(? ,? ,? ,?,CURDATE())";
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, profile.getEmail());
+            preparedStatement.setString(2, firstname);
+            preparedStatement.setString(3, lastname);
+            preparedStatement.setString(4, profile.getId());
 
             System.out.println(preparedStatement);
             int res = preparedStatement.executeUpdate();

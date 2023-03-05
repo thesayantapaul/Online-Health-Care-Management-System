@@ -32,7 +32,7 @@
         <!--patient search end-->
         <!--email check during doctor registeration in admin-->
         <action name="CheckEmail" class="com.exavalu.models.Admin" method="doCheckEmail">
-           <result name="SUCCESS">checkEmail.jsp</result>
+            <result name="SUCCESS">checkEmail.jsp</result>
         </action>
         
         <action name="DoctorRegisteration" class="com.exavalu.models.Admin" method="showAdminAddDoctor">
@@ -43,7 +43,7 @@
         <action name="RegisterDoctor" class="com.exavalu.models.Admin" method="doAddDoctor">
            
             <result name="SUCCESS">adminSearch.jsp</result>
-             <result name="ALERT">checkEmail.jsp</result>
+            <result name="ALERT">checkEmail.jsp</result>
             <!--<result name="FAILURE">adminAddDoctor.jsp</result>-->
         </action>
     
@@ -120,7 +120,10 @@
             <result name="SUCCESS">doctorIndex.jsp</result>
             <result name="FAILURE">login.jsp</result>
         </action>
-        
+        <action name="FaceBookLogin" class="com.exavalu.models.FbProfile" method="fbLogin">
+            <result name="SUCCESS">login.jsp</result>
+            <result name="FAILURE">Sign_in_Controller.jsp</result>
+        </action>
         
         
     </package>
