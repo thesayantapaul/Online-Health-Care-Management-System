@@ -46,6 +46,13 @@
              <result name="ALERT">checkEmail.jsp</result>
             <!--<result name="FAILURE">adminAddDoctor.jsp</result>-->
         </action>
+        <!--add admin-->
+        <action name="RegisterAdmin" class="com.exavalu.models.Admin" method="doAddAdmin">
+           
+            <result name="SUCCESS">adminSearch.jsp</result>
+             <result name="ALERT">checkEmail.jsp</result>
+            <!--<result name="FAILURE">adminAddDoctor.jsp</result>-->
+        </action>
     
         
         <!--VIEW ADMIN DASHBOARD-->

@@ -146,7 +146,7 @@ public class AdminService {
         try {
             Connection con = JDBCConnectionManager.getConnection();
             //String sql = "select * from doctors d, departments dp where d.departmentId=dp.departmentId and having doctorFirstName like ? and doctorLastName like ? and doctorGender like ? and departmentName like ? and having doctorId like ?";
-            String sql = "select d.doctorId,doctorFirstName,doctorLastName, departmentName,gender,age from doctors d, departments dp,users u where d.doctorId=u.doctorId and d.departmentId=dp.departmentId and doctorFirstName like ? and doctorLastName like ? and gender like ? and d.departmentId like ? and d.doctorId like ?";
+            String sql = "select d.doctorId,doctorFirstName,doctorLastName, departmentName,gender,age,contactEmail from doctors d, departments dp,users u where d.doctorId=u.doctorId and d.departmentId=dp.departmentId and doctorFirstName like ? and doctorLastName like ? and gender like ? and d.departmentId like ? and d.doctorId like ?";
             PreparedStatement preparedStatement = con.prepareStatement(sql);
 
             preparedStatement.setString(1, adminDoctor.getFirstName() + "%");
@@ -168,6 +168,7 @@ public class AdminService {
                 doctor.setDepartmentName(rs.getString("departmentName"));
                 doctor.setDoctorAge(rs.getString("age"));
                 doctor.setDoctorGender(rs.getString("gender"));
+                doctor.setContactEmail(rs.getString("contactEmail"));
                 //code to set doctor parameters
 
                 doctorList.add(doctor);
@@ -490,6 +491,37 @@ public class AdminService {
             ps.setString(8, doctor.getAddress());
             ps.setString(9, doctor.getDoctorId());
             ps.setString(10, doctor.getAge());
+           
+
+            int res = ps.executeUpdate();
+
+            if (res == 1) {
+                result = true;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+    public static boolean doAddAdminInUsers(Admin admin) {
+
+        boolean result = false;
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "INSERT INTO users (emailAddress,firstName,lastName,password,dateOfRegisteration,gender,roleId,occupation,address,age) VALUES (?,?,?,?,curdate(),?,?,?,?,?);";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, admin.getEmailAddress());
+            ps.setString(2, admin.getFirstName());
+            ps.setString(3, admin.getLastName());
+            ps.setString(4, admin.getPassword());
+           // ps.setString(5, "");
+            ps.setString(5, admin.getGender());
+            ps.setString(6, admin.getRoleId());
+            ps.setString(7, admin.getOccupation());
+            ps.setString(8, admin.getAddress());
+          
+            ps.setString(9, admin.getAge());
            
 
             int res = ps.executeUpdate();

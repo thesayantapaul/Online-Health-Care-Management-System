@@ -275,34 +275,49 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
 
         return result;
     }
-   public String showAdminAddDoctor(){
-       String result = "SUCCESS";
-       return result;
-   }
+
+    public String showAdminAddDoctor() {
+        String result = "SUCCESS";
+        return result;
+    }
 
     public String doAddDoctor() {
         String result = "ALERT";
-        
+
         boolean emailcheck = AdminService.doCheckEmail(this.emailAddress);
         boolean success1 = false;
-        if(!emailcheck){
+        if (!emailcheck) {
+            if ("3".equals(this.roleId)) {
+                success1 = AdminService.doAddAdminInUsers(this);
+                if (success1) {
+                    sessionMap.put("CheckEmail", "Successfully Registered!");
+                    result = "ALERT";
+                    return result;
+                }else{
+                    sessionMap.put("CheckEmail", "unable to process!");
+                    result = "ALERT";
+                    return result;
+                }
+            }
             success1 = AdminService.doAddDoctorInDoctors(this);
         }
         if (success1) {
 
             this.doctorId = AdminService.doSearchDoctorUsingEmail(this.emailAddress);
-            
+
             boolean success2 = AdminService.doAddDoctorInUsers(this);
             if (success2) {
-                sessionMap.put("CheckEmail","Successfully Registered!");
+                sessionMap.put("CheckEmail", "Successfully Registered!");
                 result = "ALERT";
             }
-        }else{
-            sessionMap.put("CheckEmail","invalidEmail");
+        } else {
+            sessionMap.put("CheckEmail", "invalidEmail");
             result = "ALERT";
         }
         return result;
     }
+
+
 
     public String doCheckEmail() {
         String result = "FAILURE";
@@ -312,19 +327,19 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         if (success) {
             String myString = "email already exist!";
             System.out.println(myString);
-             sessionMap.put("CheckEmail",myString);
+            sessionMap.put("CheckEmail", myString);
             result = "SUCCESS";
             //sessionMap.put("emailExist",true);
 
-        }else{
-            sessionMap.put("CheckEmail","this Email can be used !");
+        } else {
+            sessionMap.put("CheckEmail", "this Email can be used !");
             result = "SUCCESS";
         }
         //sessionMap.put("emailExist",false);
 
         return result;
     }
-    
+
     private String messageToPatient;
     private String appointmentId;
     private String firstName;
