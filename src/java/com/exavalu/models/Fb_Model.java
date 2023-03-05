@@ -48,7 +48,9 @@ public class Fb_Model {
 	     JSONObject data_response=picture_reponse.getJSONObject("data");
 	     System.out.println("URL : "+data_response.getString("url"));
 	     obj_Profile_Bean.setProfile_picture(data_response.getString("url"));
-		return obj_Profile_Bean;
+	     return obj_Profile_Bean;
 	   }
+    
+    
     
 }
