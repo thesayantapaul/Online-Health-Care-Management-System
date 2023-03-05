@@ -84,6 +84,7 @@
                                             <input name="doctorId" value="${PatientDetail.doctorId}" hidden>
                                             <input name="date" value="${PatientDetail.appointmentDate}" hidden>
                                             <input name="patientFirstName" id="patientFirstName" value="${PatientDetail.patientFirstName}" hidden>
+                                            <input name="userId" id="userId" value="${PatientDetail.userId}" hidden>
 
                                             PatientId: ${PatientDetail.patientId}<br>
                                             FirstName: ${PatientDetail.patientFirstName}<br>

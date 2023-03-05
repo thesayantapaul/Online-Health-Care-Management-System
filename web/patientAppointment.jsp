@@ -1,8 +1,9 @@
 <%-- 
-    Document   : patientUpcomingBooking
-    Created on : 26-Feb-2023, 10:19:03 am
-    Author     : SAYANTA PAUL
+    Document   : patientAppointment
+    Created on : Mar 5, 2023, 8:07:28 PM
+    Author     : anich
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html lang="en">
@@ -23,10 +24,50 @@
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css_medicalAppointmentHistory//style.css">
+       <script>
+            function fetchContent(departmentId)
+            {
+                alert(departmentId);
+                event.preventDefault();
+                //alert(fnolId);
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function ()
+                {
+                    document.getElementById("doctorId").innerHTML = xmlhttp.responseText;
+
+                };
+
+
+                xmlhttp.open("POST", "getDoctor?departmentId=" + departmentId, true);
+                xmlhttp.send();
+            }
+
+
+        </script>
     </head>
 
-   
+    <script src="https://code.jquery.com/jquery-3.6.3.js" 
+                        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
+                crossorigin="anonymous"></script>
+    <script>
+
+                 function fetchData(selectedId, targetId) {
+                     $.ajax({
+                         url: selectedId,
+
+                         success: function (responseText) {
+                             $("#" + targetId).html(responseText);
+                         }
+                     });
+                 }
+
+
+
+    </script>
+            <jsp:include page="menu.jsp"></jsp:include>
+
     <body>
+        <div id="targetId">
 
             <section class="main-content">
                 <div class="container">
@@ -100,6 +141,7 @@
                 </table>
             </div>
         </section>
+        </div>
 
     </body>
 </html>

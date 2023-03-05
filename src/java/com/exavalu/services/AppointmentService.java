@@ -44,7 +44,7 @@ public class AppointmentService {
             ps.setString(6, appointment.getUserId());
             ps.setString(7, appointment.getSymptoms());
 
-            System.out.println("LoginService :: " + ps);
+            System.out.println("AppointmentService GetAppointment :: " + ps);
 
             int rs = ps.executeUpdate();
 
@@ -89,5 +89,30 @@ public class AppointmentService {
         }
 
         return appointment;
+    }
+
+    public void updateStatus(String appointmentId) {
+        
+        boolean result = false;
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "UPDATE ohms_db.appointments SET statusId = 3 WHERE appointmentId = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, appointmentId);
+            System.out.println("AppointmentService UpdateStatus:: " + ps);
+
+            int rs = ps.executeUpdate();
+
+            if (rs == 1) {
+                result = true;
+            }
+
+        } catch (SQLException ex) {
+            log.error("Not Found");
+            System.out.println(ex.getErrorCode());
+            ex.printStackTrace();
+        }
+
     }
 }

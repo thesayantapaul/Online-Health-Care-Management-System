@@ -1,86 +1,19 @@
-<%@page import="com.exavalu.models.Departments"%>
-<%@page import="com.exavalu.services.DepartmentService"%>
+<%-- 
+    Document   : patientIndexBody
+    Created on : Mar 5, 2023, 9:39:09 AM
+    Author     : anich
+--%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
     <head>
-        <meta charset="utf-8">
-        <title>OHMS - Online HealthCare Management System</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Free HTML Templates" name="keywords">
-        <meta content="Free HTML Templates" name="description">
-        <!-- Favicons -->
-        <link href="assets/img/favicon.png" rel="icon">
-
-
-
-
-        <!-- Google Web Fonts -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-        <!-- Icon Font Stylesheet -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-        <!-- Libraries Stylesheet -->
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
-        <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
-        <script>
-            function fetchContent(departmentId)
-            {
-                alert(departmentId);
-                event.preventDefault();
-                //alert(fnolId);
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function ()
-                {
-                    document.getElementById("doctorId").innerHTML = xmlhttp.responseText;
-
-                };
-
-
-                xmlhttp.open("POST", "getDoctor?departmentId=" + departmentId, true);
-                xmlhttp.send();
-            }
-
-
-        </script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
     </head>
-
-    <script src="https://code.jquery.com/jquery-3.6.3.js" 
-                        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
-                crossorigin="anonymous"></script>
-    <script>
-
-                 function fetchData(selectedId, targetId) {
-                     $.ajax({
-                         url: selectedId,
-
-                         success: function (responseText) {
-                             $("#" + targetId).html(responseText);
-                         }
-                     });
-                 }
-
-
-
-    </script>
-            <jsp:include page="menu.jsp"></jsp:include>
-
     <body>
-        <div id="targetId">
-
-                <!-- Hero Start -->
+        
+         <!-- Hero Start -->
                 <div class="container-fluid bg-primary py-5 mb-5 hero-header">
                     <div class="container py-5">
                         <div class="row justify-content-start">
@@ -99,11 +32,6 @@
 
 
                 <!-- About Start -->
-
-
-
-                <!--<Appointment Start>-->
-            <jsp:include page="bookService.jsp"></jsp:include>
 
             <jsp:include page="about.jsp"></jsp:include>
 
@@ -403,7 +331,5 @@
                 </div>
                 <!-- Testimonial End -->
             <jsp:include page="footer.jsp"></jsp:include>
-        </div>
     </body>
-
 </html>

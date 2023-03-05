@@ -34,47 +34,6 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-    crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"
-    integrity="sha256-srhz/t0GOrmVGZryG24MVDyFDYZpvUH2+dnJ8FbpGi0=" crossorigin="anonymous"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> 
-
-
-    <script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script> 
-    <script type="text/javascript"
-            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
-    </script>
-    <script type="text/javascript">
-        (function () {
-            emailjs.init("f_3r8uuVACaKw_woR");
-        })();
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.6.3.js" 
-                        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
-                crossorigin="anonymous"></script>
-    <script>
-            function fetchContent(departmentId)
-            {
-                //alert(departmentId);
-                event.preventDefault();
-                //alert(fnolId);
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function ()
-                {
-                    document.getElementById("doctorId").innerHTML = xmlhttp.responseText;
-                };
-                xmlhttp.open("POST", "getDoctor?departmentId=" + departmentId, true);
-                xmlhttp.send();
-            }
-
-
-    </script>
 
     <body>
 
@@ -97,14 +56,13 @@
                     <div class="col-lg-6">
                         <div class="bg-white text-center rounded p-5">
                             <h1 class="mb-4">Book An Appointment</h1>
-                            <c:set var="user" value="${User}"></c:set>
                                 <form action="Appointment" method="Post">
                                     <div class="row g-3">
                                         <div  class="col-12 col-sm-6">
                                             <select name="departmentId" id="departmentId"  required class="form-select bg-light border-0" style="height: 55px;" onchange="fetchContent($('#departmentId').find(':selected').val())" required>
                                                 <option selected>Choose Department</option>
                                             <c:forEach items="${deptList}" var="dept">
-                                                <option value="${dept.getDepartmentId()}"<c:if test="${dept.getDepartmentId().equalsIgnoreCase(user.getDepartmentId())}" > selected  </c:if>  >${dept.getDepartmentName()} </option>
+                                                <option value="${dept.getDepartmentId()}" >${dept.getDepartmentName()} </option>
 <!--                                                    <input id="departmentName" value="${dept.getDepartmentName()}" hidden  > -->
                                             </c:forEach>
                                         </select>
@@ -167,13 +125,50 @@
                 </div>
             </div>
         </div>
-        <!-- Appointment End -->
-        <%--<jsp:include page="footer.jsp"></jsp:include>--%>
-        <script>
-            $(document).ready(function () {
+                                    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"
+    integrity="sha256-srhz/t0GOrmVGZryG24MVDyFDYZpvUH2+dnJ8FbpGi0=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> 
+
+
+    <script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script> 
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("f_3r8uuVACaKw_woR");
+        })();
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.3.js" 
+                        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
+                crossorigin="anonymous"></script>
+    <script>
+            function fetchContent(departmentId)
+            {
+                //alert(departmentId);
+                event.preventDefault();
+                //alert(fnolId);
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function ()
+                {
+                    document.getElementById("doctorId").innerHTML = xmlhttp.responseText;
+                };
+                xmlhttp.open("POST", "getDoctor?departmentId=" + departmentId, true);
+                xmlhttp.send();
+            }
+    </script>
+    <script>
+                $(document).ready(function () {
                 $("button").click(function () {
                     var params = {
-
                         to_name: document.getElementById('patientFirstName').value,
                         time: document.getElementById('time').value,
                         date: document.getElementById('date').value,
@@ -188,14 +183,13 @@
                     alert(document.getElementById('emailAddress').value);
                     alert(document.getElementById('doctorId').value);
                     alert(document.getElementById('departmentId').value);
-
                     alert(params);
                     emailjs.send("service_dnuk9zz", "template_wkl33wz", params);
                 });
             });
-
-
         </script>
+        <!-- Appointment End -->
+        <%--<jsp:include page="footer.jsp"></jsp:include>--%>
 
     </body>
 </html>
