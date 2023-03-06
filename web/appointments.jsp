@@ -173,6 +173,7 @@ admin appointment jsp
                                             </div>
                                         </div>
                                     </div>
+                                    <!--modal end-->
 
 
                                 </td>

@@ -98,6 +98,15 @@ public class Doctors extends ActionSupport implements ApplicationAware, SessionA
     private String departmentName;
     private String doctorAge;
     private String doctorGender;
+    private String contactEmail;
+
+    public String getContactEmail() {
+        return contactEmail;
+    }
+
+    public void setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
+    }
 
     public String getDoctorAge() {
         return doctorAge;

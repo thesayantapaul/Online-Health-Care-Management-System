@@ -41,6 +41,18 @@
 
         <!----------------------------------------------------------------------------------------------->
         <script>
+            function functionToAddDoctorOrAdmin(selectedRole) {
+                var role = selectedRole.value;
+                var roleId = parseInt(role);
+                //alert(role);
+                if (roleId === 3) {
+                    document.getElementById('departmentName').disabled = true;
+                } else {
+                    document.getElementById('departmentName').disabled = false;
+
+                }
+            }
+
             function sendRegisterFormInfo()
             {
 
@@ -177,9 +189,10 @@
 
                                         <div class="form-group last mb-3">
                                             <label for="roleId">Role</label>
-                                            <select name="roleId" class="form-control" id="roleId">
+                                            <select onchange="functionToAddDoctorOrAdmin(this)" name="roleId" class="form-control" id="roleId">
                                                 <option value="" disabled>Select Role</option>
                                                 <option value="2">Doctor</option>
+                                                <option value="3">Admin</option>
 
                                             </select>
                                         </div>
@@ -199,18 +212,18 @@
 
                                             <label class="gender" for="gender" id="gender">Choose Gender</label>
                                             <select  name="gender" class="form-control" id="gender" required>
-                                                <option value="0" disabled>Select Gender</option>
+                                                <option value="0" disabled>--Select Gender--</option>
                                                 <option value="male">Male</option>
                                                 <option value="female">Female</option>
                                                 <option value="others">Others</option>
                                             </select>
                                         </div>
                                         <div class="form-group last mb-3">
-                                            <label class="departmentName" for="inlineFormCustomSelectPref" id="departmentName">Department Name</label>
+                                            <label class="departmentName" for="departmentId">Department Name</label>
                                             <select  name="departmentId" class="form-control" id="departmentName">
-
+                                                <option value="0" id="selectDepartmentOptionId">---Select Department---</option>
                                                 <c:forEach items="${DeptList}" var="department">
-                                                    <option value="${department.departmentId}" <c:if test="${appointment.departmentId==department.departmentId}">selected</c:if>>${department.departmentName}</option>
+                                                    <option value="${department.departmentId}">${department.departmentName}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
@@ -225,8 +238,8 @@
                                 <tr>
                                     <td>
                                         <div class="form-group first">
-                                            <label for="contactEmail"> Doctor contact mail</label>
-                                            <input name="contactEmail" type="email" class="form-control" placeholder="doctor-personalmail@gmail.com" id="contactEmail" >
+                                            <label for="contactEmail">  contact mail</label>
+                                            <input name="contactEmail" type="email" class="form-control" placeholder="user-personalmail@gmail.com" id="contactEmail" >
                                         </div>
                                     </td>
                                 </tr>

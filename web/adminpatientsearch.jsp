@@ -1,20 +1,20 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<h3>OHMS Patient</h3>
+<h3><strong class="d-inline-block mb-2 text-primary">OHMS Patient</strong></h3>
 
-<table id="table" data-height="100" data-virtual-scroll="true" class="table table-bordered table-hover" style="margin-top: -9.5px;">
+<table id="table" data-height="100" data-virtual-scroll="true" class="table table-light" style="margin-top: 0px;">
 
     <thead>
         <tr>
-            <th>Patient ID</th>
-            <th>Appointment ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Age</th>
-            <th>Gender</th>
+            <th style="width: 100px">Patient ID</th>
+            <th style="width: 180px">Appointment ID</th>
+            <th style="width: 150px">First Name</th>
+            <th style="width: 150px">Last Name</th>
+            <th style="width: 100px">Age</th>
+            <th style="width: 100px">Gender</th>
+            <th style="width: 140px">Registered on</th>
+            <th style="width: 200px">Address</th>
 
-            <th>Registered on</th>
-            <th>Address</th>
         </tr>
     </thead>
     <tbody>
@@ -78,7 +78,6 @@
                         </div>
                     </div>
                 </td>
-
             </tr>
         </c:forEach>
     </tbody>
