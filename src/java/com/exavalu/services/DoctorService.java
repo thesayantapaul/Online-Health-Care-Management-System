@@ -175,7 +175,7 @@ public class DoctorService {
 
             Connection con = JDBCConnectionManager.getConnection();
 
-            String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.doctorId=? and  appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY)";
+            String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.doctorId=? and  appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY) and appointments.statusId=1";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, doctorId);
@@ -200,6 +200,7 @@ public class DoctorService {
                 appointment.setStatusId(rs.getString("statusId"));
                 appointment.setStatus(rs.getString("statusName"));
                 appointment.setSymptoms(rs.getString("symptoms"));
+                appointment.setUserId(rs.getString("userId"));
 
                 //appointment.setSymptoms(rs.getString("symptoms"));
                 appointmentList.add(appointment);

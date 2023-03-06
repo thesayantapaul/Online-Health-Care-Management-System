@@ -18,24 +18,8 @@
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
     </head>
-     <script>
 
-                            function fetchData(selectedId, targetId) {
-                                alert(selectedId);
-                                $.ajax({
-                                    url: selectedId,
-
-                                    success: function (responseText) {
-                                        $("#" + targetId).html(responseText);
-                                    }
-                                });
-                            }
-
-
-
-    </script>
     <body>
-    <jsp:include page="menu.jsp"></jsp:include>
 
         <section class="main-content">
             <div class="container">
@@ -106,12 +90,6 @@
             </div>
         </section>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.3.js" 
-                        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
-                crossorigin="anonymous"></script>
     </body>
 </html>
 

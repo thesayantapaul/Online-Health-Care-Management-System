@@ -28,7 +28,7 @@ public class PatientService {
     public static Logger log = Logger.getLogger(PatientService.class.getName());
 
     public static ArrayList doViewParticularMedicalHistory(String userId) {
-        String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.userId=?";
+        String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.userId=? and appointmentDate<=CURDATE()";
         ArrayList appointmentList = new ArrayList();
         try {
             Connection con = JDBCConnectionManager.getConnection();
@@ -59,7 +59,7 @@ public class PatientService {
     }
 
     public static ArrayList doViewParticularUpcomingAppointments(String userId) {
-        String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.userId=?";
+        String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.userId=? and appointments.appointmentdate >CURDATE() order by appointments.appointmentDate";
 
         ArrayList appointmentList = new ArrayList();
         try {

@@ -41,7 +41,7 @@ public class PrescriptionService {
 
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "INSERT INTO prescription (date, symptoms, test, medicine, dosage, timetotake, appointmentId,doctorId, patientId) VALUES (?,?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO prescription (date, symptoms, test, medicine, dosage, timetotake, appointmentId,doctorId, patientId,userId,advice) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, prescription.getDate());
             ps.setString(2, prescription.getSymptoms());
@@ -52,6 +52,8 @@ public class PrescriptionService {
             ps.setString(7, prescription.getAppointmentId());
             ps.setString(8, prescription.getDoctorId());
             ps.setString(9, prescription.getPatientId());
+            ps.setString(10, prescription.getUserId());
+            ps.setString(11, prescription.getAdvice());
 
             System.out.println("PrescriptionService add:: " + ps);
 
@@ -106,5 +108,46 @@ public class PrescriptionService {
 
         return prescribedList;
     }
+    
+     public ArrayList getPatientPrescription(String userId) {
+
+        boolean result = false;
+        ArrayList prescribedList = new ArrayList();
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT * FROM prescription left join doctors on doctors.doctorId=prescription.doctorId left join departments on doctors.departmentId=departments.departmentId left join users on prescription.userId=users.userId where prescription.userId=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, userId);
+            ResultSet rs = ps.executeQuery();
+            System.out.println("PrescriptionService getprescription:: " + ps);
+
+            while (rs.next()) {
+                Prescription prescribed = new Prescription();
+                prescribed.setDate(rs.getString("date"));
+                prescribed.setDoctorFirstName(rs.getString("doctorFirstName"));
+                prescribed.setDoctorLastName(rs.getString("doctorLastName"));
+                prescribed.setAppointmentId(rs.getString("appointmentId"));
+                prescribed.setSymptoms(rs.getString("symptoms"));
+                prescribed.setTests(rs.getString("test"));
+                prescribed.setMedicine(rs.getString("medicine"));
+                prescribed.setDosage(rs.getString("dosage"));
+                prescribed.setTime(rs.getString("timetotake"));
+                prescribed.setStatus(rs.getString("status"));
+                prescribed.setDepartmentName(rs.getString("departmentName"));
+                prescribed.setDate(rs.getString("date"));
+                prescribed.setAdvice(rs.getString("advice"));
+
+
+                prescribedList.add(prescribed);
+            }
+        } catch (SQLException ex) {
+            log.error("Cannot be Found");
+            System.out.println(ex.getErrorCode());
+            ex.printStackTrace();
+        }
+
+        return prescribedList;
+    }
+
 
 }
