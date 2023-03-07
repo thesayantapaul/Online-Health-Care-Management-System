@@ -9,10 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>OHMS Doctor's HomePage</title>
         <!-- Favicons -->
         <link href="assets/img/favicon.png" rel="icon">
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+        <!--<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">-->
 
         <!-- Google Fonts -->
         <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -39,18 +39,18 @@
     <body id="body-pd">
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-            <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
+            <!--<div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>-->
         </header>
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
                 <div> 
                     <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">OHMS</span> </a>
                     <div class="nav_list"> 
-                        <a href="home" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a>
+                        <a href="home" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Doctor's Dashboard</span> </a>
                         <a onclick="fetchContent('doctorviewbooking.jsp', 'target')" class="nav_link"> <i class='bx bx-book'></i> <span class="nav_name">View Bookings</span></a> 
-                        <a onclick="fetchContent('prescribe.jsp', 'target')" class="nav_link"> <i class='bx bx-detail'></i> <span class="nav_name">Generate Prescription</span> </a> 
-                        <a onclick="fetchContent('doctortodayAppointment.jsp', 'target')" class="nav_link"> <i class='bx bx-detail'></i> <span class="nav_name">Generate Prescription</span> </a> 
-                        <a onclick="fetchContent('doctorPrescribed.jsp', 'target')" class="nav_link"> <i class='bx bx-detail'></i> <span class="nav_name">Generate Prescription</span> </a> 
+                        <!--<a onclick="fetchContent('prescribe.jsp', 'target')" class="nav_link"> <i class='bx bx-detail'></i> <span class="nav_name">Generate Prescription</span> </a>--> 
+                        <a onclick="fetchContent('doctortodayAppointment.jsp', 'target')" class="nav_link"><i class="fab fa-yelp"></i> <span class="nav_name">Generate Prescription</span> </a> 
+                        <a onclick="fetchContent('doctorPrescribed.jsp', 'target')" class="nav_link"> <i class="fab fa-searchengin"></i><span class="nav_name">Generate Prescription</span> </a> 
 
                     </div> 
                     <a href="Logout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Sign Out</span> </a>
