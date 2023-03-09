@@ -21,6 +21,8 @@
 
         <!-- Template Main CSS File -->
         <link href="css/style1.css" rel="stylesheet">
+        <link href="css/all.min_1.css" rel="stylesheet">
+
     </head>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -374,6 +376,13 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+                                            $(document).ready(function () {
+                                                $('#example').DataTable();
+                                            });
+    </script>
 </html>
 

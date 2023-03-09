@@ -232,4 +232,35 @@ public class LoginService {
 
     }
 
+    public boolean doSocialLog_in(Users user) {
+         boolean result = false;
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "Select * from users right join role on role.roleId=users.roleId where emailAddress=? and password=? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getSub());
+
+            System.out.println("LoginService :: " + ps);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                user.setRoleId(rs.getString("roleId"));
+                user.setDoctorId(rs.getString("doctorId"));
+                user.setPatientId(rs.getString("patientId"));
+                user.setUserId(rs.getString("userId"));
+
+                result = true;
+            }
+
+        } catch (SQLException ex) {
+            log.error("Not Found");
+            System.out.println(ex.getErrorCode());
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
 }

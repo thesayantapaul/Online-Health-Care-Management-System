@@ -44,6 +44,7 @@
                 emailjs.init("f_3r8uuVACaKw_woR");
             })();
         </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 
     </head>
 
@@ -51,6 +52,7 @@
 
         <div class="d-md-flex half">
             <div class="contents">
+                <div id="pdf-content">
                 <form method="post" action="GeneratePrescription"><br>
                     <div class="wrapper">
                         <div class="prescription_form">
@@ -181,9 +183,12 @@
                             </table>
                             <br>
                             <br>
+<!--                            </div>-->
                             <button type="submit" class="submit-button">Submit</button>
 
                             </form>
+                            <button id="GetFile" type="button"  class="submit-button">Generate Pdf</button>
+
                         </div>
                     </div>
             </div>
@@ -300,6 +305,24 @@
                 });
             });
         });
+    </script>
+    <script>
+        window.onload = function () {
+        document.getElementById("GetFile")
+            .addEventListener("click", () => {
+                const template = this.document.getElementById("pdf-content");
+                console.log(template);
+                console.log(window);
+                var opt = {
+                    margin: 0,
+                    filename: 'Quotation.pdf',
+                    image: {type: 'jpeg', quality: 1},
+                    html2canvas: {scale: 1},
+                    jsPDF: {unit: 'in', format: 'A3', orientation: 'landscape'}
+                };
+                html2pdf().from(template).set(opt).save();
+            });
+};
     </script>
 
 </html>
