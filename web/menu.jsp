@@ -32,24 +32,6 @@
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
     </head>
-    <script src="https://code.jquery.com/jquery-3.6.3.js" 
-                        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
-                crossorigin="anonymous"></script>
-    <script>
-
-        function fetchData(selectedId, targetId) {
-            alert(selectedId);
-            $.ajax({
-                url: selectedId,
-
-                success: function (responseText) {
-                    $("#" + targetId).html(responseText);
-                }
-            });
-        }
-
-
-    </script>
 
     <body>
         <!-- Topbar Start -->
@@ -99,7 +81,7 @@
                         <div class="navbar-nav ms-auto py-0">
                             <c:if test="${login_check==null}">
                                 <a href="#" class="nav-item nav-link" id="menuHome">Home</a>
-                                <a href="#Service"  class="nav-item nav-link" id="serviceId">Services</a>
+                                <a class="nav-link " href="#Service"  class="nav-item nav-link" id="serviceId">Services</a>
                                 <a href="#bookAppointment" class="nav-item nav-link">Book Service</a>
                                 <a href="#Explore" class="nav-item nav-link">Explore</a>
                                 <a href="#Testimonial" class="nav-item nav-link">Testimonial</a>
@@ -110,15 +92,16 @@
 
                             </c:if>
                             <c:if test="${login_check.roleId == '1'}">
-                                <a onclick="fetchData('index.jsp', 'targetId')" class="nav-item nav-link">Home</a>
+                                <a onclick="fetchData('patientIndexBody.jsp', 'targetId')" class="nav-item nav-link">Home</a>
                                 <a onclick="fetchData('bookService.jsp', 'targetId')" class="nav-item nav-link">Book an Appointment</a>
-                                <a onclick="fetchData('ViewMedicalHistory', 'targetId')" class="nav-item nav-link">Medical History</a>
-                                <a onclick="fetchData('patientUpcomingBooking', 'targetId')" class="nav-item nav-link">Upcoming Appointments</a>
+                                <a onclick="fetchData('patientMedicalHistory.jsp', 'targetId')" class="nav-item nav-link">Medical History</a>
+                                <a onclick="fetchData('patientUpcomingBooking.jsp', 'targetId')" class="nav-item nav-link">Upcoming Appointments</a>
+                                <a onclick="fetchData('patientActivePrescription.jsp', 'targetId')" class="nav-item nav-link">Active Prescription</a>
                                 <a href="Logout" class="nav-item nav-link">Logout</a>
 
                             </c:if>
                             <c:if test="${login_check.roleId == '2'}">
-                                <a href="index.jsp" class="nav-item nav-link active">Home</a>
+                                <a href="doctorIndex.jsp" class="nav-item nav-link active">Home</a>
                                 <a href="DoctorViewAppointment?doctorId=${login_check.doctorId}" class="nav-item nav-link">View Bookings</a>
                                 <a href="prescription.jsp" class="nav-item nav-link">Generate Report</a>
                                 <a href="#" class="nav-item nav-link">View Report</a>
@@ -144,7 +127,9 @@
         </div>
         <!-- Navbar End -->
         <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+       
+    </body>
+     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="lib/easing/easing.min.js"></script>
         <script src="lib/waypoints/waypoints.min.js"></script>
@@ -155,5 +140,24 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
-    </body>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"
+    integrity="sha256-srhz/t0GOrmVGZryG24MVDyFDYZpvUH2+dnJ8FbpGi0=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> 
+
+
+    <script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script> 
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("f_3r8uuVACaKw_woR");
+        })();
+    </script>
 </html>

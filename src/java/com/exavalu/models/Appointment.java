@@ -266,6 +266,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
 
     public String getAppointment() throws Exception {
         String result = "FAILURE";
+        getSessionMap().clear();
         getSessionMap().put("Appointment", this);
 
         getSessionMap().put("symptoms", this.getSymptoms());
@@ -284,7 +285,19 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
                 appointment = AppointmentService.getInstance().getAppointmentId(appointment);
                 boolean r2 = PatientService.getInstance().insertPatientAppointment(appointment);
                 LoginService.getInstance().updateUser(appointment);
+                ArrayList appointment1 = new ArrayList();
+                ArrayList appointment2 = new ArrayList();
+
+                System.out.println("this is patiend id :" + this.getUserId());
+
+                appointment1 = PatientService.doViewParticularUpcomingAppointments(user.getUserId());
+                appointment2 = PatientService.doViewParticularMedicalHistory(user.getUserId());
+                if (appointment1 != null) {
+                    sessionMap.put("PatientUpcomingBooking", appointment1);
+                    sessionMap.put("PatientMedicalHistory", appointment2);
+                }
                 if (insert && r1 && r2) {
+                    System.out.println("SUcess");
                     result = "SUCCESS";
                 }
             }

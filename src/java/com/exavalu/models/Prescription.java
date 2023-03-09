@@ -4,6 +4,8 @@
  */
 package com.exavalu.models;
 
+import com.exavalu.services.AppointmentService;
+import com.exavalu.services.DoctorService;
 import com.exavalu.services.PrescriptionService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -49,6 +51,42 @@ public class Prescription extends ActionSupport implements ApplicationAware, Ses
     private String patientFirstName;
     private String patientLastName;
     private String emailAddress;
+    private String userId;
+    private String doctorFirstName;
+    private String doctorLastName;
+    private String departmentName;
+
+    public String getDoctorFirstName() {
+        return doctorFirstName;
+    }
+
+    public void setDoctorFirstName(String doctorFirstName) {
+        this.doctorFirstName = doctorFirstName;
+    }
+
+    public String getDoctorLastName() {
+        return doctorLastName;
+    }
+
+    public void setDoctorLastName(String doctorLastName) {
+        this.doctorLastName = doctorLastName;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getEmailAddress() {
         return emailAddress;
@@ -175,11 +213,14 @@ public class Prescription extends ActionSupport implements ApplicationAware, Ses
         System.out.println(this.appointmentId);
         System.out.println(this.patientId);
         System.out.println(this.date);
+        System.out.println(this.userId);
 
         boolean success = PrescriptionService.getInstance().addPrescription(this);
         ArrayList prescribedList = PrescriptionService.getInstance().getPrescription(this.doctorId);
         if (success) {
-
+            AppointmentService.getInstance().updateStatus(this.appointmentId);
+            ArrayList pendingprescribList = DoctorService.getInstance().doViewtodayAppointments("0", this.doctorId);
+            sessionMap.put("DoctorAppointmentListDashBoard", pendingprescribList);
             result = "SUCCESS";
             sessionMap.put("PreviousPrescription", prescribedList);
         }
