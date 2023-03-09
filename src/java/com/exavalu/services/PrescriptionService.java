@@ -108,8 +108,8 @@ public class PrescriptionService {
 
         return prescribedList;
     }
-    
-     public ArrayList getPatientPrescription(String userId) {
+
+    public ArrayList getPatientPrescription(String userId) {
 
         boolean result = false;
         ArrayList prescribedList = new ArrayList();
@@ -137,7 +137,6 @@ public class PrescriptionService {
                 prescribed.setDate(rs.getString("date"));
                 prescribed.setAdvice(rs.getString("advice"));
 
-
                 prescribedList.add(prescribed);
             }
         } catch (SQLException ex) {
@@ -149,5 +148,38 @@ public class PrescriptionService {
         return prescribedList;
     }
 
+    public Prescription getParticularPrescription(String appointmentId) {
+        Prescription prescribed = new Prescription();
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT * FROM prescription left join doctors on doctors.doctorId=prescription.doctorId left join departments on doctors.departmentId=departments.departmentId left join users on prescription.userId=users.userId where prescription.appointmentId=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, appointmentId);
+            ResultSet rs = ps.executeQuery();
+            System.out.println("PrescriptionService Particular Appointment:: " + ps);
+            if (rs.next()) {
+                prescribed.setDate(rs.getString("date"));
+                prescribed.setDoctorFirstName(rs.getString("doctorFirstName"));
+                prescribed.setDoctorLastName(rs.getString("doctorLastName"));
+                prescribed.setAppointmentId(rs.getString("appointmentId"));
+                prescribed.setSymptoms(rs.getString("symptoms"));
+                prescribed.setTests(rs.getString("test"));
+                prescribed.setMedicine(rs.getString("medicine"));
+                prescribed.setDosage(rs.getString("dosage"));
+                prescribed.setTime(rs.getString("timetotake"));
+                prescribed.setStatus(rs.getString("status"));
+                prescribed.setDepartmentName(rs.getString("departmentName"));
+                prescribed.setDate(rs.getString("date"));
+                prescribed.setAdvice(rs.getString("advice"));
+
+            }
+        } catch (SQLException ex) {
+            log.error("Cannot be Found");
+            System.out.println(ex.getErrorCode());
+            ex.printStackTrace();
+        }
+
+        return prescribed;
+    }
 
 }

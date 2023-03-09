@@ -431,3 +431,16 @@ table.dataTable-table:focus {
 	outline: solid 1px black;
     outline-offset: -1px;
 }
+div.dataTables_wrapper div.dataTables_length label {
+    font-weight: normal;
+    text-align: left;
+    white-space: nowrap
+}
+div.dataTables_wrapper div.dataTables_filter {
+    text-align: right
+}
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+    margin: 2px 0;
+    white-space: nowrap;
+    justify-content: flex-end
+}

@@ -50,7 +50,7 @@
                         <a onclick="fetchContent('doctorviewbooking.jsp', 'target')" class="nav_link"> <i class='bx bx-book'></i> <span class="nav_name">View Bookings</span></a> 
                         <!--<a onclick="fetchContent('prescribe.jsp', 'target')" class="nav_link"> <i class='bx bx-detail'></i> <span class="nav_name">Generate Prescription</span> </a>--> 
                         <a onclick="fetchContent('doctortodayAppointment.jsp', 'target')" class="nav_link"><i class="fab fa-yelp"></i> <span class="nav_name">Generate Prescription</span> </a> 
-                        <a onclick="fetchContent('doctorPrescribed.jsp', 'target')" class="nav_link"> <i class="fab fa-searchengin"></i><span class="nav_name">Generate Prescription</span> </a> 
+                        <a onclick="fetchContent('doctorPrescribed.jsp', 'target')" class="nav_link"> <i class="fab fa-searchengin"></i><span class="nav_name">Patient History</span> </a> 
 
                     </div> 
                     <a href="Logout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Sign Out</span> </a>
@@ -61,4 +61,10 @@
                     <h4>Main Components</h4>
                 </div>-->
         <script src="js/SideMenu.js"></script>
+         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.3.js" 
+                            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
+                    crossorigin="anonymous"></script>
 </html>

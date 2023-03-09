@@ -71,37 +71,37 @@
     <jsp:include page="sidemenu.jsp" ></jsp:include>
 
         <body >
-<!--             Topbar Start 
-            <div class="container-fluid py-2 border-bottom d-none d-lg-block">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
-                            <div class="d-inline-flex align-items-center">
-                                <a class="text-decoration-none text-body pe-3"href="tel:+0123456789"><i class="bi bi-telephone me-2"></i>+012 345 6789</a>
-                                <span class="text-body">|</span>
-                                <a  class="text-decoration-none text-body px-3" href = "mailto:admin@ohms.com"><i class="bi bi-envelope me-2"></i>info@ohms.com</a>
+            <!--             Topbar Start 
+                        <div class="container-fluid py-2 border-bottom d-none d-lg-block">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+                                        <div class="d-inline-flex align-items-center">
+                                            <a class="text-decoration-none text-body pe-3"href="tel:+0123456789"><i class="bi bi-telephone me-2"></i>+012 345 6789</a>
+                                            <span class="text-body">|</span>
+                                            <a  class="text-decoration-none text-body px-3" href = "mailto:admin@ohms.com"><i class="bi bi-envelope me-2"></i>info@ohms.com</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 text-center text-lg-end">
+                                        <div class="d-inline-flex align-items-center">
+                                            <a class="text-body px-2" href="https://www.facebook.com/login/">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                            <a class="text-body px-2" href="https://www.twitter.com/login/">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                            <a class="text-body px-2" href="https://www.linkedin.com/login/">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a>
+                                            <a class="text-body px-2" href="https://www.instagram.com/login/">
+                                                <i class="fab fa-instagram"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 text-center text-lg-end">
-                            <div class="d-inline-flex align-items-center">
-                                <a class="text-body px-2" href="https://www.facebook.com/login/">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a class="text-body px-2" href="https://www.twitter.com/login/">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a class="text-body px-2" href="https://www.linkedin.com/login/">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a class="text-body px-2" href="https://www.instagram.com/login/">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-             Topbar End -->
+                         Topbar End -->
 
 
             <div id="main">
@@ -152,75 +152,75 @@
                                                     <h6>${TodayBooking}</h6>
                                                 <span class="text-success small pt-1 fw-bold"><c:if test="${IncreaseRevenue!=null}"><i class="bi bi-arrow-up-circle"></i></c:if><c:if test="${DecreaseRevenue!=null}"><i class="bi bi-arrow-down-circle"></i></c:if><span class="text-muted small pt-2 ps-1">${HigherOrLowerText}</span>
 
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
+                                </div><!-- End Sales Card -->
 
-                                </div>
-                            </div><!-- End Sales Card -->
+                                <!-- Revenue Card -->
+                                <div class="col-xxl-4 col-md-6">
+                                    <div class="card info-card revenue-card">
 
-                            <!-- Revenue Card -->
-                            <div class="col-xxl-4 col-md-6">
-                                <div class="card info-card revenue-card">
+                                        <div class="filter">
+                                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <li class="dropdown-header text-start">
+                                                    <h6>Filter</h6>
+                                                </li>
 
-                                    <div class="filter">
-                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                            <li class="dropdown-header text-start">
-                                                <h6>Filter</h6>
-                                            </li>
+                                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                            </ul>
+                                        </div>
 
-                                            <li><a class="dropdown-item" href="#">Today</a></li>
-                                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                                        </ul>
-                                    </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Total Revenue <span>| Today</span></h5>
 
-                                    <div class="card-body">
-                                        <h5 class="card-title">Total Revenue <span>| Today</span></h5>
-
-                                        <div class="d-flex align-items-center">
-                                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                                <i class="bi bi-currency-dollar"></i>
-                                            </div>
-                                            <div class="ps-3">
-                                                <h6>INR ${TodayRevenue}</h6>
+                                            <div class="d-flex align-items-center">
+                                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                    <i class="bi bi-currency-dollar"></i>
+                                                </div>
+                                                <div class="ps-3">
+                                                        <h6>INR ${TodayRevenue}</h6>
                                                 <span class="text-success small pt-1 fw-bold"><c:if test="${IncreaseRevenue!=null}"><i class="bi bi-arrow-up-circle"></i></c:if><c:if test="${DecreaseRevenue!=null}"><i class="bi bi-arrow-down-circle"></i></c:if></span> <span class="text-muted small pt-2 ps-1">${HigherOrLowerTextRevenue}</span>
 
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
+                                </div><!-- End Revenue Card -->
 
-                                </div>
-                            </div><!-- End Revenue Card -->
+                                <!-- Customers Card -->
+                                <div class="col-xxl-4 col-xl-12">
 
-                            <!-- Customers Card -->
-                            <div class="col-xxl-4 col-xl-12">
+                                    <div class="card info-card customers-card">
 
-                                <div class="card info-card customers-card">
+                                        <div class="filter">
+                                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <li class="dropdown-header text-start">
+                                                    <h6>Filter</h6>
+                                                </li>
 
-                                    <div class="filter">
-                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                            <li class="dropdown-header text-start">
-                                                <h6>Filter</h6>
-                                            </li>
+                                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                            </ul>
+                                        </div>
 
-                                            <li><a class="dropdown-item" href="#">Today</a></li>
-                                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                                        </ul>
-                                    </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title"> Users Registered<span>| Today </span></h5>
 
-                                    <div class="card-body">
-                                        <h5 class="card-title"> Users Registered<span>| Today </span></h5>
-
-                                        <div class="d-flex align-items-center">
-                                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                                <i class="bi bi-people"></i>
-                                            </div>
-                                            <div class="ps-3">
-                                                <h6>${TodayUsers}</h6>
+                                            <div class="d-flex align-items-center">
+                                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                    <i class="bi bi-people"></i>
+                                                </div>
+                                                <div class="ps-3">
+                                                        <h6>${TodayUsers}</h6>
                                                 <span class="text-success small pt-1 fw-bold"><i class="bi bi-arrow-up-circle"></i></span><span class="text-muted small pt-2 ps-1">User registered today</span>
 
                                             </div>
@@ -343,21 +343,21 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach items="${DoctorAppointmentListDashBoard}" var="appointment">
-                                                <tr>
-                                                    <th scope="row"><a href="#">${appointment.appointmentId}</a></th>
-                                                    <td>${appointment.patientFirstName} ${appointment.patientLastName}</td>
-                                                    <td><a href="#" class="text-primary">${appointment.departmentName}</a></td>
-                                                    <td>${appointment.doctorFirstName} ${appointment.doctorLastName}</td>
-                                                    <td>
-                                                <c:if test="${appointment.statusId.equals('1')}"><span class="badge bg-warning">${appointment.status}</span></c:if>
-                                                <c:if test="${appointment.statusId.equals('2')}"><span class="badge bg-info">${appointment.status}</span></c:if>
-                                                <c:if test="${appointment.statusId.equals('3')}"><span class="badge bg-success">${appointment.status}</span></c:if>
-                                                <c:if test="${appointment.statusId.equals('4')}"><span class="badge bg-danger">${appointment.status}</span></c:if>
-                                                </td>
-                                                </tr>
+                                                <c:forEach items="${DoctorAppointmentListDashBoard}" var="appointment">
+                                                    <tr>
+                                                        <th scope="row"><a href="#">${appointment.appointmentId}</a></th>
+                                                        <td>${appointment.patientFirstName} ${appointment.patientLastName}</td>
+                                                        <td><a href="#" class="text-primary">${appointment.departmentName}</a></td>
+                                                        <td>${appointment.doctorFirstName} ${appointment.doctorLastName}</td>
+                                                        <td>
+                                                            <c:if test="${appointment.statusId.equals('1')}"><span class="badge bg-warning">${appointment.status}</span></c:if>
+                                                            <c:if test="${appointment.statusId.equals('2')}"><span class="badge bg-info">${appointment.status}</span></c:if>
+                                                            <c:if test="${appointment.statusId.equals('3')}"><span class="badge bg-success">${appointment.status}</span></c:if>
+                                                            <c:if test="${appointment.statusId.equals('4')}"><span class="badge bg-danger">${appointment.status}</span></c:if>
+                                                            </td>
+                                                        </tr>
 
-                                            </c:forEach>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
 
@@ -398,15 +398,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach items="${AppointmentListDashBoard}" var="appointment">
-                                                <tr>
-                                                    <th scope="row"><a href="#">${appointment.departmentId}</a></th>
-                                                    <td>${appointment.departmentName}</td>
+                                                <c:forEach items="${AppointmentListDashBoard}" var="appointment">
+                                                    <tr>
+                                                        <th scope="row"><a href="#">${appointment.departmentId}</a></th>
+                                                        <td>${appointment.departmentName}</td>
 
-                                                    <td>${appointment.doctorFirstName} ${appointment.doctorLastName}</td>
+                                                        <td>${appointment.doctorFirstName} ${appointment.doctorLastName}</td>
 
-                                                </tr>
-                                            </c:forEach>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
 
@@ -437,5 +437,12 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+                                            $(document).ready(function () {
+                                                $('#example').DataTable();
+                                            });
+    </script>
 </html>

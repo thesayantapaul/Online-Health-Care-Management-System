@@ -12,6 +12,7 @@
         <meta charset="UTF-8">
         <title>Patient's Upcoming Appointments</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css"/>
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="css_medicalAppointmentHistory//style.css">
@@ -36,10 +37,7 @@
             <div class="container">
 
                 <h3>OHMS - Patient's Active</h3>
-                <br>
-                <br>
-
-                <table class="table table-hover">
+                <table id="example" class="table table-hover">
                     <thead>
                         <tr>        
                             <th>Appointment Id</th>
@@ -121,7 +119,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                 <td>
+                                <td>
                                     <div class="user-info">
                                         <div class="user-info__basic">
                                             <a class="mb-0">${appointment.advice}</a>
@@ -143,7 +141,14 @@
                 </table>
             </div>
         </section>
-
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#example').DataTable();
+            });
+        </script>
     </body>
 </html>
 
