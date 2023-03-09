@@ -156,22 +156,22 @@
                                 <tr>
                                     <td>
                                         <div class="form-group first">
-                                            <label for="emailAddress">Email Address</label>
-                                            <input onchange="checkEmail(this.value)" name="emailAddress" type="email" class="form-control" placeholder="your-email@gmail.com" id="emailAddress" required>
+                                            <label for="emailAddress"><strong>User Id</strong></label>
+                                            <input onchange="checkEmail(this.value)" name="emailAddress" type="email" class="form-control" placeholder="user@ohms.com" id="emailAddress" required>
                                         </div>
 
 
                                         <div class="form-group first">
-                                            <label for="firstName">First Name</label>
+                                            <label for="firstName"><strong>First Name</strong></label>
                                             <input name="firstName" type="text" class="form-control" placeholder="First Name" id="firstName" required>
                                         </div>
 
                                         <div class="form-group last mb-3">
-                                            <label for="occupation">Occupation</label>
+                                            <label for="occupation"><strong>Occupation</strong></label>
                                             <input name="occupation" type="text" class="form-control" placeholder="Your Occupation" id="occupation" value="OHMS Doctor" readonly>
                                         </div>
                                         <div class="form-group last mb-3">
-                                            <label>Country</label>
+                                            <label><strong>Country</strong></label>
                                             <select name="country" class="countries form-control" id="countryId">
                                                 <option value="">Select Country</option>
                                             </select>
@@ -179,16 +179,16 @@
                                     </td>
                                     <td>
                                         <div class="form-group last mb-3">
-                                            <label for="password">Password</label>
+                                            <label for="password"><strong>Password</strong></label>
                                             <input name="password" type="password" class="form-control" placeholder="Your Password" id="password" required>
                                         </div>
                                         <div class="form-group first">
-                                            <label for="lastName">Last Name</label>
+                                            <label for="lastName"><strong>Last Name</strong></label>
                                             <input name="lastName" type="text" class="form-control" placeholder="Last Name" id="lastName" required>
                                         </div>
 
                                         <div class="form-group last mb-3">
-                                            <label for="roleId">Role</label>
+                                            <label for="roleId"><strong>Role</strong></label>
                                             <select onchange="functionToAddDoctorOrAdmin(this)" name="roleId" class="form-control" id="roleId">
                                                 <option value="" disabled>Select Role</option>
                                                 <option value="2">Doctor</option>
@@ -197,7 +197,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group last mb-3">
-                                            <label>State</label>
+                                            <label><strong>State</strong></label>
                                             <select name="state" class="states form-control" id="stateId">
                                                 <option value="">Select State</option>
                                             </select>
@@ -205,12 +205,12 @@
                                     </td>
                                     <td>
                                         <div class="form-group first">
-                                            <label for="age">Age</label>
+                                            <label for="age"><strong>Age</strong></label>
                                             <input name="age" type="text" class="form-control" placeholder="Age" id="age" >
                                         </div>
                                         <div class="form-group last mb-3">
 
-                                            <label class="gender" for="gender" id="gender">Choose Gender</label>
+                                            <label class="gender" for="gender" id="gender"><strong>Gender</strong></label>
                                             <select  name="gender" class="form-control" id="gender" required>
                                                 <option value="0" disabled>--Select Gender--</option>
                                                 <option value="male">Male</option>
@@ -219,7 +219,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group last mb-3">
-                                            <label class="departmentName" for="departmentId">Department Name</label>
+                                            <label class="departmentName" for="departmentId"><strong>Department Name</strong></label>
                                             <select  name="departmentId" class="form-control" id="departmentName">
                                                 <option value="0" id="selectDepartmentOptionId">---Select Department---</option>
                                                 <c:forEach items="${DeptList}" var="department">
@@ -228,23 +228,20 @@
                                             </select>
                                         </div>
                                         <div class="form-group last mb-3">
-                                            <label>City</label>
+                                            <label><strong>City</strong></label>
                                             <select name="address" class="cities form-control" id="cityId">
                                                 <option value="">Select City</option>
                                             </select>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-group first">
-                                            <label for="contactEmail">  contact mail</label>
-                                            <input name="contactEmail" type="email" class="form-control" placeholder="user-personalmail@gmail.com" id="contactEmail" >
-                                        </div>
-                                    </td>
-                                </tr>
                             </table>
-                            <button type="button" onclick="sendRegisterFormInfo()" class="btn btn-block py-2 btn-warning">Add</button>
+                            <div class="form-group first">
+                                <label for="contactEmail"><strong>Contact Mail</strong></label>
+                                <input name="contactEmail" type="email" class="form-control" placeholder="user-personalmail@gmail.com" id="contactEmail" >
+                            </div>
+
+                            <button type="button" onclick="sendRegisterFormInfo()" class="btn btn-block py-2 btn-warning bi bi-save">  Add</button>
 
                         </form>
                     </div>
@@ -254,4 +251,5 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
     </body>
+    <p class="mb-md-0">&copy; <a class="text-primary" href="#">OHMS</a>. All Rights Reserved. by @nik</p>
 </html>

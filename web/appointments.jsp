@@ -18,6 +18,22 @@ admin appointment jsp
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script>
 
+            function sendDateRange() {
+
+                var startingDate = document.getElementById("startingDate").value;
+                var endingDate = document.getElementById("endingDate").value;
+
+                var url = "FetchFilteredAppointment?startingDate=" + startingDate + "&endingDate=" + endingDate;
+
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function ()
+                {
+                    document.getElementById("viewAppointmenttableDivId").innerHTML = xmlhttp.responseText;
+                };
+                xmlhttp.open("POST", url, true);
+                xmlhttp.send();
+            }
+
             function editAppointmentData(appointmentId)
             {
                 //event.preventDefault();
@@ -58,14 +74,40 @@ admin appointment jsp
             //functionToUpdateAppointment
 
         </script>
+        <style>
+            #calendarId {
+                width:600px;
+                margin:auto;
+
+            }
+            hr.dotted {
+                width: 900px;
+                margin: auto;
+                border-top: 3px dotted #bbb;
+            }
+        </style>
 
 
     </head>
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
             <section class="main-content">
+
+                <div class="input-group mb-4" id="calendarId">
+                    <strong class="btn btn-primary">Filter : </strong>
+
+                    <input id="startingDate" name="startingDate" type="date"
+                           class="form-control bg-light border-0 datetimepicker-input"
+                           placeholder="Date" style="height: 45px;">
+                    <button class="btn btn-secondary"> to </button>
+                    <input id="endingDate" name="endingDate" type="date"
+                           class="form-control bg-light border-0 datetimepicker-input"
+                           placeholder="Date" style="height: 45px;">
+                    <button class="btn btn-primary bi bi-search" onclick="sendDateRange()"></button>
+                </div>
+                <hr class="dotted">
                 <div class="container" id="viewAppointmenttableDivId">
-                    <h3>OHMS Appointments</h3>
+
                     <table class="table">
                         <thead>
                             <tr>
@@ -138,7 +180,7 @@ admin appointment jsp
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="btn btn-outline-info">View</span>
+                                        <span class="btn btn-outline-primary  bi bi-receipt">  View</span>
                                     </td>
                                     <td>
                                         <div class="dropdown open">
@@ -181,10 +223,12 @@ admin appointment jsp
                         </c:forEach>
                     </tbody>
                 </table>
+
             </div>
         </section>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     </body>
 </html>

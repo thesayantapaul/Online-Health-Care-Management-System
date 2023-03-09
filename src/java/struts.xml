@@ -87,6 +87,12 @@
             <result name="SUCCESS">doctorviewbooking.jsp</result>
             <result name="FAILURE">doctorIndex.jsp</result>
         </action> 
+        <!--FetchFilteredAppointment-->
+        <action name="FetchFilteredAppointment" class="com.exavalu.models.Admin" method="doFetchFilteredAppointment">
+            <result name="APPOINTMENTTABLE">adminappointmentviewtable.jsp</result>
+            <result name="FAILURE">adminappointmentviewtable.jsp</result>
+        </action>
+        
         
         <!--fetch particular appointment with id admin-->
         <action name="FetchParticularAppointment" class="com.exavalu.models.Admin" method="doViewParticularAppointment">

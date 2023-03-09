@@ -72,7 +72,7 @@
                         </div>
                     </td>
                     <td>
-                        <span class="btn btn-outline-info">View</span>
+                        <span class="btn btn-outline-primary  bi bi-receipt">  View</span>
                     </td>
                     <td>
                         <div class="dropdown open">
