@@ -9,15 +9,16 @@
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/AdminService.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/appointments.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/adminSearch.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Doctors.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/checkEmail.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Fb_Model.java</file>
-            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/index.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/editAppointments.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/adminAddDoctor.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/struts.xml</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/adminsearchresulttable.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Departments.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Admin.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/AppointmentService.java</file>
-            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/adminappointmentviewtable.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Status.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/menu.jsp</file>
         </group>
