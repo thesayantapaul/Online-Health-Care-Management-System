@@ -192,6 +192,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     @Override
     public void setSession(Map<String, Object> session) {
         sessionMap = (SessionMap) session;
+        
     }
 
     /**
@@ -410,6 +411,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 result = "DOCTORINDEX";
             }
             if (this.roleId.equals("3")) {
+                //sessionMap.put("UserLoggedIn", this);
                 ArrayList deptList = DepartmentService.getInstance().getAllDepartments();
                 sessionMap.put("DeptList", deptList);
 

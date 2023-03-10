@@ -1,3 +1,9 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${Loggedin==null}">
+    <c:redirect url="login.jsp"/>
+</c:if>
+<!DOCTYPE html>
 <html>
     <head>
         <!-- Required meta tags -->
@@ -33,6 +39,9 @@
                 overflow: auto;
 
             }
+            #messageText{
+                width: 100%
+            }
         </style>
         <script>
             function showDoctorId(doctorId) {
@@ -44,14 +53,27 @@
         </script>
         <script type="text/javascript">
             (function () {
-                emailjs.init("1Sah0vRJNKAddwquU");
+                emailjs.init("3ScyFERQHwywYs_9a");
             })();
         </script>
 
         <script>
+            // for modal
+            function openModalForSendingMail(doctorId) {
+                //alert(doctorId);
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function ()
+                {
+                    document.querySelector("#mailModal .modal-content").innerHTML = xmlhttp.responseText;
+                };
+                xmlhttp.open("POST", "FetchParticularDoctor?doctorId=" + doctorId, true);
+                xmlhttp.send();
+
+            }
+
             function sendDoctorAmail(firstName, lastName, contactEmail) {
 
-
+                alert(contactEmail);
                 var params = {
                     from_name: "OHMS",
                     firstName: firstName,
@@ -175,7 +197,7 @@
                                                             <label class="departmentName" for="inlineFormCustomSelectPref" id="departmentName"><strong>Department Name</strong></label>
                                                             <select  name="departmentId" class="form-control" id="departmentName">
                                                                 <option value="">--select department--</option>
-                                                                <c:forEach items="${DeptList}" var="department">
+                                                            <c:forEach items="${DeptList}" var="department">
                                                                 <option value="${department.departmentId}">${department.departmentName}</option>
                                                             </c:forEach>
                                                         </select>
@@ -243,6 +265,17 @@
                             </div>
 
                         </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="mailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--modal end-->
+
                         <div  id="viewSearchResult">
 
                         </div>

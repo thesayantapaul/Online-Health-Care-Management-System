@@ -1,5 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${Loggedin==null}">
+    <c:redirect url="login.jsp"/>
+</c:if>
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,16 +31,18 @@
 
         <title>OHMS Registration</title>
         <!--send email to doctor who registered by admin with login credentials-->
-        <script src="js/adminAddDoctor.js"></script>
+
 
         <script type="text/javascript"
                 src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
         </script>
         <script type="text/javascript">
+
             (function () {
-                emailjs.init("1Sah0vRJNKAddwquU");
+                emailjs.init("3ScyFERQHwywYs_9a");
             })();
         </script>
+        <script src="js/adminAddDoctor.js"></script>
 
         <!----------------------------------------------------------------------------------------------->
         <script>
@@ -249,6 +254,7 @@
             </div>
         </div>
         <script src="js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
         <script src="js/main.js"></script>
     </body>
     <p class="mb-md-0">&copy; <a class="text-primary" href="#">OHMS</a>. All Rights Reserved. by @nik</p>

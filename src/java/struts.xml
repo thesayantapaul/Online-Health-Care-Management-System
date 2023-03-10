@@ -62,6 +62,11 @@
         <action name="home" class="com.exavalu.models.Doctors" method="doViewHome">
             <result name="SUCCESS">doctorhome.jsp</result>
         </action>
+        <!--FetchParticularDoctor-->
+        <action name="FetchParticularDoctor" class="com.exavalu.models.Admin" method="doFetchParticularDoctor">
+            <result name="MODAL">sendMailToDoctorModal.jsp</result>
+        </action>
+        
         
         <action name="SignUp" class="com.exavalu.models.Users" method="doSignUp">
             <result name="SUCCESS">login.jsp</result>

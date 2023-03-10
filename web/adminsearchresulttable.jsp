@@ -60,34 +60,7 @@
                     </div>
                 </td>
                 <td>
-                    <!-- Modal -->
-                    <div class="modal fade" id="ex${doctor.doctorId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Contact:</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p style="color:blue;"><strong>Send a Mail to ${doctor.doctorFirstName} ${doctor.doctorLastName} ! <br> having mailId : ${doctor.contactEmail}</strong></p> <div class="form-group">
-
-                                        <label for="message-text" class="col-form-label">Message body:</label>
-                                        <textarea class="form-control" id="messageText"></textarea>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
-
-                                    <a href="#" onclick="sendDoctorAmail('${doctor.doctorFirstName}', '${doctor.doctorLastName}', '${doctor.contactEmail}')" data-dismiss="modal" class="btn btn-success">send mail</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--modal end-->
-
-                    <a data-toggle="modal" data-target="#ex${doctor.doctorId}"><span class=" btn btn-success bi bi-pencil"> Contact </span></a>
+                    <a data-toggle="modal" data-target="#mailModal"><span class=" btn btn-success bi bi-envelope" onclick="openModalForSendingMail('${doctor.doctorId}')"> Contact </span></a>
                 </td>
             </tr>
         </c:forEach>
