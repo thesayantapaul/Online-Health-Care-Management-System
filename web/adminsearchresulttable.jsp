@@ -71,7 +71,8 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <p style="color:green;"><strong>Send a Mail to ${doctor.doctorFirstName} ${doctor.doctorLastName} !</strong></p> <div class="form-group">
+                                    <p style="color:blue;"><strong>Send a Mail to ${doctor.doctorFirstName} ${doctor.doctorLastName} ! <br> having mailId : ${doctor.contactEmail}</strong></p> <div class="form-group">
+
                                         <label for="message-text" class="col-form-label">Message body:</label>
                                         <textarea class="form-control" id="messageText"></textarea>
                                     </div>

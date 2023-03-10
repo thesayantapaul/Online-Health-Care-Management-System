@@ -1,6 +1,3 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
 <html>
     <head>
         <!-- Required meta tags -->
@@ -12,7 +9,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 
         <!--<link rel="stylesheet" href="css/login-icon-style.css">-->
 
@@ -134,7 +131,7 @@
                         <div class="row mb-2">
                             <div class="col-md-6">
                                 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                                    <div class="col p-3 d-flex flex-column position-static" >
+                                    <div class="col p-2 d-flex flex-column position-static" >
                                         <h3><strong class="d-inline-block mb-2 text-danger">Search Doctor</strong></h3>
                                         <form name="searchDoctor" class="form">
                                             <table class="table table-borderless">
@@ -153,7 +150,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="form-group first">
-                                                            <label for="doctorLastName"> <strong>Last Name </strong></label>
+                                                            <label for="doctorLastName"><strong>Last Name</strong></label>
                                                             <input name="doctorLastName" type="text" class="form-control" placeholder="Last Name" id="doctorLastName">
                                                         </div>
 
@@ -161,7 +158,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <div class="form-group last mb-3">
+                                                        <div class="form-group first">
 
                                                             <label for="inlineFormCustomSelectPref" id="patientGender"><strong>Gender</strong></label>
                                                             <select  name="doctorGender" class="form-control" id="gender">
@@ -173,12 +170,12 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="form-group last mb-3">
+                                                        <div class="form-group first">
 
                                                             <label class="departmentName" for="inlineFormCustomSelectPref" id="departmentName"><strong>Department Name</strong></label>
                                                             <select  name="departmentId" class="form-control" id="departmentName">
                                                                 <option value="">--select department--</option>
-                                                            <c:forEach items="${DeptList}" var="department">
+                                                                <c:forEach items="${DeptList}" var="department">
                                                                 <option value="${department.departmentId}">${department.departmentName}</option>
                                                             </c:forEach>
                                                         </select>
@@ -187,14 +184,14 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                        <button type="button" onclick="sendSearchFormInfo()" class="btn btn-block py-2 btn-danger">Search</button>
+                                        <button type="button" onclick="sendSearchFormInfo()" class="btn btn-block py-2 btn-danger bi bi-search">  Search</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                                <div class="col p-3 d-flex flex-column position-static">
+                                <div class="col p-2 d-flex flex-column position-static">
                                     <h3><strong class="d-inline-block mb-2 text-primary">Search Patient</strong></h3>
                                     <form name="searchPatient" class="form">
                                         <table class="table table-borderless">
@@ -228,7 +225,7 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="form-group last mb-3">
+                                                    <div class="form-group first">
 
                                                         <label for="inlineFormCustomSelectPref" id="patientGender"><strong>Gender</strong></label>
                                                         <select  name="patientGender" class="form-control" id="inlineFormCustomSelectPref">
@@ -240,7 +237,7 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                        <button type="button" onclick="sendSearchFormInfoPatient()" class="btn btn-block py-2 btn-primary">Search</button>
+                                        <button type="button" onclick="sendSearchFormInfoPatient()" class="btn btn-block py-2 btn-primary bi bi-search">  Search</button>
                                     </form>
                                 </div>
                             </div>

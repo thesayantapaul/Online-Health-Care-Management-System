@@ -6,8 +6,12 @@ import com.exavalu.services.StatusService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
+import javax.xml.bind.DatatypeConverter;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ApplicationAware;
@@ -57,6 +61,32 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
             sessionMap.put("AppointmentList", appointmentList);
             result = "SUCCESS";
 
+        }
+        return result;
+    }
+
+    //---------fetch filtered appointments in specified date range
+    public String doFetchFilteredAppointment() {
+        String result = "FAILURE";
+//        if (this.startingDate.isBlank()) {
+//            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+//            String date = dateFormat.format(LocalDate.now());
+//            this.startingDate = date;
+//            System.out.println(this.startingDate);
+//        }
+//        if (this.endingDate.isBlank()) {
+//            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+//            String date = dateFormat.format(LocalDate.now());
+//            this.endingDate = date;
+//            System.out.println(this.endingDate);
+//        }
+        System.out.println("starting date"+this.startingDate);
+        System.out.println(LocalDate.now());
+        ArrayList appointmentList = AdminService.doViewFilteredAppointments(this.startingDate, this.endingDate);
+
+        if (appointmentList.size() >= 0) {
+            sessionMap.put("AppointmentList", appointmentList);
+            result = "APPOINTMENTTABLE";
         }
         return result;
     }
@@ -293,7 +323,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
                     sessionMap.put("CheckEmail", "Successfully Registered!");
                     result = "ALERT";
                     return result;
-                }else{
+                } else {
                     sessionMap.put("CheckEmail", "unable to process!");
                     result = "ALERT";
                     return result;
@@ -316,8 +346,6 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         }
         return result;
     }
-
-
 
     public String doCheckEmail() {
         String result = "FAILURE";
@@ -363,6 +391,24 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
     private String occupation;
     private String address;
     private String contactEmail;
+    private String startingDate;
+    private String endingDate;
+
+    public String getStartingDate() {
+        return startingDate;
+    }
+
+    public void setStartingDate(String startingDate) {
+        this.startingDate = startingDate;
+    }
+
+    public String getEndingDate() {
+        return endingDate;
+    }
+
+    public void setEndingDate(String endingDate) {
+        this.endingDate = endingDate;
+    }
 
     public String getContactEmail() {
         return contactEmail;
