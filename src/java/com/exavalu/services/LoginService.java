@@ -57,6 +57,8 @@ public class LoginService {
                 user.setDoctorId(rs.getString("doctorId"));
                 user.setPatientId(rs.getString("patientId"));
                 user.setUserId(rs.getString("userId"));
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
 
                 result = true;
             }

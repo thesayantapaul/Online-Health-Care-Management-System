@@ -19,7 +19,7 @@
     });
 
 
-    // Date and time picker
+   //  Date and time picker
     $('.date').datetimepicker({
         format: 'L'
     });

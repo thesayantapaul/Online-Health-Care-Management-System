@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -63,16 +64,17 @@ public class AdminService {
 
         return appointmentList;
     }
+
     //filtered appointment list-----------------
-    public static ArrayList doViewFilteredAppointments(String startingDate,String endingDate) {
+    public static ArrayList doViewFilteredAppointments(String startingDate, String endingDate) {
         ArrayList appointmentList = new ArrayList();
         String sql = "SELECT * FROM appointments a,doctors d,patients p,departments dp,statusofappointments s where a.doctorId=d.doctorId and a.patientId=p.patientId and a.departmentId=dp.departmentId and a.statusId = s.statusId and appointmentDate between ? and ? ;";
-        
+
         try {
             Connection con = JDBCConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, startingDate);
-            
+
             ps.setString(2, endingDate);
 
             ResultSet rs = ps.executeQuery();
@@ -179,6 +181,33 @@ public class AdminService {
         }
 
         return result;
+    }
+
+    //do fetch perticular doctor using doctorId
+    public static Doctors doSearchDoctor(String doctorId) {
+        Doctors doctor = new Doctors();
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "select * from doctors where doctorId = ?";
+            
+             PreparedStatement ps = con.prepareStatement(sql);
+             ps.setString(1,doctorId);
+             ResultSet rs = ps.executeQuery();
+             
+             if(rs.next()){
+                 doctor.setDoctorFirstName(rs.getString("doctorFirstName"));
+                 doctor.setDoctorLastName(rs.getString("doctorLastName"));
+                 doctor.setContactEmail(rs.getString("contactEmail"));
+             }
+             
+            
+            
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
+        }
+        return doctor;
     }
 
     public static ArrayList doSearchDoctor(Admin adminDoctor) {
@@ -479,10 +508,10 @@ public class AdminService {
             ps.setString(1, emailAddress);
 
             ResultSet rs = ps.executeQuery();
-            
+
             if (!rs.next()) {
-                    result = false;
-                    System.out.println("result of query = "+result);
+                result = false;
+                System.out.println("result of query = " + result);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -501,7 +530,7 @@ public class AdminService {
             ps.setString(2, doctor.getLastName());
             ps.setString(3, doctor.getDepartmentId());
             ps.setString(4, doctor.getEmailAddress());
-            ps.setString(5,doctor.getContactEmail());
+            ps.setString(5, doctor.getContactEmail());
 
             int res = ps.executeUpdate();
 
@@ -514,6 +543,7 @@ public class AdminService {
         }
         return result;
     }
+
     public static boolean doAddDoctorInUsers(Admin doctor) {
 
         boolean result = false;
@@ -525,14 +555,13 @@ public class AdminService {
             ps.setString(2, doctor.getFirstName());
             ps.setString(3, doctor.getLastName());
             ps.setString(4, doctor.getPassword());
-           // ps.setString(5, "");
+            // ps.setString(5, "");
             ps.setString(5, doctor.getGender());
             ps.setString(6, doctor.getRoleId());
             ps.setString(7, doctor.getOccupation());
             ps.setString(8, doctor.getAddress());
             ps.setString(9, doctor.getDoctorId());
             ps.setString(10, doctor.getAge());
-           
 
             int res = ps.executeUpdate();
 
@@ -545,6 +574,7 @@ public class AdminService {
         }
         return result;
     }
+
     public static boolean doAddAdminInUsers(Admin admin) {
 
         boolean result = false;
@@ -556,14 +586,13 @@ public class AdminService {
             ps.setString(2, admin.getFirstName());
             ps.setString(3, admin.getLastName());
             ps.setString(4, admin.getPassword());
-           // ps.setString(5, "");
+            // ps.setString(5, "");
             ps.setString(5, admin.getGender());
             ps.setString(6, admin.getRoleId());
             ps.setString(7, admin.getOccupation());
             ps.setString(8, admin.getAddress());
-          
+
             ps.setString(9, admin.getAge());
-           
 
             int res = ps.executeUpdate();
 
@@ -576,7 +605,8 @@ public class AdminService {
         }
         return result;
     }
-     public static String doSearchDoctorUsingEmail(String emailAddress) {
+
+    public static String doSearchDoctorUsingEmail(String emailAddress) {
 
         String doctorId = "";
         try {
@@ -585,7 +615,7 @@ public class AdminService {
             PreparedStatement preparedStatement = con.prepareStatement(sql);
 
             preparedStatement.setString(1, emailAddress);
-          
+
             System.out.println("sql search doctor = " + preparedStatement);
 
 //            System.out.println("sql"+preparedStatement);
@@ -593,9 +623,9 @@ public class AdminService {
 //            System.out.println("size of rs="+ rs.getFetchSize());
 
             while (rs.next()) {
-                
+
                 doctorId = rs.getString("doctorId");
-                
+
             }
 
         } catch (SQLException ex) {

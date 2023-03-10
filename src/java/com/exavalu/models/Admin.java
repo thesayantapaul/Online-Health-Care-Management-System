@@ -134,6 +134,16 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         }
         return result;
     }
+    public String doFetchParticularDoctor(){
+        String result = "FAILURE";
+        Doctors doctor = new Doctors();
+        doctor = AdminService.doSearchDoctor(this.doctorId);
+        if(doctor!=null){
+            sessionMap.put("Doctor",doctor);
+            result = "MODAL";
+        }
+        return result;
+    }
 
     public String doSearchPatient() {
         String result = "FAILURE";
