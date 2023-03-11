@@ -227,15 +227,30 @@ public class Prescription extends ActionSupport implements ApplicationAware, Ses
 
         return result;
     }
+
     public String getPatientPrescription() {
         String result = "FALIURE";
 
         System.out.println(this.appointmentId);
         Prescription prescription = PrescriptionService.getInstance().getParticularPrescription(this.appointmentId);
-        if (prescription!=null) {
+        String[] med = prescription.getMedicine().split(",");
+        String[] dos = prescription.getDosage().split(",");
+        String[] tim = prescription.getTime().split(",");
+        System.out.println(med[0]);
+        System.out.println(med[1]);
+
+        System.out.println(prescription.getMedicine());
+
+        if (prescription != null) {
 
             sessionMap.put("Prescription", prescription);
-            result = "SUCCESS";
+            sessionMap.put("Med", med);
+
+            sessionMap.put("Dos", dos);
+            sessionMap.put("Times", tim);
+            System.out.println(sessionMap);
+
+            result = "MODAL";
         }
 
         return result;

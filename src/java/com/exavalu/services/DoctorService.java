@@ -67,11 +67,89 @@ public class DoctorService {
 
         } catch (SQLException ex) {
             int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
-            System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+            log.error(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors");
+            System.out.println(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors");
         }
 
         return deptLIst;
+    }
+
+    public String[] getAllWeekDays(String doctorId) {
+        Doctors doctors = new Doctors();
+
+        try {
+
+            Connection con = JDBCConnectionManager.getConnection();
+
+            String sql = "Select * from doctors where doctorId=?";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+            preparedStatement.setString(1, doctorId);
+
+            System.out.println(preparedStatement);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+
+                doctors.setWeekDays(rs.getString("weekdays"));
+
+            }
+
+        } catch (SQLException ex) {
+            int e = ex.getErrorCode();
+            log.error(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors");
+            System.out.println(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors");
+        }
+
+        return doctors.getWeekDays().split(",");
+    }
+
+    public String getAllTime(String weekdays, Appointment user) {
+        Doctors doctors = new Doctors();
+        String res = "";
+        try {
+
+            Connection con = JDBCConnectionManager.getConnection();
+
+            String sql = "Select * from doctors where doctorId=?";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+            preparedStatement.setString(1, user.getDoctorId());
+
+            System.out.println(preparedStatement);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+
+                doctors.setWeekDays(rs.getString("weekdays"));
+                System.out.println(doctors.getWeekDays());
+
+                String[] weekday = doctors.getWeekDays().split(",");
+                System.out.println(weekday[0]);
+                doctors.setTime(rs.getString("vsitingtime"));
+
+                String[] time = doctors.getTime().split(",");
+
+                for (int i = 0; i < weekday.length; i++) {
+                    System.out.println(weekday[i]);
+                    if (weekday[i].equals(weekdays)) {
+                        res = time[i];
+                    }
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            int e = ex.getErrorCode();
+            log.error(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors");
+            System.out.println(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors");
+        }
+
+        return res;
     }
 
     public ArrayList doViewAppointments(String doctorId) {
@@ -81,7 +159,47 @@ public class DoctorService {
 
             Connection con = JDBCConnectionManager.getConnection();
 
-            String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.doctorId=?";
+            String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.doctorId=? and appointments.appointmentDate>=CURDATE()";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, doctorId);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Appointment appointment = new Appointment();
+
+                appointment.setAppointmentId(rs.getString("appointmentId"));
+                appointment.setAppointmentDate(rs.getString("appointmentDate"));
+
+                appointment.setPatientFirstName(rs.getString("patientFirstName"));
+                appointment.setPatientLastName(rs.getString("patientLastName"));
+                appointment.setGender(rs.getString("gender"));
+                appointment.setAge(rs.getString("age"));
+                appointment.setDepartmentName(rs.getString("departmentName"));
+                //appointment.setSymptoms(rs.getString("symptoms"));
+
+                appointmentList.add(appointment);
+
+            }
+
+        } catch (SQLException ex) {
+            int e = ex.getErrorCode();
+            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+            System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+        }
+
+        return appointmentList;
+    }
+    
+     public ArrayList doViewPastAppointments(String doctorId) {
+
+        ArrayList appointmentList = new ArrayList();
+        try {
+
+            Connection con = JDBCConnectionManager.getConnection();
+
+            String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.doctorId=? and appointments.appointmentDate<CURDATE()";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, doctorId);

@@ -95,6 +95,15 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
     private String gender;
     private String age;
     private String feedback;
+    private String weekDays;
+
+    public String getWeekDays() {
+        return weekDays;
+    }
+
+    public void setWeekDays(String weekDays) {
+        this.weekDays = weekDays;
+    }
 
     public String getGender() {
         return gender;
@@ -241,6 +250,41 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
         return result;
 
     }
+     public String doGetWeekdays() throws Exception {
+        System.out.println(this.getDepartmentId());
+        String result = "FAILURE";
+        String[] weekDays = DoctorService.getInstance().getAllWeekDays(this.getDoctorId());
+
+        if (weekDays.length>0) {
+            result = "SUCCESS";
+            getSessionMap().put("weekDaysList", weekDays);
+            getSessionMap().put("User", this);
+
+        } else {
+            getSessionMap().put("FailSignUp", "Email All Ready Exsists");
+        }
+        System.out.println(getSessionMap());
+        return result;
+
+    }
+
+     public String doGetTime() throws Exception {
+        System.out.println(this.getWeekDays());
+        String result = "FAILURE";
+        String timeofAppointmrnt = DoctorService.getInstance().getAllTime(this.getWeekDays(),(Appointment)(getSessionMap().get("User")));
+
+        if (timeofAppointmrnt!=null) {
+            result = "SUCCESS";
+            getSessionMap().put("timeOfAppointmrnt", timeofAppointmrnt);
+            getSessionMap().put("User", this);
+
+        } else {
+            getSessionMap().put("FailSignUp", "Email All Ready Exsists");
+        }
+        System.out.println(getSessionMap());
+        return result;
+
+    }
 
     public String doPrescribe() throws Exception {
         System.out.println(this.getAppointmentId());
@@ -271,6 +315,8 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
 
         getSessionMap().put("symptoms", this.getSymptoms());
         System.out.println(this.getEmailAddress());
+                System.out.println(this.getWeekDays());
+
         boolean success = LoginService.getInstance().doExsists(this.getEmailAddress(), getSessionMap());
         if (!success) {
             result = "SignUp";

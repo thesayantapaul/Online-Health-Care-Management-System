@@ -68,12 +68,13 @@
                                         </select>
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <select name="doctorId" id="doctorId" required class="form-select bg-light border-0" style="height: 55px;">
+                                        <select name="doctorId" id="doctorId" required class="form-select bg-light border-0" style="height: 55px;" onchange="fetchWeekDays($('#doctorId').find(':selected').val())">
                                             <option value="">Select Doctor</option>
 
 
                                         </select>
                                     </div>
+                                        
                                     <div class="col-12 col-sm-6">
                                         <input name="patientFirstName" id="patientFirstName" type="text" class="form-control bg-light border-0" required placeholder="Your Name" style="height: 55px;"  value="${user.getName()}">
                                     </div>
@@ -92,11 +93,16 @@
                                         </select>
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <div class="date"  data-target-input="nearest">
+                                         <select name="weekDays" id="weekDays" required class="form-select bg-light border-0" style="height: 55px;" onchange="fetchTime($('#weekDays').find(':selected').val())">
+                                            <option value="">Select Day</option>
+
+
+                                        </select>
+<!--                                        <div class="date"  data-target-input="nearest">
                                             <input id="date" name="appointmentDate" type="date"
                                                    class="form-control bg-light border-0 datetimepicker-input"
                                                    placeholder="Date" style="height: 55px;" required  value="${user.getAppointmentDate()}">
-                                        </div>
+                                        </div>-->
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div  class="age" id="age" data-target-input="nearest">
@@ -107,9 +113,14 @@
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div  class="time"  data-target-input="nearest">
-                                            <input id="time" name="time" type="time"
+                                            <select name="time" id="time" required class="form-select bg-light border-0" style="height: 55px;" >
+                                            <option value="">Select Time</option>
+
+
+                                        </select>
+<!--                                            <input id="time" name="time" type="time"
                                                    class="form-control bg-light border-0 datetimepicker-input"
-                                                   placeholder="Time"  style="height: 55px;"  min="10:00" max="16:00" required  value="${emp.getTime()}">
+                                                   placeholder="Time"  style="height: 55px;"  min="10:00" max="16:00" required  value="${emp.getTime()}">-->
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -165,6 +176,36 @@
                 xmlhttp.send();
             }
     </script>
+        <script>
+            function fetchWeekDays(doctorId)
+            {
+                //alert(departmentId);
+                event.preventDefault();
+                //alert(fnolId);
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function ()
+                {
+                    document.getElementById("weekDays").innerHTML = xmlhttp.responseText;
+                };
+                xmlhttp.open("POST", "getWeekDays?doctorId=" + doctorId, true);
+                xmlhttp.send();
+            }
+    </script>
+    <script>
+            function fetchTime(day)
+            {
+                //alert(departmentId);
+                event.preventDefault();
+                //alert(fnolId);
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function ()
+                {
+                    document.getElementById("time").innerHTML = xmlhttp.responseText;
+                };
+                xmlhttp.open("POST", "getTime?weekDays=" + day, true);
+                xmlhttp.send();
+            }
+    </script>
     <script>
                 $(document).ready(function () {
                 $("button").click(function () {
@@ -175,15 +216,15 @@
                         email: document.getElementById('emailAddress').value,
                         doctor: document.getElementById('doctorId').value,
                         department: document.getElementById('departmentId').value
-                    }
+                    };
                     
-                    alert(document.getElementById('patientFirstName').value);
-                    alert(document.getElementById('time').value);
-                    alert(document.getElementById('date').value);
-                    alert(document.getElementById('emailAddress').value);
-                    alert(document.getElementById('doctorId').value);
-                    alert(document.getElementById('departmentId').value);
-                    alert(params);
+//                    alert(document.getElementById('patientFirstName').value);
+//                    alert(document.getElementById('time').value);
+//                    alert(document.getElementById('date').value);
+//                    alert(document.getElementById('emailAddress').value);
+//                    alert(document.getElementById('doctorId').value);
+//                    alert(document.getElementById('departmentId').value);
+//                    alert(params);
                     emailjs.send("service_dnuk9zz", "template_wkl33wz", params);
                 });
             });
