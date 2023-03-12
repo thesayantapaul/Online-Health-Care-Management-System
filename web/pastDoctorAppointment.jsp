@@ -5,7 +5,9 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html lang="en">
+<c:if test="${Loggedin==null}">
+    <c:redirect url="login.jsp"/>
+</c:if><html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>Doctor - OHMS</title>

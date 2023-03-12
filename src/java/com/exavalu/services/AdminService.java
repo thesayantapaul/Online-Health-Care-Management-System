@@ -23,6 +23,10 @@ import org.apache.log4j.Logger;
  */
 public class AdminService {
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList doViewAppointments() {
         ArrayList appointmentList = new ArrayList();
         String sql = "SELECT * FROM appointments a,doctors d,patients p,departments dp,statusofappointments s where a.doctorId=d.doctorId and a.patientId=p.patientId and a.departmentId=dp.departmentId and a.statusId = s.statusId;";
@@ -66,6 +70,13 @@ public class AdminService {
     }
 
     //filtered appointment list-----------------
+
+    /**
+     *
+     * @param startingDate
+     * @param endingDate
+     * @return
+     */
     public static ArrayList doViewFilteredAppointments(String startingDate, String endingDate) {
         ArrayList appointmentList = new ArrayList();
         String sql = "SELECT * FROM appointments a,doctors d,patients p,departments dp,statusofappointments s where a.doctorId=d.doctorId and a.patientId=p.patientId and a.departmentId=dp.departmentId and a.statusId = s.statusId and appointmentDate between ? and ? ;";
@@ -112,6 +123,11 @@ public class AdminService {
         return appointmentList;
     }
 
+    /**
+     *
+     * @param interval
+     * @return
+     */
     public static ArrayList doViewAppointments(String interval) {
         ArrayList appointmentList = new ArrayList();
         String sql = "SELECT * FROM appointments a,doctors d,patients p,departments dp,statusofappointments s where a.doctorId=d.doctorId and a.patientId=p.patientId and a.departmentId=dp.departmentId and a.statusId = s.statusId and appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY)";
@@ -159,6 +175,11 @@ public class AdminService {
         return appointmentList;
     }
 
+    /**
+     *
+     * @param appointmentId
+     * @return
+     */
     public static boolean doCancelAppointments(String appointmentId) {
         boolean result = false;
         String sql = "UPDATE appointments SET statusId = 4 WHERE appointmentId = ?";
@@ -184,6 +205,12 @@ public class AdminService {
     }
 
     //do fetch perticular doctor using doctorId
+
+    /**
+     *
+     * @param doctorId
+     * @return
+     */
     public static Doctors doSearchDoctor(String doctorId) {
         Doctors doctor = new Doctors();
         try {
@@ -210,6 +237,11 @@ public class AdminService {
         return doctor;
     }
 
+    /**
+     *
+     * @param adminDoctor
+     * @return
+     */
     public static ArrayList doSearchDoctor(Admin adminDoctor) {
 
         ArrayList doctorList = new ArrayList();
@@ -252,6 +284,12 @@ public class AdminService {
     }
 
     //search patient
+
+    /**
+     *
+     * @param adminPatient
+     * @return
+     */
     public static ArrayList doSearchPatient(Admin adminPatient) {
 
         ArrayList patientList = new ArrayList();
@@ -294,6 +332,11 @@ public class AdminService {
         return patientList;
     }
 
+    /**
+     *
+     * @param appointmentId
+     * @return
+     */
     public static Appointment doViewParticularAppointment(String appointmentId) {
         String sql = "SELECT * FROM appointments a,doctors d,patients p,departments dp,statusofappointments s where a.doctorId=d.doctorId and a.patientId=p.patientId and a.departmentId=dp.departmentId and a.statusId = s.statusId and a.appointmentId=?;";
         Appointment appointment = new Appointment();
@@ -331,6 +374,11 @@ public class AdminService {
         return appointment;
     }
 
+    /**
+     *
+     * @param appointment
+     * @return
+     */
     public static boolean doUpdateAppointment(Appointment appointment) {
 
         boolean result = false;
@@ -357,6 +405,11 @@ public class AdminService {
         return result;
     }
 
+    /**
+     *
+     * @param interval
+     * @return
+     */
     public static String doViewBookings(String interval) {
         String totalBookings = null;
 
@@ -383,6 +436,11 @@ public class AdminService {
         return totalBookings;
     }
 
+    /**
+     *
+     * @param interval
+     * @return
+     */
     public static String doViewTotalRevenue(String interval) {
         String totalRevenue = null;
 
@@ -410,6 +468,12 @@ public class AdminService {
     }
 
     //chart data x axis dashboard admin--------------------------------------------------------------------------------
+
+    /**
+     *
+     * @param interval
+     * @return
+     */
     public static String elementsForXaxis(String interval) {
         String date = null;
 
@@ -437,6 +501,11 @@ public class AdminService {
     }
     //-------------------------------------------------------------------------------------------------------
 
+    /**
+     *
+     * @param interval
+     * @return
+     */
     public static String totalRegisteredUsers(String interval) {
         String totalUsers = null;
 
@@ -466,6 +535,12 @@ public class AdminService {
     }
 
     //doGetOccupancyForEachDepartments
+
+    /**
+     *
+     * @param interval
+     * @return
+     */
     public static ArrayList doGetOccupancyForEachDepartments(String interval) {
         ArrayList departmentList = new ArrayList();
 
@@ -497,6 +572,11 @@ public class AdminService {
     }
 // check email
 
+    /**
+     *
+     * @param emailAddress
+     * @return
+     */
     public static boolean doCheckEmail(String emailAddress) {
 
         boolean result = true;
@@ -519,6 +599,11 @@ public class AdminService {
         return result;
     }
 
+    /**
+     *
+     * @param doctor
+     * @return
+     */
     public static boolean doAddDoctorInDoctors(Admin doctor) {
 
         boolean result = false;
@@ -544,6 +629,11 @@ public class AdminService {
         return result;
     }
 
+    /**
+     *
+     * @param doctor
+     * @return
+     */
     public static boolean doAddDoctorInUsers(Admin doctor) {
 
         boolean result = false;
@@ -575,6 +665,11 @@ public class AdminService {
         return result;
     }
 
+    /**
+     *
+     * @param admin
+     * @return
+     */
     public static boolean doAddAdminInUsers(Admin admin) {
 
         boolean result = false;
@@ -606,6 +701,11 @@ public class AdminService {
         return result;
     }
 
+    /**
+     *
+     * @param emailAddress
+     * @return
+     */
     public static String doSearchDoctorUsingEmail(String emailAddress) {
 
         String doctorId = "";

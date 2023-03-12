@@ -23,11 +23,19 @@ public class Departments extends ActionSupport implements ApplicationAware, Sess
 
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
 
+    /**
+     *
+     * @param application
+     */
     @Override
     public void setApplication(Map<String, Object> application) {
         setMap((ApplicationMap) application);
     }
 
+    /**
+     *
+     * @param session
+     */
     @Override
     public void setSession(Map<String, Object> session) {
         setSessionMap((SessionMap<String, Object>) (SessionMap) session);
@@ -38,10 +46,18 @@ public class Departments extends ActionSupport implements ApplicationAware, Sess
     private String departmentId;
     private String numberOfPatients;
 
+    /**
+     *
+     * @return
+     */
     public String getNumberOfPatients() {
         return numberOfPatients;
     }
 
+    /**
+     *
+     * @param numberOfPatients
+     */
     public void setNumberOfPatients(String numberOfPatients) {
         this.numberOfPatients = numberOfPatients;
     }

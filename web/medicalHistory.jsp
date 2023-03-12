@@ -3,7 +3,10 @@
     Created on : 23-Feb-2023, 2:14:38 am
     Author     : Anik Dutta
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${Loggedin==null}">
+    <c:redirect url="login.jsp"/>
+</c:if>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
