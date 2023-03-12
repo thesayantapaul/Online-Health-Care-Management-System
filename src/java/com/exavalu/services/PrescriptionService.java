@@ -152,7 +152,7 @@ public class PrescriptionService {
         Prescription prescribed = new Prescription();
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "SELECT * FROM prescription left join doctors on doctors.doctorId=prescription.doctorId left join departments on doctors.departmentId=departments.departmentId left join users on prescription.userId=users.userId where prescription.appointmentId=?";
+            String sql = "SELECT * FROM prescription left join doctors on doctors.doctorId=prescription.doctorId left join departments on doctors.departmentId=departments.departmentId left join users on prescription.userId=users.userId left join patients on patients.patientId=prescription.patientId where prescription.appointmentId=?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, appointmentId);
             ResultSet rs = ps.executeQuery();
@@ -169,8 +169,9 @@ public class PrescriptionService {
                 prescribed.setTime(rs.getString("timetotake"));
                 prescribed.setStatus(rs.getString("status"));
                 prescribed.setDepartmentName(rs.getString("departmentName"));
-                prescribed.setDate(rs.getString("date"));
                 prescribed.setAdvice(rs.getString("advice"));
+                prescribed.setPatientFirstName(rs.getString("patientFirstName"));
+                prescribed.setPatientLastName(rs.getString("patientLastName"));
 
             }
         } catch (SQLException ex) {

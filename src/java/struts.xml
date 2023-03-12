@@ -50,7 +50,7 @@
         <action name="RegisterAdmin" class="com.exavalu.models.Admin" method="doAddAdmin">
            
             <result name="SUCCESS">adminSearch.jsp</result>
-             <result name="ALERT">checkEmail.jsp</result>
+            <result name="ALERT">checkEmail.jsp</result>
             <!--<result name="FAILURE">adminAddDoctor.jsp</result>-->
         </action>
     
@@ -62,11 +62,6 @@
         <action name="home" class="com.exavalu.models.Doctors" method="doViewHome">
             <result name="SUCCESS">doctorhome.jsp</result>
         </action>
-        <!--FetchParticularDoctor-->
-        <action name="FetchParticularDoctor" class="com.exavalu.models.Admin" method="doFetchParticularDoctor">
-            <result name="MODAL">sendMailToDoctorModal.jsp</result>
-        </action>
-        
         
         <action name="SignUp" class="com.exavalu.models.Users" method="doSignUp">
             <result name="SUCCESS">login.jsp</result>
@@ -142,19 +137,27 @@
             <result name="SUCCESS">login.jsp</result>
             <result name="FAILURE">Sign_in_Controller.jsp</result>
         </action>
-         <action name="GetPrescription" class="com.exavalu.models.Prescription" method="getPatientPrescription">
+        <action name="GetPrescription" class="com.exavalu.models.Prescription" method="getPatientPrescription">
             <result name="SUCCESS">prescribed.jsp</result>
+            <result name="MODAL">getPrescription.jsp</result>
             <result name="FAILURE">error.jsp</result>
         </action>
-         <action name="Report" class="com.exavalu.models.Report" method="getReport">
+        <action name="Report" class="com.exavalu.models.Report" method="getReport">
             <result name="SUCCESS">report.jsp</result>
             <result name="FAILURE">error.jsp</result>
         </action>
-         <action name="SocialLogin" class="com.exavalu.models.Users" method="doSocialLogin">
+        <action name="SocialLogin" class="com.exavalu.models.Users" method="doSocialLogin">
             <result name="SUCCESS">patientIndex.jsp</result>
             <result name="FAILURE">error.jsp</result>
         </action>
-        
+        <action name="getWeekDays" class="com.exavalu.models.Appointment" method="doGetWeekdays">
+            <result name="SUCCESS">weekdaysList.jsp</result>
+            <result name="FAILURE">menu.jsp</result>
+        </action> 
+        <action name="getTime" class="com.exavalu.models.Appointment" method="doGetTime">
+            <result name="SUCCESS">timeList.jsp</result>
+            <result name="FAILURE">menu.jsp</result>
+        </action> 
         
     </package>
 </struts>

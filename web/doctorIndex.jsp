@@ -184,7 +184,7 @@
                                                     <i class="bi bi-currency-dollar"></i>
                                                 </div>
                                                 <div class="ps-3">
-                                                        <h6>INR ${TodayRevenue}</h6>
+                                                        <h6>&#8377; ${TodayRevenue}</h6>
                                                 <span class="text-success small pt-1 fw-bold"><c:if test="${IncreaseRevenue!=null}"><i class="bi bi-arrow-up-circle"></i></c:if><c:if test="${DecreaseRevenue!=null}"><i class="bi bi-arrow-down-circle"></i></c:if></span> <span class="text-muted small pt-2 ps-1">${HigherOrLowerTextRevenue}</span>
 
                                                 </div>

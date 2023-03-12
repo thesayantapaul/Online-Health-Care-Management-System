@@ -1,538 +1,95 @@
-body {
-    transition: all 0.3s ease;
-}
+/* CSS for Prescription Form */
 
+/* Style for form wrapper */
 .wrapper {
-    height: 100vh;
-    width: 90vw;
-    display: flex;
-    flex-direction: column;
-    background: red;
-    margin: 50px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px;
 }
 
+/* Style for prescription form */
 .prescription_form {
-    width: 100%;
-    height: 120vh;
-    text-align: center;
-    background: white;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  box-shadow: 0 5px 10px rgba(0,0,0,.1);
 }
 
+/* Style for table */
 .prescription {
-    width: 720px;
-/*    height: 960px;*/
-    margin: 0 auto;
-    border: 1px solid lightgrey;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.prescription tr>td {
-    padding: 10px;
-}
-
-.header {
-    color: #333;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    flex: 1;
-}
-
-.logo img {
-    width: 120px;
-    height: 120px;
-    float: left;
-}
-
-.credentials {
-    flex: 1;
-}
-
-.credentials h4 {
-    line-height: 1em;
-    letter-spacing: 1px;
-    font-weight: 700;
-    margin: 0px;
-    padding: 0px;
-}
-
-.credentials p {
-    margin: 0 0 5px 0;
-    padding: 3px 0px;
-}
-
-.credentials small {
-    margin: 0;
-    padding: 0;
-    letter-spacing: 1px;
-    padding-right: 80px;
-}
-
+/* Style for table headers */
 .d-header {
-    width: 100%;
-    text-align: center;
-    background: #3c4fe0;
-    padding: 5px;
-    color: white;
-    font-weight: 800;
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
-.symptoms,
-.tests,
-.advice {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+/* Style for medicine label */
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
 }
 
-.symptoms ul,
-.tests ul {
-    list-style: square;
-    margin: 0;
-    padding-left: 10px;
-    height: 100%;
-}
-
-.advice p {
-    letter-spacing: 0;
-    font-size: 14px;
-}
-
-.advice .adv_text {
-    flex-grow: 1;
-    width: 100%;
-    height: 100%;
-}
-
-.desease_details {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.med_name {
-    font-size: 16px;
-    font-weight: bold;
-    padding: 0;
-}
-
-.taking_time {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    text-align: right;
-}
-
-.schedual {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.sc_time {
-    margin: 0;
-    padding: 0;
-    float: left;
-}
-
-.sc_time span {
-    font-weight: bold;
-    margin-right: 1rem;
-}
-
-.sc {
-    border: none;
-    outline: none;
-    font-size: 15px;
-}
-
+/* Style for medicine dropdowns */
 select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    appearance: none;
-    outline: 0;
-    box-shadow: none;
-    border: 0 !important;
-    background: #fff;
-    background-image: none;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23888' d='M8.3 10.7l3 3 3-3c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4l-4 4c-.4.4-1 .4-1.4 0l-4-4c-.4-.4-.4-1 0-1.4.4-.4 1-.4 1.4 0zm0-6l3 3 3-3c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4l-4 4c-.4.4-1 .4-1.4 0l-4-4c-.4-.4-.4-1 0-1.4.4-.4 1-.4 1.4 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
 }
 
-select::-ms-expand {
-    display: none;
+/* Style for medicine dropdown options */
+option {
+  font-size: 16px;
 }
 
-.select {
-    font-size: 15px;
-    color: #335;
-    position: relative;
-    float: left;
-    overflow: hidden;
+/* Style for medicine input button */
+.add-medicine {
+  background-color: #3f51b5;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  margin-top: 20px;
+  cursor: pointer;
 }
 
-select {
-    font-weight: bold;
-    padding: 0 0.5em;
-    color: #333;
-    cursor: pointer;
-    outline: none;
+/* Style for HR */
+.hr-button {
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
+  margin: 30px 0;
 }
 
-.med_name {
-    border: 0;
-    outline: 0;
-}
-
-.period {
-    font-size: 14px;
-}
-
-input[type="date"] {
-    padding: 0;
-    margin: 0;
-    font-weight: bold;
-    border: none;
-}
-
-.medicine {
-
-    /* display: flex; */
-    font-size: small;
-    display: flex;
-    flex-flow: column;
-    height: 100%;
-    /* background-color: red; */
-}
-
-.add-medicine{
-    
-    display: inline-block;
-    outline: 0;
-    cursor: pointer;
-    padding: 5px 16px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    vertical-align: middle;
-    border: 1px solid;
-    border-radius: 6px;
-    color: #ffffff;
-    background-color: #2ea44f;
-    border-color: #1b1f2326;
-    box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
-    transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
-    transition-property: color, background-color, border-color;
-   
-
-    
-}
-.add-medicine:hover {
-    background-color: #2c974b;
-    border-color: #1b1f2326;
-    transition-duration: 0.1s;
-}
-
-.add-medicine:hover{
-    background-color: #5feb9e;
-}
-
- .Medicine select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    appearance: none;
-    outline: 0;
-    box-shadow: none;
-    border: 0 !important;
-    background: #416746;
-    background-image: none;
-    flex: 1;
-    padding: 0 .5em;
-    color: #fff;
-    cursor: pointer;
-    font-size: 1em;
-    font-family: 'Open Sans', sans-serif;
-} 
-
-/* .Medicine select::-ms-expand {
-    display: none;
- }
- .Medicine .select {
-    position: relative;
-    display: flex;
-    width: 20em;
-    height: 3em;
-    line-height: 3;
-    background: grey;
-    overflow: hidden;
-    border-radius: .25em;
- }
- .Medicine .select::after {
-    content: '\25BC';
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0 1em;
-    background: #2b2e2e;
-    cursor:pointer;
-    pointer-events:none;
-    transition:.25s all ease;
- }
- */
-.inner-item{
-    display: inline-block;
-    margin: 0 10px;
-    /* margin-right: 10px; */
-
-    /* padding-right: 20px; */
-}
-
-.remove-btn{
-    
-    display: inline-block;
-    outline: 0;
-    text-align: center;
-    cursor: pointer;
-    height: 25px;
-    padding: 0 13px;
-    color: #fff;
-    vertical-align: top;
-    border-radius: 3px;
-    border: 1px solid transparent;
-    transition: all .3s ease;
-    background: #cc4d29;
-    border-color: #cc4d29;
-    font-weight: 600;
-    text-transform: uppercase;
-    line-height: 16px;
-    font-size: 11px;
-  
-    
-}
-.remove-btn:hover {
-    background: #e4461b;
-    border-color: #e4461b;
-}
-.hr-button-js{
-    border-top: 1px solid deepskyblue;
-
-}
-.med_name_action,
-.med_when_action,
-.med_period_action {
-    display: none;
-}
-
-.med_meal_action .btn {
-    margin: 2px;
-}
-
-.med_period {
-    border: none;
-    outline: none;
-}
-
-#add_med {
-    margin: 20px 5px;
-    flex-grow: 1;
-}
-
-#add_med {
-    animation: shake 1.5s linear infinite;
-}
-
-@keyframes shake {
-
-    10%,
-    90% {
-        transform: translate3d(-1px, 0, 0);
-    }
-
-    20%,
-    80% {
-        transform: translate3d(2px, 0, 0);
-    }
-
-    30%,
-    50%,
-    70% {
-        transform: translate3d(-4px, 0, 0);
-    }
-
-    40%,
-    60% {
-        transform: translate3d(4px, 0, 0);
-    }
-
-    95% {
-        opacity: 0;
-    }
-}
-
-#add_symptoms {
-    margin: 20px 5px;
-    flex-grow: 1;
-    opacity: 1;
-}
-
-.symp_action,
-.test_action,
-.adv_action {
-    display: none;
-}
-
-.med_footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-hr {
-    margin: 10px 0px;
-}
-
-.med:hover hr {
-    border-top: 3px #111 solid;
-}
-
-.med_period_action {
-    float: right;
-}
-
-span.date {
-    color: #333399;
-    float: right;
-    clear: both;
-}
-
-.del_action {
-    width: 100%;
-    text-align: right;
-}
-
-.delete {
-    width: 50px;
-    opacity: 0;
-    display: none;
-}
-
+/* Style for submit button */
 .submit-button {
-
-    cursor: pointer;
-    outline: 0;
-    display: inline-block;
-    font-weight: 400;
-    line-height: 1.5;
-    text-align: center;
-    background-color: transparent;
-    border: 1px solid transparent;
-    padding: 6px 12px;
-    font-size: 1.5rem;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    color: #0d6efd;
-    border-color: #0d6efd;
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
 }
 
-.submit-button:hover {
-    color: #fff;
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-}
-
-
-.med:hover .delete {
-    display: inline;
-    opacity: 1;
-}
-
-.folded {
-    visibility: hidden;
-}
-
-.button_group {
-    position: fixed;
-    right: 120px;
-    bottom: 100px;
-}
-
-.hr-button{
-    border-top: 1px solid black;
-
-}
-
-#snacking,
-#snacked {
-    visibility: hidden;
-    min-width: 250px;
-    margin-left: -125px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
-    bottom: 30px;
-    font-size: 17px;
-}
-
-#snacking.show,
-#snacked.show {
-    visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-@-webkit-keyframes fadein {
-    from {
-        bottom: 0;
-        opacity: 0;
-    }
-
-    to {
-        bottom: 30px;
-        opacity: 1;
-    }
-}
-
-@keyframes fadein {
-    from {
-        bottom: 0;
-        opacity: 0;
-    }
-
-    to {
-        bottom: 30px;
-        opacity: 1;
-    }
-}
-
-@-webkit-keyframes fadeout {
-    from {
-        bottom: 30px;
-        opacity: 1;
-    }
-
-    to {
-        bottom: 0;
-        opacity: 0;
-    }
-}
-
-@keyframes fadeout {
-    from {
-        bottom: 30px;
-        opacity: 1;
-    }
-
-    to {
-        bottom: 0;
-        opacity: 0;
-    }
+/* Style for form inputs */
+.inner-item {
+  margin-right: 10px;
+  margin-bottom
 }
