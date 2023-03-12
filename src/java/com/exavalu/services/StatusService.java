@@ -20,6 +20,10 @@ import java.util.ArrayList;
  */
 public class StatusService {
     
+    /**
+     *
+     * @return
+     */
     public static ArrayList getAllStatus() {
         ArrayList statusList = new ArrayList();
         try {

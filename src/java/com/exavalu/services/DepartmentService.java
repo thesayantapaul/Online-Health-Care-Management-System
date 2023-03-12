@@ -21,12 +21,23 @@ import org.apache.log4j.Logger;
  */
 public class DepartmentService {
 
+    /**
+     *
+     */
     public static DepartmentService departmentService = null;
+
+    /**
+     *
+     */
     public static Logger log = Logger.getLogger(DepartmentService.class.getName());
 
     private DepartmentService() {
     }
 
+    /**
+     *
+     * @return
+     */
     public static DepartmentService getInstance() {
         if (departmentService == null) {
             return new DepartmentService();
@@ -35,6 +46,11 @@ public class DepartmentService {
         }
     }
 
+    /**
+     *
+     * Used to retrieve all the department and their details from the database
+     * @return 
+     */
     public ArrayList getAllDepartments() {
         ArrayList deptLIst = new ArrayList();
         try {

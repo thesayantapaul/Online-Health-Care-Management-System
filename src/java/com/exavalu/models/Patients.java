@@ -21,18 +21,34 @@ import org.apache.struts2.interceptor.SessionAware;
  */
 public class Patients extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
 
+    /**
+     *
+     * @return
+     */
     public SessionMap<String, Object> getSessionMap() {
         return sessionMap;
     }
 
+    /**
+     *
+     * @param sessionMap
+     */
     public void setSessionMap(SessionMap<String, Object> sessionMap) {
         this.sessionMap = sessionMap;
     }
 
+    /**
+     *
+     * @return
+     */
     public ApplicationMap getMap() {
         return map;
     }
 
+    /**
+     *
+     * @param map
+     */
     public void setMap(ApplicationMap map) {
         this.map = map;
     }
@@ -40,17 +56,30 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
 
+    /**
+     *
+     * @param application
+     */
     @Override
     public void setApplication(Map<String, Object> application) {
         setMap((ApplicationMap) application);
     }
 
+    /**
+     *
+     * @param session
+     */
     @Override
     public void setSession(Map<String, Object> session) {
         setSessionMap((SessionMap<String, Object>) (SessionMap) session);
 
     }
 
+    /**
+     *
+     * Used to retrieve the user's medical history.
+     * @return 
+     */
     public String doViewParticularMedicalHistory() {
         String result = "FAILURE";
         ArrayList appointment = new ArrayList();
@@ -65,6 +94,11 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
         return result;
     }
 
+    /**
+     *
+     * Used to retrieve user's upcoming appointment.
+     * @return 
+     */
     public String doViewParticularUpcomingAppointments() {
         String result = "FAILURE";
         ArrayList appointment = new ArrayList();
@@ -83,18 +117,34 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
     private String address;
     private String dateOfRegisteration;
 
+    /**
+     *
+     * @return
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     *
+     * @param address
+     */
     public void setAddress(String address) {
         this.address = address;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDateOfRegisteration() {
         return dateOfRegisteration;
     }
 
+    /**
+     *
+     * @param dateOfRegisteration
+     */
     public void setDateOfRegisteration(String dateOfRegisteration) {
         this.dateOfRegisteration = dateOfRegisteration;
     }

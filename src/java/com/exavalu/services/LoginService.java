@@ -23,12 +23,23 @@ import org.apache.struts2.dispatcher.SessionMap;
  */
 public class LoginService {
 
+    /**
+     *
+     */
     public static LoginService loginService = null;
+
+    /**
+     *
+     */
     public static Logger log = Logger.getLogger(LoginService.class.getName());
 
     private LoginService() {
     }
 
+    /**
+     *
+     * @return
+     */
     public static LoginService getInstance() {
         if (loginService == null) {
             return new LoginService();
@@ -37,6 +48,13 @@ public class LoginService {
         }
     }
 
+    /**
+     *
+     * Used to check user credentials with the
+     * database.
+     * @param user
+     * @return 
+     */
     public boolean doLogin(Users user) {
 
         boolean result = false;
@@ -71,6 +89,13 @@ public class LoginService {
         return result;
     }
 
+    /**
+     *
+     * Used to signup or add new user details to
+     * the database.
+     * @param user
+     * @return 
+     */
     public boolean doSignUp(Users user) {
 
         boolean result = false;
@@ -105,6 +130,14 @@ public class LoginService {
 
     }
 
+    /**
+     *
+     * Used to check if an user already exsists
+     * in the database.
+     * @param emailAddress
+     * @param sessionMap
+     * @return 
+     */
     public boolean doExsists(String emailAddress, SessionMap sessionMap) {
 
         boolean result = false;
@@ -138,6 +171,13 @@ public class LoginService {
         return result;
     }
 
+    /**
+     *
+     * Used to add the user's who sign up
+     * using social media to the database
+     * @param user
+     * @return 
+     */
     public boolean doSocialSignUp(Users user) {
 
         boolean result = false;
@@ -168,17 +208,22 @@ public class LoginService {
         return result;
 
     }
-    
+
+    /**
+     *
+     * @param profile
+     * @return
+     */
     public static boolean doFacebook(FbProfile profile) {
 
         boolean result = false;
-        String fullname=profile.getUser_name();
-        System.out.println("Hi"+fullname);
-        String output[]=fullname.split(" ");
-        String firstname= output[0];
-        String lastname=output[1];
-        System.out.println("Hi F1= "+firstname+"L1="+lastname );
-        
+        String fullname = profile.getUser_name();
+        System.out.println("Hi" + fullname);
+        String output[] = fullname.split(" ");
+        String firstname = output[0];
+        String lastname = output[1];
+        System.out.println("Hi F1= " + firstname + "L1=" + lastname);
+
         String sql = "INSERT INTO users (emailAddress,firstName,lastName,password,dateOfRegisteration)" + "VALUES(? ,? ,? ,?,CURDATE())";
 
         try {
@@ -207,6 +252,10 @@ public class LoginService {
 
     }
 
+    /**
+     *
+     * @param appointment
+     */
     public void updateUser(Appointment appointment) {
 
         boolean result = false;
@@ -234,8 +283,15 @@ public class LoginService {
 
     }
 
+    /**
+     *
+     * Used to verify the user's who Log In
+     * using social media with the information in the database.
+     * @param user
+     * @return 
+     */
     public boolean doSocialLog_in(Users user) {
-         boolean result = false;
+        boolean result = false;
 
         try {
             Connection con = JDBCConnectionManager.getConnection();

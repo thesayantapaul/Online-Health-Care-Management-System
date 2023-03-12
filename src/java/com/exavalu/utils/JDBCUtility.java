@@ -11,13 +11,22 @@ import java.util.Properties;
 
 /**
  *
- * @author Avijit Chattopadhyay
+ * @author anich
  */
 public class JDBCUtility {
 
+    /**
+     *
+     */
     public static JDBCUtility jdbcUtility = null;
 
     // in this class we will have static methods to get the connection params
+
+    /**
+     * Used to retrieve a particular value from the properties file
+     * @param param
+     * @return
+     */
     public String getPropertyValue(String param) {
 
         String value = null;
@@ -47,6 +56,10 @@ public class JDBCUtility {
         // Private constructor
     }
 
+    /**
+     *
+     * @return
+     */
     public static JDBCUtility getInstanceOfJDBCUtility() {
         if (jdbcUtility == null) {
             jdbcUtility = new JDBCUtility();

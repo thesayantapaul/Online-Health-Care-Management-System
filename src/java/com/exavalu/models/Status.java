@@ -12,18 +12,34 @@ public class Status {
     private String statusId;
     private String statusName;
 
+    /**
+     *
+     * @return
+     */
     public String getStatusId() {
         return statusId;
     }
 
+    /**
+     *
+     * @param statusId
+     */
     public void setStatusId(String statusId) {
         this.statusId = statusId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getStatusName() {
         return statusName;
     }
 
+    /**
+     *
+     * @param statusName
+     */
     public void setStatusName(String statusName) {
         this.statusName = statusName;
     }

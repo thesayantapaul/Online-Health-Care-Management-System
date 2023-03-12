@@ -21,8 +21,15 @@ import org.json.simple.parser.JSONParser;
  */
 public class ApiService {
 
+    /**
+     *
+     */
     public static ApiService apiService = null;
 
+    /**
+     *
+     * @return
+     */
     public static ApiService getInstance() {
         if (apiService == null) {
             return new ApiService();
@@ -30,9 +37,16 @@ public class ApiService {
             return apiService;
         }
     }
-static int f=0;
+    static int f = 0;
+
+    /**
+     *
+     * Used to retrieve the list of medicine
+     * from the 3rd party Api
+     * @return 
+     * @throws java.lang.Exception
+     */
     public ArrayList getAllData() throws Exception {
-        JDBCUtility jdbcUtility = JDBCUtility.getInstanceOfJDBCUtility();
         String apiUrl = "https://mocki.io/v1/59184e09-68a6-4e3f-a44a-6bc50682d7a8";
 
         URL obj = new URL(apiUrl);
@@ -47,8 +61,6 @@ static int f=0;
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuffer response = new StringBuffer();
-        int c = 0;
-        ArrayList userList = new ArrayList<>();
         JSONParser parse = new JSONParser();
         while ((inputLine = in.readLine()) != null) {
 
@@ -62,6 +74,11 @@ static int f=0;
         return med;
     }
 
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     public Report getReport() throws Exception {
         System.out.println("HI");
         JDBCUtility jdbcUtility = JDBCUtility.getInstanceOfJDBCUtility();
@@ -92,7 +109,7 @@ static int f=0;
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject myResponse = (JSONObject) jsonArray.get(i);
             System.out.print(myResponse.get("id"));
-            if (f==0) {
+            if (f == 0) {
                 report.setAlanin(Long.toString((long) myResponse.get("Alanin")));
                 report.setName((String) myResponse.get("Name"));
                 report.setHemoglobin(Long.toString((long) myResponse.get("Hemoglobin")));

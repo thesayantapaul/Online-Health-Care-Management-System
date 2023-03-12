@@ -1,17 +1,13 @@
 package com.exavalu.models;
 
 import com.exavalu.services.AdminService;
-import com.exavalu.services.DepartmentService;
 import com.exavalu.services.StatusService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
-import javax.xml.bind.DatatypeConverter;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ApplicationAware;
@@ -23,18 +19,34 @@ import org.apache.struts2.interceptor.SessionAware;
  */
 public class Admin extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
 
+    /**
+     *
+     * @return
+     */
     public SessionMap<String, Object> getSessionMap() {
         return sessionMap;
     }
 
+    /**
+     *
+     * @param sessionMap
+     */
     public void setSessionMap(SessionMap<String, Object> sessionMap) {
         this.sessionMap = sessionMap;
     }
 
+    /**
+     *
+     * @return
+     */
     public ApplicationMap getMap() {
         return map;
     }
 
+    /**
+     *
+     * @param map
+     */
     public void setMap(ApplicationMap map) {
         this.map = map;
     }
@@ -42,17 +54,29 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
 
+    /**
+     *
+     * @param application
+     */
     @Override
     public void setApplication(Map<String, Object> application) {
         map = (ApplicationMap) application;
     }
 
+    /**
+     *
+     * @param session
+     */
     @Override
     public void setSession(Map<String, Object> session) {
         sessionMap = (SessionMap) session;
 
     }
 
+    /**
+     *
+     * @return
+     */
     public String doViewAppointments() {
         String result = "FAILURE";
         ArrayList appointmentList = AdminService.doViewAppointments();
@@ -66,6 +90,11 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
     }
 
     //---------fetch filtered appointments in specified date range
+
+    /**
+     *
+     * @return
+     */
     public String doFetchFilteredAppointment() {
         String result = "FAILURE";
 //        if (this.startingDate.isBlank()) {
@@ -92,6 +121,10 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
     }
 //doViewParticularAppointment
 
+    /**
+     *
+     * @return
+     */
     public String doViewParticularAppointment() {
         String result = "FAILURE";
         Appointment appointment = new Appointment();
@@ -109,6 +142,10 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         return result;
     }
 
+    /**
+     *
+     * @return
+     */
     public String doCancelAppointment() {
         String result = "FAILURE";
         boolean success = AdminService.doCancelAppointments(this.appointmentId);
@@ -123,6 +160,10 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
     }
     //doUpdateAppointment
 
+    /**
+     *
+     * @return
+     */
     public String doSearchDoctor() {
         String result = "FAILURE";
         ArrayList doctorList = AdminService.doSearchDoctor(this);
@@ -134,6 +175,11 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         }
         return result;
     }
+
+    /**
+     *
+     * @return
+     */
     public String doFetchParticularDoctor(){
         String result = "FAILURE";
         Doctors doctor = new Doctors();
@@ -145,6 +191,10 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         return result;
     }
 
+    /**
+     *
+     * @return
+     */
     public String doSearchPatient() {
         String result = "FAILURE";
         ArrayList patientList = AdminService.doSearchPatient(this);
@@ -157,6 +207,10 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         return result;
     }
 
+    /**
+     *
+     * @return
+     */
     public String doViewDashboard() {
         String result = "SUCCESS";
 
@@ -316,11 +370,19 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         return result;
     }
 
+    /**
+     *
+     * @return
+     */
     public String showAdminAddDoctor() {
         String result = "SUCCESS";
         return result;
     }
 
+    /**
+     *
+     * @return
+     */
     public String doAddDoctor() {
         String result = "ALERT";
 
@@ -357,6 +419,10 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         return result;
     }
 
+    /**
+     *
+     * @return
+     */
     public String doCheckEmail() {
         String result = "FAILURE";
         System.out.println("email to verify = " + this.emailAddress);
@@ -384,10 +450,18 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
     private String lastName;
     private String gender, age;
 
+    /**
+     *
+     * @return
+     */
     public String getAge() {
         return age;
     }
 
+    /**
+     *
+     * @param age
+     */
     public void setAge(String age) {
         this.age = age;
     }
@@ -404,147 +478,291 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
     private String startingDate;
     private String endingDate;
 
+    /**
+     *
+     * @return
+     */
     public String getStartingDate() {
         return startingDate;
     }
 
+    /**
+     *
+     * @param startingDate
+     */
     public void setStartingDate(String startingDate) {
         this.startingDate = startingDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEndingDate() {
         return endingDate;
     }
 
+    /**
+     *
+     * @param endingDate
+     */
     public void setEndingDate(String endingDate) {
         this.endingDate = endingDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getContactEmail() {
         return contactEmail;
     }
 
+    /**
+     *
+     * @param contactEmail
+     */
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getRoleId() {
         return roleId;
     }
 
+    /**
+     *
+     * @param roleId
+     */
     public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getOccupation() {
         return occupation;
     }
 
+    /**
+     *
+     * @param occupation
+     */
     public void setOccupation(String occupation) {
         this.occupation = occupation;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     *
+     * @param address
+     */
     public void setAddress(String address) {
         this.address = address;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmailAddress() {
         return emailAddress;
     }
 
+    /**
+     *
+     * @param emailAddress
+     */
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPatientId() {
         return patientId;
     }
 
+    /**
+     *
+     * @param patientId
+     */
     public void setPatientId(String patientId) {
         this.patientId = patientId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDepartmentId() {
         return departmentId;
     }
 
+    /**
+     *
+     * @param departmentId
+     */
     public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId;
     }
     private String appointmentDate;
 
+    /**
+     *
+     * @return
+     */
     public String getAppointmentDate() {
         return appointmentDate;
     }
 
+    /**
+     *
+     * @param appointmentDate
+     */
     public void setAppointmentDate(String appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDoctorId() {
         return doctorId;
     }
 
+    /**
+     *
+     * @param doctorId
+     */
     public void setDoctorId(String doctorId) {
         this.doctorId = doctorId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     *
+     * @param firstName
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     *
+     * @param lastName
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getGender() {
         return gender;
     }
 
+    /**
+     *
+     * @param gender
+     */
     public void setGender(String gender) {
         this.gender = gender;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDepartmentName() {
         return departmentName;
     }
 
+    /**
+     *
+     * @param departmentName
+     */
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMessageToPatient() {
         return messageToPatient;
     }
 
+    /**
+     *
+     * @param messageToPatient
+     */
     public void setMessageToPatient(String messageToPatient) {
         this.messageToPatient = messageToPatient;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAppointmentId() {
         return appointmentId;
     }
 
+    /**
+     *
+     * @param appointmentId
+     */
     public void setAppointmentId(String appointmentId) {
         this.appointmentId = appointmentId;
     }
