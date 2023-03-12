@@ -21,12 +21,23 @@ import org.apache.log4j.Logger;
  */
 public class PrescriptionService {
 
+    /**
+     *
+     */
     public static PrescriptionService prescriptionService = null;
+
+    /**
+     *
+     */
     public static Logger log = Logger.getLogger(PrescriptionService.class.getName());
 
     private PrescriptionService() {
     }
 
+    /**
+     *
+     * @return
+     */
     public static PrescriptionService getInstance() {
         if (prescriptionService == null) {
             return new PrescriptionService();
@@ -35,6 +46,13 @@ public class PrescriptionService {
         }
     }
 
+    /**
+     *
+     * Used to add a particular
+     * prescription to the database
+     * @param prescription
+     * @return 
+     */
     public boolean addPrescription(Prescription prescription) {
 
         boolean result = false;
@@ -72,6 +90,14 @@ public class PrescriptionService {
         return result;
     }
 
+    /**
+     *
+     * Used to retrieve all the
+     * prescription prescribed by a particular doctor prescription to the
+     * database
+     * @param doctorId
+     * @return 
+     */
     public ArrayList getPrescription(String doctorId) {
 
         boolean result = false;
@@ -109,6 +135,13 @@ public class PrescriptionService {
         return prescribedList;
     }
 
+    /**
+     *
+     * Used to retrieve all
+     * previous prescriptions of a user retrieve the medical history
+     * @param userId
+     * @return 
+     */
     public ArrayList getPatientPrescription(String userId) {
 
         boolean result = false;
@@ -148,6 +181,13 @@ public class PrescriptionService {
         return prescribedList;
     }
 
+    /**
+     *
+     * Used to retrieve a
+     * prescriptions of a user according to appointmentId
+     * @param appointmentId
+     * @return 
+     */
     public Prescription getParticularPrescription(String appointmentId) {
         Prescription prescribed = new Prescription();
         try {

@@ -24,12 +24,23 @@ import org.apache.log4j.Logger;
  */
 public class DoctorService {
 
+    /**
+     *
+     */
     public static DoctorService doctorService = null;
+
+    /**
+     *
+     */
     public static Logger log = Logger.getLogger(DoctorService.class.getName());
 
     private DoctorService() {
     }
 
+    /**
+     *
+     * @return
+     */
     public static DoctorService getInstance() {
         if (doctorService == null) {
             return new DoctorService();
@@ -38,6 +49,13 @@ public class DoctorService {
         }
     }
 
+    /**
+     *
+     * Used to retrieve all doctors
+     * according to the department
+     * @param departmentId
+     * @return 
+     */
     public ArrayList getAllDoctors(String departmentId) {
         ArrayList deptLIst = new ArrayList();
         try {
@@ -74,6 +92,13 @@ public class DoctorService {
         return deptLIst;
     }
 
+    /**
+     *
+     * Used to retrieve all the available
+     * days of a doctor
+     * @param doctorId
+     * @return 
+     */
     public String[] getAllWeekDays(String doctorId) {
         Doctors doctors = new Doctors();
 
@@ -106,6 +131,13 @@ public class DoctorService {
         return doctors.getWeekDays().split(",");
     }
 
+    /**
+     *
+     * Used to retrieve the visiting hours
+     * @param weekdays
+     * @param user
+     * @return 
+     */
     public String getAllTime(String weekdays, Appointment user) {
         Doctors doctors = new Doctors();
         String res = "";
@@ -152,6 +184,13 @@ public class DoctorService {
         return res;
     }
 
+    /**
+     *
+     * Used to retrieve the upcoming
+     * appointments of an doctor from the database
+     * @param doctorId
+     * @return 
+     */
     public ArrayList doViewAppointments(String doctorId) {
 
         ArrayList appointmentList = new ArrayList();
@@ -191,8 +230,15 @@ public class DoctorService {
 
         return appointmentList;
     }
-    
-     public ArrayList doViewPastAppointments(String doctorId) {
+
+    /**
+     *
+     * Used to retrieve the
+     * previous appointments of an doctor from the database
+     * @param doctorId
+     * @return 
+     */
+    public ArrayList doViewPastAppointments(String doctorId) {
 
         ArrayList appointmentList = new ArrayList();
         try {
@@ -232,6 +278,14 @@ public class DoctorService {
         return appointmentList;
     }
 
+    /**
+     *
+     * Used to retrieve the number of
+     * appointments of an doctor in last few days from the database
+     * @param interval
+     * @param doctorId
+     * @return 
+     */
     public String doViewBookings(String interval, String doctorId) {
         String totalBookings = null;
 
@@ -258,6 +312,14 @@ public class DoctorService {
 
     }
 
+    /**
+     *
+     * Used to retrieve the income of
+     * an doctor in last few days from the database
+     * @param interval
+     * @param doctorId
+     * @return 
+     */
     public String doViewTotalRevenue(String interval, String doctorId) {
 
         String totalRevenue = null;
@@ -286,6 +348,14 @@ public class DoctorService {
         return totalRevenue;
     }
 
+    /**
+     *
+     * Used to retrieve todays
+     * appointment detail of an doctor from the database
+     * @param interval
+     * @param doctorId
+     * @return 
+     */
     public ArrayList doViewtodayAppointments(String interval, String doctorId) {
 
         ArrayList appointmentList = new ArrayList();
@@ -334,6 +404,13 @@ public class DoctorService {
         return appointmentList;
     }
 
+    /**
+     *
+     * Used to retrieve doctors
+     * information from the database
+     * @param doctorId
+     * @return 
+     */
     public Doctors getDoctor(String doctorId) {
 
         Doctors doctor = new Doctors();

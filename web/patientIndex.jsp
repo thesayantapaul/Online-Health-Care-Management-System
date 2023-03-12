@@ -2,7 +2,9 @@
 <%@page import="com.exavalu.services.DepartmentService"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<c:if test="${Loggedin==null}">
+    <c:redirect url="login.jsp"/>
+</c:if>
 <!DOCTYPE html>
 <html lang="en">
 

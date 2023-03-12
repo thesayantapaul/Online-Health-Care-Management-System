@@ -11,20 +11,40 @@ import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+/**
+ *
+ * @author anich
+ */
 public class Doctors extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
 
+    /**
+     *
+     * @return
+     */
     public SessionMap<String, Object> getSessionMap() {
         return sessionMap;
     }
 
+    /**
+     *
+     * @param sessionMap
+     */
     public void setSessionMap(SessionMap<String, Object> sessionMap) {
         this.sessionMap = sessionMap;
     }
 
+    /**
+     *
+     * @return
+     */
     public ApplicationMap getMap() {
         return map;
     }
 
+    /**
+     *
+     * @param map
+     */
     public void setMap(ApplicationMap map) {
         this.map = map;
     }
@@ -32,17 +52,30 @@ public class Doctors extends ActionSupport implements ApplicationAware, SessionA
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
 
+    /**
+     *
+     * @param application
+     */
     @Override
     public void setApplication(Map<String, Object> application) {
         map = (ApplicationMap) application;
     }
 
+    /**
+     *
+     * @param session
+     */
     @Override
     public void setSession(Map<String, Object> session) {
         sessionMap = (SessionMap) session;
 
     }
 
+    /**
+     *
+     * Used to obtain the list of appointment for a doctor
+     * @return 
+     */
     public String doViewAppointments() {
         String result = "FAILURE";
 
@@ -63,50 +96,98 @@ public class Doctors extends ActionSupport implements ApplicationAware, SessionA
     private String weekDays;
     private String time;
 
+    /**
+     *
+     * @return
+     */
     public String getWeekDays() {
         return weekDays;
     }
 
+    /**
+     *
+     * @param weekDays
+     */
     public void setWeekDays(String weekDays) {
         this.weekDays = weekDays;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTime() {
         return time;
     }
 
+    /**
+     *
+     * @param time
+     */
     public void setTime(String time) {
         this.time = time;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDoctorFirstName() {
         return doctorFirstName;
     }
 
+    /**
+     *
+     * @param doctorFirstName
+     */
     public void setDoctorFirstName(String doctorFirstName) {
         this.doctorFirstName = doctorFirstName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDoctorLastName() {
         return doctorLastName;
     }
 
+    /**
+     *
+     * @param doctorLastName
+     */
     public void setDoctorLastName(String doctorLastName) {
         this.doctorLastName = doctorLastName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDoctorId() {
         return doctorId;
     }
 
+    /**
+     *
+     * @param doctorId
+     */
     public void setDoctorId(String doctorId) {
         this.doctorId = doctorId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDepartmentId() {
         return departmentId;
     }
 
+    /**
+     *
+     * @param departmentId
+     */
     public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId;
     }
@@ -118,41 +199,78 @@ public class Doctors extends ActionSupport implements ApplicationAware, SessionA
     private String doctorGender;
     private String contactEmail;
 
+    /**
+     *
+     * @return
+     */
     public String getContactEmail() {
         return contactEmail;
     }
 
+    /**
+     *
+     * @param contactEmail
+     */
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDoctorAge() {
         return doctorAge;
     }
 
+    /**
+     *
+     * @param doctorAge
+     */
     public void setDoctorAge(String doctorAge) {
         this.doctorAge = doctorAge;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDoctorGender() {
         return doctorGender;
     }
 
+    /**
+     *
+     * @param doctorGender
+     */
     public void setDoctorGender(String doctorGender) {
         this.doctorGender = doctorGender;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDepartmentName() {
         return departmentName;
     }
 
+    /**
+     *
+     * @param departmentName
+     */
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
     }
 
+    /**
+     *
+     * Used to Set the elements of doctor dashboard.
+     * @return 
+     */
     public String doViewHome() {
-        String result="SUCCESS";
-        String doctrId=(String) sessionMap.get("doctorId");
+        String result = "SUCCESS";
+        String doctrId = (String) sessionMap.get("doctorId");
         ArrayList appointmentList = DoctorService.getInstance().doViewAppointments(doctrId);
         sessionMap.put("AppointmentListDoctor", appointmentList);
         String todayBooking = DoctorService.getInstance().doViewBookings("0", doctrId);

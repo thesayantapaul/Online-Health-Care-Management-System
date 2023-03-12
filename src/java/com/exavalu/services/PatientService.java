@@ -24,9 +24,23 @@ import org.apache.log4j.Logger;
  */
 public class PatientService {
 
+    /**
+     *
+     */
     public static PatientService patientService = null;
+
+    /**
+     *
+     */
     public static Logger log = Logger.getLogger(PatientService.class.getName());
 
+    /**
+     *
+     * Used to retrieve
+     * users medical history from BackEnd.
+     * @param userId
+     * @return 
+     */
     public static ArrayList doViewParticularMedicalHistory(String userId) {
         String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId right join prescription on prescription.appointmentId=appointments.appointmentId where appointments.userId=? and appointments.appointmentDate<=curdate()";
         ArrayList appointmentList = new ArrayList();
@@ -59,6 +73,13 @@ public class PatientService {
         return appointmentList;
     }
 
+    /**
+     *
+     * Used to
+     * retrieve users upcoming bookings from BackEnd.
+     * @param userId
+     * @return 
+     */
     public static ArrayList doViewParticularUpcomingAppointments(String userId) {
         String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.userId=? and appointments.appointmentdate >CURDATE() order by appointments.appointmentDate";
 
@@ -96,6 +117,10 @@ public class PatientService {
     private PatientService() {
     }
 
+    /**
+     *
+     * @return
+     */
     public static PatientService getInstance() {
         if (patientService == null) {
             return new PatientService();
@@ -104,6 +129,14 @@ public class PatientService {
         }
     }
 
+    /**
+     *
+     * Used to add new patient to the
+     * BackEnd.
+     * @param appointment
+     * @param userId
+     * @return 
+     */
     public boolean insertPatient(Appointment appointment, String userId) {
         boolean result = false;
 
@@ -135,6 +168,14 @@ public class PatientService {
 
     }
 
+    /**
+     *
+     * Used to get a patient detail from the
+     * BackEnd.
+     * @param appointment
+     * @param userId
+     * @return 
+     */
     public Appointment getPatient(Appointment appointment, String userId) {
         String sql = "select * from patients where patientFirstName=? and patientLastName=? and gender=? and age=? and userId=?";
         try {
@@ -167,6 +208,13 @@ public class PatientService {
 
     }
 
+    /**
+     *
+     * Used to update a the
+     * appointment detail in the patient BackEnd.
+     * @param appointment
+     * @return 
+     */
     public boolean insertPatientAppointment(Appointment appointment) {
 
         boolean result = false;
@@ -194,6 +242,13 @@ public class PatientService {
 
     }
 
+    /**
+     *
+     * Used to obtain a 
+     * patients detail from the BackEnd.
+     * @param appointmentId
+     * @return 
+     */
     public Appointment getPatientDetail(String appointmentId) {
         Appointment users = new Appointment();
         String sql = "select * from appointments right join patients on patients.patientId=appointments.patientId left join users on users.userId=patients.userId where appointments.appointmentId=?";

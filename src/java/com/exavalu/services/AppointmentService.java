@@ -17,12 +17,23 @@ import org.apache.log4j.Logger;
  */
 public class AppointmentService {
 
+    /**
+     *
+     */
     public static AppointmentService appointmentService = null;
+
+    /**
+     *
+     */
     public static Logger log = Logger.getLogger(AppointmentService.class.getName());
 
     private AppointmentService() {
     }
 
+    /**
+     *
+     * @return
+     */
     public static AppointmentService getInstance() {
         if (appointmentService == null) {
             return new AppointmentService();
@@ -31,6 +42,13 @@ public class AppointmentService {
         }
     }
 
+    /**
+     *
+     * Add a new appointment to the
+     * database
+     * @param appointment
+     * @return 
+     */
     public boolean getAppointment(Appointment appointment) {
         boolean result = false;
         Date date = new Date();
@@ -47,33 +65,20 @@ public class AppointmentService {
             ps.setString(5, appointment.getPatientId());
             ps.setString(6, appointment.getUserId());
             ps.setString(7, appointment.getSymptoms());
-            if(appointment.getWeekDays().equals("Monday"))
-            {
-                dayOfWeek=9-dayOfWeek;
-            }
-            else if(appointment.getWeekDays().equals("Tuesday"))
-            {
-                dayOfWeek=10-dayOfWeek;
-            }
-            else if(appointment.getWeekDays().equals("Wednesday"))
-            {
-                dayOfWeek=11-dayOfWeek;
-            }
-            else if(appointment.getWeekDays().equals("Thursday"))
-            {
-                dayOfWeek=12-dayOfWeek;
-            }
-            
-            else if(appointment.getWeekDays().equals("Friday"))
-            {
-                dayOfWeek=13-dayOfWeek;
-            }
-            else if(appointment.getWeekDays().equals("Saturday"))
-            {
-                dayOfWeek=14-dayOfWeek;
-            }
-            else{
-                dayOfWeek=15-dayOfWeek;
+            if (appointment.getWeekDays().equals("Monday")) {
+                dayOfWeek = 9 - dayOfWeek;
+            } else if (appointment.getWeekDays().equals("Tuesday")) {
+                dayOfWeek = 10 - dayOfWeek;
+            } else if (appointment.getWeekDays().equals("Wednesday")) {
+                dayOfWeek = 11 - dayOfWeek;
+            } else if (appointment.getWeekDays().equals("Thursday")) {
+                dayOfWeek = 12 - dayOfWeek;
+            } else if (appointment.getWeekDays().equals("Friday")) {
+                dayOfWeek = 13 - dayOfWeek;
+            } else if (appointment.getWeekDays().equals("Saturday")) {
+                dayOfWeek = 14 - dayOfWeek;
+            } else {
+                dayOfWeek = 15 - dayOfWeek;
             }
             ps.setString(1, Integer.toString(dayOfWeek));
             System.out.println("AppointmentService GetAppointment :: " + ps);
@@ -93,13 +98,20 @@ public class AppointmentService {
         return result;
     }
 
+    /**
+     *
+     * Used to get a particular appointment
+     * from the database
+     * @param appointment
+     * @return 
+     */
     public Appointment getAppointmentId(Appointment appointment) {
 
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "select * from appointments where appointmentDate=? and doctorId=? and departmentId=? and patientId=? and userId=?";
+            String sql = "select * from appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId where bookingDate=? and appointments.doctorId=? and appointments.departmentId=? and appointments.patientId=? and appointments.userId=?";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, appointment.getAppointmentDate());
+            ps.setString(1, java.time.LocalDate.now().toString());
             ps.setString(2, appointment.getDoctorId());
             ps.setString(3, appointment.getDepartmentId());
             ps.setString(4, appointment.getPatientId());
@@ -111,6 +123,11 @@ public class AppointmentService {
 
             if (res.next()) {
                 appointment.setAppointmentId(res.getString("appointmentId"));
+                appointment.setDoctorFirstName(res.getString("doctorFirstName"));
+                appointment.setDoctorLastName(res.getString("doctorLastName"));
+                appointment.setDepartmentName(res.getString("departmentName"));
+                appointment.setAppointmentDate(res.getString("appointmentDate"));
+
                 System.out.println(appointment.getAppointmentId());
             }
 
@@ -123,6 +140,12 @@ public class AppointmentService {
         return appointment;
     }
 
+    /**
+     *
+     * Used to update the status of an appointment
+     * in the database
+     * @param appointmentId
+     */
     public void updateStatus(String appointmentId) {
 
         boolean result = false;

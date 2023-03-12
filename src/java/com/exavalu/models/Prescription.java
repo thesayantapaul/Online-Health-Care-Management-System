@@ -27,11 +27,19 @@ public class Prescription extends ActionSupport implements ApplicationAware, Ses
 
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
 
+    /**
+     *
+     * @param application
+     */
     @Override
     public void setApplication(Map<String, Object> application) {
         map = (ApplicationMap) application;
     }
 
+    /**
+     *
+     * @param session
+     */
     @Override
     public void setSession(Map<String, Object> session) {
         sessionMap = (SessionMap) session;
@@ -56,150 +64,299 @@ public class Prescription extends ActionSupport implements ApplicationAware, Ses
     private String doctorLastName;
     private String departmentName;
 
+    /**
+     *
+     * @return
+     */
     public String getDoctorFirstName() {
         return doctorFirstName;
     }
 
+    /**
+     *
+     * @param doctorFirstName
+     */
     public void setDoctorFirstName(String doctorFirstName) {
         this.doctorFirstName = doctorFirstName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDoctorLastName() {
         return doctorLastName;
     }
 
+    /**
+     *
+     * @param doctorLastName
+     */
     public void setDoctorLastName(String doctorLastName) {
         this.doctorLastName = doctorLastName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDepartmentName() {
         return departmentName;
     }
 
+    /**
+     *
+     * @param departmentName
+     */
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUserId() {
         return userId;
     }
 
+    /**
+     *
+     * @param userId
+     */
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmailAddress() {
         return emailAddress;
     }
 
+    /**
+     *
+     * @param emailAddress
+     */
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPatientFirstName() {
         return patientFirstName;
     }
 
+    /**
+     *
+     * @param patientFirstName
+     */
     public void setPatientFirstName(String patientFirstName) {
         this.patientFirstName = patientFirstName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPatientLastName() {
         return patientLastName;
     }
 
+    /**
+     *
+     * @param patientLastName
+     */
     public void setPatientLastName(String patientLastName) {
         this.patientLastName = patientLastName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSymptoms() {
         return symptoms;
     }
 
+    /**
+     *
+     * @param symptoms
+     */
     public void setSymptoms(String symptoms) {
         this.symptoms = symptoms;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     *
+     * @param date
+     */
     public void setDate(String date) {
         this.date = date;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAppointmentId() {
         return appointmentId;
     }
 
+    /**
+     *
+     * @param appointmentId
+     */
     public void setAppointmentId(String appointmentId) {
         this.appointmentId = appointmentId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPatientId() {
         return patientId;
     }
 
+    /**
+     *
+     * @param patientId
+     */
     public void setPatientId(String patientId) {
         this.patientId = patientId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDoctorId() {
         return doctorId;
     }
 
+    /**
+     *
+     * @param doctorId
+     */
     public void setDoctorId(String doctorId) {
         this.doctorId = doctorId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     *
+     * @param status
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMedicine() {
         return medicine;
     }
 
+    /**
+     *
+     * @param medicine
+     */
     public void setMedicine(String medicine) {
         this.medicine = medicine;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDosage() {
         return dosage;
     }
 
+    /**
+     *
+     * @param dosage
+     */
     public void setDosage(String dosage) {
         this.dosage = dosage;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTime() {
         return time;
     }
 
+    /**
+     *
+     * @param time
+     */
     public void setTime(String time) {
         this.time = time;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTests() {
         return tests;
     }
 
+    /**
+     *
+     * @param tests
+     */
     public void setTests(String tests) {
         this.tests = tests;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAdvice() {
         return advice;
     }
 
+    /**
+     *
+     * @param advice
+     */
     public void setAdvice(String advice) {
         this.advice = advice;
     }
 
+    /**
+     * doPrescribe used by the doctor to prescribe the
+     * medicine,timing,dosage,test etc.
+     * @return
+     */
     public String doPrescribe() {
         String result = "FALIURE";
         System.out.println("advice" + this.advice);
@@ -228,6 +385,10 @@ public class Prescription extends ActionSupport implements ApplicationAware, Ses
         return result;
     }
 
+    /**
+     * used to retrieve a particular prescription data from the BackEnd.
+     * @return 
+     */
     public String getPatientPrescription() {
         String result = "FAILURE";
 

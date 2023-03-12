@@ -30,10 +30,18 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
 
     private String userId;
 
+    /**
+     *
+     * @return
+     */
     public String getUserId() {
         return userId;
     }
 
+    /**
+     *
+     * @param userId
+     */
     public void setUserId(String userId) {
         this.userId = userId;
     }
@@ -57,66 +65,130 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     private String picture;
     private String age;
 
+    /**
+     *
+     * @return
+     */
     public String getAge() {
         return age;
     }
 
+    /**
+     *
+     * @param age
+     */
     public void setAge(String age) {
         this.age = age;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSub() {
         return sub;
     }
 
+    /**
+     *
+     * @param sub
+     */
     public void setSub(String sub) {
         this.sub = sub;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFamily_name() {
         return family_name;
     }
 
+    /**
+     *
+     * @param family_name
+     */
     public void setFamily_name(String family_name) {
         this.family_name = family_name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getGiven_name() {
         return given_name;
     }
 
+    /**
+     *
+     * @param given_name
+     */
     public void setGiven_name(String given_name) {
         this.given_name = given_name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPicture() {
         return picture;
     }
 
+    /**
+     *
+     * @param picture
+     */
     public void setPicture(String picture) {
         this.picture = picture;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDoctorId() {
         return doctorId;
     }
 
+    /**
+     *
+     * @param doctorId
+     */
     public void setDoctorId(String doctorId) {
         this.doctorId = doctorId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPatientId() {
         return patientId;
     }
 
+    /**
+     *
+     * @param patientId
+     */
     public void setPatientId(String patientId) {
         this.patientId = patientId;
     }
@@ -179,17 +251,29 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
 
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
 
+    /**
+     *
+     * @return
+     */
     public SessionMap<String, Object> getSessionMap() {
         return sessionMap;
     }
 
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
 
+    /**
+     *
+     * @param application
+     */
     @Override
     public void setApplication(Map<String, Object> application) {
         map = (ApplicationMap) application;
     }
 
+    /**
+     *
+     * @param session
+     */
     @Override
     public void setSession(Map<String, Object> session) {
         sessionMap = (SessionMap) session;
@@ -251,6 +335,11 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
         this.gender = gender;
     }
 
+    /**
+     * doLogin used to validate the credential and role based login
+     *
+     * @return
+     */
     public String doLogin() {
         String result = "FAILURE";
         boolean success = LoginService.getInstance().doLogin(this);
@@ -408,6 +497,9 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 sessionMap.put("doctorId", this.doctorId);
                 ArrayList prescribedList = PrescriptionService.getInstance().getPrescription(this.doctorId);
                 sessionMap.put("PreviousPrescription", prescribedList);
+                ArrayList departmentOccupncyList = AdminService.doGetOccupancyForEachDepartments("0");
+
+                sessionMap.put("OccupancyInDepartments", departmentOccupncyList);
 
                 System.out.println(sessionMap);
                 result = "DOCTORINDEX";
@@ -612,6 +704,12 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
         return result;
     }
 
+    /**
+     * Used to LogOut user and clear the session
+     *
+     * @return
+     * @throws Exception
+     */
     public String doLogout() throws Exception {
         String result = "FAILURE";
         sessionMap.clear();
@@ -622,6 +720,12 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
 
     }
 
+    /**
+     * Used to Sign Up or add new user
+     *
+     * @return
+     * @throws Exception
+     */
     public String doSignUp() throws Exception {
         String result = "FAILURE";
         boolean success = LoginService.getInstance().doSignUp(this);
@@ -661,6 +765,11 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
 
     }
 
+    /**
+     * doSocial used from google social sign up using OAuth2
+     *
+     * @throws java.lang.Exception
+     */
     public String doSocial() throws Exception {
         String result = "FAILURE";
         boolean success = LoginService.getInstance().doSocialSignUp(this);
@@ -688,6 +797,11 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
 
     }
 
+    /**
+     * used from google social Login after validation with BackEnd.
+     *
+     * @throws java.lang.Exception doSocialLogin
+     */
     public String doSocialLogin() throws Exception {
         String result = "FAILURE";
         boolean success = LoginService.getInstance().doSocialLog_in(this);
