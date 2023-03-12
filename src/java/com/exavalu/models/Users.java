@@ -497,6 +497,9 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 sessionMap.put("doctorId", this.doctorId);
                 ArrayList prescribedList = PrescriptionService.getInstance().getPrescription(this.doctorId);
                 sessionMap.put("PreviousPrescription", prescribedList);
+                ArrayList departmentOccupncyList = AdminService.doGetOccupancyForEachDepartments("0");
+
+                sessionMap.put("OccupancyInDepartments", departmentOccupncyList);
 
                 System.out.println(sessionMap);
                 result = "DOCTORINDEX";

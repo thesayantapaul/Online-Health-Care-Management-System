@@ -4,7 +4,9 @@
     Author     : anich
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<c:if test="${Loggedin==null}">
+    <c:redirect url="login.jsp"/>
+</c:if>
 <div class="cont" id="invoice" >
     <div class="row">
         <div class="col-md-1"></div>

@@ -72,7 +72,7 @@ public class MailServic {
                 + "\n"
                 + "Thanks for getting in touch. \n"
                 + "\n"
-                + "This is a confirmation email regarding your appointment at OHMS  with Dr "+appointment.getDoctorFirstName()+" "+ appointment.getDoctorLastName()+"at"+appointment.getTime()+" on "+appointment.getAppointmentDate()+". Please be available 30 minutes prior to your appointed time.  \n"
+                + "This is a confirmation email regarding your appointment at OHMS  with Dr "+appointment.getDoctorFirstName()+" "+ appointment.getDoctorLastName()+" at "+appointment.getTime()+" on "+appointment.getAppointmentDate()+". Please be available 30 minutes prior to your appointed time.  \n"
                 + "\n"
                 + "To learn more about us,Click Here. \n"
                 + "\n"

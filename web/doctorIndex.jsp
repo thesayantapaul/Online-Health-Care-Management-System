@@ -4,7 +4,9 @@
     Author     : anich
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<c:if test="${Loggedin==null}">
+    <c:redirect url="login.jsp"/>
+</c:if>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -383,7 +385,7 @@
                                         </ul>
                                     </div>
 
-                                    <div class="card-body pb-0">
+<!--                                    <div class="card-body pb-0">
                                         <h5 class="card-title">Top Department in terms of booking <span>| Today</span></h5>
 
                                         <table class="table table-borderless datatable">
@@ -410,11 +412,56 @@
                                             </tbody>
                                         </table>
 
-                                    </div>
+                                    </div>-->
 
                                 </div>
                             </div><!-- End Top Selling -->
+                        <div class="col-12">
+                            <div class="card top-selling overflow-auto">
 
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filter</h6>
+                                        </li>
+
+                                        <li><a class="dropdown-item" href="#">Today</a></li>
+                                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="card-body pb-0">
+                                    <h5 class="card-title">Top Department in terms of booking <span>| Today</span></h5>
+
+                                    <table class="table table-borderless datatable">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Department Id</th>
+
+                                                <th scope="col">Department Name</th>
+
+                                                <th scope="col">Occupancy(no of patients)</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="${OccupancyInDepartments}" var="department">
+                                                <tr>
+                                                    <th scope="row"><a href="#">${department.departmentId}</a></th>
+                                                    <td>${department.departmentName}</td>
+                                                    <td>${department.numberOfPatients}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
+                        </div>
                         </div>
                     </div><!-- End Left side columns -->
 
