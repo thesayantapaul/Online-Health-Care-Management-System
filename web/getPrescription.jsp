@@ -1,9 +1,16 @@
-<%-- 
+<%--
     Document   : getPrescription
     Created on : Mar 10, 2023, 1:09:58 PM
     Author     : anich
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 
 <div class="cont" id="invoice" >
     <div class="row">
@@ -57,44 +64,36 @@
 
                             </c:forEach>
 
-
-
                         </tbody>
                     </table>
                 </div>
             </div>
-            <!--                    <div class="row">
-                                    <div class="col-md-11 text-right mt-2 mb-2">Signature</div>
-                                </div>-->
+
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row ">
-        <div class="col-md-12 text-center mb-4">
-            <button class="btn btn-success" id="downloadPdf" onclick="download()">
-                Download Prescription
-            </button>
-        </div>
-    </div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+    <button class="btn btn-success" id="downloadPdf" onclick="download()">
+        Download Prescription
+    </button>
 </div>
-    <script>
-    document
-            .getElementById("downloadPdf")
-            function download() {
-                const element = document.getElementById("invoice");
-                var opt = {
-                                        margin: 0,
-                                        filename: 'Quotation.pdf',
-                                        image: {type: 'jpeg', quality: 1},
-                                        html2canvas: {scale: 1},
-                                        jsPDF: {unit: 'in', format: 'A4', orientation: 'portrait'}
-                                };
-                                html2pdf().from(element).set(opt).save();
-                //                    html2pdf()
-                //                            .from(element)
-                //                            .save();
-            };
+
+<script>
+
+    function download() {
+        const element = document.getElementById("invoice");
+        var opt = {
+                                margin: 0,
+                                filename: 'Quotation.pdf',
+                                image: {type: 'jpeg', quality: 1},
+                                html2canvas: {scale: 1},
+                                jsPDF: {unit: 'in', format: 'A4', orientation: 'portrait'}
+                        };
+                        html2pdf().from(element).set(opt).save();
+
+    }
+    ;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
-        <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+<script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>

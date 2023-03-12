@@ -254,7 +254,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     public String doLogin() {
         String result = "FAILURE";
         boolean success = LoginService.getInstance().doLogin(this);
-        MailServic.send("anichakraborty0007@gmail.com", "icesuzcamsjmrsts", "anichakraborty863@gmail.com", "hello javatpoint", "How r u?");
+        //MailServic.send("anichakraborty0007@gmail.com", "icesuzcamsjmrsts", "anichakraborty863@gmail.com", "hello javatpoint", "How r u?");
         if (success) {
             if (this.roleId.equals("1")) {
                 ArrayList appointment = new ArrayList();

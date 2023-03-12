@@ -27,9 +27,7 @@ admin appointment jsp
 
             var startingDate = document.getElementById("startingDate").value;
             var endingDate = document.getElementById("endingDate").value;
-
             var url = "FetchFilteredAppointment?startingDate=" + startingDate + "&endingDate=" + endingDate;
-
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function ()
             {
@@ -80,6 +78,21 @@ admin appointment jsp
 //            }
         //functionToUpdateAppointment
 
+    </script>
+    <script>
+
+        function fetchPrescriptionModal(appointmentId) {
+            //alert(selectedId);
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function ()
+            {
+                //alert(xmlhttp.responseText);
+                document.querySelector("#mailModalId .modal-content").innerHTML = xmlhttp.responseText;
+            };
+            xmlhttp.open("POST", "GetPrescription?appointmentId=" + appointmentId, true);
+            xmlhttp.send();
+        }
     </script>
     <style>
         #calendarId {
@@ -187,17 +200,17 @@ admin appointment jsp
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="btn btn-outline-primary  bi bi-receipt">  View</span>
-                                </td>
-                                <td>
-                                    <div class="dropdown open">
-                                        <a href="#!" class="px-2" id="triggerId1" data-toggle="dropdown" aria-haspopup="true"
-                                           aria-expanded="false">
-                                            <i class="fa fa-ellipsis-v"></i>
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="triggerId1">
+                                    <span class="btn btn-outline-primary  bi bi-receipt" onclick="fetchPrescriptionModal('${appointment.appointmentId}')" data-toggle="modal" data-target="#mailModalId">  View</span>
+                            </td>
+                            <td>
+                                <div class="dropdown open">
+                                    <a href="#!" class="px-2" id="triggerId1" data-toggle="dropdown" aria-haspopup="true"
+                                       aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="triggerId1">
 
-                                            <a class="dropdown-item" onclick="editAppointmentData(${appointment.appointmentId})" ><i class="fa fa-pencil mr-1"></i> Edit</a>
+                                        <a class="dropdown-item" onclick="editAppointmentData(${appointment.appointmentId})" ><i class="fa fa-pencil mr-1"></i> Edit</a>
                                         <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#ex${appointment.appointmentId}"> <i class ="fa fa-trash mr-1"></i> Cancel</a>
                                     </div>
                                 </div>
@@ -230,8 +243,19 @@ admin appointment jsp
                     </c:forEach>
                 </tbody>
             </table>
+            <!-- Modal -->
+            <div class="modal fade" id="mailModalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+
+
+                    </div>
+                </div>
+            </div>
+            <!--modal end-->
 
         </div>
+
     </section>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -247,6 +271,24 @@ admin appointment jsp
                                                                    }
                                                     initialiseDataTables();
     </script>
+    <script>
+
+        function download() {
+            const element = document.getElementById("invoice");
+            var opt = {
+                                    margin: 0,
+                                    filename: 'Quotation.pdf',
+                                    image: {type: 'jpeg', quality: 1},
+                                    html2canvas: {scale: 1},
+                                    jsPDF: {unit: 'in', format: 'A4', orientation: 'portrait'}
+                            };
+                            html2pdf().from(element).set(opt).save();
+        }
+        ;
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 
 
 </body>
