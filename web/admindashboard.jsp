@@ -40,6 +40,7 @@
         * Author: BootstrapMade.com
         * License: https://bootstrapmade.com/license/
         ======================================================== -->
+
     </head>
     <script>
         function adminAddDoctorJSP()
@@ -165,7 +166,7 @@
                                     </div>
 
                                     <div class="card-body">
-                                        <h5 class="card-title"> Users Registered<span>| Today </span></h5>
+                                        <h5 class="card-title"> Users Registered<span> | Today </span></h5>
 
                                         <div class="d-flex align-items-center">
                                             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -373,6 +374,7 @@
             </section>
 
         </main><!-- End #main -->
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 
         <!-- Vendor JS Files -->

@@ -178,7 +178,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         sessionMap.put("Day6Booking", day6Booking);
 
         //compare booking to show in dashboard
-        if (Integer.parseInt(todayBooking) >= Integer.parseInt(day1Booking)) {
+        if (Integer.parseInt(todayBooking) > Integer.parseInt(day1Booking)) {
 
             sessionMap.put("HigherOrLowerText", "Higher than yesterday");
 
