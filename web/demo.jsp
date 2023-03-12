@@ -41,7 +41,7 @@
                     url: "SocialSign",
                     data: responsePayLoad,
                     success: function (responseText) {
-                        alert(responseText);
+//                        alert(responseText);
                         $("#" + "social").html(responseText);
 
                     }

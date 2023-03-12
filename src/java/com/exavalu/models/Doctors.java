@@ -60,6 +60,24 @@ public class Doctors extends ActionSupport implements ApplicationAware, SessionA
 
     private String doctorFirstName;
     private String doctorLastName;
+    private String weekDays;
+    private String time;
+
+    public String getWeekDays() {
+        return weekDays;
+    }
+
+    public void setWeekDays(String weekDays) {
+        this.weekDays = weekDays;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public String getDoctorFirstName() {
         return doctorFirstName;

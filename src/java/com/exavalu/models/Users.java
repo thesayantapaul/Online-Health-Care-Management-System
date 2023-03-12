@@ -9,6 +9,7 @@ import com.exavalu.services.AppointmentService;
 import com.exavalu.services.DepartmentService;
 import com.exavalu.services.DoctorService;
 import com.exavalu.services.LoginService;
+import com.exavalu.services.MailServic;
 import com.exavalu.services.PatientService;
 import com.exavalu.services.PrescriptionService;
 import com.opensymphony.xwork2.ActionContext;
@@ -192,7 +193,6 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     @Override
     public void setSession(Map<String, Object> session) {
         sessionMap = (SessionMap) session;
-        
     }
 
     /**
@@ -254,7 +254,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     public String doLogin() {
         String result = "FAILURE";
         boolean success = LoginService.getInstance().doLogin(this);
-
+        MailServic.send("anichakraborty0007@gmail.com", "icesuzcamsjmrsts", "anichakraborty863@gmail.com", "hello javatpoint", "How r u?");
         if (success) {
             if (this.roleId.equals("1")) {
                 ArrayList appointment = new ArrayList();
@@ -276,7 +276,9 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
             if (this.roleId.equals("2")) {
                 System.out.println(this.doctorId);
                 ArrayList appointmentList = DoctorService.getInstance().doViewAppointments(this.doctorId);
+                ArrayList pastAppointmentList = DoctorService.getInstance().doViewPastAppointments(this.doctorId);
                 sessionMap.put("AppointmentListDoctor", appointmentList);
+                sessionMap.put("PastAppointment", pastAppointmentList);
                 String todayBooking = DoctorService.getInstance().doViewBookings("0", this.doctorId);
                 String day1Booking = DoctorService.getInstance().doViewBookings("-1", this.doctorId);
 
@@ -411,7 +413,6 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 result = "DOCTORINDEX";
             }
             if (this.roleId.equals("3")) {
-                //sessionMap.put("UserLoggedIn", this);
                 ArrayList deptList = DepartmentService.getInstance().getAllDepartments();
                 sessionMap.put("DeptList", deptList);
 

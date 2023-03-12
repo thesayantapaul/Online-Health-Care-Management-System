@@ -30,23 +30,23 @@
         <div class="border" style="width:800px">
             <div class="border box" style="height:130px">
                 <div class="border" style="width:50%; text-align: center;display: flex;justify-content: center;align-items: center"> 
-                    <h3> Doctor Details </h3>
+                    <h5> Doctor Details </h5>
                 </div>
                 <div class="border" style="width:50%; text-align: center;display: flex;justify-content: center;align-items: center">
-                    <h4>
+                    <h5>
                         ${DoctorDetail.doctorFirstName}<br>
                         ${DoctorDetail.doctorLastName}<br>
                         ${DoctorDetail.departmentName}<br>
-                    </h4>
+                    </h5>
                     <hr>
                 </div>
             </div>
             <div class="border box" style="height:220px">
                 <div class="border" style="width:50%; text-align: center;display: flex;justify-content: center;align-items: center">
-                    <h3> Patient Details </h3>
+                    <h5> Patient Details </h5>
                 </div>
                 <div class="border" style="width:50%; text-align: center;display: flex;justify-content: center;align-items: center">
-                    <h3>
+                    <h5>
                         <input name="appointmentId" value="${PatientDetail.appointmentId}" hidden>
                         <input name="emailAddress" id="emailAddress" value="${PatientDetail.emailAddress}" hidden >
                         <input name="patientId"  value="${PatientDetail.patientId}" hidden>
@@ -60,10 +60,10 @@
                         LastName: ${PatientDetail.patientLastName}<br>
                         Age: ${PatientDetail.age}<br>
                         Gender: ${PatientDetail.gender}<br>
-                    </h3>
+                    </h5>
                 </div>
             </div>
-            <div class="border box" style="height:530px">
+            <div class="border box" style="height:auto">
                 <div class="border" style="width:50%">
                     <div class="desease_details">
                         <div class="symptoms">

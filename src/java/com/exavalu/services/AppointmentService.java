@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 import org.apache.log4j.Logger;
 
 /**
@@ -31,19 +33,49 @@ public class AppointmentService {
 
     public boolean getAppointment(Appointment appointment) {
         boolean result = false;
-
+        Date date = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "INSERT INTO appointments (appointmentDate, doctorId, departmentId, statusId,patientId,userId,symptoms,bookingDate) VALUES (?, ?, ?, ?,?,?,?,curdate());";
+            String sql = "INSERT INTO appointments (appointmentDate, doctorId, departmentId, statusId,patientId,userId,symptoms,bookingDate) VALUES (DATE_ADD(CURDATE(), INTERVAL ? DAY) , ?, ?, ?,?,?,?,curdate());";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, appointment.getAppointmentDate());
             ps.setString(2, appointment.getDoctorId());
             ps.setString(3, appointment.getDepartmentId());
-            ps.setString(4, "1");
+            ps.setString(4, "2");
             ps.setString(5, appointment.getPatientId());
             ps.setString(6, appointment.getUserId());
             ps.setString(7, appointment.getSymptoms());
-
+            if(appointment.getWeekDays().equals("Monday"))
+            {
+                dayOfWeek=9-dayOfWeek;
+            }
+            else if(appointment.getWeekDays().equals("Tuesday"))
+            {
+                dayOfWeek=10-dayOfWeek;
+            }
+            else if(appointment.getWeekDays().equals("Wednesday"))
+            {
+                dayOfWeek=11-dayOfWeek;
+            }
+            else if(appointment.getWeekDays().equals("Thursday"))
+            {
+                dayOfWeek=12-dayOfWeek;
+            }
+            
+            else if(appointment.getWeekDays().equals("Friday"))
+            {
+                dayOfWeek=13-dayOfWeek;
+            }
+            else if(appointment.getWeekDays().equals("Saturday"))
+            {
+                dayOfWeek=14-dayOfWeek;
+            }
+            else{
+                dayOfWeek=15-dayOfWeek;
+            }
+            ps.setString(1, Integer.toString(dayOfWeek));
             System.out.println("AppointmentService GetAppointment :: " + ps);
 
             int rs = ps.executeUpdate();
@@ -92,7 +124,7 @@ public class AppointmentService {
     }
 
     public void updateStatus(String appointmentId) {
-        
+
         boolean result = false;
 
         try {
