@@ -12,6 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css_medicalAppointmentHistory//style.css">
+        <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -57,10 +58,11 @@
             })();
         </script>
 
+
         <script>
             // for modal
             function openModalForSendingMail(doctorId) {
-                alert(doctorId);
+                //alert(doctorId);
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function ()
                 {
@@ -73,7 +75,7 @@
 
             function sendDoctorAmail(firstName, lastName, contactEmail) {
 
-                alert(contactEmail);
+                //alert(contactEmail);
                 var params = {
                     from_name: "OHMS",
                     firstName: firstName,
@@ -112,6 +114,7 @@
                 xmlhttp.onreadystatechange = function ()
                 {
                     document.getElementById("viewSearchResult").innerHTML = xmlhttp.responseText;
+                    initialiseDataTables();
                 };
                 xmlhttp.open("POST", url, true);
                 xmlhttp.send();
@@ -135,6 +138,7 @@
                 xmlhttp.onreadystatechange = function ()
                 {
                     document.getElementById("viewSearchResult").innerHTML = xmlhttp.responseText;
+                    initialiseDataTables();
                 };
                 xmlhttp.open("POST", url, true);
                 xmlhttp.send();
@@ -294,5 +298,15 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script>
+                                            function initialiseDataTables() {
+                                                const datatables = [...document.querySelectorAll('.datatable')];
+                                                datatables.forEach(datatable => {
+                                                    new simpleDatatables.DataTable(datatable);
+                                                });
+                                                           }
+                                            initialiseDataTables();
+    </script>
     <p class="mb-md-0">&copy; <a class="text-primary" href="#">OHMS</a>. All Rights Reserved. by @nik</p>
 </html>

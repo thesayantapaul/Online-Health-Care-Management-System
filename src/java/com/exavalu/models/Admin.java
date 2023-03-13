@@ -15,7 +15,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 /**
  *
- * @author LenovoRaja
+ * @author Raja
  */
 public class Admin extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
 
@@ -129,6 +129,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         String result = "FAILURE";
         Appointment appointment = new Appointment();
         appointment = AdminService.doViewParticularAppointment(this.appointmentId);
+        ArrayList doctorList = AdminService.getAllDoctors(appointment.getDepartmentId());
 
         if (appointment != null) {
             result = "EDITAPPOINTENTJSP";
@@ -136,10 +137,25 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
             ArrayList statusList = StatusService.getAllStatus();
 
             sessionMap.put("StatusList", statusList);
+            sessionMap.put("DoctorListAdmin", doctorList);
             sessionMap.put("appointment", appointment);
             System.out.println("appointmentdate= " + appointment.getAppointmentDate());
         }
         return result;
+    }
+    public String doGetDoctorForEditAppointment() throws Exception {
+        //System.out.println(this.getDepartmentId());
+        String result = "FAILURE";
+         ArrayList doctorList = AdminService.getAllDoctors(this.departmentId);
+
+        if (!doctorList.isEmpty()) {
+            result = "SUCCESS";
+            System.out.println("departmentid = "+this.departmentId);
+            sessionMap.put("DoctorListAdmin", doctorList);
+        }
+
+        return result;
+
     }
 
     /**

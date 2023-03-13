@@ -70,7 +70,6 @@ public class AdminService {
     }
 
     //filtered appointment list-----------------
-
     /**
      *
      * @param startingDate
@@ -205,7 +204,6 @@ public class AdminService {
     }
 
     //do fetch perticular doctor using doctorId
-
     /**
      *
      * @param doctorId
@@ -216,25 +214,59 @@ public class AdminService {
         try {
             Connection con = JDBCConnectionManager.getConnection();
             String sql = "select * from doctors where doctorId = ?";
-            
-             PreparedStatement ps = con.prepareStatement(sql);
-             ps.setString(1,doctorId);
-             ResultSet rs = ps.executeQuery();
-             
-             if(rs.next()){
-                 doctor.setDoctorFirstName(rs.getString("doctorFirstName"));
-                 doctor.setDoctorLastName(rs.getString("doctorLastName"));
-                 doctor.setContactEmail(rs.getString("contactEmail"));
-             }
-             
-            
-            
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, doctorId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                doctor.setDoctorFirstName(rs.getString("doctorFirstName"));
+                doctor.setDoctorLastName(rs.getString("doctorLastName"));
+                doctor.setContactEmail(rs.getString("contactEmail"));
+            }
+
         } catch (SQLException ex) {
             Logger log = Logger.getLogger(AdminService.class.getName());
             log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
 
         }
         return doctor;
+    }
+
+    public static ArrayList getAllDoctors(String departmentId) {
+        ArrayList deptLIst = new ArrayList();
+        try {
+
+            Connection con = JDBCConnectionManager.getConnection();
+
+            String sql = "Select * from doctors where departmentId=?";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+            preparedStatement.setString(1, departmentId);
+
+            System.out.println(preparedStatement);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Doctors doctors = new Doctors();
+
+                doctors.setDoctorId(rs.getString("doctorId"));
+                doctors.setDoctorFirstName(rs.getString("doctorFirstName"));
+                doctors.setDoctorLastName(rs.getString("doctorLastName"));
+
+                deptLIst.add(doctors);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
+        }
+
+        return deptLIst;
     }
 
     /**
@@ -278,13 +310,14 @@ public class AdminService {
 
         } catch (SQLException ex) {
 
-            ex.printStackTrace();
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
         }
         return doctorList;
     }
 
     //search patient
-
     /**
      *
      * @param adminPatient
@@ -327,7 +360,9 @@ public class AdminService {
 
         } catch (SQLException ex) {
 
-            ex.printStackTrace();
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
         }
         return patientList;
     }
@@ -348,7 +383,7 @@ public class AdminService {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-
+                appointment.setDoctorId(rs.getString("doctorId"));
                 appointment.setPatientId(rs.getString("patientId"));
                 appointment.setPatientFirstName(rs.getString("patientFirstName"));
                 //System.out.println("patient id= "+appointment.getPatientFirstName());
@@ -384,14 +419,15 @@ public class AdminService {
         boolean result = false;
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "UPDATE appointments SET departmentId=?,appointmentDate=?,statusId=? WHERE appointmentId=?;";
+            String sql = "UPDATE appointments SET departmentId=?,appointmentDate=?,statusId=?,doctorId=? WHERE appointmentId=?;";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
 
             preparedStatement.setString(1, appointment.getDepartmentId());
             preparedStatement.setString(2, appointment.getAppointmentDate());
             preparedStatement.setString(3, appointment.getStatusId());
-            preparedStatement.setString(4, appointment.getAppointmentId());
+            preparedStatement.setString(4,appointment.getDoctorId());
+            preparedStatement.setString(5, appointment.getAppointmentId());
             System.out.println("ps:" + preparedStatement);
             int row = preparedStatement.executeUpdate();
 
@@ -400,7 +436,9 @@ public class AdminService {
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
         }
         return result;
     }
@@ -468,7 +506,6 @@ public class AdminService {
     }
 
     //chart data x axis dashboard admin--------------------------------------------------------------------------------
-
     /**
      *
      * @param interval
@@ -535,7 +572,6 @@ public class AdminService {
     }
 
     //doGetOccupancyForEachDepartments
-
     /**
      *
      * @param interval
@@ -594,7 +630,9 @@ public class AdminService {
                 System.out.println("result of query = " + result);
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
         }
         return result;
     }
@@ -624,7 +662,9 @@ public class AdminService {
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
         }
         return result;
     }
@@ -660,7 +700,9 @@ public class AdminService {
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
         }
         return result;
     }
@@ -696,7 +738,9 @@ public class AdminService {
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
         }
         return result;
     }
@@ -730,7 +774,9 @@ public class AdminService {
 
         } catch (SQLException ex) {
 
-            ex.printStackTrace();
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
         }
         return doctorId;
     }

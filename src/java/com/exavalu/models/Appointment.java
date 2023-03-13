@@ -449,6 +449,9 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
 
     }
 
+    
+    
+
     /**
      *
      * Used to get the schedule of a particular doctor author anich

@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h3><strong class="d-inline-block mb-2 text-danger">OHMS Doctor</strong></h3>
-<table id="table" data-height="100" data-virtual-scroll="true" class="table table-light" style="margin-top: 0px;">
+<table id="table" data-height="100" data-virtual-scroll="true" class="table table-light datatable" style="margin-top: 0px;">
     <thead>
         <tr>
             <th style="width: 200px">Doctor ID</th>
