@@ -22,6 +22,21 @@ admin appointment jsp
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <sccript src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></sccript>
     <script>
+        function fetchContentDoctorListAdmin(departmentId)
+        {
+            //alert(departmentId);
+            event.preventDefault();
+            //alert(fnolId);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function ()
+            {
+                document.getElementById("doctorId").innerHTML = xmlhttp.responseText;
+            };
+            xmlhttp.open("POST", "getDoctorForEditAppointment?departmentId=" + departmentId, true);
+            xmlhttp.send();
+        }
+    </script>
+    <script>
 
         function sendDateRange() {
 

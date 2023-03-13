@@ -74,8 +74,13 @@
         </action>  
         <action name="getDoctor" class="com.exavalu.models.Appointment" method="doGetDoctor">
             <result name="SUCCESS">doctorList.jsp</result>
-            <result name="FAILURE">menu.jsp</result>
+            <result name="FAILURE">error.jsp</result>
         </action> 
+        <!--getDoctorForEditAppointment-->
+        <action name="getDoctorForEditAppointment" class="com.exavalu.models.Admin" method="doGetDoctorForEditAppointment">
+            <result name="SUCCESS">doctorListAdmin.jsp</result>
+            <result name="FAILURE">error.jsp</result>
+        </action>
         <action name="Appointment" class="com.exavalu.models.Appointment" method="getAppointment">
             <result name="SUCCESS">patientAppointment.jsp</result>
             <result name="SignUp">registration.jsp</result>
