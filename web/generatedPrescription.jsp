@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : generatedPrescription
     Created on : 08-Mar-2023, 11:31:41 am
     Author     : SAYANTA PAUL
@@ -17,7 +17,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Doctor's Generated Prescription</title>
         <link rel="stylesheet" href="css/styles.css">
-<!--        <link rel="stylesheet" type="text/css" href="css_medicalAppointmentHistory//style.css">-->
+        <!--        <link rel="stylesheet" type="text/css" href="css_medicalAppointmentHistory//style.css">-->
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -143,10 +143,10 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container mt-5">
             <div class="row ">
                 <div class="col-md-12 text-center mb-4">
-                    <button class="btn btn-success" id="downloadPdf" onclick="download()">
+                    <button class="btn btn-success" id="downloadPdf">
                         Download Prescription
                     </button>
                 </div>
@@ -167,9 +167,9 @@
                                             jsPDF: {unit: 'in', format: 'A5', orientation: 'landscape'}
                                     };
                                     html2pdf().from(element).set(opt).save();
-//                    html2pdf()
-//                            .from(element)
-//                            .save();
+                    setTimeout(() => {
+                        window.close();
+                    }, 1000);
                 });
     </script>
 </html>

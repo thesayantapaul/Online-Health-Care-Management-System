@@ -60,7 +60,7 @@
         <script>
             // for modal
             function openModalForSendingMail(doctorId) {
-                //alert(doctorId);
+                alert(doctorId);
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function ()
                 {

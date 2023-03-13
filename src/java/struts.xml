@@ -22,6 +22,7 @@
             <result name="SUCCESS">adminsearchresulttable.jsp</result>
             <result name="FAILURE">error.jsp</result>
         </action>
+        
         <!--doctor search end-->
         
         <!--SearchPatient-->
@@ -53,7 +54,10 @@
             <result name="ALERT">checkEmail.jsp</result>
             <!--<result name="FAILURE">adminAddDoctor.jsp</result>-->
         </action>
-    
+        <!--FetchParticularDoctor--> 
+        <action name="FetchParticularDoctor" class="com.exavalu.models.Admin" method="doFetchParticularDoctor"> 
+            <result name="MODAL">sendMailToDoctorModal.jsp</result> 
+        </action>
         
         <!--VIEW ADMIN DASHBOARD-->
         <action name="DashBoard" class="com.exavalu.models.Admin" method="doViewDashboard">

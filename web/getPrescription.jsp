@@ -74,9 +74,10 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
-    <button class="btn btn-success" id="downloadPdf" onclick="download()">
-        Download Prescription
-    </button>
+    <a href="generatedPrescription.jsp" target="_blank">
+        <button class="btn btn-success" id="downloadPdf">
+            Download Prescription
+        </button></a>
 </div>
 
 <script>
