@@ -70,8 +70,10 @@
                 var age = document.register.age.value;
                 var gender = document.register.gender.value;
                 var departmentId = document.register.departmentId.value;
-                var address = document.register.address.value;
+                //var address = document.register.address.value;
                 var contactEmail = document.register.contactEmail.value;
+                var address = document.register.country.value + "+" + document.register.state.value + "+" + document.register.address.value;
+
 
                 var url = "RegisterDoctor?emailAddress=" + email + "&firstName=" + firstName + "&lastName=" + lastName + "&departmentId=" + departmentId + "&gender=" + gender + "&address=" + address + "&age=" + age + "&roleId=" + roleId + "&password=" + password + "&occupation=" + occupation + "&contactEmail=" + contactEmail;
                 //event.preventDefault();
@@ -87,12 +89,13 @@
                         if (data === 'Successfully Registered!') {
                             sendMail();
                             alert(data);
+                            document.getElementById("registerformId").reset();
                         }
                         if (data === 'invalidEmail') {
-                            //sendMail();
+
                             alert(data);
                         }
-                        document.getElementById("registerformId").reset();
+
                     } else {
 
                         console.error('Request failed.  Returned status of ' + xmlhttp.status);

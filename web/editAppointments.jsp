@@ -28,17 +28,26 @@
                     </td>
                     <td>
                         <div class="form-group first">
-                            <label for="doctorFirstName">Doctor First Name</label>
-                            <input name="doctorFirstName" type="text" class="form-control" placeholder="First Name" id="doctorFirstName" value="${appointment.doctorFirstName}" readonly>
+                            <label for="doctorFirstName">Previous Doctor Name</label>
+                            <input name="doctorFirstName" type="text" class="form-control" placeholder="First Name" id="doctorFirstName" value="${appointment.doctorFirstName} ${appointment.doctorLastName}" readonly>
                         </div>
-                        <div class="form-group first">
-                            <label for="doctorLastName">Doctor Last Name</label>
-                            <input name="doctorLastName" type="text" class="form-control" placeholder="Last Name" id="doctorLastName" value="${appointment.doctorLastName}" readonly>
+
+                        <div class="form-group last mb-3">
+
+                            <label for="doctorName" id="doctorName">Doctor</label>
+                            <select  name="doctorId" class="custom-select my-1 mr-sm-2" id="doctorId">
+                                <option value="">--Select Doctor--</option>
+                                <c:forEach items="${DoctorListAdmin}" var="doctor" >
+                                    <option value=${doctor.doctorId}<c:if test="${doctor.doctorId.equalsIgnoreCase(appointment.doctorId)}" > selected </c:if>> ${doctor.doctorFirstName} ${doctor.doctorLastName} </option>
+                                </c:forEach>
+
+                            </select>
+
                         </div>
                         <div class="form-group last mb-3">
 
                             <label class="departmentName" for="inlineFormCustomSelectPref" id="departmentName">Department Name</label>
-                            <select  name="departmentId" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                            <select  name="departmentId" class="custom-select my-1 mr-sm-2" id="departmentId" onchange="fetchContentDoctorListAdmin($('#departmentId').find(':selected').val())">
 
                                 <c:forEach items="${DeptList}" var="department">
                                     <option value="${department.departmentId}" <c:if test="${appointment.departmentId==department.departmentId}">selected</c:if>>${department.departmentName}</option>
