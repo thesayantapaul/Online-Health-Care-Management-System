@@ -343,7 +343,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     public String doLogin() {
         String result = "FAILURE";
         boolean success = LoginService.getInstance().doLogin(this);
-        MailServic.send("anichakraborty0007@gmail.com", "icesuzcamsjmrsts", "anichakraborty863@gmail.com", "hello javatpoint", "How r u?");
+        //MailServic.send("anichakraborty0007@gmail.com", "icesuzcamsjmrsts", "anichakraborty863@gmail.com", "hello javatpoint", "How r u?");
         if (success) {
             if (this.roleId.equals("1")) {
                 ArrayList appointment = new ArrayList();
@@ -527,7 +527,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 sessionMap.put("Day6Booking", day6Booking);
 
                 //compare booking to show in dashboard
-                if (Integer.parseInt(todayBooking) >= Integer.parseInt(day1Booking)) {
+                if (Integer.parseInt(todayBooking) > Integer.parseInt(day1Booking)) {
 
                     sessionMap.put("HigherOrLowerText", "Higher than yesterday");
 

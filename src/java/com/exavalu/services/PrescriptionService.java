@@ -212,7 +212,9 @@ public class PrescriptionService {
                 prescribed.setAdvice(rs.getString("advice"));
                 prescribed.setPatientFirstName(rs.getString("patientFirstName"));
                 prescribed.setPatientLastName(rs.getString("patientLastName"));
-
+                System.out.println("valid row checking = true");
+            }else{
+                prescribed = null;
             }
         } catch (SQLException ex) {
             log.error("Cannot be Found");

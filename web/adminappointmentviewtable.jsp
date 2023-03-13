@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h3>OHMS Appointments</h3>
-<table class="table">
+<table class="table datatable">
     <thead>
         <tr>
             <th>Patient ID</th>

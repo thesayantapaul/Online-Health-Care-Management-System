@@ -140,7 +140,7 @@
         <action name="GetPrescription" class="com.exavalu.models.Prescription" method="getPatientPrescription">
             <result name="SUCCESS">prescribed.jsp</result>
             <result name="MODAL">getPrescription.jsp</result>
-            <result name="FAILURE">error.jsp</result>
+            <result name="FAILURE">viewReportForNonExaminedPatient.jsp</result>
         </action>
         <action name="Report" class="com.exavalu.models.Report" method="getReport">
             <result name="SUCCESS">report.jsp</result>
