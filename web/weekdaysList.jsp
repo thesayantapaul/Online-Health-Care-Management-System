@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-    <option value="">Select Weekdays</option>
+    <option value="" onchange="fetchTime($('#weekDays').find(':selected').val())">Select Weekdays</option>
     <c:forEach items="${weekDaysList}" var="doctor" >
         <option value=${doctor}<c:if test="${doctor.equalsIgnoreCase(user.getDoctorId())}" > selected </c:if>> ${doctor}</option>
     </c:forEach>

@@ -79,6 +79,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
 
     /**
      * Used to get the list of appointment author anich
+     *
      * @return
      */
     public String doUpdateAppointment() {
@@ -425,9 +426,9 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
 
     /**
      *
-     * retrieve the List of Doctor under a
-     * particular department author anich .
-     * @return 
+     * retrieve the List of Doctor under a particular department author anich .
+     *
+     * @return
      * @throws java.lang.Exception
      */
     public String doGetDoctor() throws Exception {
@@ -450,9 +451,9 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
 
     /**
      *
-     * Used to get the schedule of a
-     * particular doctor author anich  
-     * @return 
+     * Used to get the schedule of a particular doctor author anich
+     *
+     * @return
      * @throws java.lang.Exception
      */
     public String doGetWeekdays() throws Exception {
@@ -464,6 +465,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
             result = "SUCCESS";
             getSessionMap().put("weekDaysList", weekDays);
             getSessionMap().put("User", this);
+            getSessionMap().put("DoctorId", this.getDoctorId());
 
         } else {
             getSessionMap().put("FailSignUp", "Email All Ready Exsists");
@@ -475,14 +477,15 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
 
     /**
      *
-     * Used to get the visiting hour of a doctor  
-     * @return 
-     * @throws java.lang.Exception 
+     * Used to get the visiting hour of a doctor
+     *
+     * @return
+     * @throws java.lang.Exception
      */
     public String doGetTime() throws Exception {
         System.out.println(this.getWeekDays());
         String result = "FAILURE";
-        String timeofAppointmrnt = DoctorService.getInstance().getAllTime(this.getWeekDays(), (Appointment) (getSessionMap().get("User")));
+        String timeofAppointmrnt = DoctorService.getInstance().getAllTime(this.getWeekDays(),(String)(getSessionMap().get("DoctorId")));
 
         if (timeofAppointmrnt != null) {
             result = "SUCCESS";
@@ -499,9 +502,9 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
 
     /**
      *
-     * Used to initialize the prescription
-     * with patient and doctor's information
-     * @return 
+     * Used to initialize the prescription with patient and doctor's information
+     *
+     * @return
      * @throws java.lang.Exception
      */
     public String doPrescribe() throws Exception {
@@ -528,9 +531,10 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
 
     /**
      *
-     *Used by user's to book an appointment
-     * @return  
-     * @throws java.lang.Exception  
+     * Used by user's to book an appointment
+     *
+     * @return
+     * @throws java.lang.Exception
      */
     public String getAppointment() throws Exception {
         String result = "FAILURE";

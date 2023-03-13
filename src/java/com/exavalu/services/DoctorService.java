@@ -138,7 +138,7 @@ public class DoctorService {
      * @param user
      * @return 
      */
-    public String getAllTime(String weekdays, Appointment user) {
+    public String getAllTime(String weekdays, String  doctorId) {
         Doctors doctors = new Doctors();
         String res = "";
         try {
@@ -149,9 +149,9 @@ public class DoctorService {
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
 
-            preparedStatement.setString(1, user.getDoctorId());
+            preparedStatement.setString(1, doctorId);
 
-            System.out.println(preparedStatement);
+            System.out.println("getAllTime"+preparedStatement);
 
             ResultSet rs = preparedStatement.executeQuery();
 
