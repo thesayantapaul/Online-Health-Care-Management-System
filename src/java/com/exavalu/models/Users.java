@@ -742,7 +742,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
         boolean res = LoginService.getInstance().doExsists(this.emailAddress, getSessionMap());
         if (success && res) {
             Users user = (Users) getSessionMap().get("Patient");
-            boolean res1 = LoginService.getInstance().doLogin(user);
+            boolean res1 = LoginService.getInstance().doInternalLogin(user);
             if (res1) {
                 getSessionMap().put("Loggedin", user);
                 Appointment appointment = (Appointment) sessionMap.get("Appointment");
