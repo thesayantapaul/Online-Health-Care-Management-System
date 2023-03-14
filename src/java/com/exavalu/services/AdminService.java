@@ -783,13 +783,13 @@ public class AdminService {
         boolean result = false;
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "INSERT INTO users (emailAddress,firstName,lastName,password,dateOfRegisteration,gender,roleId,occupation,address,doctorId,age) VALUES (?,?,?,?,curdate(),?,?,?,?,?,?);";
+            String sql = "INSERT INTO users (emailAddress,firstName,lastName,password,dateOfRegisteration,gender,roleId,occupation,address,doctorId,age) VALUES (?,?,?,md5(?),curdate(),?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, doctor.getEmailAddress());
             ps.setString(2, doctor.getFirstName());
             ps.setString(3, doctor.getLastName());
-            ps.setString(4, doctor.getPassword());
-            // ps.setString(5, "");
+            ps.setString(4, doctor.getEmailAddress()+doctor.getPassword());
+            
             ps.setString(5, doctor.getGender());
             ps.setString(6, doctor.getRoleId());
             ps.setString(7, doctor.getOccupation());
@@ -821,12 +821,12 @@ public class AdminService {
         boolean result = false;
         try {
             Connection con = JDBCConnectionManager.getConnection();
-            String sql = "INSERT INTO users (emailAddress,firstName,lastName,password,dateOfRegisteration,gender,roleId,occupation,address,age) VALUES (?,?,?,?,curdate(),?,?,?,?,?);";
+            String sql = "INSERT INTO users (emailAddress,firstName,lastName,password,dateOfRegisteration,gender,roleId,occupation,address,age) VALUES (?,?,?,md5(?),curdate(),?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, admin.getEmailAddress());
             ps.setString(2, admin.getFirstName());
             ps.setString(3, admin.getLastName());
-            ps.setString(4, admin.getPassword());
+            ps.setString(4, admin.getEmailAddress()+admin.getPassword());//for unique md5 insertion in database
             // ps.setString(5, "");
             ps.setString(5, admin.getGender());
             ps.setString(6, admin.getRoleId());
@@ -834,6 +834,7 @@ public class AdminService {
             ps.setString(8, admin.getAddress());
 
             ps.setString(9, admin.getAge());
+            System.out.println("ps from doaddAdmin= 0"+ps);
 
             int res = ps.executeUpdate();
 
