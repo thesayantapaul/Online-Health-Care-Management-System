@@ -147,26 +147,35 @@
         </script>
 
     </body>
-<!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
--->    <script>
-            function download() {
-                const element = document.getElementById("invoice");
-                var opt = {
-                                        margin: 0,
-                                        filename: 'Quotation.pdf',
-                                        image: {type: 'jpeg', quality: 1},
-                                        html2canvas: {scale: 1},
-                                        jsPDF: {unit: 'in', format: 'A4', orientation: 'portrait'}
-                                };
-                                html2pdf().from(element).set(opt).save();
-                //                    html2pdf()
-                //                            .from(element)
-                //                            .save();
-            }
-            ;
-    </script><!--
+    <!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    -->    <script>
+        function download() {
+            const element = document.getElementById("invoice");
+            var opt = {
+                                    margin: 0,
+                                    filename: 'Quotation.pdf',
+                                    image: {type: 'jpeg', quality: 1},
+                                    html2canvas: {scale: 1},
+                                    jsPDF: {unit: 'in', format: 'A4', orientation: 'portrait'}
+                            };
+                            html2pdf().from(element).set(opt).save();
+            //                    html2pdf()
+            //                            .from(element)
+            //                            .save();
+        }
+        ;
+    </script>
+    <script>
+        function fetchPrescription() {
+            $.ajax({
+                url: "downloadPrescription";
+                }
+            });
+        };
+    </script>
+    <!--
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
     <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>-->

@@ -167,6 +167,17 @@
             <result name="SUCCESS">timeList.jsp</result>
             <result name="FAILURE">menu.jsp</result>
         </action> 
-        
+        <action name="sendOTP" class="com.exavalu.models.Users" method="doSendOTP">
+            <result name="SUCCESS">Otp.jsp</result>
+            <result name="FAILURE">login.jsp</result>
+        </action>
+        <action name="verifyOTP" class="com.exavalu.models.Users" method="doVerifyOTP">
+            <result name="SUCCESS">reset.jsp</result>
+            <result name="FAILURE" >otpVerificationBlank.jsp</result>
+        </action>
+        <action name="reset" class="com.exavalu.models.Users" method="doReset">
+            <result name="SUCCESS">login.jsp</result>
+            <result name="FAILURE" >resetPassword.jsp</result>
+        </action>
     </package>
 </struts>

@@ -10,6 +10,7 @@ import com.exavalu.services.DepartmentService;
 import com.exavalu.services.DoctorService;
 import com.exavalu.services.LoginService;
 import com.exavalu.services.MailServic;
+import com.exavalu.services.OtpService;
 import com.exavalu.services.PatientService;
 import com.exavalu.services.PrescriptionService;
 import com.opensymphony.xwork2.ActionContext;
@@ -64,6 +65,15 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     private String given_name;
     private String picture;
     private String age;
+    private String otp;
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
 
     /**
      *
@@ -343,7 +353,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     public String doLogin() {
         String result = "FAILURE";
         boolean success = LoginService.getInstance().doLogin(this);
-        //MailServic.send("anichakraborty0007@gmail.com", "icesuzcamsjmrsts", "anichakraborty863@gmail.com", "hello javatpoint", "How r u?");
+        MailServic.send("anichakraborty863@gmail.com", "hello javatpoint", "How r u?");
         if (success) {
             if (this.roleId.equals("1")) {
                 ArrayList appointment = new ArrayList();
@@ -869,4 +879,45 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
         this.lastName = lastName;
     }
 
+    public String doSendOTP() throws Exception {
+        String result = "FAILURE";
+        boolean success = LoginService.getInstance().doExsists(this.emailAddress, sessionMap);
+        if (success) {
+
+            String otp = OtpService.OTP(4);
+            sessionMap.put("Otp", otp);
+            MailServic.send(this.emailAddress, "One Time Password For Password Reset", otp);
+            result = "SUCCESS";
+        } else {
+            sessionMap.put("FailSignUp", "Email Desn't Exsist");
+        }
+        System.out.println(sessionMap);
+        return result;
+    }
+
+    public String doVerifyOTP() throws Exception {
+        String result = "FAILURE";
+        String userOtp = (String) sessionMap.get("Otp");
+        if (this.otp.equals(userOtp)) {
+            result = "SUCCESS";
+        } else {
+            sessionMap.put("FailOtpVerification", "Otp Doesn't match");
+        }
+        System.out.println(sessionMap);
+        return result;
+    }
+
+    public String doReset() throws Exception {
+        String result = "FAILURE";
+        boolean success = LoginService.getInstance().updatePassword(this);
+        if (success) {
+            result = "SUCCESS";
+            sessionMap.put("SuccessSignUp", "Password Changed Please Login now");
+
+        } else {
+            sessionMap.put("FailSignUp", "Email Desn't Exsist");
+        }
+        System.out.println(sessionMap);
+        return result;
+    }
 }

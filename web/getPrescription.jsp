@@ -74,27 +74,7 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
-    <a href="generatedPrescription.jsp" target="_blank">
-        <button class="btn btn-success" id="downloadPdf">
-            Download Prescription
+    <a href="generatedPrescription.jsp" target="_blank"><button class="btn btn-success" id="downloadPdf">
+        Download Prescription
         </button></a>
 </div>
-
-<script>
-
-    function download() {
-        const element = document.getElementById("invoice");
-        var opt = {
-                                margin: 0,
-                                filename: 'Quotation.pdf',
-                                image: {type: 'jpeg', quality: 1},
-                                html2canvas: {scale: 1},
-                                jsPDF: {unit: 'in', format: 'A4', orientation: 'portrait'}
-                        };
-                        html2pdf().from(element).set(opt).save();
-
-    }
-    ;
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
-<script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>

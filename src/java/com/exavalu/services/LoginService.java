@@ -82,7 +82,7 @@ public class LoginService {
             }
 
         } catch (SQLException ex) {
-            log.error("Not Found");
+            log.error("Not Found any user with given credential");
             System.out.println(ex.getErrorCode());
             ex.printStackTrace();
         }
@@ -163,7 +163,7 @@ public class LoginService {
             }
 
         } catch (SQLException ex) {
-            log.error("Not Found");
+            log.error(LocalDateTime.now() + "Sql Error :" + ex + "Not Found");
             System.out.println(ex.getErrorCode());
             ex.printStackTrace();
         }
@@ -277,8 +277,7 @@ public class LoginService {
 
         } catch (SQLException ex) {
             int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + " Duplicate Email Address");
-            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+            log.error(LocalDateTime.now() + "Sql Error :" + e + "check user details");
         }
 
     }
@@ -314,9 +313,32 @@ public class LoginService {
             }
 
         } catch (SQLException ex) {
-            log.error("Not Found");
+            log.error(LocalDateTime.now() +"Not Found any social user with given credential");
             System.out.println(ex.getErrorCode());
             ex.printStackTrace();
+        }
+        return result;
+    }
+    public boolean updatePassword(Users user) {
+
+        boolean result = false;
+        try {
+            String sql = "update users set password=? where emailAddress=? ";
+            Connection con = JDBCConnectionManager.getConnection();
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, user.getPassword());
+            preparedStatement.setString(2, user.getEmailAddress());
+            System.out.println(preparedStatement);
+            int res = preparedStatement.executeUpdate();
+
+            if (res == 1) {
+                result = true;
+            }
+        } catch (SQLException ex) {
+            int e = ex.getErrorCode();
+            log.error(LocalDateTime.now() + "Sql Error :" + e + " Error while updating password check email");
+            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
         }
         return result;
     }

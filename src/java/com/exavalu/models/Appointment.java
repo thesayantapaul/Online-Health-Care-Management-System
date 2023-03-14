@@ -468,6 +468,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
             result = "SUCCESS";
             getSessionMap().put("weekDaysList", weekDays);
             getSessionMap().put("User", this);
+            getSessionMap().put("DoctorId", this.getDoctorId());
 
         } else {
             getSessionMap().put("FailSignUp", "Email All Ready Exsists");
@@ -487,7 +488,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
     public String doGetTime() throws Exception {
         System.out.println(this.getWeekDays());
         String result = "FAILURE";
-        String timeofAppointmrnt = DoctorService.getInstance().getAllTime(this.getWeekDays(), (Appointment) (getSessionMap().get("User")));
+        String timeofAppointmrnt = DoctorService.getInstance().getAllTime(this.getWeekDays(),(String)(getSessionMap().get("DoctorId")));
 
         if (timeofAppointmrnt != null) {
             result = "SUCCESS";
