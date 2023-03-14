@@ -486,7 +486,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
      */
     public String doCheckEmail() {
         String result = "FAILURE";
-        System.out.println("email to verify = " + this.emailAddress);
+        //System.out.println("email to verify = " + this.emailAddress);
 
         boolean success = AdminService.doCheckEmail(this.emailAddress);
         if (success) {

@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/registration.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/admindashboard.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Appointment.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/AdminService.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/appointments.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/adminpatientsearch.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/adminSearch.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/LoginService.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/ApiService.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/editAppointments.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/adminAddDoctor.jsp</file>
@@ -16,6 +18,7 @@
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/struts.xml</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/adminsearchresulttable.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/topDepartmentsThisYear.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Users.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/adminappointmentviewtable.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Admin.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/menu.jsp</file>

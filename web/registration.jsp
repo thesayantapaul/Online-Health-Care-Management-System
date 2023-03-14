@@ -31,6 +31,43 @@
     <script src="https://code.jquery.com/jquery-3.6.3.js" 
                         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
                 crossorigin="anonymous"></script>
+    <script>
+        function checkEmailExist(email) {
+
+            if (document.getElementById("emailAddress").value === '') {
+                alert("please enter email!");
+                document.getElementById("emailAddress").focus();
+                return false;
+            }
+            // create a new XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+
+            // set the HTTP method and URL of the request
+            xhr.open('GET', 'CheckEmail?emailAddress=' + email, true);
+
+            // set the response type to text
+            xhr.responseType = 'text';
+
+            // define a callback function to handle the response
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // success
+                    var data = xhr.response;
+                    if (data === 'email already exist!') {
+                        alert(data);
+                        document.getElementById("emailAddress").value = "";
+                        //document.getElementById("emailAddress").focus();
+                    }
+
+                } else {
+
+                    console.error('Request failed.  Returned status of ' + xhr.status);
+                }
+            };
+            // send the request
+            xhr.send();
+        }
+    </script>
     <body style="overflow: scroll; height : 90%" id="social">
         <div class="d-md-flex half">
             <div class="bg" style="background-image: url('images/login-side.jpg');height: 1309px"></div>
@@ -43,7 +80,7 @@
                                 <div class="text-center mb-5">
                                     <h3 class="text-uppercase">Please Register With <strong> OHMS </strong></h3>
                                 </div>
-                                <form action="SignUp" method="POST">
+                                <form action="SignUp" method="POST" id="my_captcha_form">
                                     <div class="form-group first">
                                         <label for="firstName">First Name</label>
                                         <input name="firstName" type="text" class="form-control" placeholder="First Name" id="firstName" required>
@@ -54,7 +91,7 @@
                                     </div>
                                     <div class="form-group first">
                                         <label for="emailAddress">Email Address</label>
-                                        <input name="emailAddress" type="text" class="form-control" placeholder="your-email@gmail.com" id="emailAddress" required>
+                                        <input name="emailAddress" type="text" class="form-control" placeholder="your-email@gmail.com" id="emailAddress" onchange="checkEmailExist(this.value)" required>
                                     </div>
 
                                     <div class="form-group last mb-3">
@@ -90,6 +127,7 @@
                                         </label>
                                         <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
                                     </div>
+
                                     <div class="g-recaptcha" data-sitekey="6LcQjK0kAAAAALMogTAZqQcjHJftku7jwQSL4jIV"></div><br>
                                     <button type="submit" value="Sign Up" class="btn btn-block py-2 btn-primary">Sign Up</button>
                                 </form>
@@ -106,7 +144,22 @@
                 </div>
             </div>
 
+            <script>
+                document.getElementById("my_captcha_form").addEventListener("submit", function (evt)
+                {
 
+                    var response = grecaptcha.getResponse();
+                    if (response.length === 0)
+                    {
+//reCaptcha not verified------------------------------------------------------------------------------
+                        alert("please verify you are humann!");
+                        evt.preventDefault();
+                        return false;
+                    }
+//captcha verified
+
+                });
+            </script>
 
             <script src="js/jquery-3.3.1.min.js"></script>
             <script src="js/popper.min.js"></script>
