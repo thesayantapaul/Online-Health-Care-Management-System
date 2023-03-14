@@ -53,6 +53,88 @@
             xmlhttp.open("GET", "ViewDoctorRegisteration", true);
             xmlhttp.send();
         }
+        function fetchAppointmentsThisMonth() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function ()
+            {
+                document.getElementById("appointmentCard").innerHTML = xmlhttp.responseText;
+            };
+            xmlhttp.open("GET", "AppointmentThisMonth", true);
+            xmlhttp.send();
+
+        }
+        function fetchAppointmentsThisYear() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function ()
+            {
+                document.getElementById("appointmentCard").innerHTML = xmlhttp.responseText;
+            };
+            xmlhttp.open("GET", "AppointmentThisYear", true);
+            xmlhttp.send();
+
+        }
+        function fetchRevenueThisMonth() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function ()
+            {
+                document.getElementById("revenueCard").innerHTML = xmlhttp.responseText;
+            };
+            xmlhttp.open("GET", "RevenueThisMonth", true);
+            xmlhttp.send();
+
+        }
+        function fetchRevenueThisYear() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function ()
+            {
+                document.getElementById("revenueCard").innerHTML = xmlhttp.responseText;
+            };
+            xmlhttp.open("GET", "RevenueThisYear", true);
+            xmlhttp.send();
+
+        }
+        function fetchUserThisMonth() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function ()
+            {
+                document.getElementById("userCard").innerHTML = xmlhttp.responseText;
+            };
+            xmlhttp.open("GET", "UserThisMonth", true);
+            xmlhttp.send();
+
+        }
+        function fetchUserThisYear() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function ()
+            {
+                document.getElementById("userCard").innerHTML = xmlhttp.responseText;
+            };
+            xmlhttp.open("GET", "UserThisYear", true);
+            xmlhttp.send();
+
+        }
+        function fetchDepartmentsThisMonth() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function ()
+            {
+                document.getElementById("topDepartmentstableDiv").innerHTML = xmlhttp.responseText;
+                initialiseDataTables();
+            };
+            xmlhttp.open("GET", "TopDepartmentsThisMonth", true);
+            xmlhttp.send();
+
+        }
+        function fetchDepartmentsThisYear() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function ()
+            {
+                document.getElementById("topDepartmentstableDiv").innerHTML = xmlhttp.responseText;
+                initialiseDataTables();
+            };
+            xmlhttp.open("GET", "TopDepartmentsThisYear", true);
+            xmlhttp.send();
+
+        }
     </script>
 
     <body>
@@ -88,13 +170,13 @@
                                                 <h6>Filter</h6>
                                             </li>
 
-                                            <li><a class="dropdown-item" href="#">Today</a></li>
-                                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                            <li><a class="dropdown-item" href="admindashboard.jsp">Today</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="fetchAppointmentsThisMonth()">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="fetchAppointmentsThisYear()">This Year</a></li>
                                         </ul>
                                     </div>
 
-                                    <div class="card-body">
+                                    <div class="card-body" id="appointmentCard">
                                         <h5 class="card-title">Appointments <span>| Today</span></h5>
 
                                         <div class="d-flex align-items-center">
@@ -103,7 +185,7 @@
                                             </div>
                                             <div class="ps-3">
                                                 <h6>${TodayBooking}</h6>
-                                            <span class="text-success small pt-1 fw-bold"><c:if test="${IncreaseBooking!=null}"><i class="bi bi-arrow-up-circle"></i></c:if><c:if test="${DecreaseBooking!=null}"><i class="bi bi-arrow-down-circle"></i></c:if><span class="text-muted small pt-2 ps-1">${HigherOrLowerText}</span>
+                                            <span class="text-success small pt-1 fw-bold"><c:if test="${IncreaseBooking!=null}"><i class="bi bi-arrow-up-circle"></i></c:if><c:if test="${DecreaseBooking!=null}"><i class="bi bi-arrow-down-circle"></i></c:if></span><span class="text-muted small pt-2 ps-1">${HigherOrLowerText}</span>
 
                                             </div>
                                         </div>
@@ -123,18 +205,18 @@
                                                 <h6>Filter</h6>
                                             </li>
 
-                                            <li><a class="dropdown-item" href="#">Today</a></li>
-                                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                            <li><a class="dropdown-item" href="admindashboard.jsp">Today</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="fetchRevenueThisMonth()">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="fetchRevenueThisYear()">This Year</a></li>
                                         </ul>
                                     </div>
 
-                                    <div class="card-body">
+                                    <div class="card-body" id="revenueCard">
                                         <h5 class="card-title">Total Revenue <span>| Today</span></h5>
 
                                         <div class="d-flex align-items-center">
                                             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                                <i class="bi bi-currency-dollar"></i>
+                                                <i class="bi bi-currency-rupee"></i>
                                             </div>
                                             <div class="ps-3">
                                                     <h6>INR ${TodayRevenue}</h6>
@@ -159,13 +241,13 @@
                                                 <h6>Filter</h6>
                                             </li>
 
-                                            <li><a class="dropdown-item" href="#">Today</a></li>
-                                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                            <li><a class="dropdown-item" href="admindashboard.jsp">Today</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="fetchUserThisMonth()">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="fetchUserThisYear()">This Year</a></li>
                                         </ul>
                                     </div>
 
-                                    <div class="card-body">
+                                    <div class="card-body" id="userCard">
                                         <h5 class="card-title"> Users Registered<span> | Today </span></h5>
 
                                         <div class="d-flex align-items-center">
@@ -187,19 +269,6 @@
                         <!-- Reports -->
                         <div class="col-12">
                             <div class="card">
-
-                                <div class="filter">
-                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                        <li class="dropdown-header text-start">
-                                            <h6>Filter</h6>
-                                        </li>
-
-                                        <li><a class="dropdown-item" href="#">Today</a></li>
-                                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                                        <li><a class="dropdown-item" href="#">This Year</a></li>
-                                    </ul>
-                                </div>
 
                                 <div class="card-body">
                                     <h5 class="card-title">Reports <span>/Appointments-Revenue-Users</span></h5>
@@ -270,18 +339,7 @@
                         <div class="col-12">
                             <div class="card recent-sales overflow-auto">
 
-                                <div class="filter">
-                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                        <li class="dropdown-header text-start">
-                                            <h6>Filter</h6>
-                                        </li>
 
-                                        <li><a class="dropdown-item" href="#">Today</a></li>
-                                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                                        <li><a class="dropdown-item" href="#">This Year</a></li>
-                                    </ul>
-                                </div>
 
                                 <div class="card-body">
                                     <h5 class="card-title">Recent Bookings <span>| Today</span></h5>
@@ -331,13 +389,13 @@
                                             <h6>Filter</h6>
                                         </li>
 
-                                        <li><a class="dropdown-item" href="#">Today</a></li>
-                                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                                        <li><a class="dropdown-item" href="admindashboard.jsp">Today</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="fetchDepartmentsThisMonth()">This Month</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="fetchDepartmentsThisYear()">This Year</a></li>
                                     </ul>
                                 </div>
 
-                                <div class="card-body pb-0">
+                                <div class="card-body pb-0" id="topDepartmentstableDiv">
                                     <h5 class="card-title">Top Department in terms of booking <span>| Today</span></h5>
 
                                     <table class="table table-borderless datatable">
@@ -391,5 +449,14 @@
         <script src="assets/js/main.js"></script>
 
     </body>
+    <script>
+                                            function initialiseDataTables() {
+                                                const datatables = [...document.querySelectorAll('.datatable')];
+                                                datatables.forEach(datatable => {
+                                                    new simpleDatatables.DataTable(datatable);
+                                                });
+                                                           }
+                                            initialiseDataTables();
+    </script>
 
 </html>
