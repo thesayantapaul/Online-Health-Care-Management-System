@@ -7,7 +7,6 @@ package com.exavalu.services;
 import com.exavalu.models.Appointment;
 import com.exavalu.models.FbProfile;
 import com.exavalu.models.Users;
-import static com.exavalu.services.PatientService.log;
 import com.exavalu.utils.JDBCConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,10 +49,10 @@ public class LoginService {
 
     /**
      *
-     * Used to check user credentials with the
-     * database.
+     * Used to check user credentials with the database.
+     *
      * @param user
-     * @return 
+     * @return
      */
     public boolean doLogin(Users user) {
 
@@ -63,8 +62,9 @@ public class LoginService {
             Connection con = JDBCConnectionManager.getConnection();
             String sql = "Select * from users right join role on role.roleId=users.roleId where emailAddress=? and password=? ";
             PreparedStatement ps = con.prepareStatement(sql);
+            String passoword = MD5.getMd5(user.getEmailAddress()+user.getPassword());
             ps.setString(1, user.getEmailAddress());
-            ps.setString(2, user.getPassword());
+            ps.setString(2, passoword);
 
             System.out.println("LoginService :: " + ps);
 
@@ -91,10 +91,10 @@ public class LoginService {
 
     /**
      *
-     * Used to signup or add new user details to
-     * the database.
+     * Used to signup or add new user details to the database.
+     *
      * @param user
-     * @return 
+     * @return
      */
     public boolean doSignUp(Users user) {
 
@@ -103,10 +103,10 @@ public class LoginService {
 
         try {
             Connection con = JDBCConnectionManager.getConnection();
-
+            String passoword = MD5.getMd5(user.getEmailAddress()+user.getPassword());
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, user.getEmailAddress());
-            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(2, passoword);
             preparedStatement.setString(3, user.getFirstName());
             preparedStatement.setString(4, user.getLastName());
             preparedStatement.setString(5, user.getOccupation());
@@ -132,11 +132,11 @@ public class LoginService {
 
     /**
      *
-     * Used to check if an user already exsists
-     * in the database.
+     * Used to check if an user already exsists in the database.
+     *
      * @param emailAddress
      * @param sessionMap
-     * @return 
+     * @return
      */
     public boolean doExsists(String emailAddress, SessionMap sessionMap) {
 
@@ -173,10 +173,10 @@ public class LoginService {
 
     /**
      *
-     * Used to add the user's who sign up
-     * using social media to the database
+     * Used to add the user's who sign up using social media to the database
+     *
      * @param user
-     * @return 
+     * @return
      */
     public boolean doSocialSignUp(Users user) {
 
@@ -284,10 +284,11 @@ public class LoginService {
 
     /**
      *
-     * Used to verify the user's who Log In
-     * using social media with the information in the database.
+     * Used to verify the user's who Log In using social media with the
+     * information in the database.
+     *
      * @param user
-     * @return 
+     * @return
      */
     public boolean doSocialLog_in(Users user) {
         boolean result = false;
@@ -313,12 +314,13 @@ public class LoginService {
             }
 
         } catch (SQLException ex) {
-            log.error(LocalDateTime.now() +"Not Found any social user with given credential");
+            log.error(LocalDateTime.now() + "Not Found any social user with given credential");
             System.out.println(ex.getErrorCode());
             ex.printStackTrace();
         }
         return result;
     }
+
     public boolean updatePassword(Users user) {
 
         boolean result = false;
@@ -339,6 +341,40 @@ public class LoginService {
             int e = ex.getErrorCode();
             log.error(LocalDateTime.now() + "Sql Error :" + e + " Error while updating password check email");
             System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+        }
+        return result;
+    }
+    
+     public boolean doInternalLogin(Users user) {
+
+        boolean result = false;
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "Select * from users right join role on role.roleId=users.roleId where emailAddress=? and password=? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, user.getEmailAddress());
+            ps.setString(2, user.getPassword());
+
+            System.out.println("LoginService :: " + ps);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                user.setRoleId(rs.getString("roleId"));
+                user.setDoctorId(rs.getString("doctorId"));
+                user.setPatientId(rs.getString("patientId"));
+                user.setUserId(rs.getString("userId"));
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
+
+                result = true;
+            }
+
+        } catch (SQLException ex) {
+            log.error("Not Found any user with given credential");
+            System.out.println(ex.getErrorCode());
+            ex.printStackTrace();
         }
         return result;
     }

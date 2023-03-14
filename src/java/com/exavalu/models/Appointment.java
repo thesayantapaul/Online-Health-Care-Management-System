@@ -89,7 +89,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
         if (success) {
             ArrayList appointmentList = AdminService.doViewAppointments();
 
-            if (appointmentList.size() > 0) {
+            if (!appointmentList.isEmpty()) {
                 getSessionMap().put("AppointmentList", appointmentList);
 
             }
@@ -118,7 +118,10 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
     }
 
     private String patientId;
-    private String patientFirstName, patientLastName, doctorFirstName, doctorLastName;
+    private String patientFirstName; 
+    private String patientLastName;
+    private String doctorFirstName; 
+    private String doctorLastName;
     private String appointmentId;
     private String appointmentDate;
     private String status;
@@ -449,9 +452,6 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
 
     }
 
-    
-    
-
     /**
      *
      * Used to get the schedule of a particular doctor author anich
@@ -488,7 +488,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
     public String doGetTime() throws Exception {
         System.out.println(this.getWeekDays());
         String result = "FAILURE";
-        String timeofAppointmrnt = DoctorService.getInstance().getAllTime(this.getWeekDays(),(String)(getSessionMap().get("DoctorId")));
+        String timeofAppointmrnt = DoctorService.getInstance().getAllTime(this.getWeekDays(), (String) (getSessionMap().get("DoctorId")));
 
         if (timeofAppointmrnt != null) {
             result = "SUCCESS";
@@ -545,9 +545,6 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
         getSessionMap().put("Appointment", this);
 
         getSessionMap().put("symptoms", this.getSymptoms());
-        System.out.println(this.getEmailAddress());
-        System.out.println(this.getWeekDays());
-
         boolean success = LoginService.getInstance().doExsists(this.getEmailAddress(), getSessionMap());
         if (!success) {
             result = "SignUp";
@@ -563,16 +560,16 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
                 boolean r2 = PatientService.getInstance().insertPatientAppointment(appointment);
                 MailServic.sendAppointment(appointment);
                 LoginService.getInstance().updateUser(appointment);
-                ArrayList appointment1 = new ArrayList();
-                ArrayList appointment2 = new ArrayList();
+                ArrayList upcomingAppointment = new ArrayList();
+                ArrayList appointmentHistory = new ArrayList();
 
                 System.out.println("this is patiend id :" + this.getUserId());
 
-                appointment1 = PatientService.doViewParticularUpcomingAppointments(user.getUserId());
-                appointment2 = PatientService.doViewParticularMedicalHistory(user.getUserId());
-                if (appointment1 != null) {
-                    sessionMap.put("PatientUpcomingBooking", appointment1);
-                    sessionMap.put("PatientMedicalHistory", appointment2);
+                upcomingAppointment = PatientService.doViewParticularUpcomingAppointments(user.getUserId());
+                appointmentHistory = PatientService.doViewParticularMedicalHistory(user.getUserId());
+                if (upcomingAppointment != null) {
+                    sessionMap.put("PatientUpcomingBooking", upcomingAppointment);
+                    sessionMap.put("PatientMedicalHistory", appointmentHistory);
                 }
                 if (insert && r1 && r2) {
                     System.out.println("SUcess");

@@ -65,20 +65,28 @@ public class AppointmentService {
             ps.setString(5, appointment.getPatientId());
             ps.setString(6, appointment.getUserId());
             ps.setString(7, appointment.getSymptoms());
-            if (appointment.getWeekDays().equals("Monday")) {
-                dayOfWeek = 9 - dayOfWeek;
-            } else if (appointment.getWeekDays().equals("Tuesday")) {
-                dayOfWeek = 10 - dayOfWeek;
-            } else if (appointment.getWeekDays().equals("Wednesday")) {
-                dayOfWeek = 11 - dayOfWeek;
-            } else if (appointment.getWeekDays().equals("Thursday")) {
-                dayOfWeek = 12 - dayOfWeek;
-            } else if (appointment.getWeekDays().equals("Friday")) {
-                dayOfWeek = 13 - dayOfWeek;
-            } else if (appointment.getWeekDays().equals("Saturday")) {
-                dayOfWeek = 14 - dayOfWeek;
-            } else {
-                dayOfWeek = 15 - dayOfWeek;
+            switch (appointment.getWeekDays()) {
+                case "Monday":
+                    dayOfWeek = 9 - dayOfWeek;
+                    break;
+                case "Tuesday":
+                    dayOfWeek = 10 - dayOfWeek;
+                    break;
+                case "Wednesday":
+                    dayOfWeek = 11 - dayOfWeek;
+                    break;
+                case "Thursday":
+                    dayOfWeek = 12 - dayOfWeek;
+                    break;
+                case "Friday":
+                    dayOfWeek = 13 - dayOfWeek;
+                    break;
+                case "Saturday":
+                    dayOfWeek = 14 - dayOfWeek;
+                    break;
+                default:
+                    dayOfWeek = 15 - dayOfWeek;
+                    break;
             }
             ps.setString(1, Integer.toString(dayOfWeek));
             System.out.println("AppointmentService GetAppointment :: " + ps);
