@@ -25,7 +25,6 @@ public class Prescription extends ActionSupport implements ApplicationAware, Ses
 
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
 
-    private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
 
     /**
      *
@@ -33,7 +32,6 @@ public class Prescription extends ActionSupport implements ApplicationAware, Ses
      */
     @Override
     public void setApplication(Map<String, Object> application) {
-        map = (ApplicationMap) application;
     }
 
     /**

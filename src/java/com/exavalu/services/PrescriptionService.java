@@ -4,14 +4,13 @@
  */
 package com.exavalu.services;
 
-import com.exavalu.models.Appointment;
 import com.exavalu.models.Prescription;
-import static com.exavalu.services.AppointmentService.log;
 import com.exavalu.utils.JDBCConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
@@ -82,7 +81,7 @@ public class PrescriptionService {
             }
 
         } catch (SQLException ex) {
-            log.error("Cannot be Addes");
+            log.error(LocalDateTime.now()+" sql Error"+ex.getErrorCode()+"Cannot add");
             System.out.println(ex.getErrorCode());
             ex.printStackTrace();
         }
@@ -100,7 +99,6 @@ public class PrescriptionService {
      */
     public ArrayList getPrescription(String doctorId) {
 
-        boolean result = false;
         ArrayList prescribedList = new ArrayList();
         try {
             Connection con = JDBCConnectionManager.getConnection();
@@ -127,7 +125,7 @@ public class PrescriptionService {
                 prescribedList.add(prescribed);
             }
         } catch (SQLException ex) {
-            log.error("Cannot be Addes");
+            log.error(LocalDateTime.now()+" sql Error"+ex.getErrorCode()+"Cannot be found");
             System.out.println(ex.getErrorCode());
             ex.printStackTrace();
         }
@@ -144,7 +142,6 @@ public class PrescriptionService {
      */
     public ArrayList getPatientPrescription(String userId) {
 
-        boolean result = false;
         ArrayList prescribedList = new ArrayList();
         try {
             Connection con = JDBCConnectionManager.getConnection();
@@ -173,7 +170,7 @@ public class PrescriptionService {
                 prescribedList.add(prescribed);
             }
         } catch (SQLException ex) {
-            log.error("Cannot be Found");
+            log.error(LocalDateTime.now()+" sql Error"+ex.getErrorCode()+"no record Found");
             System.out.println(ex.getErrorCode());
             ex.printStackTrace();
         }
@@ -217,7 +214,7 @@ public class PrescriptionService {
                 prescribed = null;
             }
         } catch (SQLException ex) {
-            log.error("Cannot be Found");
+            log.error(LocalDateTime.now()+" sql Error"+ex.getErrorCode()+"Cannot be Found");
             System.out.println(ex.getErrorCode());
             ex.printStackTrace();
         }
