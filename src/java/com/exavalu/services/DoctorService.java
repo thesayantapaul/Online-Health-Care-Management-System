@@ -124,7 +124,7 @@ public class DoctorService {
 
         } catch (SQLException ex) {
             int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors");
+            log.error(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors schedule");
             System.out.println(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors");
         }
 
@@ -177,7 +177,7 @@ public class DoctorService {
 
         } catch (SQLException ex) {
             int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors");
+            log.error(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors visiting time");
             System.out.println(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors");
         }
 
@@ -224,7 +224,7 @@ public class DoctorService {
 
         } catch (SQLException ex) {
             int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors appointment");
             System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
         }
 
@@ -271,7 +271,7 @@ public class DoctorService {
 
         } catch (SQLException ex) {
             int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors past appointment history");
             System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
         }
 
@@ -397,7 +397,7 @@ public class DoctorService {
 
         } catch (SQLException ex) {
             int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors today appointment");
             System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
         }
 
@@ -434,7 +434,7 @@ public class DoctorService {
 
         } catch (SQLException ex) {
             int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors detail");
             System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
         }
 

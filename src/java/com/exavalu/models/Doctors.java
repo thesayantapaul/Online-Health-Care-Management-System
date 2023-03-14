@@ -81,7 +81,7 @@ public class Doctors extends ActionSupport implements ApplicationAware, SessionA
 
         ArrayList appointmentList = DoctorService.getInstance().doViewAppointments(this.doctorId);
 
-        if (appointmentList.size() > 0) {
+        if (!appointmentList.isEmpty()) {
 
             sessionMap.put("AppointmentListDoctor", appointmentList);
             result = "SUCCESS";
