@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : resetPassword
     Created on : 12-Mar-2023, 10:57:06 pm
     Author     : SAYANTA PAUL
@@ -99,9 +99,10 @@
                 color:red;
             }
         </style>
+
     </head>
-    <script src="https://code.jquery.com/jquery-3.6.3.js" 
-            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
     crossorigin="anonymous"></script>
     <body>
         <h1>Reset Password</h1>
@@ -110,15 +111,18 @@
 
             <form method="post" action="reset">
                 <label for="email">Email Address  <sup class="star">*</sup> </label>
+
                 <input type="email" id="emailAddress" name="emailAddress" required>
-                <div id="send">
+
+                <div id="send" class="mb-3">
                     <button type="button" onclick="sendOTP($('#emailAddress').val())">SEND OTP</button><br>
                 </div>
-                
+
                 <div id="reset">
-                </div>
-              
+                </div><hr>
+                <a href="resetPassword.jsp" style="margin-right: 10px"><button type="button" >Back</button></a><a href="login.jsp"><button type="button" >Return to login</button></a><br>
             </form>
+
         </div>
     </body>
     <script>
@@ -126,7 +130,7 @@
         function sendOTP(emailAddress)
         {
             //alert(departmentId);
-            document.getElementById("reset").innerHTML="";
+            document.getElementById("reset").innerHTML = "";
             event.preventDefault();
             //alert(fnolId);
             var xmlhttp = new XMLHttpRequest();
@@ -137,7 +141,7 @@
             xmlhttp.open("POST", "sendOTP?emailAddress=" + emailAddress, true);
             xmlhttp.send();
         }
-         function verify(otp)
+        function verify(otp)
         {
             //alert(departmentId);
             event.preventDefault();
