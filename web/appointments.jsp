@@ -61,6 +61,7 @@ admin appointment jsp
             xmlhttp.onreadystatechange = function ()
             {
                 document.getElementById("viewAppointmenttableDivId").innerHTML = xmlhttp.responseText;
+                document.getElementById("calendarId").style.display = "none";
             };
             xmlhttp.open("POST", "FetchParticularAppointment?appointmentId=" + appointmentId, true);
             xmlhttp.send();
@@ -78,20 +79,7 @@ admin appointment jsp
             xmlhttp.open("POST", "CancelAppointment?appointmentId=" + appointmentId, true);
             xmlhttp.send();
         }
-//            function functionToUpdateAppointment(appointmentId)
-//            {
-//                //event.preventDefault();
-//                //alert(appointmentId);
-//                var xmlhttp = new XMLHttpRequest();
-//                xmlhttp.onreadystatechange = function ()
-//                {
-//                    document.getElementById("viewAppointmenttableDivId").innerHTML = xmlhttp.responseText;
-//                    document.getElementById("appointmentEditDiv").innerHTML = "";
-//                };
-//                //xmlhttp.open("POST", "UpdateAppointment?appointmentId=" + appointmentId + "&appointmentDate=" + , true);
-//                xmlhttp.send();
-//            }
-        //functionToUpdateAppointment
+
 
     </script>
     <script>
