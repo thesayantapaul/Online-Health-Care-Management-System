@@ -63,6 +63,40 @@
         <action name="DashBoard" class="com.exavalu.models.Admin" method="doViewDashboard">
             <result name="SUCCESS">admindashboard.jsp</result>
         </action>
+        <!--AppointmentThisMonth-->
+         <action name="AppointmentThisMonth" class="com.exavalu.models.Admin" method="doGetAppointmentThisMonth">
+            <result name="APPOINTMENTCARD">appointmentThisMonth.jsp</result>
+        </action>
+        <!--AppointmentThisYear-->
+         <action name="AppointmentThisYear" class="com.exavalu.models.Admin" method="doGetAppointmentThisYear">
+            <result name="APPOINTMENTCARD">appointmentThisYear.jsp</result>
+        </action>
+        <!--RevenueThisMonth-->
+        <action name="RevenueThisMonth" class="com.exavalu.models.Admin" method="doGetRevenueThisMonth">
+            <result name="REVENUECARD">revenueThisMonth.jsp</result>
+        </action>
+        <!--RevenueThisYear-->
+        <action name="RevenueThisYear" class="com.exavalu.models.Admin" method="doGetRevenueThisYear">
+            <result name="REVENUECARD">revenueThisYear.jsp</result>
+        </action>
+        <!--UserThisMonth-->
+        <action name="UserThisMonth" class="com.exavalu.models.Admin" method="doGetUserThisMonth">
+            <result name="USERCARD">userThisMonth.jsp</result>
+        </action>
+        <!--UserThisYear-->
+        <action name="UserThisYear" class="com.exavalu.models.Admin" method="doGetUserThisYear">
+            <result name="USERCARD">userThisYear.jsp</result>
+        </action>
+       <!--topDepartmentThisMonth-->
+        <action name="TopDepartmentsThisMonth" class="com.exavalu.models.Admin" method="doGetDepartmentsThisMonth">
+            <result name="TOPDEPARTMENTS">topDepartmentsThisMonth.jsp</result>
+        </action>
+       <!--topDepartmentThisYear-->
+        <action name="TopDepartmentsThisYear" class="com.exavalu.models.Admin" method="doGetDepartmentsThisYear">
+            <result name="TOPDEPARTMENTS">topDepartmentsThisYear.jsp</result>
+        </action>
+        
+        
         <action name="home" class="com.exavalu.models.Doctors" method="doViewHome">
             <result name="SUCCESS">doctorhome.jsp</result>
         </action>

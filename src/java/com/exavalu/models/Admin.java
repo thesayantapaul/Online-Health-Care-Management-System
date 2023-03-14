@@ -97,18 +97,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
      */
     public String doFetchFilteredAppointment() {
         String result = "FAILURE";
-//        if (this.startingDate.isBlank()) {
-//            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-//            String date = dateFormat.format(LocalDate.now());
-//            this.startingDate = date;
-//            System.out.println(this.startingDate);
-//        }
-//        if (this.endingDate.isBlank()) {
-//            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-//            String date = dateFormat.format(LocalDate.now());
-//            this.endingDate = date;
-//            System.out.println(this.endingDate);
-//        }
+
         System.out.println("starting date"+this.startingDate);
         System.out.println(LocalDate.now());
         ArrayList appointmentList = AdminService.doViewFilteredAppointments(this.startingDate, this.endingDate);
@@ -220,6 +209,62 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
             result = "SUCCESS";
         }
 
+        return result;
+    }
+    public String doGetAppointmentThisMonth(){
+        String result = "APPOINTMENTCARD";
+        String thisMonthBooking = AdminService.doViewBookingsThisMonthOrYear("-30");
+        sessionMap.put("ThisMonthBooking", thisMonthBooking);
+        return result;
+    }
+    public String doGetAppointmentThisYear(){
+        String result = "APPOINTMENTCARD";
+        String thisYearBooking = AdminService.doViewBookingsThisMonthOrYear("-365");
+        sessionMap.put("ThisYearBooking", thisYearBooking);
+        return result;
+    }
+    //revenue monthly
+    public String doGetRevenueThisMonth(){
+        String result = "REVENUECARD";
+        String thisMonthRevenue = AdminService.doViewTotalRevenueThisMonthOrYear("-30");
+        sessionMap.put("ThisMonthRevenue", thisMonthRevenue);
+        return result;
+    }
+    //revenue Yearly
+    public String doGetRevenueThisYear(){
+        String result = "REVENUECARD";
+        String thisYearRevenue = AdminService.doViewTotalRevenueThisMonthOrYear("-365");
+        sessionMap.put("ThisYearRevenue", thisYearRevenue);
+        return result;
+    }
+    //registered user monthly
+    public String doGetUserThisMonth(){
+        String result = "USERCARD";
+        String thisMonthUser = AdminService.totalRegisteredUsersThisMonthOrYear("-30");
+        sessionMap.put("ThisMonthUser", thisMonthUser);
+        return result;
+    }
+    //registered user Yearly
+    public String doGetUserThisYear(){
+        String result = "USERCARD";
+        String thisYearUser = AdminService.totalRegisteredUsersThisMonthOrYear("-365");
+        sessionMap.put("ThisYearUser", thisYearUser);
+        return result;
+    }
+    //top departments monthly
+    public String doGetDepartmentsThisMonth(){
+        String result = "TOPDEPARTMENTS";
+        ArrayList departmentOccupncyList = AdminService.doGetOccupancyForEachDepartmentsThisMonthOrYear("-30");
+
+        sessionMap.put("OccupancyInDepartmentsThisMonth", departmentOccupncyList);
+        return result;
+    }
+    //top departments Yearly
+    public String doGetDepartmentsThisYear(){
+        String result = "TOPDEPARTMENTS";
+        ArrayList departmentOccupncyList = AdminService.doGetOccupancyForEachDepartmentsThisMonthOrYear("-365");
+
+        sessionMap.put("OccupancyInDepartmentsThisYear", departmentOccupncyList);
         return result;
     }
 
