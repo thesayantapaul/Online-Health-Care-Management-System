@@ -100,20 +100,55 @@
             }
         </style>
     </head>
+    <script src="https://code.jquery.com/jquery-3.6.3.js" 
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
+    crossorigin="anonymous"></script>
     <body>
         <h1>Reset Password</h1>
         <div class="container">
             <img src="images/2.png" id="img" alt="Flowers in Chania">
 
-            <form method="post" action="#">
+            <form method="post" action="reset">
                 <label for="email">Email Address  <sup class="star">*</sup> </label>
-                <input type="email" id="email" name="email" required>
-                <label for="password">Enter OTP <sup class="star">*</sup></label>
-                <input type="password" id="otp" name="otp"  minlength="4" required  >
-                <label for="otp" >New Password  <sup class="star">*</sup> </label>
-                <input type="password" id="password" name="password" required>
-                <input type="submit" value="Reset Password" >
+                <input type="email" id="emailAddress" name="emailAddress" required>
+                <div id="send">
+                    <button type="button" onclick="sendOTP($('#emailAddress').val())">SEND OTP</button><br>
+                </div>
+                
+                <div id="reset">
+                </div>
+              
             </form>
         </div>
     </body>
+    <script>
+
+        function sendOTP(emailAddress)
+        {
+            //alert(departmentId);
+            document.getElementById("reset").innerHTML="";
+            event.preventDefault();
+            //alert(fnolId);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function ()
+            {
+                document.getElementById("send").innerHTML = xmlhttp.responseText;
+            };
+            xmlhttp.open("POST", "sendOTP?emailAddress=" + emailAddress, true);
+            xmlhttp.send();
+        }
+         function verify(otp)
+        {
+            //alert(departmentId);
+            event.preventDefault();
+            //alert(fnolId);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function ()
+            {
+                document.getElementById("reset").innerHTML = xmlhttp.responseText;
+            };
+            xmlhttp.open("POST", "verifyOTP?otp=" + otp, true);
+            xmlhttp.send();
+        }
+    </script>
 </html>

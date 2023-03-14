@@ -143,33 +143,36 @@
                 </div>
             </div>
         </div>
-        <div class="container mt-5">
+        <div class="container mt-5" >
             <div class="row ">
                 <div class="col-md-12 text-center mb-4">
-                    <button class="btn btn-success" id="downloadPdf">
+                    <button class="btn btn-success" id="downloadPdf" >
                         Download Prescription
                     </button>
                 </div>
             </div>
         </div>
     </body>
-
     <script>
         document
                 .getElementById("downloadPdf")
                 .addEventListener("click", function download() {
                     const element = document.getElementById("invoice");
                     var opt = {
-                                            margin: 0,
-                                            filename: 'Quotation.pdf',
-                                            image: {type: 'jpeg', quality: 1},
-                                            html2canvas: {scale: 1},
-                                            jsPDF: {unit: 'in', format: 'A5', orientation: 'landscape'}
-                                    };
-                                    html2pdf().from(element).set(opt).save();
+                        margin: 0,
+                        filename: 'prescription.pdf',
+                        image: {type: 'jpeg', quality: 1},
+                        html2canvas: {scale: 1},
+                        jsPDF: {unit: 'in', format: 'A5', orientation: 'landscape'}
+                    };
+                    html2pdf().from(element).set(opt).save();
                     setTimeout(() => {
                         window.close();
-                    }, 1000);
+                    }, 800);
+//                    close_window();
+//                    html2pdf()
+//                            .from(element)
+//                            .save();
                 });
     </script>
 </html>
