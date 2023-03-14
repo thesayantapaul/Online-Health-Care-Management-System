@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.logging.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -473,6 +472,30 @@ public class AdminService {
         }
         return totalBookings;
     }
+    public static String doViewBookingsThisMonthOrYear(String interval) {
+        String totalBookings = null;
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT COUNT(appointmentId) as bookings FROM appointments WHERE appointmentDate between DATE_ADD(CURDATE(), INTERVAL ? DAY) and DATE_ADD(CURDATE(), INTERVAL '0' DAY)";
+            PreparedStatement ps = con.prepareStatement(sql);
+             ps.setString(1, interval);
+           
+            System.out.println("ps:" + ps);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalBookings = rs.getString("bookings");
+            } else {
+                totalBookings = "0";
+            }
+
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
+        }
+        return totalBookings;
+    }
 
     /**
      *
@@ -486,6 +509,31 @@ public class AdminService {
             Connection con = JDBCConnectionManager.getConnection();
             String sql = "SELECT SUM(amount) as totalRevenue FROM appointments where bookingDate = DATE_ADD(CURDATE(), INTERVAL ? DAY);";
 
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, interval);
+
+            System.out.println("ps:" + ps);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                totalRevenue = rs.getString("totalRevenue");
+            }
+
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
+        }
+        return totalRevenue;
+    }
+    //REVENUE THIS MONTH
+    public static String doViewTotalRevenueThisMonthOrYear(String interval) {
+        String totalRevenue = null;
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT SUM(amount) as totalRevenue FROM appointments where bookingDate between DATE_ADD(CURDATE(), INTERVAL ? DAY) and DATE_ADD(CURDATE(), INTERVAL '0' DAY);";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, interval);
 
@@ -570,6 +618,33 @@ public class AdminService {
         }
         return totalUsers;
     }
+    //registered user month year wise
+    public static String totalRegisteredUsersThisMonthOrYear(String interval) {
+        String totalUsers = null;
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT COUNT(emailAddress) as totalRegisteredUsers FROM users where dateofregisteration between  DATE_ADD(CURDATE(), INTERVAL ? DAY) and  DATE_ADD(CURDATE(), INTERVAL '0' DAY);";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, interval);
+
+            System.out.println("ps:" + ps);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                totalUsers = rs.getString("totalRegisteredUsers");
+            } else {
+                totalUsers = "0";
+            }
+
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
+        }
+        return totalUsers;
+    }
 
     //doGetOccupancyForEachDepartments
     /**
@@ -583,6 +658,35 @@ public class AdminService {
         try {
             Connection con = JDBCConnectionManager.getConnection();
             String sql = "SELECT a.departmentId,departmentName, COUNT(appointmentId) as numberOfPatients FROM appointments a,departments d where a.departmentId = d.departmentId and appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY) group by departmentId";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, interval);
+
+            System.out.println("ps:" + ps);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Departments department = new Departments();
+                department.setDepartmentId(rs.getString("departmentId"));
+                department.setDepartmentName(rs.getString("departmentName"));
+                department.setNumberOfPatients(rs.getString("numberOfPatients"));
+                departmentList.add(department);
+                //System.out.println("numberOfpatients = " + department.getNumberOfPatients());
+            }
+
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
+
+        }
+        return departmentList;
+    }
+    public static ArrayList doGetOccupancyForEachDepartmentsThisMonthOrYear(String interval) {
+        ArrayList departmentList = new ArrayList();
+
+        try {
+            Connection con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT a.departmentId,departmentName, COUNT(appointmentId) as numberOfPatients FROM appointments a,departments d where a.departmentId = d.departmentId and appointmentDate between DATE_ADD(CURDATE(), INTERVAL ? DAY) and DATE_ADD(CURDATE(), INTERVAL '0' DAY) group by departmentId";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, interval);
 
