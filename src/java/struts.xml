@@ -203,7 +203,7 @@
         </action> 
         <action name="sendOTP" class="com.exavalu.models.Users" method="doSendOTP">
             <result name="SUCCESS">Otp.jsp</result>
-            <result name="FAILURE">login.jsp</result>
+            <result name="FAILURE">otpVerificationBlank.jsp</result>
         </action>
         <action name="verifyOTP" class="com.exavalu.models.Users" method="doVerifyOTP">
             <result name="SUCCESS">reset.jsp</result>

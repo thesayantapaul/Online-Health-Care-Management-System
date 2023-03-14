@@ -889,7 +889,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
             MailServic.send(this.emailAddress, "One Time Password For Password Reset", otp);
             result = "SUCCESS";
         } else {
-            sessionMap.put("FailSignUp", "Email Desn't Exsist");
+            sessionMap.put("FailOtpVerification", "Email Doesn't Exsist");
         }
         System.out.println(sessionMap);
         return result;

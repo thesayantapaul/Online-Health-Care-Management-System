@@ -327,9 +327,10 @@ public class LoginService {
         try {
             String sql = "update users set password=? where emailAddress=? ";
             Connection con = JDBCConnectionManager.getConnection();
+            String passoword = MD5.getMd5(user.getEmailAddress()+user.getPassword());
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
-            preparedStatement.setString(1, user.getPassword());
+            preparedStatement.setString(1, passoword);
             preparedStatement.setString(2, user.getEmailAddress());
             System.out.println(preparedStatement);
             int res = preparedStatement.executeUpdate();

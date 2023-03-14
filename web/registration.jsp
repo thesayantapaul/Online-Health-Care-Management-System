@@ -1,9 +1,3 @@
-<%--
-    Document   : signup
-    Created on : 23-Feb-2023, 2:19:03 am
-    Author     : Anik Dutta
---%>
-
 
 <!doctype html>
 <html lang="en">
@@ -125,7 +119,7 @@
                                             <input type="checkbox" checked="checked" required/>
                                             <div class="control__indicator"></div>
                                         </label>
-                                        <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
+                                        <span class="ml-auto"><a href="resetPassword.jsp" class="forgot-pass">Forgot Password</a></span>
                                     </div>
 
                                     <div class="g-recaptcha" data-sitekey="6LcQjK0kAAAAALMogTAZqQcjHJftku7jwQSL4jIV"></div><br>
