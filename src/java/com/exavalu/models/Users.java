@@ -353,18 +353,14 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     public String doLogin() {
         String result = "FAILURE";
         boolean success = LoginService.getInstance().doLogin(this);
-        MailServic.send("anichakraborty863@gmail.com", "hello javatpoint", "How r u?");
+//        MailServic.send("anichakraborty863@gmail.com", "hello javatpoint", "How r u?");
         if (success) {
             if (this.roleId.equals("1")) {
-                ArrayList appointment = new ArrayList();
-                ArrayList appointment2 = new ArrayList();
-                ArrayList activePrescription = new ArrayList();
-
                 System.out.println("this is patiend id :" + this.getUserId());
 
-                appointment = PatientService.doViewParticularUpcomingAppointments(this.getUserId());
-                appointment2 = PatientService.doViewParticularMedicalHistory(this.getUserId());
-                activePrescription = PrescriptionService.getInstance().getPatientPrescription(this.userId);
+                ArrayList appointment = PatientService.doViewParticularUpcomingAppointments(this.getUserId());
+                ArrayList appointment2 = PatientService.doViewParticularMedicalHistory(this.getUserId());
+                ArrayList activePrescription = PrescriptionService.getInstance().getPatientPrescription(this.userId);
                 if (appointment != null) {
                     sessionMap.put("PatientUpcomingBooking", appointment);
                     sessionMap.put("PatientMedicalHistory", appointment2);
@@ -778,6 +774,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     /**
      * doSocial used from google social sign up using OAuth2
      *
+     * @return 
      * @throws java.lang.Exception
      */
     public String doSocial() throws Exception {
@@ -810,6 +807,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     /**
      * used from google social Login after validation with BackEnd.
      *
+     * @return 
      * @throws java.lang.Exception doSocialLogin
      */
     public String doSocialLogin() throws Exception {
@@ -818,15 +816,12 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
         this.roleId = "1";
 
         if (success) {
-            ArrayList appointment = new ArrayList();
-            ArrayList appointment2 = new ArrayList();
-            ArrayList activePrescription = new ArrayList();
             result = "SUCCESS";
             System.out.println("this is user id :" + this.getUserId());
 
-            appointment = PatientService.doViewParticularUpcomingAppointments(this.getUserId());
-            appointment2 = PatientService.doViewParticularMedicalHistory(this.getUserId());
-            activePrescription = PrescriptionService.getInstance().getPatientPrescription(this.userId);
+            ArrayList appointment = PatientService.doViewParticularUpcomingAppointments(this.getUserId());
+            ArrayList appointment2 = PatientService.doViewParticularMedicalHistory(this.getUserId());
+            ArrayList activePrescription = PrescriptionService.getInstance().getPatientPrescription(this.userId);
             if (appointment != null) {
                 sessionMap.put("PatientUpcomingBooking", appointment);
                 sessionMap.put("PatientMedicalHistory", appointment2);
@@ -884,9 +879,9 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
         boolean success = LoginService.getInstance().doExsists(this.emailAddress, sessionMap);
         if (success) {
 
-            String otp = OtpService.OTP(4);
-            sessionMap.put("Otp", otp);
-            MailServic.send(this.emailAddress, "One Time Password For Password Reset", otp);
+            String generatedOtp = OtpService.OTP(4);
+            sessionMap.put("Otp", generatedOtp);
+            MailServic.send(this.emailAddress, "One Time Password For Password Reset", generatedOtp);
             result = "SUCCESS";
         } else {
             sessionMap.put("FailSignUp", "Email Desn't Exsist");
