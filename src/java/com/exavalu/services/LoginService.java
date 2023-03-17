@@ -12,7 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.util.Date;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.SessionMap;
 
@@ -85,9 +86,10 @@ public class LoginService {
             }
 
         } catch (SQLException ex) {
-            log.error("Not Found any user with given credential");
-            System.out.println(ex.getErrorCode());
-            ex.printStackTrace();
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, ps, con);
@@ -130,9 +132,10 @@ public class LoginService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + " Duplicate Email Address");
-            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(null, preparedStatement, con);
@@ -178,9 +181,10 @@ public class LoginService {
             }
 
         } catch (SQLException ex) {
-            log.error(LocalDateTime.now() + "Sql Error :" + ex + "Not Found");
-            System.out.println(ex.getErrorCode());
-            ex.printStackTrace();
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, ps, con);
@@ -219,9 +223,10 @@ public class LoginService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + " Duplicate Email Address");
-            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(null, preparedStatement, con);
@@ -259,8 +264,10 @@ public class LoginService {
 //            }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + "check user details");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(null, preparedStatement, con);
@@ -304,9 +311,10 @@ public class LoginService {
             }
 
         } catch (SQLException ex) {
-            log.error(LocalDateTime.now() + "Not Found any social user with given credential");
-            System.out.println(ex.getErrorCode());
-            ex.printStackTrace();
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, ps, con);
@@ -335,9 +343,10 @@ public class LoginService {
                 result = true;
             }
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + " Error while updating password check email");
-            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(null, preparedStatement, con);
@@ -375,9 +384,10 @@ public class LoginService {
             }
 
         } catch (SQLException ex) {
-            log.error("Not Found any user with given credential");
-            System.out.println(ex.getErrorCode());
-            ex.printStackTrace();
+           if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, ps, con);

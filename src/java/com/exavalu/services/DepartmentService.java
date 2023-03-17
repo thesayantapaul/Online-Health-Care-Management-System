@@ -11,8 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -77,9 +78,10 @@ public class DepartmentService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting departments");
-            System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting departments");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, preparedStatement, con);

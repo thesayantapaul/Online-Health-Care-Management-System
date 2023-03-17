@@ -11,8 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -85,9 +86,10 @@ public class PrescriptionService {
             }
 
         } catch (SQLException ex) {
-            log.error(LocalDateTime.now() + " sql Error" + ex.getErrorCode() + "Cannot add");
-            System.out.println(ex.getErrorCode());
-            ex.printStackTrace();
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(null, ps, con);
@@ -135,9 +137,10 @@ public class PrescriptionService {
                 prescribedList.add(prescribed);
             }
         } catch (SQLException ex) {
-            log.error(LocalDateTime.now() + " sql Error" + ex.getErrorCode() + "Cannot be found");
-            System.out.println(ex.getErrorCode());
-            ex.printStackTrace();
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, ps, con);
@@ -187,9 +190,10 @@ public class PrescriptionService {
                 prescribedList.add(prescribed);
             }
         } catch (SQLException ex) {
-            log.error(LocalDateTime.now() + " sql Error" + ex.getErrorCode() + "no record Found");
-            System.out.println(ex.getErrorCode());
-            ex.printStackTrace();
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -237,9 +241,10 @@ public class PrescriptionService {
                 prescribed = null;
             }
         } catch (SQLException ex) {
-            log.error(LocalDateTime.now() + " sql Error" + ex.getErrorCode() + "Cannot be Found");
-            System.out.println(ex.getErrorCode());
-            ex.printStackTrace();
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);

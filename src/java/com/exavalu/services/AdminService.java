@@ -10,13 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Date;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-
 
 /**
  *
@@ -24,6 +21,14 @@ import org.apache.log4j.Logger;
  */
 public class AdminService {
 
+    /**
+     * close the resultSet preparedStatement and connection
+     *
+     * @param resultSet
+     * @param preparedstatement
+     * @param conn
+     *
+     */
     public static void close(ResultSet resultSet, PreparedStatement preparedstatement, Connection conn) {
         if (resultSet != null) {
             try {
@@ -33,10 +38,9 @@ public class AdminService {
             } catch (SQLException e) {
                 Logger log = Logger.getLogger(AdminService.class.getName());
                 //log.setLevel(Level.INFO);
-                if(log.isInfoEnabled()){
-                   
-                    log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + e.getMessage());
-
+                if (log.isEnabledFor(Level.ERROR)) {
+                    String errorMessage = "Error message: " + e.getMessage() + " | Date: " + new Date();
+                    log.error(errorMessage);
                 }
             }
         }
@@ -46,10 +50,10 @@ public class AdminService {
                 preparedstatement.close();
             } catch (SQLException e) {
                 Logger log = Logger.getLogger(AdminService.class.getName());
-                log.setLevel(Level.ERROR);
-                if(log.isEnabledFor(Level.ERROR)){
-                    log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + e.getMessage());
 
+                if (log.isEnabledFor(Level.ERROR)) {
+                    String errorMessage = "Error message: " + e.getMessage() + " | Date: " + new Date();
+                    log.error(errorMessage);
                 }
             }
         }
@@ -59,17 +63,17 @@ public class AdminService {
                 conn.close();
             } catch (SQLException e) {
                 Logger log = Logger.getLogger(AdminService.class.getName());
-                log.setLevel(Level.ERROR);
-                if(log.isEnabledFor(Level.ERROR)){
-                    log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + e.getMessage());
-
+                if (log.isEnabledFor(Level.ERROR)) {
+                    String errorMessage = "Error message: " + e.getMessage() + " | Date: " + new Date();
+                    log.error(errorMessage);
                 }
-                
+
             }
         }
     }
 
     /**
+     * view all appointments in admin view appointments
      *
      * @return
      */
@@ -110,9 +114,12 @@ public class AdminService {
             System.out.println("rs size = " + appointmentList.size());
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
             close(rs, ps, con);
         }
@@ -129,8 +136,8 @@ public class AdminService {
      */
     public static ArrayList doViewFilteredAppointments(String startingDate, String endingDate) {
         ArrayList appointmentList = new ArrayList();
-        System.out.println("ending date = "+endingDate);
-       
+        System.out.println("ending date = " + endingDate);
+
         String sql = "SELECT * FROM appointments a,doctors d,patients p,departments dp,statusofappointments s where a.doctorId=d.doctorId and a.patientId=p.patientId and a.departmentId=dp.departmentId and a.statusId = s.statusId and appointmentDate between ? and ? ;";
         Connection con = null;
         PreparedStatement ps = null;
@@ -150,7 +157,6 @@ public class AdminService {
                 appointment.setPatientId(rs.getString("patientId"));
 
                 //System.out.println("patient id= " + appointment.getPatientId());
-
                 appointment.setPatientFirstName(rs.getString("patientFirstName"));
                 //System.out.println("patient id= " + appointment.getPatientFirstName());
                 appointment.setPatientLastName(rs.getString("patientLastName"));
@@ -169,9 +175,12 @@ public class AdminService {
             System.out.println("rs size = " + appointmentList.size());
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -228,9 +237,12 @@ public class AdminService {
             System.out.println("rs size = " + appointmentList.size());
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -260,12 +272,16 @@ public class AdminService {
 
             if (row == 1) {
                 result = true;
+
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(null, ps, con);
@@ -297,12 +313,16 @@ public class AdminService {
                 doctor.setDoctorFirstName(rs.getString("doctorFirstName"));
                 doctor.setDoctorLastName(rs.getString("doctorLastName"));
                 doctor.setContactEmail(rs.getString("contactEmail"));
+
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -341,9 +361,12 @@ public class AdminService {
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, preparedStatement, con);
@@ -392,13 +415,17 @@ public class AdminService {
                 //code to set doctor parameters
 
                 doctorList.add(doctor);
+
             }
 
         } catch (SQLException ex) {
 
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, preparedStatement, con);
@@ -448,13 +475,17 @@ public class AdminService {
 
                 //code to set doctor parameters
                 patientList.add(patient);
+
             }
 
         } catch (SQLException ex) {
 
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, preparedStatement, con);
@@ -499,9 +530,12 @@ public class AdminService {
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -537,12 +571,16 @@ public class AdminService {
 
             if (row == 1) {
                 result = true;
+
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(null, preparedStatement, con);
@@ -575,12 +613,16 @@ public class AdminService {
                 totalBookings = rs.getString("bookings");
             } else {
                 totalBookings = "0";
+
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -607,12 +649,16 @@ public class AdminService {
                 totalBookings = rs.getString("bookings");
             } else {
                 totalBookings = "0";
+
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -644,12 +690,16 @@ public class AdminService {
 
             if (rs.next()) {
                 totalRevenue = rs.getString("totalRevenue");
+
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -676,12 +726,16 @@ public class AdminService {
 
             if (rs.next()) {
                 totalRevenue = rs.getString("totalRevenue");
+
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -714,12 +768,16 @@ public class AdminService {
 
             if (rs.next()) {
                 date = rs.getString("Date");
+
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -754,12 +812,16 @@ public class AdminService {
                 totalUsers = rs.getString("totalRegisteredUsersToday");
             } else {
                 totalUsers = "0";
+
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -788,12 +850,16 @@ public class AdminService {
                 totalUsers = rs.getString("totalRegisteredUsers");
             } else {
                 totalUsers = "0";
+
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -830,12 +896,16 @@ public class AdminService {
                 department.setNumberOfPatients(rs.getString("numberOfPatients"));
                 departmentList.add(department);
                 //System.out.println("numberOfpatients = " + department.getNumberOfPatients());
+
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -865,12 +935,16 @@ public class AdminService {
                 department.setNumberOfPatients(rs.getString("numberOfPatients"));
                 departmentList.add(department);
                 //System.out.println("numberOfpatients = " + department.getNumberOfPatients());
+
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -902,11 +976,15 @@ public class AdminService {
             if (!rs.next()) {
                 result = false;
                 System.out.println("result of query = " + result);
+
             }
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -939,12 +1017,16 @@ public class AdminService {
 
             if (res == 1) {
                 result = true;
+
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(null, ps, con);
@@ -982,12 +1064,16 @@ public class AdminService {
 
             if (res == 1) {
                 result = true;
+
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(null, ps, con);
@@ -1006,9 +1092,9 @@ public class AdminService {
 
         boolean result = false;
         try {
-             con = JDBCConnectionManager.getConnection();
+            con = JDBCConnectionManager.getConnection();
             String sql = "INSERT INTO users (emailAddress,firstName,lastName,password,dateOfRegisteration,gender,roleId,occupation,address,age) VALUES (?,?,?,md5(?),curdate(),?,?,?,?,?);";
-             ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setString(1, admin.getEmailAddress());
             ps.setString(2, admin.getFirstName());
             ps.setString(3, admin.getLastName());
@@ -1026,13 +1112,17 @@ public class AdminService {
 
             if (res == 1) {
                 result = true;
+
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
-        }finally {
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        } finally {
 
             close(null, ps, con);
         }
@@ -1051,16 +1141,16 @@ public class AdminService {
 
         String doctorId = "";
         try {
-             con = JDBCConnectionManager.getConnection();
+            con = JDBCConnectionManager.getConnection();
             String sql = "select * from doctors where emailAddress = ?";
-             preparedStatement = con.prepareStatement(sql);
+            preparedStatement = con.prepareStatement(sql);
 
             preparedStatement.setString(1, emailAddress);
 
             System.out.println("sql search doctor = " + preparedStatement);
 
 //            System.out.println("sql"+preparedStatement);
-             rs = preparedStatement.executeQuery();
+            rs = preparedStatement.executeQuery();
 //            System.out.println("size of rs="+ rs.getFetchSize());
 
             while (rs.next()) {
@@ -1071,10 +1161,13 @@ public class AdminService {
 
         } catch (SQLException ex) {
 
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
-        }finally {
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        } finally {
 
             close(rs, preparedStatement, con);
         }
