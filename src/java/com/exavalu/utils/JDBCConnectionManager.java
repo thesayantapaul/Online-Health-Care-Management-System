@@ -34,16 +34,15 @@ public class JDBCConnectionManager {
         String url = jdbcUtility.getPropertyValue("url");
         
         System.out.println("URL ="+url);
+        
 
         try {
-
-            if (connection == null) {
-
+                System.out.println("connection = "+connection);
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 connection = DriverManager.getConnection(
                         url + dbNname, user, password);
 
-            }
+            
 
         } catch (ClassNotFoundException | SQLException e) {
 

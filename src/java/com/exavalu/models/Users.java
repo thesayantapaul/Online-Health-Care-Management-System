@@ -18,7 +18,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
-import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -269,7 +268,6 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
         return sessionMap;
     }
 
-    private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
 
     /**
      *
@@ -277,7 +275,6 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
      */
     @Override
     public void setApplication(Map<String, Object> application) {
-        map = (ApplicationMap) application;
     }
 
     /**
@@ -355,7 +352,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
         boolean success = LoginService.getInstance().doLogin(this);
         //MailServic.send("anichakraborty863@gmail.com", "hello javatpoint", "How r u?");
         if (success) {
-            if (this.roleId.equals("1")) {
+            if ("1".equals(this.roleId)) {
                 ArrayList appointment = new ArrayList();
                 ArrayList appointment2 = new ArrayList();
                 ArrayList activePrescription = new ArrayList();
@@ -372,7 +369,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                     result = "PATIENTINDEX";
                 }
             }
-            if (this.roleId.equals("2")) {
+            if ("2".equals(this.roleId)) {
                 System.out.println(this.doctorId);
                 ArrayList appointmentList = DoctorService.getInstance().doViewAppointments(this.doctorId);
                 ArrayList pastAppointmentList = DoctorService.getInstance().doViewPastAppointments(this.doctorId);
@@ -514,7 +511,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 System.out.println(sessionMap);
                 result = "DOCTORINDEX";
             }
-            if (this.roleId.equals("3")) {
+            if ("3".equals(this.roleId)) {
                 ArrayList deptList = DepartmentService.getInstance().getAllDepartments();
                 sessionMap.put("DeptList", deptList);
 
