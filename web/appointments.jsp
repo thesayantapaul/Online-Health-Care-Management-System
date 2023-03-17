@@ -42,6 +42,16 @@ admin appointment jsp
 
             var startingDate = document.getElementById("startingDate").value;
             var endingDate = document.getElementById("endingDate").value;
+            if (startingDate === "" && endingDate === "") {
+                alert("cannot filter with empty date range!");
+                return false;
+            }
+            if (endingDate === "") {
+                endingDate = null;
+                //alert(endingDate);
+            }
+
+
             var url = "FetchFilteredAppointment?startingDate=" + startingDate + "&endingDate=" + endingDate;
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function ()
@@ -246,18 +256,19 @@ admin appointment jsp
                     </c:forEach>
                 </tbody>
             </table>
-            <!-- Modal -->
-            <div class="modal fade" id="mailModalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="mailModalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
 
 
-                    </div>
                 </div>
             </div>
-            <!--modal end-->
-
         </div>
+        <!--modal end-->
+
+
 
     </section>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

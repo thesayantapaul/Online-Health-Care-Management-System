@@ -78,7 +78,8 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
     /**
      *
      * Used to retrieve the user's medical history.
-     * @return 
+     *
+     * @return
      */
     public String doViewParticularMedicalHistory() {
         String result = "FAILURE";
@@ -97,7 +98,8 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
     /**
      *
      * Used to retrieve user's upcoming appointment.
-     * @return 
+     *
+     * @return
      */
     public String doViewParticularUpcomingAppointments() {
         String result = "FAILURE";
@@ -113,7 +115,12 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
         return result;
     }
 
-    private String patientId, patientFirstName, patientLastName, age, gender, appointmentId;
+    private String patientId;
+    private String patientFirstName;
+    private String patientLastName;
+    private String age;
+    private String gender;
+    private String appointmentId;
     private String address;
     private String dateOfRegisteration;
 

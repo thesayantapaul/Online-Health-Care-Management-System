@@ -1,6 +1,7 @@
 package com.exavalu.services;
 
 import com.exavalu.models.Appointment;
+import static com.exavalu.services.AdminService.close;
 import com.exavalu.utils.JDBCConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,15 +51,18 @@ public class AppointmentService {
      * @return 
      */
     public boolean getAppointment(Appointment appointment) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        
         boolean result = false;
         Date date = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
         try {
-            Connection con = JDBCConnectionManager.getConnection();
+             con = JDBCConnectionManager.getConnection();
             String sql = "INSERT INTO appointments (appointmentDate, doctorId, departmentId, statusId,patientId,userId,symptoms,bookingDate) VALUES (DATE_ADD(CURDATE(), INTERVAL ? DAY) , ?, ?, ?,?,?,?,curdate());";
-            PreparedStatement ps = con.prepareStatement(sql);
+             ps = con.prepareStatement(sql);
             ps.setString(2, appointment.getDoctorId());
             ps.setString(3, appointment.getDepartmentId());
             ps.setString(4, "2");
@@ -101,6 +105,9 @@ public class AppointmentService {
             log.error("Not Found");
             System.out.println(ex.getErrorCode());
             ex.printStackTrace();
+        }finally {
+
+            close(null, ps, con);
         }
 
         return result;
@@ -114,11 +121,15 @@ public class AppointmentService {
      * @return 
      */
     public Appointment getAppointmentId(Appointment appointment) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet res = null;
+        
 
         try {
-            Connection con = JDBCConnectionManager.getConnection();
+             con = JDBCConnectionManager.getConnection();
             String sql = "select * from appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId where bookingDate=? and appointments.doctorId=? and appointments.departmentId=? and appointments.patientId=? and appointments.userId=?";
-            PreparedStatement ps = con.prepareStatement(sql);
+             ps = con.prepareStatement(sql);
             ps.setString(1, java.time.LocalDate.now().toString());
             ps.setString(2, appointment.getDoctorId());
             ps.setString(3, appointment.getDepartmentId());
@@ -126,7 +137,7 @@ public class AppointmentService {
             ps.setString(5, appointment.getUserId());
 
             System.out.println(ps);
-            ResultSet res = ps.executeQuery();
+             res = ps.executeQuery();
             System.out.println(res);
 
             if (res.next()) {
@@ -143,6 +154,9 @@ public class AppointmentService {
             int e = ex.getErrorCode();
             log.error(LocalDateTime.now() + "Sql Error :" + e);
             System.out.println(LocalDateTime.now() + "error code:" + e);
+        }finally {
+
+            close(res, ps, con);
         }
 
         return appointment;
@@ -155,26 +169,27 @@ public class AppointmentService {
      * @param appointmentId
      */
     public void updateStatus(String appointmentId) {
-
-        boolean result = false;
+        Connection con = null;
+        PreparedStatement ps = null;
 
         try {
-            Connection con = JDBCConnectionManager.getConnection();
+             con = JDBCConnectionManager.getConnection();
             String sql = "UPDATE ohms_db.appointments SET statusId = 3 WHERE appointmentId = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
+             ps = con.prepareStatement(sql);
             ps.setString(1, appointmentId);
             System.out.println("AppointmentService UpdateStatus:: " + ps);
 
-            int rs = ps.executeUpdate();
+            ps.executeUpdate();
 
-            if (rs == 1) {
-                result = true;
-            }
+           
 
         } catch (SQLException ex) {
             log.error("Not Found");
             System.out.println(ex.getErrorCode());
             ex.printStackTrace();
+        }finally {
+
+            close(null, ps, con);
         }
 
     }

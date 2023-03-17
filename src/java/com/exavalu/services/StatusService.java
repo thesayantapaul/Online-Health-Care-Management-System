@@ -5,6 +5,7 @@
 package com.exavalu.services;
 
 import com.exavalu.models.Status;
+import static com.exavalu.services.AdminService.close;
 import static com.exavalu.services.LoginService.log;
 import com.exavalu.utils.JDBCConnectionManager;
 import java.sql.Connection;
@@ -25,16 +26,19 @@ public class StatusService {
      * @return
      */
     public static ArrayList getAllStatus() {
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
         ArrayList statusList = new ArrayList();
         try {
 
-            Connection con = JDBCConnectionManager.getConnection();
+             con = JDBCConnectionManager.getConnection();
 
             String sql = "Select * from statusofappointments";
 
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
+             preparedStatement = con.prepareStatement(sql);
 
-            ResultSet rs = preparedStatement.executeQuery();
+             rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 Status status = new Status();
@@ -50,6 +54,9 @@ public class StatusService {
             int e = ex.getErrorCode();
             log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting status");
             System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting status");
+        }finally {
+
+            close(rs, preparedStatement, con);
         }
 
         return statusList;

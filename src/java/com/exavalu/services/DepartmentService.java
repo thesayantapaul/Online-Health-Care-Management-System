@@ -5,7 +5,7 @@
 package com.exavalu.services;
 
 import com.exavalu.models.Departments;
-import static com.exavalu.services.LoginService.log;
+import static com.exavalu.services.AdminService.close;
 import com.exavalu.utils.JDBCConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,15 +53,18 @@ public class DepartmentService {
      */
     public ArrayList getAllDepartments() {
         ArrayList deptLIst = new ArrayList();
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
         try {
 
-            Connection con = JDBCConnectionManager.getConnection();
+             con = JDBCConnectionManager.getConnection();
 
             String sql = "Select * from departments";
 
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
+             preparedStatement = con.prepareStatement(sql);
 
-            ResultSet rs = preparedStatement.executeQuery();
+             rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 Departments dept = new Departments();
@@ -77,6 +80,9 @@ public class DepartmentService {
             int e = ex.getErrorCode();
             log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting departments");
             System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting departments");
+        }finally {
+
+            close(rs, preparedStatement, con);
         }
 
         return deptLIst;
