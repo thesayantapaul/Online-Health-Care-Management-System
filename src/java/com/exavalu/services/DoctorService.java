@@ -12,10 +12,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Date;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -87,9 +86,10 @@ public class DoctorService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors");
-            System.out.println(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, preparedStatement, con);
@@ -132,9 +132,10 @@ public class DoctorService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors schedule");
-            System.out.println(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, preparedStatement, con);
@@ -192,9 +193,10 @@ public class DoctorService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors visiting time");
-            System.out.println(LocalDateTime.now() + " Sql Error :" + e + "Error in getting Doctors");
+           if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, preparedStatement, con);
@@ -244,9 +246,10 @@ public class DoctorService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors appointment");
-            System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, preparedStatement, con);
@@ -297,9 +300,10 @@ public class DoctorService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors past appointment history");
-            System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, preparedStatement, con);
@@ -338,9 +342,10 @@ public class DoctorService {
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, ps, con);
@@ -382,9 +387,10 @@ public class DoctorService {
             }
 
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-
+           if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, ps, con);
@@ -443,9 +449,10 @@ public class DoctorService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors today appointment");
-            System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, preparedStatement, con);
@@ -486,9 +493,10 @@ public class DoctorService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors detail");
-            System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting Doctors");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, preparedStatement, con);

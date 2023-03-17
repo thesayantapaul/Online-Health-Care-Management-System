@@ -7,9 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -45,24 +45,24 @@ public class AppointmentService {
 
     /**
      *
-     * Add a new appointment to the
-     * database
+     * Add a new appointment to the database
+     *
      * @param appointment
-     * @return 
+     * @return
      */
     public boolean getAppointment(Appointment appointment) {
         Connection con = null;
         PreparedStatement ps = null;
-        
+
         boolean result = false;
         Date date = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
         try {
-             con = JDBCConnectionManager.getConnection();
+            con = JDBCConnectionManager.getConnection();
             String sql = "INSERT INTO appointments (appointmentDate, doctorId, departmentId, statusId,patientId,userId,symptoms,bookingDate) VALUES (DATE_ADD(CURDATE(), INTERVAL ? DAY) , ?, ?, ?,?,?,?,curdate());";
-             ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setString(2, appointment.getDoctorId());
             ps.setString(3, appointment.getDepartmentId());
             ps.setString(4, "2");
@@ -102,10 +102,11 @@ public class AppointmentService {
             }
 
         } catch (SQLException ex) {
-            log.error("Not Found");
-            System.out.println(ex.getErrorCode());
-            ex.printStackTrace();
-        }finally {
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        } finally {
 
             close(null, ps, con);
         }
@@ -115,21 +116,20 @@ public class AppointmentService {
 
     /**
      *
-     * Used to get a particular appointment
-     * from the database
+     * Used to get a particular appointment from the database
+     *
      * @param appointment
-     * @return 
+     * @return
      */
     public Appointment getAppointmentId(Appointment appointment) {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet res = null;
-        
 
         try {
-             con = JDBCConnectionManager.getConnection();
+            con = JDBCConnectionManager.getConnection();
             String sql = "select * from appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId where bookingDate=? and appointments.doctorId=? and appointments.departmentId=? and appointments.patientId=? and appointments.userId=?";
-             ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setString(1, java.time.LocalDate.now().toString());
             ps.setString(2, appointment.getDoctorId());
             ps.setString(3, appointment.getDepartmentId());
@@ -137,7 +137,7 @@ public class AppointmentService {
             ps.setString(5, appointment.getUserId());
 
             System.out.println(ps);
-             res = ps.executeQuery();
+            res = ps.executeQuery();
             System.out.println(res);
 
             if (res.next()) {
@@ -151,10 +151,11 @@ public class AppointmentService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e);
-            System.out.println(LocalDateTime.now() + "error code:" + e);
-        }finally {
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        } finally {
 
             close(res, ps, con);
         }
@@ -164,8 +165,8 @@ public class AppointmentService {
 
     /**
      *
-     * Used to update the status of an appointment
-     * in the database
+     * Used to update the status of an appointment in the database
+     *
      * @param appointmentId
      */
     public void updateStatus(String appointmentId) {
@@ -173,21 +174,20 @@ public class AppointmentService {
         PreparedStatement ps = null;
 
         try {
-             con = JDBCConnectionManager.getConnection();
+            con = JDBCConnectionManager.getConnection();
             String sql = "UPDATE ohms_db.appointments SET statusId = 3 WHERE appointmentId = ?";
-             ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setString(1, appointmentId);
             System.out.println("AppointmentService UpdateStatus:: " + ps);
 
             ps.executeUpdate();
 
-           
-
         } catch (SQLException ex) {
-            log.error("Not Found");
-            System.out.println(ex.getErrorCode());
-            ex.printStackTrace();
-        }finally {
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        } finally {
 
             close(null, ps, con);
         }

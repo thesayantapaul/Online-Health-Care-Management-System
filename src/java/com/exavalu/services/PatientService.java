@@ -11,10 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Date;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -68,9 +67,10 @@ public class PatientService {
                 appointmentList.add(appointment);
             }
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-            System.out.println(ex);
+           if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         } finally {
 
             close(rs, ps, con);
@@ -115,9 +115,10 @@ public class PatientService {
                 appointmentList.add(appointment);
             }
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-            System.out.println(ex);
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(rs, ps, con);
@@ -173,9 +174,10 @@ public class PatientService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + " Duplicate Email Address");
-            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(null, preparedStatement, con);
@@ -219,9 +221,10 @@ public class PatientService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + " Duplicate Email Address");
-            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+           if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(res, preparedStatement, con);
@@ -258,9 +261,10 @@ public class PatientService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + " Duplicate Email Address");
-            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(null, preparedStatement, con);
@@ -310,9 +314,10 @@ public class PatientService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + " Duplicate Email Address");
-            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
         }finally {
 
             close(res, preparedStatement, con);
