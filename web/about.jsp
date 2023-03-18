@@ -44,7 +44,7 @@
                             <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">About Us</h5>
                             <h1 class="display-4">Best Medical Care For Yourself and Your Family</h1>
                         </div>
-                        <p>Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam dolores dolore. Amet erat amet et magna</p>
+                        <p>OHMS is a Hospital Management System which helps in an effective way to patients from  from the time they register until they are discharged or their appointment concludes.As a result there will be no need to be concerned about previous and current patients medical records.This hospital information system or management system understands what quality data should be maintained. </p>
                         <div class="row g-3 pt-3">
                             <div class="col-sm-3 col-6">
                                 <div class="bg-light text-center rounded-circle py-4">
@@ -84,7 +84,7 @@
                 <div class="text-center mx-auto mb-5" style="max-width: 500px;">
                     <h5 class="d-inline-block text-white text-uppercase border-bottom border-5">Find A Doctor</h5>
                     <h1 class="display-4 mb-4">Find A Healthcare Professionals</h1>
-                    <h5 class="text-white fw-normal">Duo ipsum erat stet dolor sea ut nonumy tempor. Tempor duo lorem eos sit sed ipsum takimata ipsum sit est. Ipsum ea voluptua ipsum sit justo</h5>
+                    <h5 class="text-white fw-normal"align="justify">OHMS facilitates booking of doctors in a highly systematic way depending on the convenience of the patients within seconds.Get hold of the professionals as per your needs.</h5>
                 </div>
                 <div class="mx-auto" style="width: 100%; max-width: 600px;">
                     <div class="input-group">
