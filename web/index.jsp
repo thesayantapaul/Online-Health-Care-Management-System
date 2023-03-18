@@ -121,7 +121,7 @@
                                         <i class="fa fa-2x fa-user-md text-white"></i>
                                     </div>
                                     <h4 class="mb-3">Emergency Care</h4>
-                                    <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit</p>
+                                    <p class="m-0" align="justify">Sudden illness or injury can occur without warning,everyone should know what to expect after they arrive.The Emergency Care given by OHMS team provides urgent care to patients who have traumatic injury, major illnesses or other issues that require immediate treatment.</p>
                                     <a class="btn btn-lg btn-primary rounded-pill" href="">
                                         <i class="bi bi-arrow-right"></i>
                                     </a>
@@ -133,7 +133,7 @@
                                         <i class="fa fa-2x fa-procedures text-white"></i>
                                     </div>
                                     <h4 class="mb-3">Operation & Surgery</h4>
-                                    <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit</p>
+                                    <p class="m-0" align="justify">OHMS provides facilities like advance O.T booking, the maintenance or O.T start & end time, records of clinical orders, disposables or consumables for surgery & medicines, complete record of the new born babies and records of pre anesthetic and post operative notes.</p>
                                     <a class="btn btn-lg btn-primary rounded-pill" href="">
                                         <i class="bi bi-arrow-right"></i>
                                     </a>
@@ -145,7 +145,7 @@
                                         <i class="fa fa-2x fa-stethoscope text-white"></i>
                                     </div>
                                     <h4 class="mb-3">Outdoor Checkup</h4>
-                                    <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit</p>
+                                    <p class="m-0" align="justify">OHMS provides different slots depending on the availability of the doctors which facilitates patients to easily take consultation of the doctors at a mutual convenient time.</p>
                                     <a class="btn btn-lg btn-primary rounded-pill" href="">
                                         <i class="bi bi-arrow-right"></i>
                                     </a>
@@ -157,7 +157,7 @@
                                         <i class="fa fa-2x fa-ambulance text-white"></i>
                                     </div>
                                     <h4 class="mb-3">Ambulance Service</h4>
-                                    <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit</p>
+                                    <p class="m-0" align="justify">OHMS provides top-class ambulance services in Kolkata with ALS, BLS, Patient Transport Ambulances. These are supported by advanced equipment and well-trained medical staff which makes us the best ambulance service providers. Our Ambulances are well equipped with advanced medical tools and equipment which are required for immediate help for the patient.</p>
                                     <a class="btn btn-lg btn-primary rounded-pill" href="">
                                         <i class="bi bi-arrow-right"></i>
                                     </a>
@@ -169,7 +169,7 @@
                                         <i class="fa fa-2x fa-pills text-white"></i>
                                     </div>
                                     <h4 class="mb-3">Medicine & Pharmacy</h4>
-                                    <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit</p>
+                                    <p class="m-0" align="justify">OHMS wants to get linked with pharmaceutical companies, and the capacity to prescribe and request pharmaceuticals is a feature that most doctors and patients will seek.It not only eliminates the time-consuming manual prescription process but also ensures treatment safety and compliance.</p>
                                     <a class="btn btn-lg btn-primary rounded-pill" href="">
                                         <i class="bi bi-arrow-right"></i>
                                     </a>
@@ -181,7 +181,7 @@
                                         <i class="fa fa-2x fa-microscope text-white"></i>
                                     </div>
                                     <h4 class="mb-3">Blood Testing</h4>
-                                    <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit</p>
+                                    <p class="m-0" align="justify">For diagnostic and laboratory management OHMS can generate the department wise slip after investigation, reports for all types of pathology, radiology, USG, CT scan and other different investigations.This helps in keeping digital documentation as well.</p>
                                     <a class="btn btn-lg btn-primary rounded-pill" href="">
                                         <i class="bi bi-arrow-right"></i>
                                     </a>
@@ -294,9 +294,9 @@
                                     </div>
                                     <div class="col-12 col-sm-7 h-100 d-flex flex-column">
                                         <div class="mt-auto p-4">
-                                            <h3>Doctor Name</h3>
-                                            <h6 class="fw-normal fst-italic text-primary mb-4">Cardiology Specialist</h6>
-                                            <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna rebum clita rebum dolor</p>
+                                            <h3>Dr. Avishek Nadkarni</h3>
+                                            <h6 class="fw-normal fst-italic text-primary mb-4">Immunology Specialist</h6>
+                                            <p class="m-0">I am a doctor.My motto is to provide a healthy life for you.Drugs are not always necessary. Belief in recovery always is.</p>
                                         </div>
                                         <div class="d-flex mt-auto border-top p-4">
                                             <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-twitter"></i></a>
@@ -313,9 +313,9 @@
                                     </div>
                                     <div class="col-12 col-sm-7 h-100 d-flex flex-column">
                                         <div class="mt-auto p-4">
-                                            <h3>Doctor Name</h3>
-                                            <h6 class="fw-normal fst-italic text-primary mb-4">Cardiology Specialist</h6>
-                                            <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna rebum clita rebum dolor</p>
+                                            <h3>Dr. Venkat Somani</h3>
+                                            <h6 class="fw-normal fst-italic text-primary mb-4">Dermatology Specialist</h6>
+                                            <p class="m-0">The proud feeling when you are called a Doctor requires years and years of hard work.Don't fear...just treat it.</p>
                                         </div>
                                         <div class="d-flex mt-auto border-top p-4">
                                             <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-twitter"></i></a>
@@ -332,9 +332,9 @@
                                     </div>
                                     <div class="col-12 col-sm-7 h-100 d-flex flex-column">
                                         <div class="mt-auto p-4">
-                                            <h3>Doctor Name</h3>
-                                            <h6 class="fw-normal fst-italic text-primary mb-4">Cardiology Specialist</h6>
-                                            <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna rebum clita rebum dolor</p>
+                                            <h3>Dr. Vineeta Nayar</h3>
+                                            <h6 class="fw-normal fst-italic text-primary mb-4">Endocrinology Specialist</h6>
+                                            <p class="m-0">We believe that life is the most precious thing in this entire world.Don't fear any illness...everything has its cure.</p>
                                         </div>
                                         <div class="d-flex mt-auto border-top p-4">
                                             <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-twitter"></i></a>
@@ -367,9 +367,9 @@
                                                 <i class="fa fa-quote-left fa-2x text-primary"></i>
                                             </div>
                                         </div>
-                                        <p class="fs-4 fw-normal">Dolores sed duo clita tempor justo dolor et stet lorem kasd labore dolore lorem ipsum. At lorem lorem magna ut et, nonumy et labore et tempor diam tempor erat. Erat dolor rebum sit ipsum.</p>
+                                        <p class="fs-4 fw-normal" align="justify">"What a fantastic place this is.Upon arriving I have received nothing but kindness. Staff have been professional but with a smile at all times. Doctor?s have been very personable with good and kind  manners."</p>
                                         <hr class="w-25 mx-auto">
-                                        <h3>Patient Name</h3>
+                                        <h3>Yashvi Goenka</h3>
                                         <h6 class="fw-normal text-primary mb-3">Profession</h6>
                                     </div>
                                     <div class="testimonial-item text-center">
@@ -379,9 +379,9 @@
                                                 <i class="fa fa-quote-left fa-2x text-primary"></i>
                                             </div>
                                         </div>
-                                        <p class="fs-4 fw-normal">Dolores sed duo clita tempor justo dolor et stet lorem kasd labore dolore lorem ipsum. At lorem lorem magna ut et, nonumy et labore et tempor diam tempor erat. Erat dolor rebum sit ipsum.</p>
+                                        <p class="fs-4 fw-normal" align="justify">"I can not praise the the staff, both medical and administrative, for the professional and caring and kind way I was treated. They were both patient and reassuring and more than happy to answer all my questions. Nothing was too much trouble. The hospital was spotlessly clean and attention to detail was superb, I could not have asked for more. I have already recommended this hospital to friends and family."</p>
                                         <hr class="w-25 mx-auto">
-                                        <h3>Patient Name</h3>
+                                        <h3>Nikhilendu Bose</h3>
                                         <h6 class="fw-normal text-primary mb-3">Profession</h6>
                                     </div>
                                     <div class="testimonial-item text-center">
@@ -391,9 +391,9 @@
                                                 <i class="fa fa-quote-left fa-2x text-primary"></i>
                                             </div>
                                         </div>
-                                        <p class="fs-4 fw-normal">Dolores sed duo clita tempor justo dolor et stet lorem kasd labore dolore lorem ipsum. At lorem lorem magna ut et, nonumy et labore et tempor diam tempor erat. Erat dolor rebum sit ipsum.</p>
+                                        <p class="fs-4 fw-normal" align="justify">"Professional staff from admission to discharge. Ready to go the extra mile. Well cared for. 'Even the tea was drinkable'. Many thanks.Completely satisfied with level of service and friendliness of staff. No issues encountered with procedure and post procedure care of high standard."</p>
                                         <hr class="w-25 mx-auto">
-                                        <h3>Patient Name</h3>
+                                        <h3>Aritrika Ganguly</h3>
                                         <h6 class="fw-normal text-primary mb-3">Profession</h6>
                                     </div>
                                 </div>
