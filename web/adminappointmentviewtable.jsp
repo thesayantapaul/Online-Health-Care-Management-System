@@ -72,17 +72,17 @@
                         </div>
                     </td>
                     <td>
-                        <span class="btn btn-outline-primary  bi bi-receipt">  View</span>
-                    </td>
-                    <td>
-                        <div class="dropdown open">
-                            <a href="#!" class="px-2" id="triggerId1" data-toggle="dropdown" aria-haspopup="true"
-                               aria-expanded="false">
-                                <i class="fa fa-ellipsis-v"></i>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="triggerId1">
+                        <span class="btn btn-outline-primary  bi bi-receipt" onclick="fetchPrescriptionModal('${appointment.appointmentId}')" data-toggle="modal" data-target="#mailModalId">  View</span>
+                </td>
+                <td>
+                    <div class="dropdown open">
+                        <a href="#!" class="px-2" id="triggerId1" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="fa fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="triggerId1">
 
-                                <a class="dropdown-item"  onclick="editAppointmentData(${appointment.appointmentId})" href="#"><i class="fa fa-pencil mr-1"></i> Edit</a>
+                            <a class="dropdown-item"  onclick="editAppointmentData(${appointment.appointmentId})" href="#"><i class="fa fa-pencil mr-1"></i> Edit</a>
                             <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#ex${appointment.appointmentId}"> <i class ="fa fa-trash mr-1"></i> Cancel</a>
                         </div>
                     </div>

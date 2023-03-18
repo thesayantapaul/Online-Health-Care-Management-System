@@ -10,7 +10,7 @@ import com.exavalu.services.PrescriptionService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -22,6 +22,15 @@ import org.apache.struts2.interceptor.SessionAware;
  * @author anich
  */
 public class Prescription extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
+    private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
+
+    public ApplicationMap getMap() {
+        return map;
+    }
+
+    public void setMap(ApplicationMap map) {
+        this.map = map;
+    }
 
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
 
@@ -32,6 +41,8 @@ public class Prescription extends ActionSupport implements ApplicationAware, Ses
      */
     @Override
     public void setApplication(Map<String, Object> application) {
+                setMap((ApplicationMap) application);
+
     }
 
     /**
@@ -371,10 +382,10 @@ public class Prescription extends ActionSupport implements ApplicationAware, Ses
         System.out.println(this.userId);
 
         boolean success = PrescriptionService.getInstance().addPrescription(this);
-        ArrayList prescribedList = PrescriptionService.getInstance().getPrescription(this.doctorId);
+        List<Prescription> prescribedList = PrescriptionService.getInstance().getPrescription(this.doctorId);
         if (success) {
             AppointmentService.getInstance().updateStatus(this.appointmentId);
-            ArrayList pendingprescribList = DoctorService.getInstance().doViewtodayAppointments("0", this.doctorId);
+            List<Appointment> pendingprescribList = DoctorService.getInstance().doViewtodayAppointments("0", this.doctorId);
             sessionMap.put("DoctorAppointmentListDashBoard", pendingprescribList);
             result = "SUCCESS";
             sessionMap.put("PreviousPrescription", prescribedList);

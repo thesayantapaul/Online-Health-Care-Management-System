@@ -49,7 +49,7 @@
                             <h5 class="d-inline-block text-white text-uppercase border-bottom border-5">Appointment</h5>
                             <h1 class="display-4">Make An Appointment For You And Your Family</h1>
                         </div>
-                        <p class="text-white mb-5">Eirmod sed tempor lorem ut dolores. Aliquyam sit sadipscing kasd ipsum. Dolor ea et dolore et at sea ea at dolor, justo ipsum duo rebum sea invidunt voluptua. Eos vero eos vero ea et dolore eirmod et. Dolores diam duo invidunt lorem. Elitr ut dolores magna sit. Sea dolore sanctus sed et. Takimata takimata sanctus sed.</p>
+                        <p class="text-white mb-5">OHMS is an Online Healthcare Management System which is used for booking appointments, maintaining digital records for the advise given by the healthcare experts and lastly the website is designed in a very user friendly so that this cumbersome process becomes easier for all. </p>
                         <a class="btn btn-dark rounded-pill py-3 px-5 me-3" href="">Find Doctor</a>
                         <a class="btn btn-outline-dark rounded-pill py-3 px-5" href="">Read More</a>
                     </div>

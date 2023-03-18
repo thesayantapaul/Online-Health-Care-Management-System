@@ -5,17 +5,16 @@
 package com.exavalu.services;
 
 import com.exavalu.models.Appointment;
-import com.exavalu.models.Users;
-import static com.exavalu.services.LoginService.log;
+import static com.exavalu.services.AdminService.close;
 import com.exavalu.utils.JDBCConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -36,19 +35,22 @@ public class PatientService {
 
     /**
      *
-     * Used to retrieve
-     * users medical history from BackEnd.
+     * Used to retrieve users medical history from BackEnd.
+     *
      * @param userId
-     * @return 
+     * @return
      */
-    public static ArrayList doViewParticularMedicalHistory(String userId) {
+    public static List<Appointment> doViewParticularMedicalHistory(String userId) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId right join prescription on prescription.appointmentId=appointments.appointmentId where appointments.userId=? and appointments.appointmentDate<=curdate()";
         ArrayList appointmentList = new ArrayList();
         try {
-            Connection con = JDBCConnectionManager.getConnection();
-            PreparedStatement ps = con.prepareStatement(sql);
+            con = JDBCConnectionManager.getConnection();
+            ps = con.prepareStatement(sql);
             ps.setString(1, userId);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             System.out.println("Prepared Statement" + ps);
             while (rs.next()) {
@@ -66,30 +68,37 @@ public class PatientService {
                 appointmentList.add(appointment);
             }
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-            System.out.println(ex);
+           if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        } finally {
+
+            close(rs, ps, con);
         }
         return appointmentList;
     }
 
     /**
      *
-     * Used to
-     * retrieve users upcoming bookings from BackEnd.
+     * Used to retrieve users upcoming bookings from BackEnd.
+     *
      * @param userId
-     * @return 
+     * @return
      */
-    public static ArrayList doViewParticularUpcomingAppointments(String userId) {
+    public static List<Appointment> doViewParticularUpcomingAppointments(String userId) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.userId=? and appointments.appointmentdate >CURDATE() order by appointments.appointmentDate";
 
         ArrayList appointmentList = new ArrayList();
         try {
-            Connection con = JDBCConnectionManager.getConnection();
-            PreparedStatement ps = con.prepareStatement(sql);
+             con = JDBCConnectionManager.getConnection();
+             ps = con.prepareStatement(sql);
             ps.setString(1, userId);
 
-            ResultSet rs = ps.executeQuery();
+             rs = ps.executeQuery();
 
             System.out.println("Prepared Statement" + ps);
             while (rs.next()) {
@@ -107,9 +116,13 @@ public class PatientService {
                 appointmentList.add(appointment);
             }
         } catch (SQLException ex) {
-            Logger log = Logger.getLogger(AdminService.class.getName());
-            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM)) + " " + ex.getMessage());
-            System.out.println(ex);
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        }finally {
+
+            close(rs, ps, con);
         }
         return appointmentList;
     }
@@ -121,30 +134,33 @@ public class PatientService {
      *
      * @return
      */
-    public static PatientService getInstance() {
+    public static synchronized PatientService getInstance() {
         if (patientService == null) {
-            return new PatientService();
-        } else {
+            patientService= new PatientService();
+        } 
             return patientService;
-        }
+        
     }
 
     /**
      *
-     * Used to add new patient to the
-     * BackEnd.
+     * Used to add new patient to the BackEnd.
+     *
      * @param appointment
      * @param userId
-     * @return 
+     * @return
      */
     public boolean insertPatient(Appointment appointment, String userId) {
         boolean result = false;
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        //ResultSet rs = null;
 
         String sql = "INSERT INTO patients (patientFirstName,patientLastName, age, gender,userId) VALUES (?, ?, ?, ?,?);";
         try {
-            Connection con = JDBCConnectionManager.getConnection();
+             con = JDBCConnectionManager.getConnection();
 
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
+             preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, appointment.getPatientFirstName());
             preparedStatement.setString(2, appointment.getPatientLastName());
             preparedStatement.setString(3, appointment.getAge());
@@ -159,9 +175,13 @@ public class PatientService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + " Duplicate Email Address");
-            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        }finally {
+
+            close(null, preparedStatement, con);
         }
 
         return result;
@@ -170,18 +190,21 @@ public class PatientService {
 
     /**
      *
-     * Used to get a patient detail from the
-     * BackEnd.
+     * Used to get a patient detail from the BackEnd.
+     *
      * @param appointment
      * @param userId
-     * @return 
+     * @return
      */
     public Appointment getPatient(Appointment appointment, String userId) {
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet res = null;
         String sql = "select * from patients where patientFirstName=? and patientLastName=? and gender=? and age=? and userId=?";
         try {
-            Connection con = JDBCConnectionManager.getConnection();
+             con = JDBCConnectionManager.getConnection();
 
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
+             preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, appointment.getPatientFirstName());
             preparedStatement.setString(2, appointment.getPatientLastName());
             preparedStatement.setString(4, appointment.getAge());
@@ -189,7 +212,7 @@ public class PatientService {
             preparedStatement.setString(5, userId);
 
             System.out.println(preparedStatement);
-            ResultSet res = preparedStatement.executeQuery();
+             res = preparedStatement.executeQuery();
             System.out.println(res);
 
             if (res.next()) {
@@ -199,9 +222,13 @@ public class PatientService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + " Duplicate Email Address");
-            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+           if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        }finally {
+
+            close(res, preparedStatement, con);
         }
 
         return appointment;
@@ -210,19 +237,21 @@ public class PatientService {
 
     /**
      *
-     * Used to update a the
-     * appointment detail in the patient BackEnd.
+     * Used to update a the appointment detail in the patient BackEnd.
+     *
      * @param appointment
-     * @return 
+     * @return
      */
     public boolean insertPatientAppointment(Appointment appointment) {
-
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        //ResultSet rs = null;
         boolean result = false;
         try {
             String sql = "update patients set appointmentId=? where patientId=?";
-            Connection con = JDBCConnectionManager.getConnection();
+             con = JDBCConnectionManager.getConnection();
 
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
+             preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, appointment.getAppointmentId());
             preparedStatement.setString(2, appointment.getPatientId());
             System.out.println(preparedStatement);
@@ -233,9 +262,13 @@ public class PatientService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + " Duplicate Email Address");
-            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        }finally {
+
+            close(null, preparedStatement, con);
         }
 
         return result;
@@ -244,22 +277,25 @@ public class PatientService {
 
     /**
      *
-     * Used to obtain a 
-     * patients detail from the BackEnd.
+     * Used to obtain a patients detail from the BackEnd.
+     *
      * @param appointmentId
-     * @return 
+     * @return
      */
     public Appointment getPatientDetail(String appointmentId) {
         Appointment users = new Appointment();
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet res = null;
         String sql = "select * from appointments right join patients on patients.patientId=appointments.patientId left join users on users.userId=patients.userId where appointments.appointmentId=?";
         try {
-            Connection con = JDBCConnectionManager.getConnection();
+             con = JDBCConnectionManager.getConnection();
 
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
+             preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, appointmentId);
 
             System.out.println(preparedStatement);
-            ResultSet res = preparedStatement.executeQuery();
+             res = preparedStatement.executeQuery();
             System.out.println(res);
 
             if (res.next()) {
@@ -279,9 +315,13 @@ public class PatientService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + " Duplicate Email Address");
-            System.out.println(LocalDateTime.now() + "error code:" + e + "Duplicate Email Address");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        }finally {
+
+            close(res, preparedStatement, con);
         }
         return users;
     }

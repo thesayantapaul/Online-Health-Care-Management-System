@@ -4,7 +4,7 @@ import com.exavalu.services.DoctorService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -79,7 +79,7 @@ public class Doctors extends ActionSupport implements ApplicationAware, SessionA
     public String doViewAppointments() {
         String result = "FAILURE";
 
-        ArrayList appointmentList = DoctorService.getInstance().doViewAppointments(this.doctorId);
+        List<Appointment> appointmentList = DoctorService.getInstance().doViewAppointments(this.doctorId);
 
         if (!appointmentList.isEmpty()) {
 
@@ -271,7 +271,7 @@ public class Doctors extends ActionSupport implements ApplicationAware, SessionA
     public String doViewHome() {
         String result = "SUCCESS";
         String doctrId = (String) sessionMap.get("doctorId");
-        ArrayList appointmentList = DoctorService.getInstance().doViewAppointments(doctrId);
+        List<Appointment> appointmentList = DoctorService.getInstance().doViewAppointments(doctrId);
         sessionMap.put("AppointmentListDoctor", appointmentList);
         String todayBooking = DoctorService.getInstance().doViewBookings("0", doctrId);
         String day1Booking = DoctorService.getInstance().doViewBookings("-1", doctrId);

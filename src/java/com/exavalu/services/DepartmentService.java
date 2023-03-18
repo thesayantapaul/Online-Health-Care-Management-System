@@ -5,14 +5,16 @@
 package com.exavalu.services;
 
 import com.exavalu.models.Departments;
-import static com.exavalu.services.LoginService.log;
+import static com.exavalu.services.AdminService.close;
 import com.exavalu.utils.JDBCConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -38,12 +40,12 @@ public class DepartmentService {
      *
      * @return
      */
-    public static DepartmentService getInstance() {
+    public static synchronized DepartmentService getInstance() {
         if (departmentService == null) {
-            return new DepartmentService();
-        } else {
+            departmentService= new DepartmentService();
+        } 
             return departmentService;
-        }
+        
     }
 
     /**
@@ -51,17 +53,20 @@ public class DepartmentService {
      * Used to retrieve all the department and their details from the database
      * @return 
      */
-    public ArrayList getAllDepartments() {
+    public List getAllDepartments() {
         ArrayList deptLIst = new ArrayList();
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
         try {
 
-            Connection con = JDBCConnectionManager.getConnection();
+             con = JDBCConnectionManager.getConnection();
 
             String sql = "Select * from departments";
 
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
+             preparedStatement = con.prepareStatement(sql);
 
-            ResultSet rs = preparedStatement.executeQuery();
+             rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 Departments dept = new Departments();
@@ -74,9 +79,13 @@ public class DepartmentService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting departments");
-            System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting departments");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        }finally {
+
+            close(rs, preparedStatement, con);
         }
 
         return deptLIst;

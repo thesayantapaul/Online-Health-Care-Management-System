@@ -24,8 +24,6 @@ public class MailServic {
 
     /**
      *
-     * @param from
-     * @param password
      * @param to
      * @param sub
      * @param msg
@@ -69,7 +67,6 @@ public class MailServic {
      */
     public static void sendAppointment(Appointment appointment) {
 
-        String to_email = appointment.getEmailAddress();
         String sub = "Appointment Details";
         String body = "Hi , \n"
                 + "\n"

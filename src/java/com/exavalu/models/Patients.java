@@ -8,7 +8,7 @@ import com.exavalu.services.PatientService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -78,15 +78,15 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
     /**
      *
      * Used to retrieve the user's medical history.
-     * @return 
+     *
+     * @return
      */
     public String doViewParticularMedicalHistory() {
         String result = "FAILURE";
-        ArrayList appointment = new ArrayList();
         Users patient = (Users) sessionMap.get("Loggedin");
         System.out.println("this is patiend id :" + patient.getUserId());
 
-        appointment = PatientService.doViewParticularMedicalHistory(patient.getUserId());
+        List<Appointment> appointment = PatientService.doViewParticularMedicalHistory(patient.getUserId());
         if (appointment != null) {
             sessionMap.put("PatientMedicalHistory", appointment);
             result = "SUCCESS";
@@ -97,15 +97,15 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
     /**
      *
      * Used to retrieve user's upcoming appointment.
-     * @return 
+     *
+     * @return
      */
     public String doViewParticularUpcomingAppointments() {
         String result = "FAILURE";
-        ArrayList appointment = new ArrayList();
         Users patient = (Users) sessionMap.get("Loggedin");
         System.out.println("this is patiend id :" + patient.getUserId());
 
-        appointment = PatientService.doViewParticularUpcomingAppointments(patient.getUserId());
+        List<Appointment> appointment = PatientService.doViewParticularUpcomingAppointments(patient.getUserId());
         if (appointment != null) {
             sessionMap.put("PatientUpcomingBooking", appointment);
             result = "SUCCESS";
@@ -113,7 +113,12 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
         return result;
     }
 
-    private String patientId, patientFirstName, patientLastName, age, gender, appointmentId;
+    private String patientId;
+    private String patientFirstName;
+    private String patientLastName;
+    private String age;
+    private String gender;
+    private String appointmentId;
     private String address;
     private String dateOfRegisteration;
 

@@ -5,8 +5,7 @@ import com.exavalu.services.StatusService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -79,9 +78,9 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
      */
     public String doViewAppointments() {
         String result = "FAILURE";
-        ArrayList appointmentList = AdminService.doViewAppointments();
+        List appointmentList = AdminService.doViewAppointments();
 
-        if (appointmentList.size() > 0) {
+        if (!appointmentList.isEmpty()) {
             sessionMap.put("AppointmentList", appointmentList);
             result = "SUCCESS";
 
@@ -90,23 +89,22 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
     }
 
     //---------fetch filtered appointments in specified date range
-
     /**
      *
      * @return
      */
     public String doFetchFilteredAppointment() {
-        String result = "FAILURE";
+       
 
-        System.out.println("starting date"+this.startingDate);
-        System.out.println(LocalDate.now());
-        ArrayList appointmentList = AdminService.doViewFilteredAppointments(this.startingDate, this.endingDate);
+        System.out.println("starting date" + this.startingDate);
+        
+        List appointmentList = AdminService.doViewFilteredAppointments(this.startingDate, this.endingDate);
 
-        if (appointmentList.size() >= 0) {
+       
             sessionMap.put("AppointmentList", appointmentList);
-            result = "APPOINTMENTTABLE";
-        }
-        return result;
+           
+        
+        return "APPOINTMENTTABLE";
     }
 //doViewParticularAppointment
 
@@ -116,14 +114,14 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
      */
     public String doViewParticularAppointment() {
         String result = "FAILURE";
-        Appointment appointment = new Appointment();
-        appointment = AdminService.doViewParticularAppointment(this.appointmentId);
-        ArrayList doctorList = AdminService.getAllDoctors(appointment.getDepartmentId());
+         
+        Appointment appointment = AdminService.doViewParticularAppointment(this.appointmentId);
+        List doctorList = AdminService.getAllDoctors(appointment.getDepartmentId());
 
         if (appointment != null) {
             result = "EDITAPPOINTENTJSP";
 
-            ArrayList statusList = StatusService.getAllStatus();
+            List<Status> statusList = StatusService.getAllStatus();
 
             sessionMap.put("StatusList", statusList);
             sessionMap.put("DoctorListAdmin", doctorList);
@@ -132,14 +130,15 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         }
         return result;
     }
+
     public String doGetDoctorForEditAppointment() throws Exception {
         //System.out.println(this.getDepartmentId());
         String result = "FAILURE";
-         ArrayList doctorList = AdminService.getAllDoctors(this.departmentId);
+        List doctorList = AdminService.getAllDoctors(this.departmentId);
 
         if (!doctorList.isEmpty()) {
             result = "SUCCESS";
-            System.out.println("departmentid = "+this.departmentId);
+            System.out.println("departmentid = " + this.departmentId);
             sessionMap.put("DoctorListAdmin", doctorList);
         }
 
@@ -170,27 +169,26 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
      * @return
      */
     public String doSearchDoctor() {
-        String result = "FAILURE";
-        ArrayList doctorList = AdminService.doSearchDoctor(this);
+       
+        List doctorList = AdminService.doSearchDoctor(this);
 
-        if (doctorList.size() >= 0) {
+        
             sessionMap.put("SearchedDoctorList", doctorList);
-            result = "SUCCESS";
-
-        }
-        return result;
+            
+        
+        return "SUCCESS";
     }
 
     /**
      *
      * @return
      */
-    public String doFetchParticularDoctor(){
+    public String doFetchParticularDoctor() {
         String result = "FAILURE";
         Doctors doctor = new Doctors();
         doctor = AdminService.doSearchDoctor(this.doctorId);
-        if(doctor!=null){
-            sessionMap.put("Doctor",doctor);
+        if (doctor != null) {
+            sessionMap.put("Doctor", doctor);
             result = "MODAL";
         }
         return result;
@@ -201,71 +199,79 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
      * @return
      */
     public String doSearchPatient() {
-        String result = "FAILURE";
-        ArrayList patientList = AdminService.doSearchPatient(this);
+        
+        List patientList = AdminService.doSearchPatient(this);
 
-        if (patientList.size() >= 0) {
+       
             sessionMap.put("SearchResult", patientList);
-            result = "SUCCESS";
-        }
+            
+        
 
-        return result;
+        return "SUCCESS";
     }
-    public String doGetAppointmentThisMonth(){
-        String result = "APPOINTMENTCARD";
+
+    public String doGetAppointmentThisMonth() {
+        //String result = "APPOINTMENTCARD";
         String thisMonthBooking = AdminService.doViewBookingsThisMonthOrYear("-30");
         sessionMap.put("ThisMonthBooking", thisMonthBooking);
-        return result;
+        return "APPOINTMENTCARD";
     }
-    public String doGetAppointmentThisYear(){
-        String result = "APPOINTMENTCARD";
+
+    public String doGetAppointmentThisYear() {
+        //String result = "APPOINTMENTCARD";
         String thisYearBooking = AdminService.doViewBookingsThisMonthOrYear("-365");
         sessionMap.put("ThisYearBooking", thisYearBooking);
-        return result;
+        return "APPOINTMENTCARD";
     }
+
     //revenue monthly
-    public String doGetRevenueThisMonth(){
-        String result = "REVENUECARD";
+    public String doGetRevenueThisMonth() {
+        //String result = "REVENUECARD";
         String thisMonthRevenue = AdminService.doViewTotalRevenueThisMonthOrYear("-30");
         sessionMap.put("ThisMonthRevenue", thisMonthRevenue);
-        return result;
+        return "REVENUECARD";
     }
+
     //revenue Yearly
-    public String doGetRevenueThisYear(){
-        String result = "REVENUECARD";
+    public String doGetRevenueThisYear() {
+        //String result = "REVENUECARD";
         String thisYearRevenue = AdminService.doViewTotalRevenueThisMonthOrYear("-365");
         sessionMap.put("ThisYearRevenue", thisYearRevenue);
-        return result;
+        return "REVENUECARD";
     }
+
     //registered user monthly
-    public String doGetUserThisMonth(){
-        String result = "USERCARD";
+    public String doGetUserThisMonth() {
+        //String result = "USERCARD";
         String thisMonthUser = AdminService.totalRegisteredUsersThisMonthOrYear("-30");
         sessionMap.put("ThisMonthUser", thisMonthUser);
-        return result;
+        return "USERCARD";
     }
+
     //registered user Yearly
-    public String doGetUserThisYear(){
-        String result = "USERCARD";
+    public String doGetUserThisYear() {
+        //String result = "USERCARD";
         String thisYearUser = AdminService.totalRegisteredUsersThisMonthOrYear("-365");
         sessionMap.put("ThisYearUser", thisYearUser);
-        return result;
+        return "USERCARD";
     }
+
     //top departments monthly
-    public String doGetDepartmentsThisMonth(){
-        String result = "TOPDEPARTMENTS";
-        ArrayList departmentOccupncyList = AdminService.doGetOccupancyForEachDepartmentsThisMonthOrYear("-30");
+    public String doGetDepartmentsThisMonth() {
+        //String result = "TOPDEPARTMENTS";
+        List departmentOccupncyList = AdminService.doGetOccupancyForEachDepartmentsThisMonthOrYear("-30");
 
         sessionMap.put("OccupancyInDepartmentsThisMonth", departmentOccupncyList);
-        return result;
+        return "TOPDEPARTMENTS";
     }
+
     //top departments Yearly
-    public String doGetDepartmentsThisYear(){
-        String result = "TOPDEPARTMENTS";
-        ArrayList departmentOccupncyList = AdminService.doGetOccupancyForEachDepartmentsThisMonthOrYear("-365");
+    public String doGetDepartmentsThisYear() {
+        //String result = "TOPDEPARTMENTS";
+        List departmentOccupncyList = AdminService.doGetOccupancyForEachDepartmentsThisMonthOrYear("-365");
 
         sessionMap.put("OccupancyInDepartmentsThisYear", departmentOccupncyList);
-        return result;
+        return "TOPDEPARTMENTS";
     }
 
     /**
@@ -273,7 +279,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
      * @return
      */
     public String doViewDashboard() {
-        String result = "SUCCESS";
+        //String result = "SUCCESS";
 
         String todayBooking = AdminService.doViewBookings("0");
         sessionMap.put("TodayBooking", todayBooking);
@@ -400,12 +406,12 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         sessionMap.put("Day6", day6);
 
         //-----------------------------------------------------------------------
-        ArrayList appointmentList = AdminService.doViewAppointments("0");
+        List appointmentList = AdminService.doViewAppointments("0");
 
         sessionMap.put("AppointmentListDashBoard", appointmentList);
         //---------------------departmentList with occupancy start---------------------------------------------------------------   
 
-        ArrayList departmentOccupncyList = AdminService.doGetOccupancyForEachDepartments("0");
+        List departmentOccupncyList = AdminService.doGetOccupancyForEachDepartments("0");
 
         sessionMap.put("OccupancyInDepartments", departmentOccupncyList);
         //--------------------------------------------------------------------------------------------------------
@@ -428,7 +434,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         String day6User = AdminService.totalRegisteredUsers("-6");
         sessionMap.put("Day6User", day6User);
 
-        return result;
+        return "SUCCESS";
     }
 
     /**
@@ -436,8 +442,8 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
      * @return
      */
     public String showAdminAddDoctor() {
-        String result = "SUCCESS";
-        return result;
+
+        return "SUCCESS";
     }
 
     /**
@@ -486,7 +492,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
      */
     public String doCheckEmail() {
         String result = "FAILURE";
-        System.out.println("email to verify = " + this.emailAddress);
+        //System.out.println("email to verify = " + this.emailAddress);
 
         boolean success = AdminService.doCheckEmail(this.emailAddress);
         if (success) {
@@ -509,7 +515,8 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
     private String appointmentId;
     private String firstName;
     private String lastName;
-    private String gender, age;
+    private String gender;
+    private String age;
 
     /**
      *

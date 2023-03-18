@@ -5,36 +5,44 @@
 package com.exavalu.services;
 
 import com.exavalu.models.Status;
-import static com.exavalu.services.LoginService.log;
+import static com.exavalu.services.AdminService.close;
 import com.exavalu.utils.JDBCConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author LenovoRaja
  */
+
 public class StatusService {
+    public static Logger log = Logger.getLogger(StatusService.class.getName());
     
     /**
      *
      * @return
      */
-    public static ArrayList getAllStatus() {
+    public static List<Status> getAllStatus() {
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
         ArrayList statusList = new ArrayList();
         try {
 
-            Connection con = JDBCConnectionManager.getConnection();
+             con = JDBCConnectionManager.getConnection();
 
             String sql = "Select * from statusofappointments";
 
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
+             preparedStatement = con.prepareStatement(sql);
 
-            ResultSet rs = preparedStatement.executeQuery();
+             rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 Status status = new Status();
@@ -47,9 +55,13 @@ public class StatusService {
             }
 
         } catch (SQLException ex) {
-            int e = ex.getErrorCode();
-            log.error(LocalDateTime.now() + "Sql Error :" + e + "Error in getting status");
-            System.out.println(LocalDateTime.now() + "Sql Error :" + e + "Error in getting status");
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        }finally {
+
+            close(rs, preparedStatement, con);
         }
 
         return statusList;

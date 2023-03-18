@@ -176,19 +176,13 @@
             <result name="SUCCESS">doctorIndex.jsp</result>
             <result name="FAILURE">login.jsp</result>
         </action>
-        <action name="FaceBookLogin" class="com.exavalu.models.FbProfile" method="fbLogin">
-            <result name="SUCCESS">login.jsp</result>
-            <result name="FAILURE">Sign_in_Controller.jsp</result>
-        </action>
+        
         <action name="GetPrescription" class="com.exavalu.models.Prescription" method="getPatientPrescription">
             <result name="SUCCESS">prescribed.jsp</result>
             <result name="MODAL">getPrescription.jsp</result>
             <result name="FAILURE">viewReportForNonExaminedPatient.jsp</result>
         </action>
-        <action name="Report" class="com.exavalu.models.Report" method="getReport">
-            <result name="SUCCESS">report.jsp</result>
-            <result name="FAILURE">error.jsp</result>
-        </action>
+        
         <action name="SocialLogin" class="com.exavalu.models.Users" method="doSocialLogin">
             <result name="SUCCESS">patientIndex.jsp</result>
             <result name="FAILURE">error.jsp</result>
@@ -203,7 +197,7 @@
         </action> 
         <action name="sendOTP" class="com.exavalu.models.Users" method="doSendOTP">
             <result name="SUCCESS">Otp.jsp</result>
-            <result name="FAILURE">login.jsp</result>
+            <result name="FAILURE">otpVerificationBlank.jsp</result>
         </action>
         <action name="verifyOTP" class="com.exavalu.models.Users" method="doVerifyOTP">
             <result name="SUCCESS">reset.jsp</result>

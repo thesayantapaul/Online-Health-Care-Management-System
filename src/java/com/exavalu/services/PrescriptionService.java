@@ -5,13 +5,16 @@
 package com.exavalu.services;
 
 import com.exavalu.models.Prescription;
+import static com.exavalu.services.AdminService.close;
 import com.exavalu.utils.JDBCConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -37,29 +40,32 @@ public class PrescriptionService {
      *
      * @return
      */
-    public static PrescriptionService getInstance() {
+    public static synchronized PrescriptionService getInstance() {
         if (prescriptionService == null) {
-            return new PrescriptionService();
-        } else {
+            prescriptionService= new PrescriptionService();
+        } 
             return prescriptionService;
-        }
+        
     }
 
     /**
      *
-     * Used to add a particular
-     * prescription to the database
+     * Used to add a particular prescription to the database
+     *
      * @param prescription
-     * @return 
+     * @return
      */
     public boolean addPrescription(Prescription prescription) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        //ResultSet rs = null;
 
         boolean result = false;
 
         try {
-            Connection con = JDBCConnectionManager.getConnection();
+             con = JDBCConnectionManager.getConnection();
             String sql = "INSERT INTO prescription (date, symptoms, test, medicine, dosage, timetotake, appointmentId,doctorId, patientId,userId,advice) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
-            PreparedStatement ps = con.prepareStatement(sql);
+             ps = con.prepareStatement(sql);
             ps.setString(1, prescription.getDate());
             ps.setString(2, prescription.getSymptoms());
             ps.setString(3, prescription.getTests());
@@ -81,9 +87,13 @@ public class PrescriptionService {
             }
 
         } catch (SQLException ex) {
-            log.error(LocalDateTime.now()+" sql Error"+ex.getErrorCode()+"Cannot add");
-            System.out.println(ex.getErrorCode());
-            ex.printStackTrace();
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        }finally {
+
+            close(null, ps, con);
         }
 
         return result;
@@ -91,21 +101,24 @@ public class PrescriptionService {
 
     /**
      *
-     * Used to retrieve all the
-     * prescription prescribed by a particular doctor prescription to the
-     * database
+     * Used to retrieve all the prescription prescribed by a particular doctor
+     * prescription to the database
+     *
      * @param doctorId
-     * @return 
+     * @return
      */
-    public ArrayList getPrescription(String doctorId) {
+    public List<Prescription> getPrescription(String doctorId) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         ArrayList prescribedList = new ArrayList();
         try {
-            Connection con = JDBCConnectionManager.getConnection();
+            con = JDBCConnectionManager.getConnection();
             String sql = "SELECT * FROM prescription left join patients on patients.patientId=prescription.patientId left join users on patients.userId=users.userId where prescription.doctorId=?";
-            PreparedStatement ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setString(1, doctorId);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             System.out.println("PrescriptionService getprescription:: " + ps);
 
             while (rs.next()) {
@@ -125,9 +138,13 @@ public class PrescriptionService {
                 prescribedList.add(prescribed);
             }
         } catch (SQLException ex) {
-            log.error(LocalDateTime.now()+" sql Error"+ex.getErrorCode()+"Cannot be found");
-            System.out.println(ex.getErrorCode());
-            ex.printStackTrace();
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        }finally {
+
+            close(rs, ps, con);
         }
 
         return prescribedList;
@@ -135,20 +152,24 @@ public class PrescriptionService {
 
     /**
      *
-     * Used to retrieve all
-     * previous prescriptions of a user retrieve the medical history
+     * Used to retrieve all previous prescriptions of a user retrieve the
+     * medical history
+     *
      * @param userId
-     * @return 
+     * @return
      */
-    public ArrayList getPatientPrescription(String userId) {
+    public List<Prescription> getPatientPrescription(String userId) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         ArrayList prescribedList = new ArrayList();
         try {
-            Connection con = JDBCConnectionManager.getConnection();
+            con = JDBCConnectionManager.getConnection();
             String sql = "SELECT * FROM prescription left join doctors on doctors.doctorId=prescription.doctorId left join departments on doctors.departmentId=departments.departmentId left join users on prescription.userId=users.userId where prescription.userId=?";
-            PreparedStatement ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setString(1, userId);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             System.out.println("PrescriptionService getprescription:: " + ps);
 
             while (rs.next()) {
@@ -170,9 +191,13 @@ public class PrescriptionService {
                 prescribedList.add(prescribed);
             }
         } catch (SQLException ex) {
-            log.error(LocalDateTime.now()+" sql Error"+ex.getErrorCode()+"no record Found");
-            System.out.println(ex.getErrorCode());
-            ex.printStackTrace();
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        } finally {
+
+            close(rs, ps, con);
         }
 
         return prescribedList;
@@ -180,19 +205,22 @@ public class PrescriptionService {
 
     /**
      *
-     * Used to retrieve a
-     * prescriptions of a user according to appointmentId
+     * Used to retrieve a prescriptions of a user according to appointmentId
+     *
      * @param appointmentId
-     * @return 
+     * @return
      */
     public Prescription getParticularPrescription(String appointmentId) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         Prescription prescribed = new Prescription();
         try {
-            Connection con = JDBCConnectionManager.getConnection();
+            con = JDBCConnectionManager.getConnection();
             String sql = "SELECT * FROM prescription left join doctors on doctors.doctorId=prescription.doctorId left join departments on doctors.departmentId=departments.departmentId left join users on prescription.userId=users.userId left join patients on patients.patientId=prescription.patientId where prescription.appointmentId=?";
-            PreparedStatement ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setString(1, appointmentId);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             System.out.println("PrescriptionService Particular Appointment:: " + ps);
             if (rs.next()) {
                 prescribed.setDate(rs.getString("date"));
@@ -210,13 +238,17 @@ public class PrescriptionService {
                 prescribed.setPatientFirstName(rs.getString("patientFirstName"));
                 prescribed.setPatientLastName(rs.getString("patientLastName"));
                 System.out.println("valid row checking = true");
-            }else{
+            } else {
                 prescribed = null;
             }
         } catch (SQLException ex) {
-            log.error(LocalDateTime.now()+" sql Error"+ex.getErrorCode()+"Cannot be Found");
-            System.out.println(ex.getErrorCode());
-            ex.printStackTrace();
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        } finally {
+
+            close(rs, ps, con);
         }
 
         return prescribed;

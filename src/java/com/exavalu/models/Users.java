@@ -16,9 +16,8 @@ import com.exavalu.services.PrescriptionService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -269,7 +268,6 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
         return sessionMap;
     }
 
-    private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
 
     /**
      *
@@ -277,7 +275,6 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
      */
     @Override
     public void setApplication(Map<String, Object> application) {
-        map = (ApplicationMap) application;
     }
 
     /**
@@ -353,14 +350,15 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     public String doLogin() {
         String result = "FAILURE";
         boolean success = LoginService.getInstance().doLogin(this);
-//        MailServic.send("anichakraborty863@gmail.com", "hello javatpoint", "How r u?");
+        //MailServic.send("anichakraborty863@gmail.com", "hello javatpoint", "How r u?");
         if (success) {
-            if (this.roleId.equals("1")) {
+            if ("1".equals(this.roleId)) {
+
                 System.out.println("this is patiend id :" + this.getUserId());
 
-                ArrayList appointment = PatientService.doViewParticularUpcomingAppointments(this.getUserId());
-                ArrayList appointment2 = PatientService.doViewParticularMedicalHistory(this.getUserId());
-                ArrayList activePrescription = PrescriptionService.getInstance().getPatientPrescription(this.userId);
+                List<Appointment> appointment = PatientService.doViewParticularUpcomingAppointments(this.getUserId());
+                List<Appointment> appointment2 = PatientService.doViewParticularMedicalHistory(this.getUserId());
+                List<Prescription> activePrescription = PrescriptionService.getInstance().getPatientPrescription(this.userId);
                 if (appointment != null) {
                     sessionMap.put("PatientUpcomingBooking", appointment);
                     sessionMap.put("PatientMedicalHistory", appointment2);
@@ -368,10 +366,10 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                     result = "PATIENTINDEX";
                 }
             }
-            if (this.roleId.equals("2")) {
+            if ("2".equals(this.roleId)) {
                 System.out.println(this.doctorId);
-                ArrayList appointmentList = DoctorService.getInstance().doViewAppointments(this.doctorId);
-                ArrayList pastAppointmentList = DoctorService.getInstance().doViewPastAppointments(this.doctorId);
+                List<Appointment> appointmentList = DoctorService.getInstance().doViewAppointments(this.doctorId);
+                List<Appointment> pastAppointmentList = DoctorService.getInstance().doViewPastAppointments(this.doctorId);
                 sessionMap.put("AppointmentListDoctor", appointmentList);
                 sessionMap.put("PastAppointment", pastAppointmentList);
                 String todayBooking = DoctorService.getInstance().doViewBookings("0", this.doctorId);
@@ -498,20 +496,20 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                     sessionMap.put("HigherOrLowerTextRevenue", "Higher than yesterday");
 
                 }
-                ArrayList doctortodayAppointmentList = DoctorService.getInstance().doViewtodayAppointments("0", this.doctorId);
+                List<Appointment> doctortodayAppointmentList = DoctorService.getInstance().doViewtodayAppointments("0", this.doctorId);
                 sessionMap.put("DoctorAppointmentListDashBoard", doctortodayAppointmentList);
                 sessionMap.put("doctorId", this.doctorId);
-                ArrayList prescribedList = PrescriptionService.getInstance().getPrescription(this.doctorId);
+                List<Prescription> prescribedList = PrescriptionService.getInstance().getPrescription(this.doctorId);
                 sessionMap.put("PreviousPrescription", prescribedList);
-                ArrayList departmentOccupncyList = AdminService.doGetOccupancyForEachDepartments("0");
+                List<Departments> departmentOccupncyList = AdminService.doGetOccupancyForEachDepartments("0");
 
                 sessionMap.put("OccupancyInDepartments", departmentOccupncyList);
 
                 System.out.println(sessionMap);
                 result = "DOCTORINDEX";
             }
-            if (this.roleId.equals("3")) {
-                ArrayList deptList = DepartmentService.getInstance().getAllDepartments();
+            if ("3".equals(this.roleId)) {
+                List<Departments> deptList = DepartmentService.getInstance().getAllDepartments();
                 sessionMap.put("DeptList", deptList);
 
 //                booking 
@@ -640,8 +638,8 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 sessionMap.put("Day6", day6);
 
                 //----------------------------------------------------------------------------------------------------------
-                ArrayList appointmentList = AdminService.doViewAppointments("0");
-                ArrayList departmentOccupncyList = AdminService.doGetOccupancyForEachDepartments("0");
+                List<Appointment> appointmentList = AdminService.doViewAppointments("0");
+                List<Departments> departmentOccupncyList = AdminService.doGetOccupancyForEachDepartments("0");
 
                 sessionMap.put("OccupancyInDepartments", departmentOccupncyList);
 
@@ -808,20 +806,20 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
      * used from google social Login after validation with BackEnd.
      *
      * @return 
-     * @throws java.lang.Exception doSocialLogin
+     * @throws java.lang.Exception doSocialLogIn
      */
     public String doSocialLogin() throws Exception {
         String result = "FAILURE";
-        boolean success = LoginService.getInstance().doSocialLog_in(this);
+        boolean success = LoginService.getInstance().doSocialLogIn(this);
         this.roleId = "1";
 
         if (success) {
             result = "SUCCESS";
             System.out.println("this is user id :" + this.getUserId());
 
-            ArrayList appointment = PatientService.doViewParticularUpcomingAppointments(this.getUserId());
-            ArrayList appointment2 = PatientService.doViewParticularMedicalHistory(this.getUserId());
-            ArrayList activePrescription = PrescriptionService.getInstance().getPatientPrescription(this.userId);
+            List<Appointment> appointment = PatientService.doViewParticularUpcomingAppointments(this.getUserId());
+            List<Appointment> appointment2 = PatientService.doViewParticularMedicalHistory(this.getUserId());
+            List<Prescription> activePrescription = PrescriptionService.getInstance().getPatientPrescription(this.userId);
             if (appointment != null) {
                 sessionMap.put("PatientUpcomingBooking", appointment);
                 sessionMap.put("PatientMedicalHistory", appointment2);
@@ -879,12 +877,12 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
         boolean success = LoginService.getInstance().doExsists(this.emailAddress, sessionMap);
         if (success) {
 
-            String generatedOtp = OtpService.OTP(4);
+            String generatedOtp = OtpService.otp(4);
             sessionMap.put("Otp", generatedOtp);
             MailServic.send(this.emailAddress, "One Time Password For Password Reset", generatedOtp);
             result = "SUCCESS";
         } else {
-            sessionMap.put("FailSignUp", "Email Desn't Exsist");
+            sessionMap.put("FailOtpVerification", "Email Doesn't Exsist");
         }
         System.out.println(sessionMap);
         return result;
