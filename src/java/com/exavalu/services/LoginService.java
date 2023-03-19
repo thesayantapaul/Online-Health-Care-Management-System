@@ -40,12 +40,12 @@ public class LoginService {
      *
      * @return
      */
-    public static LoginService getInstance() {
+    public static synchronized LoginService getInstance() {
         if (loginService == null) {
-            return new LoginService();
-        } else {
+            loginService=new LoginService();
+        } 
             return loginService;
-        }
+        
     }
 
     /**
@@ -283,7 +283,7 @@ public class LoginService {
      * @param user
      * @return
      */
-    public boolean doSocialLog_in(Users user) {
+    public boolean doSocialLogIn(Users user) {
         boolean result = false;
         Connection con = null;
         PreparedStatement ps = null;

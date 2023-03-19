@@ -35,12 +35,12 @@ public class AppointmentService {
      *
      * @return
      */
-    public static AppointmentService getInstance() {
+    public static synchronized AppointmentService getInstance() {
         if (appointmentService == null) {
-            return new AppointmentService();
-        } else {
+            appointmentService= new AppointmentService();
+        } 
             return appointmentService;
-        }
+        
     }
 
     /**

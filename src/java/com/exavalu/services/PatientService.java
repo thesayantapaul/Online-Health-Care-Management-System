@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -39,7 +40,7 @@ public class PatientService {
      * @param userId
      * @return
      */
-    public static ArrayList doViewParticularMedicalHistory(String userId) {
+    public static List<Appointment> doViewParticularMedicalHistory(String userId) {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -85,7 +86,7 @@ public class PatientService {
      * @param userId
      * @return
      */
-    public static ArrayList doViewParticularUpcomingAppointments(String userId) {
+    public static List<Appointment> doViewParticularUpcomingAppointments(String userId) {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -133,12 +134,12 @@ public class PatientService {
      *
      * @return
      */
-    public static PatientService getInstance() {
+    public static synchronized PatientService getInstance() {
         if (patientService == null) {
-            return new PatientService();
-        } else {
+            patientService= new PatientService();
+        } 
             return patientService;
-        }
+        
     }
 
     /**

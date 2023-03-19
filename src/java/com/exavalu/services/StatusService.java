@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -28,7 +29,7 @@ public class StatusService {
      *
      * @return
      */
-    public static ArrayList getAllStatus() {
+    public static List<Status> getAllStatus() {
         Connection con = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;

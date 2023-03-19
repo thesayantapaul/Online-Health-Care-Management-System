@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -40,12 +41,12 @@ public class DoctorService {
      *
      * @return
      */
-    public static DoctorService getInstance() {
+    public static synchronized DoctorService getInstance() {
         if (doctorService == null) {
-            return new DoctorService();
-        } else {
+            doctorService= new DoctorService();
+        } 
             return doctorService;
-        }
+        
     }
 
     /**
@@ -55,7 +56,7 @@ public class DoctorService {
      * @param departmentId
      * @return
      */
-    public ArrayList getAllDoctors(String departmentId) {
+    public List<Doctors> getAllDoctors(String departmentId) {
         Connection con = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
@@ -212,7 +213,7 @@ public class DoctorService {
      * @param doctorId
      * @return
      */
-    public ArrayList doViewAppointments(String doctorId) {
+    public List doViewAppointments(String doctorId) {
         Connection con = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
@@ -265,7 +266,7 @@ public class DoctorService {
      * @param doctorId
      * @return
      */
-    public ArrayList doViewPastAppointments(String doctorId) {
+    public List doViewPastAppointments(String doctorId) {
         Connection con = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
@@ -406,7 +407,7 @@ public class DoctorService {
      * @param doctorId
      * @return
      */
-    public ArrayList doViewtodayAppointments(String interval, String doctorId) {
+    public List doViewtodayAppointments(String interval, String doctorId) {
 
         ArrayList appointmentList = new ArrayList();
         Connection con = null;
@@ -416,7 +417,7 @@ public class DoctorService {
 
              con = JDBCConnectionManager.getConnection();
 
-            String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.doctorId=? and  appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY) and appointments.statusId=1";
+            String sql = "SELECT * FROM ohms_db.appointments right join doctors on doctors.doctorId=appointments.doctorId right join departments on departments.departmentId=appointments.departmentId right join patients on patients.patientId=appointments.patientId right join statusofappointments on statusofappointments.statusId=appointments.statusId where appointments.doctorId=? and  appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY) and appointments.statusId=2";
 
              preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, doctorId);

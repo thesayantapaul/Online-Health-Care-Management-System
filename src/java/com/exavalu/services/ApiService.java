@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -27,23 +28,22 @@ public class ApiService {
      *
      * @return
      */
-    public static ApiService getInstance() {
+    public static synchronized ApiService getInstance() {
         if (apiService == null) {
-            return new ApiService();
-        } else {
-            return apiService;
+            apiService = new ApiService();
         }
+        return apiService;
+
     }
-    static int f = 0;
 
     /**
      *
-     * Used to retrieve the list of medicine
-     * from the 3rd party Api
-     * @return 
+     * Used to retrieve the list of medicine from the 3rd party Api
+     *
+     * @return
      * @throws java.lang.Exception
      */
-    public ArrayList getAllData() throws Exception {
+    public List getAllData() throws Exception {
         String apiUrl = "https://mocki.io/v1/59184e09-68a6-4e3f-a44a-6bc50682d7a8";
 
         URL obj = new URL(apiUrl);
@@ -61,16 +61,17 @@ public class ApiService {
             StringBuffer response = new StringBuffer();
             JSONParser parse = new JSONParser();
             while ((inputLine = in.readLine()) != null) {
-                
+
                 response.append(inputLine);
-            }   JSONObject jsonArray = (JSONObject) parse.parse(response.toString());
+            }
+            JSONObject jsonArray = (JSONObject) parse.parse(response.toString());
             System.out.println(jsonArray);
             System.out.println(jsonArray.size());
             med = (ArrayList) jsonArray.get("drugs");
             System.out.println(med.size());
         }
         return med;
-        
+
     }
 
 }

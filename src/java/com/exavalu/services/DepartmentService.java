@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -39,12 +40,12 @@ public class DepartmentService {
      *
      * @return
      */
-    public static DepartmentService getInstance() {
+    public static synchronized DepartmentService getInstance() {
         if (departmentService == null) {
-            return new DepartmentService();
-        } else {
+            departmentService= new DepartmentService();
+        } 
             return departmentService;
-        }
+        
     }
 
     /**
@@ -52,7 +53,7 @@ public class DepartmentService {
      * Used to retrieve all the department and their details from the database
      * @return 
      */
-    public ArrayList getAllDepartments() {
+    public List getAllDepartments() {
         ArrayList deptLIst = new ArrayList();
         Connection con = null;
         PreparedStatement preparedStatement = null;
