@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -39,12 +40,12 @@ public class PrescriptionService {
      *
      * @return
      */
-    public static PrescriptionService getInstance() {
+    public static synchronized PrescriptionService getInstance() {
         if (prescriptionService == null) {
-            return new PrescriptionService();
-        } else {
+            prescriptionService= new PrescriptionService();
+        } 
             return prescriptionService;
-        }
+        
     }
 
     /**
@@ -106,7 +107,7 @@ public class PrescriptionService {
      * @param doctorId
      * @return
      */
-    public ArrayList getPrescription(String doctorId) {
+    public List<Prescription> getPrescription(String doctorId) {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -157,7 +158,7 @@ public class PrescriptionService {
      * @param userId
      * @return
      */
-    public ArrayList getPatientPrescription(String userId) {
+    public List<Prescription> getPatientPrescription(String userId) {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;

@@ -10,7 +10,7 @@ import com.exavalu.services.PatientService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -87,7 +87,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
         boolean success = AdminService.doUpdateAppointment(this);
 
         if (success) {
-            ArrayList appointmentList = AdminService.doViewAppointments();
+            List<Appointment> appointmentList = AdminService.doViewAppointments();
 
             if (!appointmentList.isEmpty()) {
                 getSessionMap().put("AppointmentList", appointmentList);
@@ -437,7 +437,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
     public String doGetDoctor() throws Exception {
         System.out.println(this.getDepartmentId());
         String result = "FAILURE";
-        ArrayList doctorList = DoctorService.getInstance().getAllDoctors(this.getDepartmentId());
+        List<Doctors> doctorList = DoctorService.getInstance().getAllDoctors(this.getDepartmentId());
 
         if (!doctorList.isEmpty()) {
             result = "SUCCESS";
@@ -517,7 +517,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
         Appointment user = PatientService.getInstance().getPatientDetail(this.getAppointmentId());
         String doctorId = (String) getSessionMap().get("doctorId");
         Doctors doctor = DoctorService.getInstance().getDoctor(doctorId);
-        ArrayList med = ApiService.getInstance().getAllData();
+        List med = ApiService.getInstance().getAllData();
         if (user != null) {
             result = "SUCCESS";
             getSessionMap().put("PatientDetail", user);
@@ -550,7 +550,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
             result = "SignUp";
         } else {
             Users user = (Users) getSessionMap().get("Patient");
-            boolean res = LoginService.getInstance().doLogin(user);
+            boolean res = LoginService.getInstance().doInternalLogin(user);
             if (res) {
                 getSessionMap().put("Loggedin", user);
                 boolean r1 = PatientService.getInstance().insertPatient(this, user.getUserId());
@@ -560,13 +560,10 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
                 boolean r2 = PatientService.getInstance().insertPatientAppointment(appointment);
                 MailServic.sendAppointment(appointment);
                 LoginService.getInstance().updateUser(appointment);
-                ArrayList upcomingAppointment = new ArrayList();
-                ArrayList appointmentHistory = new ArrayList();
-
                 System.out.println("this is patiend id :" + this.getUserId());
 
-                upcomingAppointment = PatientService.doViewParticularUpcomingAppointments(user.getUserId());
-                appointmentHistory = PatientService.doViewParticularMedicalHistory(user.getUserId());
+                List<Appointment> upcomingAppointment = PatientService.doViewParticularUpcomingAppointments(user.getUserId());
+                List<Appointment> appointmentHistory = PatientService.doViewParticularMedicalHistory(user.getUserId());
                 if (upcomingAppointment != null) {
                     sessionMap.put("PatientUpcomingBooking", upcomingAppointment);
                     sessionMap.put("PatientMedicalHistory", appointmentHistory);

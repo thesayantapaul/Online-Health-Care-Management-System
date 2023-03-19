@@ -8,7 +8,7 @@ import com.exavalu.services.PatientService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -83,11 +83,10 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
      */
     public String doViewParticularMedicalHistory() {
         String result = "FAILURE";
-        ArrayList appointment = new ArrayList();
         Users patient = (Users) sessionMap.get("Loggedin");
         System.out.println("this is patiend id :" + patient.getUserId());
 
-        appointment = PatientService.doViewParticularMedicalHistory(patient.getUserId());
+        List<Appointment> appointment = PatientService.doViewParticularMedicalHistory(patient.getUserId());
         if (appointment != null) {
             sessionMap.put("PatientMedicalHistory", appointment);
             result = "SUCCESS";
@@ -103,11 +102,10 @@ public class Patients extends ActionSupport implements ApplicationAware, Session
      */
     public String doViewParticularUpcomingAppointments() {
         String result = "FAILURE";
-        ArrayList appointment = new ArrayList();
         Users patient = (Users) sessionMap.get("Loggedin");
         System.out.println("this is patiend id :" + patient.getUserId());
 
-        appointment = PatientService.doViewParticularUpcomingAppointments(patient.getUserId());
+        List<Appointment> appointment = PatientService.doViewParticularUpcomingAppointments(patient.getUserId());
         if (appointment != null) {
             sessionMap.put("PatientUpcomingBooking", appointment);
             result = "SUCCESS";

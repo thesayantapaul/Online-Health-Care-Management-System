@@ -12,7 +12,7 @@ import java.util.Random;
  */
 public class OtpService {
 
-    public static String OTP(int len)
+    public static String otp(int len)
     {
         System.out.println("Generating OTP using random() : ");
         System.out.print("You OTP is : ");

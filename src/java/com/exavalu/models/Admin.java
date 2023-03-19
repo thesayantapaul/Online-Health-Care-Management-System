@@ -5,7 +5,7 @@ import com.exavalu.services.StatusService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -78,7 +78,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
      */
     public String doViewAppointments() {
         String result = "FAILURE";
-        ArrayList appointmentList = AdminService.doViewAppointments();
+        List appointmentList = AdminService.doViewAppointments();
 
         if (!appointmentList.isEmpty()) {
             sessionMap.put("AppointmentList", appointmentList);
@@ -98,7 +98,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
 
         System.out.println("starting date" + this.startingDate);
         
-        ArrayList appointmentList = AdminService.doViewFilteredAppointments(this.startingDate, this.endingDate);
+        List appointmentList = AdminService.doViewFilteredAppointments(this.startingDate, this.endingDate);
 
        
             sessionMap.put("AppointmentList", appointmentList);
@@ -114,14 +114,14 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
      */
     public String doViewParticularAppointment() {
         String result = "FAILURE";
-        Appointment appointment = new Appointment();
-        appointment = AdminService.doViewParticularAppointment(this.appointmentId);
-        ArrayList doctorList = AdminService.getAllDoctors(appointment.getDepartmentId());
+         
+        Appointment appointment = AdminService.doViewParticularAppointment(this.appointmentId);
+        List doctorList = AdminService.getAllDoctors(appointment.getDepartmentId());
 
         if (appointment != null) {
             result = "EDITAPPOINTENTJSP";
 
-            ArrayList statusList = StatusService.getAllStatus();
+            List<Status> statusList = StatusService.getAllStatus();
 
             sessionMap.put("StatusList", statusList);
             sessionMap.put("DoctorListAdmin", doctorList);
@@ -134,7 +134,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
     public String doGetDoctorForEditAppointment() throws Exception {
         //System.out.println(this.getDepartmentId());
         String result = "FAILURE";
-        ArrayList doctorList = AdminService.getAllDoctors(this.departmentId);
+        List doctorList = AdminService.getAllDoctors(this.departmentId);
 
         if (!doctorList.isEmpty()) {
             result = "SUCCESS";
@@ -170,7 +170,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
      */
     public String doSearchDoctor() {
        
-        ArrayList doctorList = AdminService.doSearchDoctor(this);
+        List doctorList = AdminService.doSearchDoctor(this);
 
         
             sessionMap.put("SearchedDoctorList", doctorList);
@@ -200,7 +200,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
      */
     public String doSearchPatient() {
         
-        ArrayList patientList = AdminService.doSearchPatient(this);
+        List patientList = AdminService.doSearchPatient(this);
 
        
             sessionMap.put("SearchResult", patientList);
@@ -259,7 +259,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
     //top departments monthly
     public String doGetDepartmentsThisMonth() {
         //String result = "TOPDEPARTMENTS";
-        ArrayList departmentOccupncyList = AdminService.doGetOccupancyForEachDepartmentsThisMonthOrYear("-30");
+        List departmentOccupncyList = AdminService.doGetOccupancyForEachDepartmentsThisMonthOrYear("-30");
 
         sessionMap.put("OccupancyInDepartmentsThisMonth", departmentOccupncyList);
         return "TOPDEPARTMENTS";
@@ -268,7 +268,7 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
     //top departments Yearly
     public String doGetDepartmentsThisYear() {
         //String result = "TOPDEPARTMENTS";
-        ArrayList departmentOccupncyList = AdminService.doGetOccupancyForEachDepartmentsThisMonthOrYear("-365");
+        List departmentOccupncyList = AdminService.doGetOccupancyForEachDepartmentsThisMonthOrYear("-365");
 
         sessionMap.put("OccupancyInDepartmentsThisYear", departmentOccupncyList);
         return "TOPDEPARTMENTS";
@@ -406,12 +406,12 @@ public class Admin extends ActionSupport implements ApplicationAware, SessionAwa
         sessionMap.put("Day6", day6);
 
         //-----------------------------------------------------------------------
-        ArrayList appointmentList = AdminService.doViewAppointments("0");
+        List appointmentList = AdminService.doViewAppointments("0");
 
         sessionMap.put("AppointmentListDashBoard", appointmentList);
         //---------------------departmentList with occupancy start---------------------------------------------------------------   
 
-        ArrayList departmentOccupncyList = AdminService.doGetOccupancyForEachDepartments("0");
+        List departmentOccupncyList = AdminService.doGetOccupancyForEachDepartments("0");
 
         sessionMap.put("OccupancyInDepartments", departmentOccupncyList);
         //--------------------------------------------------------------------------------------------------------

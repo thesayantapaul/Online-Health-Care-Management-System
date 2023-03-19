@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -77,7 +78,7 @@ public class AdminService {
      *
      * @return
      */
-    public static ArrayList doViewAppointments() {
+    public static List<Appointment> doViewAppointments() {
         ArrayList appointmentList = new ArrayList();
         String sql = "SELECT * FROM appointments a,doctors d,patients p,departments dp,statusofappointments s where a.doctorId=d.doctorId and a.patientId=p.patientId and a.departmentId=dp.departmentId and a.statusId = s.statusId;";
         Connection con = null;
@@ -134,7 +135,7 @@ public class AdminService {
      * @param endingDate
      * @return
      */
-    public static ArrayList doViewFilteredAppointments(String startingDate, String endingDate) {
+    public static List<Appointment> doViewFilteredAppointments(String startingDate, String endingDate) {
         ArrayList appointmentList = new ArrayList();
         System.out.println("ending date = " + endingDate);
 
@@ -194,7 +195,7 @@ public class AdminService {
      * @param interval
      * @return
      */
-    public static ArrayList doViewAppointments(String interval) {
+    public static List<Appointment> doViewAppointments(String interval) {
         ArrayList appointmentList = new ArrayList();
 
         String sql = "SELECT * FROM appointments a,doctors d,patients p,departments dp,statusofappointments s where a.doctorId=d.doctorId and a.patientId=p.patientId and a.departmentId=dp.departmentId and a.statusId = s.statusId and appointmentDate = DATE_ADD(CURDATE(), INTERVAL ? DAY)";
@@ -336,7 +337,7 @@ public class AdminService {
      * @return
      */
 
-    public static ArrayList getAllDoctors(String departmentId) {
+    public static List<Doctors> getAllDoctors(String departmentId) {
         ArrayList deptLIst = new ArrayList();
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -386,7 +387,7 @@ public class AdminService {
      * @param adminDoctor
      * @return
      */
-    public static ArrayList doSearchDoctor(Admin adminDoctor) {
+    public static List<Doctors> doSearchDoctor(Admin adminDoctor) {
 
         ArrayList doctorList = new ArrayList();
         Connection con = null;
@@ -445,7 +446,7 @@ public class AdminService {
      * @param adminPatient
      * @return
      */
-    public static ArrayList doSearchPatient(Admin adminPatient) {
+    public static List<Patients> doSearchPatient(Admin adminPatient) {
 
         ArrayList patientList = new ArrayList();
         Connection con = null;
@@ -894,7 +895,7 @@ public class AdminService {
      * @param interval
      * @return
      */
-    public static ArrayList doGetOccupancyForEachDepartments(String interval) {
+    public static List<Departments> doGetOccupancyForEachDepartments(String interval) {
         ArrayList departmentList = new ArrayList();
         Connection con = null;
         PreparedStatement ps = null;
@@ -939,7 +940,7 @@ public class AdminService {
      * @return
      */
 
-    public static ArrayList doGetOccupancyForEachDepartmentsThisMonthOrYear(String interval) {
+    public static List<Departments> doGetOccupancyForEachDepartmentsThisMonthOrYear(String interval) {
         ArrayList departmentList = new ArrayList();
         Connection con = null;
         PreparedStatement ps = null;
