@@ -5,9 +5,17 @@
         <group>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/admindashboard.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/utils/JDBCConnectionManager.java</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/Otp.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/MailServic.java</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/MD5.java</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/LoginService.java</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/PrescriptionService.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/index.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/resetPassword.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/ApiService.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/topDepartmentsThisMonth.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/adminAddDoctor.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/menu.jsp</file>
         </group>
     </open-files>
 </project-private>
