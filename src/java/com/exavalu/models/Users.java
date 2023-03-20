@@ -897,7 +897,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
 
             String generatedOtp = OtpService.otp(4);
             sessionMap.put("Otp", generatedOtp);
-            MailServic.send(this.emailAddress, "One Time Password For Password Reset", generatedOtp);
+            //MailServic.send(this.emailAddress, "One Time Password For Password Reset", generatedOtp);
             result = "SUCCESS";
         } else {
             sessionMap.put("FailOtpVerification", "Email Doesn't Exsist");
