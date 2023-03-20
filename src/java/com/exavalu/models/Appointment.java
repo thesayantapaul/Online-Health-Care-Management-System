@@ -541,7 +541,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
      */
     public String getAppointment() throws Exception {
         String result = "FAILURE";
-        getSessionMap().clear();
+//        getSessionMap().clear();
         getSessionMap().put("Appointment", this);
 
         getSessionMap().put("symptoms", this.getSymptoms());
@@ -552,26 +552,27 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
             Users user = (Users) getSessionMap().get("Patient");
             boolean res = LoginService.getInstance().doInternalLogin(user);
             if (res) {
-                getSessionMap().put("Loggedin", user);
-                boolean r1 = PatientService.getInstance().insertPatient(this, user.getUserId());
-                Appointment appointment = PatientService.getInstance().getPatient(this, user.getUserId());
-                boolean insert = AppointmentService.getInstance().getAppointment(appointment);
-                appointment = AppointmentService.getInstance().getAppointmentId(appointment);
-                boolean r2 = PatientService.getInstance().insertPatientAppointment(appointment);
-                //MailServic.sendAppointment(appointment);
-                LoginService.getInstance().updateUser(appointment);
-                System.out.println("this is patiend id :" + this.getUserId());
-
-                List<Appointment> upcomingAppointment = PatientService.doViewParticularUpcomingAppointments(user.getUserId());
-                List<Appointment> appointmentHistory = PatientService.doViewParticularMedicalHistory(user.getUserId());
-                if (upcomingAppointment != null) {
-                    sessionMap.put("PatientUpcomingBooking", upcomingAppointment);
-                    sessionMap.put("PatientMedicalHistory", appointmentHistory);
-                }
-                if (insert && r1 && r2) {
-                    System.out.println("SUcess");
-                    result = "SUCCESS";
-                }
+                result="Payment";
+//                getSessionMap().put("Loggedin", user);
+//                boolean r1 = PatientService.getInstance().insertPatient(this, user.getUserId());
+//                Appointment appointment = PatientService.getInstance().getPatient(this, user.getUserId());
+//                boolean insert = AppointmentService.getInstance().getAppointment(appointment);
+//                appointment = AppointmentService.getInstance().getAppointmentId(appointment);
+//                boolean r2 = PatientService.getInstance().insertPatientAppointment(appointment);
+//                MailServic.sendAppointment(appointment);
+//                LoginService.getInstance().updateUser(appointment);
+//                System.out.println("this is patiend id :" + this.getUserId());
+//
+//                List<Appointment> upcomingAppointment = PatientService.doViewParticularUpcomingAppointments(user.getUserId());
+//                List<Appointment> appointmentHistory = PatientService.doViewParticularMedicalHistory(user.getUserId());
+//                if (upcomingAppointment != null) {
+//                    sessionMap.put("PatientUpcomingBooking", upcomingAppointment);
+//                    sessionMap.put("PatientMedicalHistory", appointmentHistory);
+//                }
+//                if (insert && r1 && r2) {
+//                    System.out.println("SUcess");
+//                    result = "SUCCESS";
+//                }
             }
 
         }
