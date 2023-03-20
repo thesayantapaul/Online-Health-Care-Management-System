@@ -3,30 +3,39 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/registration.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/Otp.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Patients.java</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/doctortodayAppointment.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/MailServic.java</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/bookService.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/reset.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/resetPassword.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Prescription.java</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/struts.xml</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/doctorIndex.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Departments.java</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Users.java</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/menu.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/admindashboard.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/utils/JDBCConnectionManager.java</file>
-            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/Otp.jsp</file>
-            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/doctortodayAppointment.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/sidemenu.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/AdminService.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Appointment.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/prescribed.jsp</file>
-            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/MailServic.java</file>
-            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/bookService.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/adminSearch.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/LoginService.java</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Doctors.java</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/demo.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/PrescriptionService.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/DoctorService.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/index.jsp</file>
-            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/resetPassword.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/services/ApiService.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/topDepartmentsThisMonth.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/adminAddDoctor.jsp</file>
-            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Prescription.java</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/prescription.jsp</file>
             <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/adminsearchresulttable.jsp</file>
-            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/doctorIndex.jsp</file>
-            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Users.java</file>
-            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/web/menu.jsp</file>
+            <file>file:/D:/netBeans_workSpace/Online-Health-Care-Management-System/src/java/com/exavalu/models/Status.java</file>
         </group>
     </open-files>
 </project-private>
