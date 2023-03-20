@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : doctorindex
     Created on : Feb 27, 2023, 1:32:46 PM
     Author     : anich
@@ -49,6 +49,7 @@
         <link href="css/style.css" rel="stylesheet">
 
         <!-- Template Main CSS File -->
+
         <link href="css/style1.css" rel="stylesheet">
     </head>
 
@@ -166,7 +167,12 @@
                                 <!-- Customers Card -->
                                 <div class="col-xxl-4 col-xl-12">
 
-                                    <div class="card info-card customers-card">
+
+                                </div><!-- End Customers Card -->
+
+                                <!-- Reports -->
+                                <div class="col-12">
+                                    <div class="card">
 
                                         <div class="filter">
                                             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -182,97 +188,58 @@
                                         </div>
 
                                         <div class="card-body">
-                                            <h5 class="card-title"> Users Registered<span>| Today </span></h5>
+                                            <h5 class="card-title">Reports <span>/Appointments-Revenue-Users</span></h5>
 
-                                            <div class="d-flex align-items-center">
-                                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                                    <i class="bi bi-people"></i>
-                                                </div>
-                                                <div class="ps-3">
-                                                        <h6>${TodayUsers}</h6>
-                                                <span class="text-success small pt-1 fw-bold"><i class="bi bi-arrow-up-circle"></i></span><span class="text-muted small pt-2 ps-1">User registered today</span>
+                                            <!-- Line Chart -->
+                                            <div id="reportsChart"></div>
 
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div><!-- End Customers Card -->
-
-                            <!-- Reports -->
-                            <div class="col-12">
-                                <div class="card">
-
-                                    <div class="filter">
-                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                            <li class="dropdown-header text-start">
-                                                <h6>Filter</h6>
-                                            </li>
-
-                                            <li><a class="dropdown-item" href="#">Today</a></li>
-                                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="card-body">
-                                        <h5 class="card-title">Reports <span>/Appointments-Revenue-Users</span></h5>
-
-                                        <!-- Line Chart -->
-                                        <div id="reportsChart"></div>
-
-                                        <script>
-                                            document.addEventListener("DOMContentLoaded", () => {
-                                                new ApexCharts(document.querySelector("#reportsChart"), {
-                                                    series: [{
-                                                            name: 'Appointments',
-                                                            data: [${Day6Booking}, ${Day5Booking}, ${Day4Booking}, ${Day3Booking}, ${Day2Booking}, ${Day1Booking},${TodayBooking}]
-                                                        }, {
-                                                            name: 'Revenue',
-                                                            data: [${Day6Revenue}, ${Day5Revenue}, ${Day4Revenue}, ${Day3Revenue}, ${Day2Revenue}, ${Day1Revenue},${TodayRevenue}]
-                                                        }, {
-                                                            name: 'Users',
-                                                            data: [${Day6User},${Day5User},${Day4User},${Day3User},${Day2User},${Day1User},${TodayUsers}]
-                                                        }],
-                                                    chart: {
-                                                        height: 350,
-                                                        type: 'area',
-                                                        toolbar: {
-                                                            show: false
+                                            <script>
+                                                document.addEventListener("DOMContentLoaded", () => {
+                                                    new ApexCharts(document.querySelector("#reportsChart"), {
+                                                        series: [{
+                                                                name: 'Appointments',
+                                                                data: [${Day6Booking}, ${Day5Booking}, ${Day4Booking}, ${Day3Booking}, ${Day2Booking}, ${Day1Booking},${TodayBooking}]
+                                                            }, {
+                                                                name: 'Revenue',
+                                                                data: [${Day6Revenue}, ${Day5Revenue}, ${Day4Revenue}, ${Day3Revenue}, ${Day2Revenue}, ${Day1Revenue},${TodayRevenue}]
+                                                            }],
+                                                        chart: {
+                                                            height: 350,
+                                                            type: 'area',
+                                                            toolbar: {
+                                                                show: false
+                                                            }
+                                                        },
+                                                        markers: {
+                                                            size: 4
+                                                        },
+                                                        colors: ['#4154f1', '#2eca6a'],
+                                                        fill: {
+                                                            type: "gradient",
+                                                            gradient: {
+                                                                shadeIntensity: 1,
+                                                                opacityFrom: 0.3,
+                                                                opacityTo: 0.4,
+                                                                stops: [0, 90, 100]
+                                                            }
+                                                        },
+                                                        dataLabels: {
+                                                            enabled: false
+                                                        },
+                                                        stroke: {
+                                                            curve: 'smooth',
+                                                            width: 2
+                                                        },
+                                                        xaxis: {
+                                                            categories: ["${Day6}", "${Day5}", "${Day4}", "${Day3}", "${Day2}", "${Day1}", "${CurrentDay}"]
+                                                        },
+                                                        tooltip: {
+                                                            x: {
+                                                                format: 'dd/MM/yy HH:mm'
+                                                            }
                                                         }
-                                                    },
-                                                    markers: {
-                                                        size: 4
-                                                    },
-                                                    colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                                                    fill: {
-                                                        type: "gradient",
-                                                        gradient: {
-                                                            shadeIntensity: 1,
-                                                            opacityFrom: 0.3,
-                                                            opacityTo: 0.4,
-                                                            stops: [0, 90, 100]
-                                                        }
-                                                    },
-                                                    dataLabels: {
-                                                        enabled: false
-                                                    },
-                                                    stroke: {
-                                                        curve: 'smooth',
-                                                        width: 2
-                                                    },
-                                                    xaxis: {
-                                                        categories: ["${Day6}", "${Day5}", "${Day4}", "${Day3}", "${Day2}", "${Day1}", "${CurrentDay}"]
-                                                    },
-                                                    tooltip: {
-                                                        x: {
-                                                            format: 'dd/MM/yy HH:mm'
-                                                        }
-                                                    }
-                                                }).render();
-                                            });
+                                                    }).render();
+                                                });
                                         </script>
                                         <!-- End Line Chart -->
 
@@ -352,7 +319,54 @@
                                         </ul>
                                     </div>
 
-<!--                                    <div class="card-body pb-0">
+                                    <!--                                    <div class="card-body pb-0">
+                                                                            <h5 class="card-title">Top Department in terms of booking <span>| Today</span></h5>
+
+                                                                            <table class="table table-borderless datatable">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th scope="col">Department Id</th>
+
+                                                                                        <th scope="col">Department Name</th>
+                                                                                        <th scope="col">Doctor Name</th>
+
+
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                    <c:forEach items="${AppointmentListDashBoard}" var="appointment">
+                                        <tr>
+                                            <th scope="row"><a href="#">${appointment.departmentId}</a></th>
+                                            <td>${appointment.departmentName}</td>
+
+                                            <td>${appointment.doctorFirstName} ${appointment.doctorLastName}</td>
+
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+
+                        </div>-->
+
+                                </div>
+                            </div><!-- End Top Selling -->
+                            <div class="col-12">
+                                <div class="card top-selling overflow-auto">
+
+                                    <div class="filter">
+                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                            <li class="dropdown-header text-start">
+                                                <h6>Filter</h6>
+                                            </li>
+
+                                            <li><a class="dropdown-item" href="#">Today</a></li>
+                                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="card-body pb-0">
                                         <h5 class="card-title">Top Department in terms of booking <span>| Today</span></h5>
 
                                         <table class="table table-borderless datatable">
@@ -361,74 +375,27 @@
                                                     <th scope="col">Department Id</th>
 
                                                     <th scope="col">Department Name</th>
-                                                    <th scope="col">Doctor Name</th>
+
+                                                    <th scope="col">Occupancy(no of patients)</th>
 
 
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${AppointmentListDashBoard}" var="appointment">
+                                                <c:forEach items="${OccupancyInDepartments}" var="department">
                                                     <tr>
-                                                        <th scope="row"><a href="#">${appointment.departmentId}</a></th>
-                                                        <td>${appointment.departmentName}</td>
-
-                                                        <td>${appointment.doctorFirstName} ${appointment.doctorLastName}</td>
-
+                                                        <th scope="row"><a href="#">${department.departmentId}</a></th>
+                                                        <td>${department.departmentName}</td>
+                                                        <td>${department.numberOfPatients}</td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
                                         </table>
 
-                                    </div>-->
+                                    </div>
 
                                 </div>
-                            </div><!-- End Top Selling -->
-                        <div class="col-12">
-                            <div class="card top-selling overflow-auto">
-
-                                <div class="filter">
-                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                        <li class="dropdown-header text-start">
-                                            <h6>Filter</h6>
-                                        </li>
-
-                                        <li><a class="dropdown-item" href="#">Today</a></li>
-                                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                                        <li><a class="dropdown-item" href="#">This Year</a></li>
-                                    </ul>
-                                </div>
-
-                                <div class="card-body pb-0">
-                                    <h5 class="card-title">Top Department in terms of booking <span>| Today</span></h5>
-
-                                    <table class="table table-borderless datatable">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Department Id</th>
-
-                                                <th scope="col">Department Name</th>
-
-                                                <th scope="col">Occupancy(no of patients)</th>
-
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items="${OccupancyInDepartments}" var="department">
-                                                <tr>
-                                                    <th scope="row"><a href="#">${department.departmentId}</a></th>
-                                                    <td>${department.departmentName}</td>
-                                                    <td>${department.numberOfPatients}</td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-
                             </div>
-                        </div>
                         </div>
                     </div><!-- End Left side columns -->
 
@@ -455,8 +422,8 @@
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
     <script>
-                                            $(document).ready(function () {
-                                                $('#example').DataTable();
-                                            });
+                                                $(document).ready(function () {
+                                                    $('#example').DataTable();
+                                                });
     </script>
 </html>

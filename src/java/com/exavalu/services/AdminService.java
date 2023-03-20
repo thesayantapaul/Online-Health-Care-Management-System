@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
 
 /**
  *
- * @author LenovoRaja
+ * @author Raja
  */
 public class AdminService {
 
@@ -128,9 +128,9 @@ public class AdminService {
         return appointmentList;
     }
 
-    //filtered appointment list-----------------
+    
     /**
-     *
+     * filtered appointment list
      * @param startingDate
      * @param endingDate
      * @return
@@ -191,7 +191,7 @@ public class AdminService {
     }
 
     /**
-     *
+     *  do view appointments in admin
      * @param interval
      * @return
      */
@@ -253,7 +253,7 @@ public class AdminService {
     }
 
     /**
-     *
+     *   cancel particular appointment
      * @param appointmentId
      * @return
      */
@@ -291,9 +291,9 @@ public class AdminService {
         return result;
     }
 
-    //do fetch perticular doctor using doctorId
+    
     /**
-     *
+     * do fetch particular doctor using doctorId
      * @param doctorId
      * @return
      */
@@ -330,6 +330,12 @@ public class AdminService {
         }
         return doctor;
     }
+    
+    /**
+     * do fetch  doctors using department Id
+     * @param departmentId 
+     * @return
+     */
 
     public static List<Doctors> getAllDoctors(String departmentId) {
         ArrayList deptLIst = new ArrayList();
@@ -377,7 +383,7 @@ public class AdminService {
     }
 
     /**
-     *
+     * do search doctor List in admin search JSP
      * @param adminDoctor
      * @return
      */
@@ -434,9 +440,9 @@ public class AdminService {
         return doctorList;
     }
 
-    //search patient
+    
     /**
-     *
+     * do search patient in admin patient search
      * @param adminPatient
      * @return
      */
@@ -495,7 +501,7 @@ public class AdminService {
     }
 
     /**
-     *
+     *  do view particular appointment using appointmentId in admin
      * @param appointmentId
      * @return
      */
@@ -546,7 +552,7 @@ public class AdminService {
     }
 
     /**
-     *
+     *  do update appointment in admin
      * @param appointment
      * @return
      */
@@ -591,7 +597,7 @@ public class AdminService {
     }
 
     /**
-     *
+     *  do view bookings
      * @param interval
      * @return
      */
@@ -631,6 +637,11 @@ public class AdminService {
 
         return totalBookings;
     }
+    /**
+     *  do view bookings this month or year
+     * @param interval
+     * @return
+     */
 
     public static String doViewBookingsThisMonthOrYear(String interval) {
         String totalBookings = null;
@@ -668,7 +679,7 @@ public class AdminService {
     }
 
     /**
-     *
+     * do view total revenue from admin
      * @param interval
      * @return
      */
@@ -708,7 +719,12 @@ public class AdminService {
         return totalRevenue;
     }
 
-    //REVENUE THIS MONTH
+    
+    /**
+     * do view total revenue this month or year from admin
+     * @param interval
+     * @return
+     */
     public static String doViewTotalRevenueThisMonthOrYear(String interval) {
         String totalRevenue = null;
         Connection con = null;
@@ -744,9 +760,8 @@ public class AdminService {
         return totalRevenue;
     }
 
-    //chart data x axis dashboard admin--------------------------------------------------------------------------------
     /**
-     *
+     * data for x axis in admin dashboard
      * @param interval
      * @return
      */
@@ -788,7 +803,7 @@ public class AdminService {
     //-------------------------------------------------------------------------------------------------------
 
     /**
-     *
+     * to get total registered users in admin dashboard
      * @param interval
      * @return
      */
@@ -830,7 +845,12 @@ public class AdminService {
         return totalUsers;
     }
 
-    //registered user month year wise
+   
+    /**
+     * do view total registered users this month or year from admin
+     * @param interval
+     * @return
+     */
     public static String totalRegisteredUsersThisMonthOrYear(String interval) {
         String totalUsers = null;
         Connection con = null;
@@ -870,7 +890,7 @@ public class AdminService {
 
     //doGetOccupancyForEachDepartments
     /**
-     *
+     * to get top departments in terms of booking
      * @param interval
      * @return
      */
@@ -913,6 +933,11 @@ public class AdminService {
         }
         return departmentList;
     }
+    /**
+     * to get top departments in terms of booking each month or year
+     * @param interval
+     * @return
+     */
 
     public static List<Departments> doGetOccupancyForEachDepartmentsThisMonthOrYear(String interval) {
         ArrayList departmentList = new ArrayList();
@@ -955,7 +980,7 @@ public class AdminService {
 // check email
 
     /**
-     *
+     * check email in Add Doctor JSP
      * @param emailAddress
      * @return
      */
@@ -994,7 +1019,7 @@ public class AdminService {
     }
 
     /**
-     *
+     *  doAddDoctorInDoctors from addDoctor JSP
      * @param doctor
      * @return
      */
@@ -1036,7 +1061,7 @@ public class AdminService {
     }
 
     /**
-     *
+     * add doctor in user table
      * @param doctor
      * @return
      */
@@ -1083,7 +1108,7 @@ public class AdminService {
     }
 
     /**
-     *
+     *  add admin in users table
      * @param admin
      * @return
      */
@@ -1131,7 +1156,7 @@ public class AdminService {
     }
 
     /**
-     *
+     *  search doctor if doctor exist in doctor tables
      * @param emailAddress
      * @return
      */

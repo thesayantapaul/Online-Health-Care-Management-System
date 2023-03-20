@@ -3,10 +3,13 @@ package com.exavalu.utils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Date;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 /**
  *
- * @author Avijit Chattopadhyay
+ * @author Group B
  */
 public class JDBCConnectionManager {
 
@@ -45,8 +48,12 @@ public class JDBCConnectionManager {
             
 
         } catch (ClassNotFoundException | SQLException e) {
-
-            e.printStackTrace();
+             Logger log = Logger.getLogger(JDBCConnectionManager.class.getName());
+                if (log.isEnabledFor(Level.ERROR)) {
+                    String errorMessage = "Error message: " + e.getMessage() + " | Date: " + new Date();
+                    log.error(errorMessage);
+                }
+           
         }
 
         return connection;

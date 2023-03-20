@@ -306,6 +306,7 @@ public class LoginService {
                 user.setDoctorId(rs.getString("doctorId"));
                 user.setPatientId(rs.getString("patientId"));
                 user.setUserId(rs.getString("userId"));
+                user.setEmailAddress(rs.getString("emailAddress"));
 
                 result = true;
             }

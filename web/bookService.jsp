@@ -82,19 +82,19 @@
                                         <input name="patientLastName" type="text" class="form-control bg-light border-0" required placeholder="Your Name" style="height: 55px;"  value="${user.getName()}">
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <input name="emailAddress" id="emailAddress" type="email" class="form-control bg-light border-0" placeholder="Your Email" required style="height: 55px;"  value="${user.getEmailAddess()}">
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <select name="gender"  id="gender" required class="form-select bg-light border-0" style="height: 55px;">
-                                            <option value="">Select Gender</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                            <option value="Other">Other</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <select name="weekDays" id="weekDays" required class="form-select bg-light border-0" style="height: 55px;" onchange="fetchTime($('#weekDays').find(':selected').val())">
-                                            <option value="">Select Day</option>
+                                        <input name="emailAddress" id="emailAddress" type="email" class="form-control bg-light border-0" placeholder="Your Email" required style="height: 55px;"  <c:if test="${Loggedin.emailAddress!=null}"> value="${Loggedin.emailAddress}" readonly </c:if>>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <select name="gender"  id="gender" required class="form-select bg-light border-0" style="height: 55px;">
+                                                <option value="">Select Gender</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <select name="weekDays" id="weekDays" required class="form-select bg-light border-0" style="height: 55px;" onchange="fetchTime($('#weekDays').find(':selected').val())">
+                                                <option value="">Select Day</option>
 
 
                                         </select>
@@ -108,7 +108,7 @@
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div  class="time"  data-target-input="nearest">
-                                            <select name="time" id="time" required class="form-select bg-light border-0" style="height: 55px;" onchange="fetchAmount($('#time').find(':selected').val())">
+                                            <select name="time" id="time" required class="form-select bg-light border-0" style="height: 55px;" >
                                                 <option value="">Select Time</option>
 
 
@@ -148,10 +148,10 @@
         integrity="sha256-srhz/t0GOrmVGZryG24MVDyFDYZpvUH2+dnJ8FbpGi0=" crossorigin="anonymous"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 
 
-        <script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script> 
+        <script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script>
         <script type="text/javascript"
                 src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
         </script>
@@ -161,8 +161,8 @@
             })();
         </script>
 
-        <script src="https://code.jquery.com/jquery-3.6.3.js" 
-                integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
+        <script src="https://code.jquery.com/jquery-3.6.3.js"
+                integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
         crossorigin="anonymous"></script>
         <script>
             function fetchContent(departmentId)
@@ -207,19 +207,6 @@
                 };
                 xmlhttp.open("POST", "getTime?weekDays=" + day, true);
                 xmlhttp.send();
-            }
-        </script>
-          <script>
-            function fetchAmount(time)
-            {
-                //alert(departmentId);
-                event.preventDefault();
-                //alert(fnolId);
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function ()
-                {
-                    document.getElementById("amont").innerHTML = "";
-                };
             }
         </script>
         <script>

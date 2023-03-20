@@ -34,6 +34,7 @@
         <!-- Template Main CSS File -->
         <link href="assets/css/style.css" rel="stylesheet">
 
+
         <!-- =======================================================
         * Template Name: NiceAdmin - v2.5.0
         * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -269,6 +270,18 @@
                         <!-- Reports -->
                         <div class="col-12">
                             <div class="card">
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filter</h6>
+                                        </li>
+
+                                        <li><a class="dropdown-item" href="admindashboard.jsp">current week</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="fetchGraphThisMonth()">Monthly</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="fetchGraphThisYear()">Yearly</a></li>
+                                    </ul>
+                                </div>
 
                                 <div class="card-body">
                                     <h5 class="card-title">Reports <span>/Appointments-Revenue-Users</span></h5>
@@ -422,6 +435,7 @@
                                     </table>
 
                                 </div>
+
 
                             </div>
                         </div><!-- End Top Selling -->
