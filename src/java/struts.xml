@@ -64,11 +64,11 @@
             <result name="SUCCESS">admindashboard.jsp</result>
         </action>
         <!--AppointmentThisMonth-->
-         <action name="AppointmentThisMonth" class="com.exavalu.models.Admin" method="doGetAppointmentThisMonth">
+        <action name="AppointmentThisMonth" class="com.exavalu.models.Admin" method="doGetAppointmentThisMonth">
             <result name="APPOINTMENTCARD">appointmentThisMonth.jsp</result>
         </action>
         <!--AppointmentThisYear-->
-         <action name="AppointmentThisYear" class="com.exavalu.models.Admin" method="doGetAppointmentThisYear">
+        <action name="AppointmentThisYear" class="com.exavalu.models.Admin" method="doGetAppointmentThisYear">
             <result name="APPOINTMENTCARD">appointmentThisYear.jsp</result>
         </action>
         <!--RevenueThisMonth-->
@@ -87,11 +87,11 @@
         <action name="UserThisYear" class="com.exavalu.models.Admin" method="doGetUserThisYear">
             <result name="USERCARD">userThisYear.jsp</result>
         </action>
-       <!--topDepartmentThisMonth-->
+        <!--topDepartmentThisMonth-->
         <action name="TopDepartmentsThisMonth" class="com.exavalu.models.Admin" method="doGetDepartmentsThisMonth">
             <result name="TOPDEPARTMENTS">topDepartmentsThisMonth.jsp</result>
         </action>
-       <!--topDepartmentThisYear-->
+        <!--topDepartmentThisYear-->
         <action name="TopDepartmentsThisYear" class="com.exavalu.models.Admin" method="doGetDepartmentsThisYear">
             <result name="TOPDEPARTMENTS">topDepartmentsThisYear.jsp</result>
         </action>
@@ -116,7 +116,7 @@
             <result name="FAILURE">error.jsp</result>
         </action>
         <action name="Appointment" class="com.exavalu.models.Appointment" method="getAppointment">
-            <result name="SUCCESS">patientAppointment.jsp</result>
+            <result name="Payment">patientPay.jsp</result>
             <result name="SignUp">registration.jsp</result>
             <result name="FAILURE">menu.jsp</result>
         </action> 
@@ -206,6 +206,10 @@
         <action name="reset" class="com.exavalu.models.Users" method="doReset">
             <result name="SUCCESS">login.jsp</result>
             <result name="FAILURE" >resetPassword.jsp</result>
+        </action>
+        <action name="payment" class="com.exavalu.models.Users" method="doPayment">
+            <result name="SUCCESS">patientUpcomingBooking.jsp</result>
+            <result name="FAILURE" >patientPay.jsp</result>
         </action>
     </package>
 </struts>

@@ -5,6 +5,7 @@
 package com.exavalu.services;
 
 import com.exavalu.models.Appointment;
+import com.exavalu.models.Users;
 import static com.exavalu.services.AdminService.close;
 import com.exavalu.utils.JDBCConnectionManager;
 import java.sql.Connection;
@@ -325,5 +326,7 @@ public class PatientService {
         }
         return users;
     }
+
+
 
 }

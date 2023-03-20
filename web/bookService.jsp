@@ -97,12 +97,7 @@
                                                 <option value="">Select Day</option>
 
 
-                                            </select>
-                                            <!--                                        <div class="date"  data-target-input="nearest">
-                                                                                        <input id="date" name="appointmentDate" type="date"
-                                                                                               class="form-control bg-light border-0 datetimepicker-input"
-                                                                                               placeholder="Date" style="height: 55px;" required  value="${user.getAppointmentDate()}">
-                                                                                    </div>-->
+                                        </select>
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div  class="age" id="age" data-target-input="nearest">
@@ -122,7 +117,15 @@
                                                                                                class="form-control bg-light border-0 datetimepicker-input"
                                                                                                placeholder="Time"  style="height: 55px;"  min="10:00" max="16:00" required  value="${emp.getTime()}">-->
                                         </div>
+                                    </div> 
+                                    <div class="col-12 col-sm-6">
+                                        <div  class="amount" id="amount" data-target-input="nearest">
+                                            <input 
+                                                class="form-control bg-light border-0"
+                                                placeholder="Amount"  style="height: 55px;"  value="&#8377;${ 1000}" readonly>
+                                        </div>
                                     </div>
+
                                     <div class="col-12">
                                         <input name="symptoms" id="symptoms" type="text" class="form-control bg-light border-0" placeholder="Symptoms" style="height: 55px;" required value="${emp.getSymptoms()}">
                                     </div>
