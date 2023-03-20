@@ -496,6 +496,23 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                     sessionMap.put("HigherOrLowerTextRevenue", "Higher than yesterday");
 
                 }
+                //elements for xaxis in dashboard graph -----------------------------------
+                String todayDateElement = AdminService.elementsForXaxis("0");
+                sessionMap.put("CurrentDay", todayDateElement);
+                String day1 = AdminService.elementsForXaxis("-1");
+                sessionMap.put("Day1", day1);
+                String day2 = AdminService.elementsForXaxis("-2");
+                sessionMap.put("Day2", day2);
+                String day3 = AdminService.elementsForXaxis("-3");
+                sessionMap.put("Day3", day3);
+                String day4 = AdminService.elementsForXaxis("-4");
+                sessionMap.put("Day4", day4);
+                String day5 = AdminService.elementsForXaxis("-5");
+                sessionMap.put("Day5", day5);
+                String day6 = AdminService.elementsForXaxis("-6");
+                sessionMap.put("Day6", day6);
+
+                //--------------------------------------------------------------------
                 List<Appointment> doctortodayAppointmentList = DoctorService.getInstance().doViewtodayAppointments("0", this.doctorId);
                 sessionMap.put("DoctorAppointmentListDashBoard", doctortodayAppointmentList);
                 sessionMap.put("doctorId", this.doctorId);
@@ -880,7 +897,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
 
             String generatedOtp = OtpService.otp(4);
             sessionMap.put("Otp", generatedOtp);
-            MailServic.send(this.emailAddress, "One Time Password For Password Reset", generatedOtp);
+            //MailServic.send(this.emailAddress, "One Time Password For Password Reset", generatedOtp);
             result = "SUCCESS";
         } else {
             sessionMap.put("FailOtpVerification", "Email Doesn't Exsist");

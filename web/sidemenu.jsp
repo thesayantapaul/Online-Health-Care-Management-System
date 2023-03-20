@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : sidemenu
     Created on : Feb 24, 2023, 1:55:15 PM
     Author     : anich
@@ -34,6 +34,14 @@
         <!-- Template Main CSS File -->
         <link href="css/style1.css" rel="stylesheet">
         <link href="css/sideMenu.css" rel="stylesheet">
+        <style>
+            #sidemenuLink{
+                color: #ffffff;
+            }
+            #sidemenuLink:hover{
+                color: #ccffff;
+            }
+        </style>
 
     </head>
     <body id="body-pd">
@@ -43,19 +51,19 @@
         </header>
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
-                <div> 
+                <div>
                     <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">OHMS</span> </a>
-                    <div class="nav_list"> 
-                        <a href="home" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Doctor's Dashboard</span> </a>
-                        <a onclick="fetchContent('doctorviewbooking.jsp', 'target')" class="nav_link"> <i class='bx bx-book'></i> <span class="nav_name">View Bookings</span></a> 
-                        <!--<a onclick="fetchContent('prescribe.jsp', 'target')" class="nav_link"> <i class='bx bx-detail'></i> <span class="nav_name">Generate Prescription</span> </a>--> 
-                        <a onclick="fetchContent('doctortodayAppointment.jsp', 'target')" class="nav_link"><i class="fab fa-yelp"></i> <span class="nav_name">Generate Prescription</span> </a> 
-                        <a onclick="fetchContent('doctorPrescribed.jsp', 'target')" class="nav_link"> <i class="fab fa-searchengin"></i><span class="nav_name">Patient History</span> </a> 
+                    <div class="nav_list">
+                        <a href="home" class="nav_link" id="sidemenuLink"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Doctor's Dashboard</span> </a>
+                        <a onclick="fetchContent('doctorviewbooking.jsp', 'target')" class="nav_link" id="sidemenuLink"> <i class='bx bx-book'></i> <span class="nav_name">View Bookings</span></a>
+                        <!--<a onclick="fetchContent('prescribe.jsp', 'target')" class="nav_link"> <i class='bx bx-detail'></i> <span class="nav_name">Generate Prescription</span> </a>-->
+                        <a onclick="fetchContent('doctortodayAppointment.jsp', 'target')" class="nav_link" id="sidemenuLink"><i class="fab fa-yelp"></i> <span class="nav_name">Generate Prescription</span> </a>
+                        <a onclick="fetchContent('doctorPrescribed.jsp', 'target')" class="nav_link" id="sidemenuLink"> <i class="fab fa-searchengin"></i><span class="nav_name">Patient History</span> </a>
 
-                        <a onclick="fetchContent('pastDoctorAppointment.jsp', 'target')" class="nav_link"><i class="bi bi-calendar3"></i><span class="nav_name">Past Appointment</span> </a> 
+                        <a onclick="fetchContent('pastDoctorAppointment.jsp', 'target')" class="nav_link" id="sidemenuLink"><i class="bi bi-calendar3"></i><span class="nav_name">Past Appointment</span> </a>
 
-                    </div> 
-                    <a href="Logout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Sign Out</span> </a>
+                    </div>
+                    <a href="Logout" class="nav_link" id="sidemenuLink"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Sign Out</span> </a>
             </nav>
         </div>
         <!--        Container Main start
@@ -69,19 +77,19 @@
         <script src="https://code.jquery.com/jquery-3.6.3.js" 
                             integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
                     crossorigin="anonymous"></script>
-            <script>
+        <script>
 
-        function fetchContent(selectedId, targetId) {
-            $.ajax({
-                url: selectedId,
+                            function fetchContent(selectedId, targetId) {
+                                $.ajax({
+                                    url: selectedId,
 
-                success: function (responseText) {
-                    $("#" + targetId).html(responseText);
-                }
-            });
-        }
+                                    success: function (responseText) {
+                                        $("#" + targetId).html(responseText);
+                                    }
+                                });
+                            }
 
 
 
-    </script>
+        </script>
 </html>

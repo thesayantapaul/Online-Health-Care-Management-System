@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : reset
     Created on : Mar 13, 2023, 12:21:00 PM
     Author     : anich
@@ -13,7 +13,7 @@
     </head>
     <body>
 
-        <label for="otp" >New Password  <sup class="star">*</sup> </label>
+        <label for="otp" >New Password  <sup class="star" style="color: red">*</sup> </label>
         <input type="password" id="password" name="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
         <label for="otp" >Confirm Password  <sup class="star">*</sup> </label>
         <input type="password" id="confirmpassword" name="confirmpassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
