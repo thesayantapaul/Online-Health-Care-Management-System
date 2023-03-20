@@ -136,6 +136,7 @@
             xmlhttp.send();
 
         }
+
     </script>
 
     <body>
@@ -278,20 +279,20 @@
                                         </li>
 
                                         <li><a class="dropdown-item" href="admindashboard.jsp">current week</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="fetchGraphThisMonth()">Monthly</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="fetchGraphThisYear()">Yearly</a></li>
+                                        <!--                                        <li><a class="dropdown-item" href="#" >Monthly</a></li>
+                                                                                <li><a class="dropdown-item" href="#" >Yearly</a></li>-->
                                     </ul>
                                 </div>
 
-                                <div class="card-body">
+                                <div class="card-body" id="reportchartDiv">
                                     <h5 class="card-title">Reports <span>/Appointments-Revenue-Users</span></h5>
 
                                     <!-- Line Chart -->
                                     <div id="reportsChart"></div>
 
                                     <script>
-                                        document.addEventListener("DOMContentLoaded", () => {
-                                            new ApexCharts(document.querySelector("#reportsChart"), {
+                                        function renderChart() {
+                                            var options = {
                                                 series: [{
                                                         name: 'Appointments',
                                                         data: [${Day6Booking}, ${Day5Booking}, ${Day4Booking}, ${Day3Booking}, ${Day2Booking}, ${Day1Booking},${TodayBooking}]
@@ -338,8 +339,13 @@
                                                         format: 'dd/MM/yy HH:mm'
                                                     }
                                                 }
-                                            }).render();
-                                        });
+                                            };
+                                            var chart = new ApexCharts(
+                                                    document.querySelector("#reportsChart"),
+                                                    options
+                                                    );
+                                            chart.render();
+                                        }
                                     </script>
                                     <!-- End Line Chart -->
 
@@ -471,6 +477,9 @@
                                                 });
                                                            }
                                             initialiseDataTables();
+                                            document.addEventListener("DOMContentLoaded", () => {
+                                                renderChart();
+                                            });
     </script>
 
 </html>
