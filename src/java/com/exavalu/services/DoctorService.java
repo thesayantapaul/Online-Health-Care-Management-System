@@ -401,7 +401,7 @@ public class DoctorService {
 
     /**
      *
-     * Used to retrieve todays appointment detail of an doctor from the database
+     * Used to retrieve today's appointment detail of an doctor from the database
      *
      * @param interval
      * @param doctorId

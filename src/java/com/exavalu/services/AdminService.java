@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
 
 /**
  *
- * @author LenovoRaja
+ * @author Raja
  */
 public class AdminService {
 
@@ -128,9 +128,9 @@ public class AdminService {
         return appointmentList;
     }
 
-    //filtered appointment list-----------------
+    
     /**
-     *
+     * filtered appointment list
      * @param startingDate
      * @param endingDate
      * @return
@@ -191,7 +191,7 @@ public class AdminService {
     }
 
     /**
-     *
+     *  do view appointments in admin
      * @param interval
      * @return
      */
@@ -253,7 +253,7 @@ public class AdminService {
     }
 
     /**
-     *
+     *   cancel particular appointment
      * @param appointmentId
      * @return
      */
@@ -332,7 +332,7 @@ public class AdminService {
     }
     
     /**
-     * do fetch  doctors using departmentid
+     * do fetch  doctors using department Id
      * @param departmentId 
      * @return
      */
@@ -383,7 +383,7 @@ public class AdminService {
     }
 
     /**
-     * do search doctor List in admin search jsp
+     * do search doctor List in admin search JSP
      * @param adminDoctor
      * @return
      */
@@ -440,7 +440,7 @@ public class AdminService {
         return doctorList;
     }
 
-    //search patient
+    
     /**
      * do search patient in admin patient search
      * @param adminPatient
@@ -760,7 +760,6 @@ public class AdminService {
         return totalRevenue;
     }
 
-    //chart data x axis dashboard admin--------------------------------------------------------------------------------
     /**
      * data for x axis in admin dashboard
      * @param interval
@@ -981,7 +980,7 @@ public class AdminService {
 // check email
 
     /**
-     *  check email in adddoctor jsp
+     * check email in Add Doctor JSP
      * @param emailAddress
      * @return
      */
@@ -1020,7 +1019,7 @@ public class AdminService {
     }
 
     /**
-     *  doAddDoctorInDoctors from addDoctor jsp
+     *  doAddDoctorInDoctors from addDoctor JSP
      * @param doctor
      * @return
      */

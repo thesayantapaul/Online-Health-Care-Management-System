@@ -558,7 +558,7 @@ public class Appointment extends ActionSupport implements ApplicationAware, Sess
                 boolean insert = AppointmentService.getInstance().getAppointment(appointment);
                 appointment = AppointmentService.getInstance().getAppointmentId(appointment);
                 boolean r2 = PatientService.getInstance().insertPatientAppointment(appointment);
-                MailServic.sendAppointment(appointment);
+                //MailServic.sendAppointment(appointment);
                 LoginService.getInstance().updateUser(appointment);
                 System.out.println("this is patiend id :" + this.getUserId());
 
