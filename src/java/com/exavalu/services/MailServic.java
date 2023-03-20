@@ -5,6 +5,7 @@
 package com.exavalu.services;
 
 import com.exavalu.models.Appointment;
+import com.exavalu.utils.JDBCUtility;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -13,8 +14,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
-
 
 /**
  *
@@ -38,12 +37,16 @@ public class MailServic {
         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "587");
+        JDBCUtility jdbcUtility = JDBCUtility.getInstanceOfJDBCUtility();
+        final String userName = jdbcUtility.getPropertyValue("email");
+        final String appPassword = jdbcUtility.getPropertyValue("appPassword");
+
         //get Session   
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("anichakraborty0007@gmail.com", "qiuaunmxndiorovj");
+                return new PasswordAuthentication(userName, appPassword);
             }
         });
         //compose message    

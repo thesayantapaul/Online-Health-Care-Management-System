@@ -56,11 +56,11 @@
                     <div class="col-lg-6">
                         <div class="bg-white text-center rounded p-5">
                             <h1 class="mb-4">Book An Appointment</h1>
-                                <form action="Appointment" method="Post">
-                                    <div class="row g-3">
-                                        <div  class="col-12 col-sm-6">
-                                            <select name="departmentId" id="departmentId"  required class="form-select bg-light border-0" style="height: 55px;" onchange="fetchContent($('#departmentId').find(':selected').val())" required>
-                                                <option selected>Choose Department</option>
+                            <form action="Appointment" method="Post">
+                                <div class="row g-3">
+                                    <div  class="col-12 col-sm-6">
+                                        <select name="departmentId" id="departmentId"  required class="form-select bg-light border-0" style="height: 55px;" onchange="fetchContent($('#departmentId').find(':selected').val())" required>
+                                            <option selected>Choose Department</option>
                                             <c:forEach items="${deptList}" var="dept">
                                                 <option value="${dept.getDepartmentId()}" >${dept.getDepartmentName()} </option>
 <!--                                                    <input id="departmentName" value="${dept.getDepartmentName()}" hidden  > -->
@@ -74,7 +74,7 @@
 
                                         </select>
                                     </div>
-                                        
+
                                     <div class="col-12 col-sm-6">
                                         <input name="patientFirstName" id="patientFirstName" type="text" class="form-control bg-light border-0" required placeholder="Your Name" style="height: 55px;"  value="${user.getName()}">
                                     </div>
@@ -93,16 +93,11 @@
                                         </select>
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                         <select name="weekDays" id="weekDays" required class="form-select bg-light border-0" style="height: 55px;" onchange="fetchTime($('#weekDays').find(':selected').val())">
+                                        <select name="weekDays" id="weekDays" required class="form-select bg-light border-0" style="height: 55px;" onchange="fetchTime($('#weekDays').find(':selected').val())">
                                             <option value="">Select Day</option>
 
 
                                         </select>
-<!--                                        <div class="date"  data-target-input="nearest">
-                                            <input id="date" name="appointmentDate" type="date"
-                                                   class="form-control bg-light border-0 datetimepicker-input"
-                                                   placeholder="Date" style="height: 55px;" required  value="${user.getAppointmentDate()}">
-                                        </div>-->
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div  class="age" id="age" data-target-input="nearest">
@@ -113,16 +108,24 @@
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div  class="time"  data-target-input="nearest">
-                                            <select name="time" id="time" required class="form-select bg-light border-0" style="height: 55px;" >
-                                            <option value="">Select Time</option>
+                                            <select name="time" id="time" required class="form-select bg-light border-0" style="height: 55px;" onchange="fetchAmount($('#time').find(':selected').val())">
+                                                <option value="">Select Time</option>
 
 
-                                        </select>
-<!--                                            <input id="time" name="time" type="time"
-                                                   class="form-control bg-light border-0 datetimepicker-input"
-                                                   placeholder="Time"  style="height: 55px;"  min="10:00" max="16:00" required  value="${emp.getTime()}">-->
+                                            </select>
+                                            <!--                                            <input id="time" name="time" type="time"
+                                                                                               class="form-control bg-light border-0 datetimepicker-input"
+                                                                                               placeholder="Time"  style="height: 55px;"  min="10:00" max="16:00" required  value="${emp.getTime()}">-->
+                                        </div>
+                                    </div> 
+                                    <div class="col-12 col-sm-6">
+                                        <div  class="amount" id="amount" data-target-input="nearest">
+                                            <input 
+                                                class="form-control bg-light border-0"
+                                                placeholder="Amount"  style="height: 55px;"  value="&#8377;${ 1000}" readonly>
                                         </div>
                                     </div>
+
                                     <div class="col-12">
                                         <input name="symptoms" id="symptoms" type="text" class="form-control bg-light border-0" placeholder="Symptoms" style="height: 55px;" required value="${emp.getSymptoms()}">
                                     </div>
@@ -136,32 +139,32 @@
                 </div>
             </div>
         </div>
-                                    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-    crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"
-    integrity="sha256-srhz/t0GOrmVGZryG24MVDyFDYZpvUH2+dnJ8FbpGi0=" crossorigin="anonymous"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"
+        integrity="sha256-srhz/t0GOrmVGZryG24MVDyFDYZpvUH2+dnJ8FbpGi0=" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> 
 
 
-    <script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script> 
-    <script type="text/javascript"
-            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
-    </script>
-    <script type="text/javascript">
-        (function () {
-            emailjs.init("f_3r8uuVACaKw_woR");
-        })();
-    </script>
+        <script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script> 
+        <script type="text/javascript"
+                src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+        </script>
+        <script type="text/javascript">
+            (function () {
+                emailjs.init("f_3r8uuVACaKw_woR");
+            })();
+        </script>
 
-    <script src="https://code.jquery.com/jquery-3.6.3.js" 
-                        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
-                crossorigin="anonymous"></script>
-    <script>
+        <script src="https://code.jquery.com/jquery-3.6.3.js" 
+                integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" 
+        crossorigin="anonymous"></script>
+        <script>
             function fetchContent(departmentId)
             {
                 //alert(departmentId);
@@ -175,7 +178,7 @@
                 xmlhttp.open("POST", "getDoctor?departmentId=" + departmentId, true);
                 xmlhttp.send();
             }
-    </script>
+        </script>
         <script>
             function fetchWeekDays(doctorId)
             {
@@ -190,8 +193,8 @@
                 xmlhttp.open("POST", "getWeekDays?doctorId=" + doctorId, true);
                 xmlhttp.send();
             }
-    </script>
-    <script>
+        </script>
+        <script>
             function fetchTime(day)
             {
                 //alert(departmentId);
@@ -205,9 +208,22 @@
                 xmlhttp.open("POST", "getTime?weekDays=" + day, true);
                 xmlhttp.send();
             }
-    </script>
-    <script>
-                $(document).ready(function () {
+        </script>
+          <script>
+            function fetchAmount(time)
+            {
+                //alert(departmentId);
+                event.preventDefault();
+                //alert(fnolId);
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function ()
+                {
+                    document.getElementById("amont").innerHTML = "";
+                };
+            }
+        </script>
+        <script>
+            $(document).ready(function () {
                 $("button").click(function () {
                     var params = {
                         to_name: document.getElementById('patientFirstName').value,
@@ -217,14 +233,14 @@
                         doctor: document.getElementById('doctorId').value,
                         department: document.getElementById('departmentId').value
                     };
-                    
-//                    alert(document.getElementById('patientFirstName').value);
-//                    alert(document.getElementById('time').value);
-//                    alert(document.getElementById('date').value);
-//                    alert(document.getElementById('emailAddress').value);
-//                    alert(document.getElementById('doctorId').value);
-//                    alert(document.getElementById('departmentId').value);
-//                    alert(params);
+
+                    //                    alert(document.getElementById('patientFirstName').value);
+                    //                    alert(document.getElementById('time').value);
+                    //                    alert(document.getElementById('date').value);
+                    //                    alert(document.getElementById('emailAddress').value);
+                    //                    alert(document.getElementById('doctorId').value);
+                    //                    alert(document.getElementById('departmentId').value);
+                    //                    alert(params);
                     emailjs.send("service_dnuk9zz", "template_wkl33wz", params);
                 });
             });

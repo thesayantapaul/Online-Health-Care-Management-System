@@ -5,6 +5,7 @@
 package com.exavalu.models;
 
 import com.exavalu.services.AdminService;
+import com.exavalu.services.ApiService;
 import com.exavalu.services.AppointmentService;
 import com.exavalu.services.DepartmentService;
 import com.exavalu.services.DoctorService;
@@ -65,6 +66,51 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     private String picture;
     private String age;
     private String otp;
+    private String cardNumber;
+    private String cardName;
+    private String cardMonth;
+    private String cardYear;
+    private String cardCvv;
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getCardName() {
+        return cardName;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+
+    public String getCardMonth() {
+        return cardMonth;
+    }
+
+    public void setCardMonth(String cardMonth) {
+        this.cardMonth = cardMonth;
+    }
+
+    public String getCardYear() {
+        return cardYear;
+    }
+
+    public void setCardYear(String cardYear) {
+        this.cardYear = cardYear;
+    }
+
+    public String getCardCvv() {
+        return cardCvv;
+    }
+
+    public void setCardCvv(String cardCvv) {
+        this.cardCvv = cardCvv;
+    }
 
     public String getOtp() {
         return otp;
@@ -267,7 +313,6 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     public SessionMap<String, Object> getSessionMap() {
         return sessionMap;
     }
-
 
     /**
      *
@@ -772,7 +817,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     /**
      * doSocial used from google social sign up using OAuth2
      *
-     * @return 
+     * @return
      * @throws java.lang.Exception
      */
     public String doSocial() throws Exception {
@@ -805,7 +850,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     /**
      * used from google social Login after validation with BackEnd.
      *
-     * @return 
+     * @return
      * @throws java.lang.Exception doSocialLogIn
      */
     public String doSocialLogin() throws Exception {
@@ -909,6 +954,47 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
 
         } else {
             sessionMap.put("FailSignUp", "Email Desn't Exsist");
+        }
+        System.out.println(sessionMap);
+        return result;
+    }
+
+    public String doPayment() throws Exception {
+        String result = "FAILURE";
+        boolean success = ApiService.getInstance().getPayment(this);
+        System.out.println(this.cardName);
+        System.out.println(sessionMap);
+
+        if (success) {
+            Users user = (Users) sessionMap.get("Loggedin");
+            Appointment appointment = (Appointment) sessionMap.get("Appointment");
+            Appointment exsist = PatientService.getInstance().getPatient(appointment, user.getUserId());
+            System.out.println(exsist.getPatientId());
+            if (exsist.getPatientId() == null) {
+                boolean r1 = PatientService.getInstance().insertPatient(appointment, user.getUserId());
+                appointment = PatientService.getInstance().getPatient(appointment, user.getUserId());
+            }
+            boolean insert = AppointmentService.getInstance().getAppointment(appointment);
+            appointment = AppointmentService.getInstance().getAppointmentId(appointment);
+            boolean r2 = PatientService.getInstance().insertPatientAppointment(appointment);
+            MailServic.sendAppointment(appointment);
+            LoginService.getInstance().updateUser(appointment);
+            System.out.println("this is patiend id :" + this.getUserId());
+
+            List<Appointment> upcomingAppointment = PatientService.doViewParticularUpcomingAppointments(user.getUserId());
+            List<Appointment> appointmentHistory = PatientService.doViewParticularMedicalHistory(user.getUserId());
+            if (upcomingAppointment != null) {
+                sessionMap.put("PatientUpcomingBooking", upcomingAppointment);
+                sessionMap.put("PatientMedicalHistory", appointmentHistory);
+            }
+            if (insert && r2) {
+                System.out.println("SUcess");
+                result = "SUCCESS";
+            }
+            sessionMap.put("SuccessSignUp", "Password Changed Please Login now");
+
+        } else {
+            sessionMap.put("FailPayment", "Unable to Process Payment");
         }
         System.out.println(sessionMap);
         return result;
