@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : doctortodayAppointment
     Created on : Mar 2, 2023, 2:08:14 PM
     Author     : anich
@@ -25,25 +25,25 @@
                 </tr>
             </thead>
             <tbody>
-            <c:forEach items="${DoctorAppointmentListDashBoard}" var="appointment">
-                <tr>
-                    <th scope="row"><a href="#">${appointment.appointmentId}</a></th>
-                    <td>${appointment.patientFirstName} ${appointment.patientLastName}</td>
-                    <td><a href="#" class="text-primary">${appointment.departmentName}</a></td>
-                    <td>${appointment.doctorFirstName} ${appointment.doctorLastName}</td>
-                    <td>
-                <c:if test="${appointment.statusId.equals('1')}"><span class="badge bg-warning">${appointment.status}</span></c:if>
-                <c:if test="${appointment.statusId.equals('2')}"><span class="badge bg-info">${appointment.status}</span></c:if>
-                <c:if test="${appointment.statusId.equals('3')}"><span class="badge bg-success">${appointment.status}</span></c:if>
-                <c:if test="${appointment.statusId.equals('4')}"><span class="badge bg-danger">${appointment.status}</span></c:if>
-                </td>
-                <td>
-                    <button><a href='Prescribe?appointmentId=<c:out value="${appointment.appointmentId}"> </c:out>'>Prescribe</a></button>
-                </td>
-                </tr>
+                <c:forEach items="${DoctorAppointmentListDashBoard}" var="appointment">
+                    <tr>
+                        <th scope="row"><a href="#">${appointment.appointmentId}</a></th>
+                        <td>${appointment.patientFirstName} ${appointment.patientLastName}</td>
+                        <td><a href="#" class="text-primary">${appointment.departmentName}</a></td>
+                        <td>${appointment.doctorFirstName} ${appointment.doctorLastName}</td>
+                        <td>
+                            <c:if test="${appointment.statusId.equals('1')}"><span class="badge bg-warning">${appointment.status}</span></c:if>
+                            <c:if test="${appointment.statusId.equals('2')}"><span class="badge bg-info">${appointment.status}</span></c:if>
+                            <c:if test="${appointment.statusId.equals('3')}"><span class="badge bg-success">${appointment.status}</span></c:if>
+                            <c:if test="${appointment.statusId.equals('4')}"><span class="badge bg-danger">${appointment.status}</span></c:if>
+                            </td>
+                            <td>
+                                <button><a href='Prescribe?appointmentId=<c:out value="${appointment.appointmentId}"> </c:out>'>Prescribe</a></button>
+                            </td>
+                        </tr>
 
-            </c:forEach>
-        </tbody>
-    </table>
-</body>
+                </c:forEach>
+            </tbody>
+        </table>
+    </body>
 </html>

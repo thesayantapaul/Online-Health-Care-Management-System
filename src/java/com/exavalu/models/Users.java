@@ -840,6 +840,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
             sessionMap.put("FailSignUp", "Wrong Email or Password");
         }
         System.out.println(sessionMap);
+       
         return result;
 
     }
