@@ -200,7 +200,7 @@
                                     </div>
                                     <div class="form-group first">
                                         <label for="emailAddress">Email Address<sup class="star">*</sup></label>
-                                        <input name="emailAddress" type="text" class="form-control" placeholder="your-email@gmail.com" id="emailAddress" onchange="checkEmailExist(this.value)" required>
+                                        <input name="emailAddress" type="email" class="form-control" placeholder="your-email@gmail.com" id="emailAddress" onchange="checkEmailExist(this.value)" required>
                                     </div>
 
                                     <div class="form-group last mb-3">
