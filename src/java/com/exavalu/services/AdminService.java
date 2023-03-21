@@ -128,9 +128,9 @@ public class AdminService {
         return appointmentList;
     }
 
-    
     /**
      * filtered appointment list
+     *
      * @param startingDate
      * @param endingDate
      * @return
@@ -191,7 +191,8 @@ public class AdminService {
     }
 
     /**
-     *  do view appointments in admin
+     * do view appointments in admin
+     *
      * @param interval
      * @return
      */
@@ -253,7 +254,8 @@ public class AdminService {
     }
 
     /**
-     *   cancel particular appointment
+     * cancel particular appointment
+     *
      * @param appointmentId
      * @return
      */
@@ -291,9 +293,9 @@ public class AdminService {
         return result;
     }
 
-    
     /**
      * do fetch particular doctor using doctorId
+     *
      * @param doctorId
      * @return
      */
@@ -330,13 +332,13 @@ public class AdminService {
         }
         return doctor;
     }
-    
+
     /**
-     * do fetch  doctors using department Id
-     * @param departmentId 
+     * do fetch doctors using department Id
+     *
+     * @param departmentId
      * @return
      */
-
     public static List<Doctors> getAllDoctors(String departmentId) {
         ArrayList deptLIst = new ArrayList();
         Connection con = null;
@@ -384,6 +386,7 @@ public class AdminService {
 
     /**
      * do search doctor List in admin search JSP
+     *
      * @param adminDoctor
      * @return
      */
@@ -440,9 +443,9 @@ public class AdminService {
         return doctorList;
     }
 
-    
     /**
      * do search patient in admin patient search
+     *
      * @param adminPatient
      * @return
      */
@@ -501,7 +504,8 @@ public class AdminService {
     }
 
     /**
-     *  do view particular appointment using appointmentId in admin
+     * do view particular appointment using appointmentId in admin
+     *
      * @param appointmentId
      * @return
      */
@@ -552,7 +556,8 @@ public class AdminService {
     }
 
     /**
-     *  do update appointment in admin
+     * do update appointment in admin
+     *
      * @param appointment
      * @return
      */
@@ -597,7 +602,8 @@ public class AdminService {
     }
 
     /**
-     *  do view bookings
+     * do view bookings
+     *
      * @param interval
      * @return
      */
@@ -637,12 +643,13 @@ public class AdminService {
 
         return totalBookings;
     }
+
     /**
-     *  do view bookings this month or year
+     * do view bookings this month or year
+     *
      * @param interval
      * @return
      */
-
     public static String doViewBookingsThisMonthOrYear(String interval) {
         String totalBookings = null;
         Connection con = null;
@@ -680,6 +687,7 @@ public class AdminService {
 
     /**
      * do view total revenue from admin
+     *
      * @param interval
      * @return
      */
@@ -719,9 +727,9 @@ public class AdminService {
         return totalRevenue;
     }
 
-    
     /**
      * do view total revenue this month or year from admin
+     *
      * @param interval
      * @return
      */
@@ -762,6 +770,7 @@ public class AdminService {
 
     /**
      * data for x axis in admin dashboard
+     *
      * @param interval
      * @return
      */
@@ -804,6 +813,7 @@ public class AdminService {
 
     /**
      * to get total registered users in admin dashboard
+     *
      * @param interval
      * @return
      */
@@ -845,9 +855,9 @@ public class AdminService {
         return totalUsers;
     }
 
-   
     /**
      * do view total registered users this month or year from admin
+     *
      * @param interval
      * @return
      */
@@ -891,6 +901,7 @@ public class AdminService {
     //doGetOccupancyForEachDepartments
     /**
      * to get top departments in terms of booking
+     *
      * @param interval
      * @return
      */
@@ -933,12 +944,57 @@ public class AdminService {
         }
         return departmentList;
     }
+
     /**
-     * to get top departments in terms of booking each month or year
+     * to get top departments occupancy for polar chart
+     *
      * @param interval
      * @return
      */
+    public static List<Departments> doGetOccupancyForPolarChartThisMonth(String interval) {
+        ArrayList departmentList = new ArrayList();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
+        try {
+            con = JDBCConnectionManager.getConnection();
+            String sql = "SELECT departmentId, COUNT(*) as occupancy FROM appointments where appointmentDate between DATE_ADD(CURDATE(), INTERVAL ? DAY) and DATE_ADD(CURDATE(), INTERVAL '0' DAY) GROUP BY departmentId;";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, interval);
+
+            System.out.println("ps:" + ps);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Departments department = new Departments();
+                department.setDepartmentId(rs.getString("departmentId"));
+                department.setNumberOfPatients(rs.getString("occupancy"));
+                departmentList.add(department);
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(AdminService.class
+                    .getName());
+            if (log.isEnabledFor(Level.ERROR)) {
+                String errorMessage = "Error message: " + ex.getMessage() + " | Date: " + new Date();
+                log.error(errorMessage);
+            }
+        } finally {
+
+            close(rs, ps, con);
+        }
+        return departmentList;
+    }
+
+    /**
+     * to get top departments in terms of booking each month or year
+     *
+     * @param interval
+     * @return
+     */
     public static List<Departments> doGetOccupancyForEachDepartmentsThisMonthOrYear(String interval) {
         ArrayList departmentList = new ArrayList();
         Connection con = null;
@@ -981,6 +1037,7 @@ public class AdminService {
 
     /**
      * check email in Add Doctor JSP
+     *
      * @param emailAddress
      * @return
      */
@@ -1019,7 +1076,8 @@ public class AdminService {
     }
 
     /**
-     *  doAddDoctorInDoctors from addDoctor JSP
+     * doAddDoctorInDoctors from addDoctor JSP
+     *
      * @param doctor
      * @return
      */
@@ -1062,6 +1120,7 @@ public class AdminService {
 
     /**
      * add doctor in user table
+     *
      * @param doctor
      * @return
      */
@@ -1108,7 +1167,8 @@ public class AdminService {
     }
 
     /**
-     *  add admin in users table
+     * add admin in users table
+     *
      * @param admin
      * @return
      */
@@ -1156,7 +1216,8 @@ public class AdminService {
     }
 
     /**
-     *  search doctor if doctor exist in doctor tables
+     * search doctor if doctor exist in doctor tables
+     *
      * @param emailAddress
      * @return
      */

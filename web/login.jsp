@@ -1,10 +1,8 @@
-<%-- 
+<%--
     Document   : login
     Created on : 21-Feb-2023, 4:56:03 pm
     Author     : SAYANTA PAUL
 --%>
-
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -13,30 +11,21 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-
-
         <!--<link rel="stylesheet" href="css/login-icon-style.css">-->
-
         <!--done-->
-        <link rel="stylesheet" href="css/owl.carousel.min.css"> 
-
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.login.css">
-
         <!-- Style -->
         <link rel="stylesheet" href="css/loginstyle.css">
-
         <title>OHMS Login</title>
         <meta name="google-signin-client_id" content="954298706213-l0sc288rp22fj9vpjt2n6o9t7vqvfuqc.apps.googleusercontent.com">
-                <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
     </head>
     <body id="social">
-
-
         <div class="d-md-flex half">
             <div class="bg" style="background-image: url('images/login-side.jpg');"></div>
             <div class="contents">
-
                 <div class="container">
                     <div class="row align-items-center justify-content-center">
                         <div class="col-md-12">
@@ -58,7 +47,7 @@
                                                                                 <select name="login-form" id="login-form" class="form-control">
                                                                                     <option value="0">Patient</option>
                                                                                     <option value="1">Doctor</option>
-                                                                                    <option value="2">Admin</option>                                       
+                                                                                    <option value="2">Admin</option>
                                                                                 </select>
                                                                             </div>-->
 
@@ -73,8 +62,8 @@
                                         </div>
 
                                         <div class="d-sm-flex mb-5 align-items-center">
-                                           
-                                            <span class="ml-auto"><a href="resetPassword.jsp" class="forgot-pass">Forgot Password</a></span> 
+
+                                            <span class="ml-auto"><a href="resetPassword.jsp" class="forgot-pass">Forgot Password</a></span>
                                         </div>
 
 
@@ -82,13 +71,8 @@
                                     </form>
                                     <span class="text-center my-3 d-block">or</span>
 
+                                    <center><jsp:include page="socialLogin.jsp"></jsp:include></center>
 
-                                    <div class="">
-                                        <a href="#" class="btn btn-block py-2 btn-facebook">
-                                            <span class="icon-facebook mr-3"></span> Login with facebook
-                                        </a>
-                                    <jsp:include page="socialLogin.jsp"></jsp:include>
-                                </div>
 
                             </div>
                         </div>

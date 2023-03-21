@@ -55,6 +55,7 @@
             xmlhttp.send();
         }
         function fetchAppointmentsThisMonth() {
+            event.preventDefault();
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function ()
             {
@@ -62,9 +63,9 @@
             };
             xmlhttp.open("GET", "AppointmentThisMonth", true);
             xmlhttp.send();
-
         }
         function fetchAppointmentsThisYear() {
+            event.preventDefault();
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function ()
             {
@@ -72,9 +73,9 @@
             };
             xmlhttp.open("GET", "AppointmentThisYear", true);
             xmlhttp.send();
-
         }
         function fetchRevenueThisMonth() {
+            event.preventDefault();
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function ()
             {
@@ -82,9 +83,9 @@
             };
             xmlhttp.open("GET", "RevenueThisMonth", true);
             xmlhttp.send();
-
         }
         function fetchRevenueThisYear() {
+            event.preventDefault();
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function ()
             {
@@ -92,9 +93,9 @@
             };
             xmlhttp.open("GET", "RevenueThisYear", true);
             xmlhttp.send();
-
         }
         function fetchUserThisMonth() {
+            event.preventDefault();
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function ()
             {
@@ -102,9 +103,9 @@
             };
             xmlhttp.open("GET", "UserThisMonth", true);
             xmlhttp.send();
-
         }
         function fetchUserThisYear() {
+            event.preventDefault();
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function ()
             {
@@ -112,30 +113,64 @@
             };
             xmlhttp.open("GET", "UserThisYear", true);
             xmlhttp.send();
-
         }
         function fetchDepartmentsThisMonth() {
+            document.getElementById("visualizePolarChartId").style.display = "block";
+            document.getElementById("polarAreaChart").style.display = "block";
+            event.preventDefault();
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function ()
             {
-                document.getElementById("topDepartmentstableDiv").innerHTML = xmlhttp.responseText;
-                initialiseDataTables();
+                if (xmlhttp.status === 200) {
+
+                    document.getElementById("topDepartmentstableDiv").innerHTML = xmlhttp.responseText;
+                    initialiseDataTables();
+                    //renderPolarAreaChart();
+                }
             };
             xmlhttp.open("GET", "TopDepartmentsThisMonth", true);
             xmlhttp.send();
-
         }
         function fetchDepartmentsThisYear() {
+            document.getElementById("visualizePolarChartId").style.display = "none";
+            document.getElementById("polarAreaChart").style.display = "none";
+            event.preventDefault();
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function ()
             {
-                document.getElementById("topDepartmentstableDiv").innerHTML = xmlhttp.responseText;
-                initialiseDataTables();
+                if (xmlhttp.status === 200) {
+                    document.getElementById("topDepartmentstableDiv").innerHTML = xmlhttp.responseText;
+                    initialiseDataTables();
+                }
             };
             xmlhttp.open("GET", "TopDepartmentsThisYear", true);
             xmlhttp.send();
-
         }
+
+        function callRenderCurrentWeekChart() {
+            event.preventDefault();
+            document.getElementById("reportsChart").innerHTML = "";
+            renderChart();
+        }
+        function callRenderBarChart() {
+            event.preventDefault();
+            document.getElementById("reportsChart").innerHTML = "";
+            renderBarChart();
+        }
+        function callRenderRevenueBarChart() {
+            document.getElementById("revenueReportChart").innerHTML = "";
+            renderRevenueBarChart();
+        }
+        function callRenderCurrentWeekRevenueChart() {
+            document.getElementById("revenueReportChart").innerHTML = "";
+            renderRevenueChart();
+        }
+        function renderPolarAreaChart() {
+            //event.preventDefault();
+            document.getElementById("polarAreaChart").innerHTML = "";
+            renderPolarChartForDepartments();
+        }
+
     </script>
 
     <body>
@@ -276,30 +311,27 @@
                                         <li class="dropdown-header text-start">
                                             <h6>Filter</h6>
                                         </li>
+                                        <li><a class="dropdown-item" href="#" onclick="callRenderBarChart()" >Bar Graph</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="callRenderCurrentWeekChart()">Line Chart</a></li>
 
-                                        <li><a class="dropdown-item" href="admindashboard.jsp">current week</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="fetchGraphThisMonth()">Monthly</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="fetchGraphThisYear()">Yearly</a></li>
                                     </ul>
                                 </div>
 
-                                <div class="card-body">
-                                    <h5 class="card-title">Reports <span>/Appointments-Revenue-Users</span></h5>
+                                <div class="card-body" id="appointmentUserchartDiv">
+                                    <h5 class="card-title">Reports <span>/Appointments-Users</span></h5>
 
                                     <!-- Line Chart -->
                                     <div id="reportsChart"></div>
 
+
                                     <script>
-                                        document.addEventListener("DOMContentLoaded", () => {
-                                            new ApexCharts(document.querySelector("#reportsChart"), {
+                                        function renderChart() {
+                                            var options = {
                                                 series: [{
                                                         name: 'Appointments',
                                                         data: [${Day6Booking}, ${Day5Booking}, ${Day4Booking}, ${Day3Booking}, ${Day2Booking}, ${Day1Booking},${TodayBooking}]
                                                     }, {
-                                                        name: 'Revenue',
-                                                        data: [${Day6Revenue}, ${Day5Revenue}, ${Day4Revenue}, ${Day3Revenue}, ${Day2Revenue}, ${Day1Revenue},${TodayRevenue}]
-                                                    }, {
-                                                        name: 'Users',
+                                                        name: 'Users registered',
                                                         data: [${Day6User},${Day5User},${Day4User},${Day3User},${Day2User},${Day1User},${TodayUsers}]
                                                     }],
                                                 chart: {
@@ -312,7 +344,7 @@
                                                 markers: {
                                                     size: 4
                                                 },
-                                                colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                                                colors: ['#4154f1', '#ff771d'],
                                                 fill: {
                                                     type: "gradient",
                                                     gradient: {
@@ -338,8 +370,68 @@
                                                         format: 'dd/MM/yy HH:mm'
                                                     }
                                                 }
-                                            }).render();
-                                        });
+                                            };
+                                            var chart = new ApexCharts(
+                                                    document.querySelector("#reportsChart"),
+                                                    options
+                                                    );
+                                            chart.render();
+                                        }
+
+                                        function renderBarChart() {
+                                            var options = {
+                                                series: [{
+                                                        name: 'Appointments',
+                                                        data: [${Day6Booking}, ${Day5Booking}, ${Day4Booking}, ${Day3Booking}, ${Day2Booking}, ${Day1Booking},${TodayBooking}]
+                                                    }, {
+                                                        name: 'Users registered',
+                                                        data: [${Day6User},${Day5User},${Day4User},${Day3User},${Day2User},${Day1User},${TodayUsers}]
+                                                    }],
+                                                chart: {
+                                                    type: 'bar',
+                                                    height: 350
+                                                },
+                                                plotOptions: {
+                                                    bar: {
+                                                        horizontal: false,
+                                                        columnWidth: '55%',
+                                                        endingShape: 'rounded'
+                                                    }
+                                                },
+                                                dataLabels: {
+                                                    enabled: false
+                                                },
+                                                stroke: {
+                                                    show: true,
+                                                    width: 2,
+                                                    colors: ['transparent']
+                                                },
+                                                xaxis: {
+                                                    categories: ["${Day6}", "${Day5}", "${Day4}", "${Day3}", "${Day2}", "${Day1}", "${CurrentDay}"]
+                                                },
+                                                yaxis: {
+                                                    title: {
+                                                        text: 'values'
+                                                    }
+                                                },
+                                                fill: {
+                                                    opacity: 1
+                                                },
+                                                tooltip: {
+                                                    y: {
+                                                        formatter: function (val) {
+                                                            return  val;
+                                                        }
+                                                    }
+                                                }
+                                            };
+                                            var chart = new ApexCharts(
+                                                    document.querySelector("#reportsChart"),
+                                                    options
+                                                    );
+                                            chart.render();
+                                        }
+
                                     </script>
                                     <!-- End Line Chart -->
 
@@ -347,6 +439,138 @@
 
                             </div>
                         </div><!-- End Reports -->
+                        <!--Revenue Reports -->
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filter</h6>
+                                        </li>
+                                        <li><a class="dropdown-item" onclick="callRenderRevenueBarChart()" >Bar Graph</a></li>
+                                        <li><a class="dropdown-item" onclick="callRenderCurrentWeekRevenueChart()">Line Graph</a></li>
+
+                                    </ul>
+                                </div>
+
+                                <div class="card-body" id="appointmentUserchartDiv">
+                                    <h5 class="card-title">Reports <span>/ Revenue-data</span></h5>
+
+                                    <!-- Line Chart -->
+                                    <div id="revenueReportChart"></div>
+
+
+                                    <script>
+                                        function renderRevenueChart() {
+                                            var options = {
+                                                series: [{
+                                                        name: 'Revenue generated',
+                                                        data: [${Day6Revenue}, ${Day5Revenue}, ${Day4Revenue}, ${Day3Revenue}, ${Day2Revenue}, ${Day1Revenue},${TodayRevenue}]
+                                                    }],
+                                                chart: {
+                                                    height: 350,
+                                                    type: 'area',
+                                                    toolbar: {
+                                                        show: false
+                                                    }
+                                                },
+                                                markers: {
+                                                    size: 4
+                                                },
+                                                colors: ['#2eca6a'],
+                                                fill: {
+                                                    type: "gradient",
+                                                    gradient: {
+                                                        shadeIntensity: 1,
+                                                        opacityFrom: 0.3,
+                                                        opacityTo: 0.4,
+                                                        stops: [0, 90, 100]
+                                                    }
+                                                },
+                                                dataLabels: {
+                                                    enabled: false
+                                                },
+                                                stroke: {
+                                                    curve: 'smooth',
+                                                    width: 2
+                                                },
+                                                xaxis: {
+
+                                                    categories: ["${Day6}", "${Day5}", "${Day4}", "${Day3}", "${Day2}", "${Day1}", "${CurrentDay}"]
+                                                },
+                                                tooltip: {
+                                                    x: {
+                                                        format: 'dd/MM/yy HH:mm'
+                                                    }
+                                                }
+                                            };
+                                            var chart = new ApexCharts(
+                                                    document.querySelector("#revenueReportChart"),
+                                                    options
+                                                    );
+                                            chart.render();
+                                        }
+
+                                        function renderRevenueBarChart() {
+                                            var options = {
+                                                series: [{
+                                                        name: 'Revenue generated',
+                                                        data: [${Day6Revenue}, ${Day5Revenue}, ${Day4Revenue}, ${Day3Revenue}, ${Day2Revenue}, ${Day1Revenue},${TodayRevenue}]
+                                                    }],
+                                                chart: {
+                                                    type: 'bar',
+                                                    height: 350
+                                                },
+                                                plotOptions: {
+                                                    bar: {
+                                                        horizontal: false,
+                                                        columnWidth: '55%',
+                                                        endingShape: 'rounded'
+                                                    }
+                                                },
+                                                dataLabels: {
+                                                    enabled: false
+                                                },
+                                                colors: ['#99e699'],
+                                                stroke: {
+                                                    show: true,
+                                                    width: 2,
+                                                    colors: ['#99e699']
+                                                },
+                                                xaxis: {
+                                                    categories: ["${Day6}", "${Day5}", "${Day4}", "${Day3}", "${Day2}", "${Day1}", "${CurrentDay}"]
+                                                },
+                                                yaxis: {
+                                                    title: {
+                                                        text: 'values'
+                                                    }
+                                                },
+                                                fill: {
+                                                    opacity: 1
+                                                },
+                                                tooltip: {
+                                                    y: {
+                                                        formatter: function (val) {
+                                                            return  val;
+                                                        }
+                                                    }
+                                                }
+                                            };
+                                            var chart = new ApexCharts(
+                                                    document.querySelector("#revenueReportChart"),
+                                                    options
+                                                    );
+                                            chart.render();
+                                        }
+
+                                    </script>
+                                    <!-- End Line Chart -->
+
+                                </div>
+
+                            </div>
+                        </div><!-- End Revenue Reports -->
 
                         <!-- Recent Sales -->
                         <div class="col-12">
@@ -355,7 +579,7 @@
 
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Recent Bookings <span>| Today</span></h5>
+                                    <h5 class="card-title">Recent Appointments <span>| Today</span></h5>
 
                                     <table class="table table-borderless datatable">
                                         <thead>
@@ -372,7 +596,7 @@
                                                 <tr>
                                                     <th scope="row"><a href="#">${appointment.appointmentId}</a></th>
                                                     <td>${appointment.patientFirstName} ${appointment.patientLastName}</td>
-                                                    <td><a href="#" class="text-primary">${appointment.departmentName}</a></td>
+                                                    <td><a class="text-primary">${appointment.departmentName}</a></td>
                                                     <td>${appointment.doctorFirstName} ${appointment.doctorLastName}</td>
                                                     <td>
                                                         <c:if test="${appointment.statusId.equals('1')}"><span class="badge bg-warning">${appointment.statusOfAppointments}</span></c:if>
@@ -401,7 +625,7 @@
                                         <li class="dropdown-header text-start">
                                             <h6>Filter</h6>
                                         </li>
-
+                                        <li><a class="dropdown-item" onclick="renderPolarAreaChart()" style="display: none" id="visualizePolarChartId">visualize</a></li>
                                         <li><a class="dropdown-item" href="admindashboard.jsp">Today</a></li>
                                         <li><a class="dropdown-item" href="#" onclick="fetchDepartmentsThisMonth()">This Month</a></li>
                                         <li><a class="dropdown-item" href="#" onclick="fetchDepartmentsThisYear()">This Year</a></li>
@@ -410,6 +634,7 @@
 
                                 <div class="card-body pb-0" id="topDepartmentstableDiv">
                                     <h5 class="card-title">Top Department in terms of booking <span>| Today</span></h5>
+
 
                                     <table class="table table-borderless datatable">
                                         <thead>
@@ -435,10 +660,38 @@
                                     </table>
 
                                 </div>
-
-
+                                <!-- Polar Area Chart -->
+                                <div id="polarAreaChart"></div>
                             </div>
                         </div><!-- End Top Selling -->
+                        <script>
+                            function renderPolarChartForDepartments() {
+                                var options = {
+                                    series: [<c:forEach items="${OccupancyThisMonthPolarChart}" var="department">${department.numberOfPatients},</c:forEach>],
+                                    chart: {
+                                        type: 'polarArea',
+                                        height: 350,
+                                        toolbar: {
+                                            show: true
+                                        }
+                                    },
+                                    stroke: {
+                                        colors: ['#fff']
+                                    },
+                                    fill: {
+                                        opacity: 0.8
+                                    },
+                                    labels: [<c:forEach items="${DeptList}" var="department">"${department.departmentName}",</c:forEach>]
+                                };
+
+                                var chart = new ApexCharts(
+                                        document.querySelector("#polarAreaChart"),
+                                        options
+                                        );
+                                chart.render();
+                            }
+
+                        </script>
 
                     </div>
                 </div><!-- End Left side columns -->
@@ -464,13 +717,22 @@
 
     </body>
     <script>
-                                            function initialiseDataTables() {
-                                                const datatables = [...document.querySelectorAll('.datatable')];
-                                                datatables.forEach(datatable => {
-                                                    new simpleDatatables.DataTable(datatable);
-                                                });
-                                                           }
-                                            initialiseDataTables();
+                            function initialiseDataTables() {
+                                const datatables = [...document.querySelectorAll('.datatable')];
+                                datatables.forEach(datatable => {
+                                    new simpleDatatables.DataTable(datatable);
+                                });
+                                           }
+                            initialiseDataTables();
+                            document.addEventListener("DOMContentLoaded", () => {
+                                renderChart();
+                            });
+                            document.addEventListener("DOMContentLoaded", () => {
+                                //fetchDepartmentsThisMonth();
+                                renderRevenueChart();
+                                //renderPolarChart();
+                            });
+
     </script>
 
 </html>

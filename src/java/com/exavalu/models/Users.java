@@ -702,9 +702,10 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 //----------------------------------------------------------------------------------------------------------
                 List<Appointment> appointmentList = AdminService.doViewAppointments("0");
                 List<Departments> departmentOccupncyList = AdminService.doGetOccupancyForEachDepartments("0");
+                List<Departments> occupancyThisMonthPolarChart = AdminService.doGetOccupancyForPolarChartThisMonth("-30");
 
                 sessionMap.put("OccupancyInDepartments", departmentOccupncyList);
-
+                sessionMap.put("OccupancyThisMonthPolarChart", occupancyThisMonthPolarChart);
                 sessionMap.put("AppointmentListDashBoard", appointmentList);
 
 //-------------------no. of user registeration to show on admin dashboard---------------------------------------------
@@ -902,7 +903,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
             sessionMap.put("FailSignUp", "Wrong Email or Password");
         }
         System.out.println(sessionMap);
-       
+
         return result;
 
     }
@@ -942,7 +943,7 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
 
             String generatedOtp = OtpService.otp(4);
             sessionMap.put("Otp", generatedOtp);
-            //MailServic.send(this.emailAddress, "One Time Password For Password Reset", generatedOtp);
+            MailServic.send(this.emailAddress, "One Time Password For Password Reset", generatedOtp);
             result = "SUCCESS";
         } else {
             sessionMap.put("FailOtpVerification", "Email Doesn't Exsist");
