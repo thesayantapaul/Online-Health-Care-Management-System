@@ -208,7 +208,7 @@
                                     <div class="position-absolute w-100 h-100 top-50 start-50 translate-middle rounded-top d-flex flex-column align-items-center justify-content-center" style="background: rgba(29, 42, 77, .8);">
                                         <h3 class="text-white">Pregnancy Care</h3>
                                         <h1 class="display-4 text-white mb-0">
-                                            <small class="align-top fw-normal" style="font-size: 22px; line-height: 45px;">$</small>49<small class="align-bottom fw-normal" style="font-size: 16px; line-height: 40px;">/ Year</small>
+                                            <small class="align-top fw-normal" style="font-size: 22px; line-height: 45px;">&#8377;</small>49<small class="align-bottom fw-normal" style="font-size: 16px; line-height: 40px;">/ Year</small>
                                         </h1>
                                     </div>
                                 </div>
@@ -226,7 +226,7 @@
                                     <div class="position-absolute w-100 h-100 top-50 start-50 translate-middle rounded-top d-flex flex-column align-items-center justify-content-center" style="background: rgba(29, 42, 77, .8);">
                                         <h3 class="text-white">Health Checkup</h3>
                                         <h1 class="display-4 text-white mb-0">
-                                            <small class="align-top fw-normal" style="font-size: 22px; line-height: 45px;">$</small>99<small class="align-bottom fw-normal" style="font-size: 16px; line-height: 40px;">/ Year</small>
+                                            <small class="align-top fw-normal" style="font-size: 22px; line-height: 45px;">&#8377;</small>99<small class="align-bottom fw-normal" style="font-size: 16px; line-height: 40px;">/ Year</small>
                                         </h1>
                                     </div>
                                 </div>
@@ -244,7 +244,7 @@
                                     <div class="position-absolute w-100 h-100 top-50 start-50 translate-middle rounded-top d-flex flex-column align-items-center justify-content-center" style="background: rgba(29, 42, 77, .8);">
                                         <h3 class="text-white">Dental Care</h3>
                                         <h1 class="display-4 text-white mb-0">
-                                            <small class="align-top fw-normal" style="font-size: 22px; line-height: 45px;">$</small>149<small class="align-bottom fw-normal" style="font-size: 16px; line-height: 40px;">/ Year</small>
+                                            <small class="align-top fw-normal" style="font-size: 22px; line-height: 45px;">&#8377;</small>149<small class="align-bottom fw-normal" style="font-size: 16px; line-height: 40px;">/ Year</small>
                                         </h1>
                                     </div>
                                 </div>
@@ -262,7 +262,7 @@
                                     <div class="position-absolute w-100 h-100 top-50 start-50 translate-middle rounded-top d-flex flex-column align-items-center justify-content-center" style="background: rgba(29, 42, 77, .8);">
                                         <h3 class="text-white">Operation & Surgery</h3>
                                         <h1 class="display-4 text-white mb-0">
-                                            <small class="align-top fw-normal" style="font-size: 22px; line-height: 45px;">$</small>199<small class="align-bottom fw-normal" style="font-size: 16px; line-height: 40px;">/ Year</small>
+                                            <small class="align-top fw-normal" style="font-size: 22px; line-height: 45px;">&#8377;</small>199<small class="align-bottom fw-normal" style="font-size: 16px; line-height: 40px;">/ Year</small>
                                         </h1>
                                     </div>
                                 </div>

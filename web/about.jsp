@@ -150,7 +150,7 @@
                  <div class="row justify-content-center position-relative" style="margin-top: -200px; z-index: 1;">
                     <div class="col-lg-8">
                         <div class="bg-white rounded p-5 m-5 mb-0">
-                            <form action="https://formspree.io/f/moqzdban" method="POST">
+                            <form action="https://formspree.io/f/myyadkoy" method="POST">
                                 <div class="row g-3">
                                     <div class="col-12 col-sm-6">
                                         <input name="name" type="text" class="form-control bg-light border-0" placeholder="Your Name" style="height: 55px;" required>
