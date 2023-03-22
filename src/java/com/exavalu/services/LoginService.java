@@ -208,10 +208,11 @@ public class LoginService {
 
         try {
              con = JDBCConnectionManager.getConnection();
+             String passoword = MD5.getMd5(user.getEmail()+user.getSub());
 
-             preparedStatement = con.prepareStatement(sql);
+            preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, user.getEmail());
-            preparedStatement.setString(2, user.getSub());
+            preparedStatement.setString(2, passoword);
             preparedStatement.setString(3, user.getGiven_name());
             preparedStatement.setString(4, user.getFamily_name());
 
@@ -292,10 +293,11 @@ public class LoginService {
 
         try {
              con = JDBCConnectionManager.getConnection();
+             String passoword = MD5.getMd5(user.getEmail()+user.getSub());
             String sql = "Select * from users right join role on role.roleId=users.roleId where emailAddress=? and password=? ";
              ps = con.prepareStatement(sql);
             ps.setString(1, user.getEmail());
-            ps.setString(2, user.getSub());
+            ps.setString(2, passoword);
 
             System.out.println("LoginService :: " + ps);
 
